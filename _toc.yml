@@ -2,4 +2,6 @@ format: jb-book
 root: README
 chapters:
 - file: Einführung
+  title: "Einführung in Computational Essays"
 - file: Leitfaden
+  title: "Leitfaden für Computational Essays"

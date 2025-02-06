@@ -1,0 +1,896 @@
+
+<!DOCTYPE html>
+
+
+<html lang="de" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Anleitung zur Erstellung eines Computational Essays in Jupyter Notebook &#8212; Computational Essays</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=91fba89f"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script src="../_static/translations.js?v=79cc9f76"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'konvertierungen/word_md_notebook';</script>
+    <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
+    <link rel="search" title="Suche" href="../search.html" />
+    <link rel="prev" title="Leitfaden für Computational Essays: Formatierung und Anforderungen" href="../Leitfaden.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="de"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../home.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/Logo_DigitalHistoryBerlin.png" class="logo__image only-light" alt="Computational Essays - Home"/>
+    <img src="../_static/Logo_DigitalHistoryBerlin.png" class="logo__image only-dark pst-js-only" alt="Computational Essays - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Suche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../home.html">
+                    Computational Essays: Ein Leitfaden für die Digital Humanities
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Grundlagen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Einf%C3%BChrung.html">Einführung in Computational Essays</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Leitfäden</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Leitfaden.html">Leitfaden für Computational Essays</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Konvertierungen</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Konvertierung von Word Document</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Laden Sie diese Seite herunter">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/konvertierungen/word_md_notebook.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Quelldatei herunterladen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="In PDF drucken"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Vollbildmodus"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Anleitung zur Erstellung eines Computational Essays in Jupyter Notebook</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Inhalt </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zielgruppe">Zielgruppe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#voraussetzungen">Voraussetzungen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-der-voraussetzungen">Installation der Voraussetzungen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pandoc-installation">1. Pandoc Installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-pakete-installation">2. Python-Pakete Installation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nutzungsmoglichkeiten">Nutzungsmöglichkeiten</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verwendung">Verwendung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konvertierung-von-word-dokumenten-zu-markdown-mit-bildextraktion">Konvertierung von Word-Dokumenten zu Markdown mit Bildextraktion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#was-macht-dieser-schritt">Was macht dieser Schritt?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#warum-ist-dieser-schritt-notwendig">Warum ist dieser Schritt notwendig?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wie-funktioniert-es">Wie funktioniert es?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vorteile-dieses-workflows">Vorteile dieses Workflows</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konvertierung-von-markdown-in-ein-jupyter-notebook">Konvertierung von Markdown in ein Jupyter Notebook</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Warum ist dieser Schritt notwendig?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#was-passiert-in-diesem-schritt">Was passiert in diesem Schritt?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wo-muss-der-benutzer-anderungen-vornehmen">Wo muss der Benutzer Änderungen vornehmen?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Vorteile dieses Workflows</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="anleitung-zur-erstellung-eines-computational-essays-in-jupyter-notebook">
+<h1>Anleitung zur Erstellung eines Computational Essays in Jupyter Notebook<a class="headerlink" href="#anleitung-zur-erstellung-eines-computational-essays-in-jupyter-notebook" title="Link to this heading">#</a></h1>
+<section id="zielgruppe">
+<h2>Zielgruppe<a class="headerlink" href="#zielgruppe" title="Link to this heading">#</a></h2>
+<p>Diese Anleitung richtet sich an Studierende der digitalen Geschichtswissenschaft, die einen <strong>Computational Essay</strong> in Form eines Jupyter Notebooks erstellen und einreichen möchten.</p>
+</section>
+<section id="voraussetzungen">
+<h2>Voraussetzungen<a class="headerlink" href="#voraussetzungen" title="Link to this heading">#</a></h2>
+<p>Bevor Sie mit der Konvertierung beginnen können, benötigen Sie:</p>
+<ol class="arabic simple">
+<li><p><strong>Python</strong> (Version 3.8 oder höher)</p></li>
+<li><p><strong>Pandoc</strong> (für die Dokumentkonvertierung)</p></li>
+<li><p>Die Python-Pakete:</p>
+<ul class="simple">
+<li><p>nbformat</p></li>
+<li><p>jupyter</p></li>
+<li><p>os</p></li>
+<li><p>re</p></li>
+<li><p>subprocess</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="installation-der-voraussetzungen">
+<h2>Installation der Voraussetzungen<a class="headerlink" href="#installation-der-voraussetzungen" title="Link to this heading">#</a></h2>
+<section id="pandoc-installation">
+<h3>1. Pandoc Installation<a class="headerlink" href="#pandoc-installation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Windows: Laden Sie den Installer von <a class="reference external" href="https://pandoc.org/installing.html">pandoc.org/installing.html</a> herunter</p></li>
+<li><p>Mac: <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">pandoc</span></code></p></li>
+<li><p>Linux: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">pandoc</span></code></p></li>
+</ul>
+</section>
+<section id="python-pakete-installation">
+<h3>2. Python-Pakete Installation<a class="headerlink" href="#python-pakete-installation" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>nbformat<span class="w"> </span>jupyter
+</pre></div>
+</div>
+</section>
+</section>
+<section id="nutzungsmoglichkeiten">
+<h2>Nutzungsmöglichkeiten<a class="headerlink" href="#nutzungsmoglichkeiten" title="Link to this heading">#</a></h2>
+<p>Sie haben zwei Möglichkeiten, diesen Konverter zu nutzen:</p>
+<p><strong>Option 1: Einzelne Notebook-Datei</strong></p>
+<ol class="arabic simple">
+<li><p>Laden Sie die Datei word_md_notebook.ipynb herunter</p></li>
+<li><p>Erstellen Sie einen neuen Ordner für Ihr Projekt</p></li>
+<li><p>Legen Sie das Notebook in diesem Ordner ab</p></li>
+<li><p>Erstellen Sie einen Unterordner input für Ihre Word-Dokumente</p></li>
+</ol>
+<p><strong>Option 2: Repository klonen</strong></p>
+<ol class="arabic">
+<li><p>Klonen Sie das Repository:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Digital-History-Berlin/Computational-Essays.git
+</pre></div>
+</div>
+</li>
+<li><p>Navigieren Sie zum Projektordner</p></li>
+<li><p>Folgen Sie den weiteren Anweisungen</p></li>
+</ol>
+</section>
+<section id="verwendung">
+<h2>Verwendung<a class="headerlink" href="#verwendung" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Legen Sie Ihr Word-Dokument im Projektordner ab</p></li>
+<li><p>Öffnen Sie das Notebook in Jupyter</p></li>
+<li><p>Passen Sie die Dateipfade an:</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">docx_path</span> <span class="o">=</span> <span class="s2">&quot;IhrDokument.docx&quot;</span>
+<span class="n">output_md</span> <span class="o">=</span> <span class="s2">&quot;Output.md&quot;</span>
+<span class="n">images_folder</span> <span class="o">=</span> <span class="s2">&quot;images&quot;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Führen Sie alle Zellen nacheinander aus</p></li>
+</ol>
+</section>
+<section id="konvertierung-von-word-dokumenten-zu-markdown-mit-bildextraktion">
+<h2>Konvertierung von Word-Dokumenten zu Markdown mit Bildextraktion<a class="headerlink" href="#konvertierung-von-word-dokumenten-zu-markdown-mit-bildextraktion" title="Link to this heading">#</a></h2>
+<section id="was-macht-dieser-schritt">
+<h3>Was macht dieser Schritt?<a class="headerlink" href="#was-macht-dieser-schritt" title="Link to this heading">#</a></h3>
+<p>Dieses Skript dient der Konvertierung von <strong>Word-Dokumenten (.docx)</strong> in <strong>Markdown</strong>-Format. Dabei werden alle im Dokument enthaltenen Bilder automatisch extrahiert und in einem separaten Ordner gespeichert. Zusätzlich sorgt das Skript dafür, dass Tabellen, Fußnoten und andere akademische Inhalte in ein Markdown-kompatibles Format überführt werden.</p>
+</section>
+<section id="warum-ist-dieser-schritt-notwendig">
+<h3>Warum ist dieser Schritt notwendig?<a class="headerlink" href="#warum-ist-dieser-schritt-notwendig" title="Link to this heading">#</a></h3>
+<p>Die Konvertierung von <code class="docutils literal notranslate"><span class="pre">.docx</span></code> zu Markdown ist ein wichtiger Zwischenschritt, um die Inhalte eines Textdokuments in ein Jupyter Notebook zu integrieren. Markdown ist das bevorzugte Format für Notebooks, da es sowohl Klartext als auch strukturierte Inhalte wie Tabellen, Bilder und Code unterstützt. Die Bildextraktion stellt sicher, dass eingebettete Medien korrekt referenziert und später im Jupyter Notebook dargestellt werden können.</p>
+</section>
+<section id="wie-funktioniert-es">
+<h3>Wie funktioniert es?<a class="headerlink" href="#wie-funktioniert-es" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Dateiüberprüfung und Ordnererstellung</strong>:</p>
+<ul class="simple">
+<li><p>Es wird sichergestellt, dass der Zielordner für Bilder existiert oder bei Bedarf erstellt wird.</p></li>
+</ul>
+</li>
+<li><p><strong>Pandoc-Kommando</strong>:</p>
+<ul class="simple">
+<li><p>Mithilfe von <strong>Pandoc</strong>, einem leistungsstarken Konvertierungstool, wird das <code class="docutils literal notranslate"><span class="pre">.docx</span></code>-Dokument in Markdown umgewandelt.</p></li>
+<li><p>GitHub-Flavored Markdown (GFM) wird als Ziel gewählt, um saubere Tabellen und bessere Kompatibilität zu gewährleisten.</p></li>
+<li><p>Bilder werden mit dem Parameter <code class="docutils literal notranslate"><span class="pre">--extract-media</span></code> automatisch extrahiert und im angegebenen Ordner gespeichert.</p></li>
+</ul>
+</li>
+<li><p><strong>Speicherung und Ausgabe</strong>:</p>
+<ul class="simple">
+<li><p>Das Markdown-Dokument wird im definierten Pfad gespeichert, und die extrahierten Bilder werden in den Bildordner verschoben.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="vorteile-dieses-workflows">
+<h3>Vorteile dieses Workflows<a class="headerlink" href="#vorteile-dieses-workflows" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Saubere Strukturierung</strong>:
+Tabellen und Inhalte werden in einem für Jupyter Notebook gut lesbaren Format erstellt.</p></li>
+<li><p><strong>Automatische Bildextraktion</strong>:
+Bilder werden automatisch verarbeitet und in Markdown korrekt referenziert, was manuelle Nacharbeit reduziert.</p></li>
+<li><p><strong>Reproduzierbarkeit</strong>:
+Die automatisierte Konvertierung minimiert Fehler und sorgt für konsistente Ergebnisse.</p></li>
+</ul>
+<p>Nach Abschluss der Konvertierung finden Sie:</p>
+<p>Eine Markdown-Datei (<a class="reference external" href="http://sample.md">sample.md</a>) mit allen Textinhalten.
+Alle eingebetteten Bilder im Ordner images.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">convert_docx_to_md_with_images</span><span class="p">(</span><span class="n">docx_path</span><span class="p">,</span> <span class="n">output_md</span><span class="p">,</span> <span class="n">images_folder</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Konvertierung von .docx Datei zu Markdown und extrahiert die Bilder automatisch in einen Ordner.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Ensure the images folder exists</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">images_folder</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">images_folder</span><span class="p">)</span>
+
+    <span class="c1"># Use Pandoc for text conversion with image extraction</span>
+    <span class="n">pandoc_command</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;pandoc&quot;</span><span class="p">,</span>
+        <span class="n">docx_path</span><span class="p">,</span>
+        <span class="s2">&quot;-f&quot;</span><span class="p">,</span> <span class="s2">&quot;docx&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;-t&quot;</span><span class="p">,</span> <span class="s2">&quot;gfm&quot;</span><span class="p">,</span>  <span class="c1"># GitHub-Flavored Markdown for cleaner tables</span>
+        <span class="s2">&quot;--wrap=none&quot;</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s2">&quot;--extract-media=</span><span class="si">{</span><span class="n">images_folder</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>  <span class="c1"># Extract media to the specified folder</span>
+        <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="n">output_md</span>
+    <span class="p">]</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">pandoc_command</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Conversion completed. Markdown saved to </span><span class="si">{</span><span class="n">output_md</span><span class="si">}</span><span class="s2">. Images saved to </span><span class="si">{</span><span class="n">images_folder</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error during conversion: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">docx_path</span> <span class="o">=</span> <span class="s2">&quot;Sample_Academic_Document.docx&quot;</span>  <span class="c1"># Path to the input Word document</span>
+<span class="n">output_md</span> <span class="o">=</span> <span class="s2">&quot;Sample_Markdown.md&quot;</span>  <span class="c1"># Path to the output Markdown file</span>
+<span class="n">images_folder</span> <span class="o">=</span> <span class="s2">&quot;images&quot;</span>  <span class="c1"># Folder to store extracted images</span>
+
+<span class="n">convert_docx_to_md_with_images</span><span class="p">(</span><span class="n">docx_path</span><span class="p">,</span> <span class="n">output_md</span><span class="p">,</span> <span class="n">images_folder</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Conversion completed. Markdown saved to Sample_Markdown.md. Images saved to images.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="konvertierung-von-markdown-in-ein-jupyter-notebook">
+<h2>Konvertierung von Markdown in ein Jupyter Notebook<a class="headerlink" href="#konvertierung-von-markdown-in-ein-jupyter-notebook" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>Warum ist dieser Schritt notwendig?<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>Dieser Schritt ist erforderlich, um das vorbereitete Markdown-Dokument in ein <strong>Jupyter Notebook</strong> umzuwandeln. Das Notebook ermöglicht die interaktive Arbeit mit Text, Code und Visualisierungen und ist ideal für Computational Essays geeignet.</p>
+<p>Markdown allein kann die Funktionalität eines Notebooks nicht bieten, daher müssen:</p>
+<ul class="simple">
+<li><p>Markdown-Zellen und ggf. Code-Zellen identifiziert werden,</p></li>
+<li><p>Bilder eingebunden werden,</p></li>
+<li><p>Metadaten hinzugefügt werden, um das Notebook ausführbar zu machen.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="was-passiert-in-diesem-schritt">
+<h3>Was passiert in diesem Schritt?<a class="headerlink" href="#was-passiert-in-diesem-schritt" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Verarbeitung der Fußnoten</strong>:</p>
+<ul class="simple">
+<li><p>Fußnoten werden aus dem Ende des Dokuments extrahiert und an die Absätze angehängt, auf die sie sich beziehen.</p></li>
+<li><p>Dies stellt sicher, dass die Fußnoten beim Aufteilen in Zellen an der richtigen Stelle verbleiben.</p></li>
+</ul>
+</li>
+<li><p><strong>Einfügen von Zellmarkierungen</strong>:</p>
+<ul class="simple">
+<li><p>Zellmarkierungen (<code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">#region</span> <span class="pre">--&gt;</span></code> und <code class="docutils literal notranslate"><span class="pre">&lt;!--</span> <span class="pre">#endregion</span> <span class="pre">--&gt;</span></code>) werden im Markdown-Dokument eingefügt, um festzulegen, welche Abschnitte als einzelne Zellen im Notebook dargestellt werden sollen.</p></li>
+<li><p>Codeblöcke werden separat erkannt und entsprechend markiert.</p></li>
+</ul>
+</li>
+<li><p><strong>Konvertierung zu einem Notebook</strong>:</p>
+<ul class="simple">
+<li><p>Das Markdown-Dokument wird in Zellen aufgeteilt (Markdown- und Code-Zellen).</p></li>
+<li><p>Bilder werden mit relativen Pfaden korrekt referenziert.</p></li>
+<li><p>Metadaten werden hinzugefügt, um sicherzustellen, dass das Notebook in Jupyter korrekt ausgeführt werden kann.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="wo-muss-der-benutzer-anderungen-vornehmen">
+<h3>Wo muss der Benutzer Änderungen vornehmen?<a class="headerlink" href="#wo-muss-der-benutzer-anderungen-vornehmen" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Dateipfade anpassen</strong>:</p>
+<ul>
+<li><p>Ändern Sie die Pfade für die Eingabedateien (<code class="docutils literal notranslate"><span class="pre">sample.md</span></code>) und Ausgabedateien (<code class="docutils literal notranslate"><span class="pre">output_notebook.ipynb</span></code>), um mit Ihren spezifischen Dateien zu arbeiten.</p></li>
+<li><p>Beispiel:
+markdown_file = „mein_markdown.md“
+notebook_file = „mein_notebook.ipynb“
+images_folder = „meine_bilder“</p></li>
+</ul>
+</li>
+<li><p><strong>Format prüfen</strong>:</p>
+<ul>
+<li><p>Stellen Sie sicher, dass das Markdown-Dokument korrekt formatiert ist (z. B. gültige Codeblöcke und Bilder mit <code class="docutils literal notranslate"><span class="pre">![Beschreibung](pfad)</span></code>).</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id2">
+<h3>Vorteile dieses Workflows<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Automatisiert</strong>: Der Prozess automatisiert die Umwandlung, wodurch manuelle Arbeit minimiert wird.</p></li>
+<li><p><strong>Flexibel</strong>: Der Benutzer kann Änderungen an den Markdown-Inhalten vornehmen, bevor die Konvertierung erfolgt.</p></li>
+<li><p><strong>Kompatibel</strong>: Das erzeugte Notebook ist mit Jupyter kompatibel und bereit zur interaktiven Nutzung.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nbformat</span> <span class="k">as</span> <span class="nn">nbf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">process_footnotes</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">output_file</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Verschiebt Fußnoten in den Absatz, in dem sie referenziert werden.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="c1"># Step 1: Extract footnote definitions from the end</span>
+    <span class="n">footnote_definitions</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">footnote_def_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^\[\^([^\]]+)\]:\s+(.*)&#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+    <span class="n">footnotes</span> <span class="o">=</span> <span class="n">footnote_def_pattern</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+
+    <span class="c1"># Build a dictionary of footnote definitions</span>
+    <span class="k">for</span> <span class="n">footnote_id</span><span class="p">,</span> <span class="n">footnote_text</span> <span class="ow">in</span> <span class="n">footnotes</span><span class="p">:</span>
+        <span class="n">footnote_definitions</span><span class="p">[</span><span class="n">footnote_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">footnote_text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="c1"># Remove footnote definitions from the content</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">footnote_def_pattern</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="c1"># Step 2: Place footnote definitions after their references</span>
+    <span class="n">footnote_ref_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\[\^([^\]]+)\]&#39;</span><span class="p">)</span>
+    <span class="n">paragraphs</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">included_footnotes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">processed_paragraphs</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">paragraph</span> <span class="ow">in</span> <span class="n">paragraphs</span><span class="p">:</span>
+        <span class="n">refs_in_paragraph</span> <span class="o">=</span> <span class="n">footnote_ref_pattern</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">paragraph</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">refs_in_paragraph</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">ref</span> <span class="ow">in</span> <span class="n">refs_in_paragraph</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">ref</span> <span class="ow">in</span> <span class="n">footnote_definitions</span> <span class="ow">and</span> <span class="n">ref</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">included_footnotes</span><span class="p">:</span>
+                    <span class="n">footnote_def</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">[^</span><span class="si">{</span><span class="n">ref</span><span class="si">}</span><span class="s2">]: </span><span class="si">{</span><span class="n">footnote_definitions</span><span class="p">[</span><span class="n">ref</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="n">paragraph</span> <span class="o">+=</span> <span class="n">footnote_def</span>
+                    <span class="n">included_footnotes</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">ref</span><span class="p">)</span>
+        <span class="n">processed_paragraphs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">paragraph</span><span class="p">)</span>
+
+    <span class="c1"># Reconstruct the content</span>
+    <span class="n">new_content</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">processed_paragraphs</span><span class="p">)</span>
+
+    <span class="c1"># Step 3: Write the modified content to the output file</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">new_content</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">insert_cell_markers</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">output_file</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fügt Zellmarker zu Markdown hinzu, um die Aufteilung in Jupyter Notebook-Zellen vorzubereiten.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="c1"># Insert cell markers before headings and code blocks</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(^#+ .*$)&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;&lt;!-- #endregion --&gt;\n\n&lt;!-- #region --&gt;\n\1&#39;</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(```.*?```)&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;&lt;!-- #endregion --&gt;\n\n&lt;!-- #region --&gt;\n\1\n\n&lt;!-- #endregion --&gt;&#39;</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+
+    <span class="c1"># Add starting and ending cell markers if missing</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">content</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;&lt;!-- #region --&gt;&#39;</span><span class="p">):</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="s1">&#39;&lt;!-- #region --&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">content</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">content</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;&lt;!-- #endregion --&gt;&#39;</span><span class="p">):</span>
+        <span class="n">content</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&lt;!-- #endregion --&gt;&#39;</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">convert_markdown_to_notebook</span><span class="p">(</span><span class="n">markdown_file</span><span class="p">,</span> <span class="n">notebook_file</span><span class="p">,</span> <span class="n">images_folder</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Konvertiert Markdown mit Zellmarkierungen in eine Jupyter Notebook-Datei.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">markdown_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="c1"># Split the Markdown into sections based on cell markers</span>
+    <span class="n">sections</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&lt;!-- #region --&gt;|&lt;!-- #endregion --&gt;&#39;</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+    <span class="n">notebook</span> <span class="o">=</span> <span class="n">nbf</span><span class="o">.</span><span class="n">v4</span><span class="o">.</span><span class="n">new_notebook</span><span class="p">()</span>
+
+    <span class="c1"># Process each section</span>
+    <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">sections</span><span class="p">:</span>
+        <span class="n">section</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">section</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># Detect code or Markdown</span>
+        <span class="k">if</span> <span class="n">section</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;```&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">section</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;```&quot;</span><span class="p">):</span>
+            <span class="c1"># Code cell</span>
+            <span class="n">code_content</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;```&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">notebook</span><span class="o">.</span><span class="n">cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nbf</span><span class="o">.</span><span class="n">v4</span><span class="o">.</span><span class="n">new_code_cell</span><span class="p">(</span><span class="n">code_content</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Markdown cell</span>
+            <span class="c1"># Adjust image references to use the relative path</span>
+            <span class="n">section</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;!\[(.*?)\]\((.*?)\)&#39;</span><span class="p">,</span> <span class="sa">rf</span><span class="s1">&#39;![\1](</span><span class="si">{</span><span class="n">images_folder</span><span class="si">}</span><span class="s1">/\2)&#39;</span><span class="p">,</span> <span class="n">section</span><span class="p">)</span>
+            <span class="n">notebook</span><span class="o">.</span><span class="n">cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nbf</span><span class="o">.</span><span class="n">v4</span><span class="o">.</span><span class="n">new_markdown_cell</span><span class="p">(</span><span class="n">section</span><span class="p">))</span>
+
+    <span class="c1"># Write the notebook to a file</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">notebook_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">nbf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">notebook</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+<span class="c1"># Example Usage</span>
+<span class="n">markdown_file</span> <span class="o">=</span> <span class="s2">&quot;Sample_Markdown.md&quot;</span>
+<span class="n">notebook_file</span> <span class="o">=</span> <span class="s2">&quot;Sample_Notebook.ipynb&quot;</span>
+<span class="n">images_folder</span> <span class="o">=</span> <span class="s2">&quot;images&quot;</span>
+
+<span class="c1"># Step 1: Process footnotes</span>
+<span class="n">process_footnotes</span><span class="p">(</span><span class="n">markdown_file</span><span class="p">,</span> <span class="n">markdown_file</span><span class="p">)</span>
+
+<span class="c1"># Step 2: Insert cell markers</span>
+<span class="n">insert_cell_markers</span><span class="p">(</span><span class="n">markdown_file</span><span class="p">,</span> <span class="n">markdown_file</span><span class="p">)</span>
+
+<span class="c1"># Step 3: Convert to Jupyter Notebook</span>
+<span class="n">convert_markdown_to_notebook</span><span class="p">(</span><span class="n">markdown_file</span><span class="p">,</span> <span class="n">notebook_file</span><span class="p">,</span> <span class="n">images_folder</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Notebook created: </span><span class="si">{</span><span class="n">notebook_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Notebook created: Sample_Notebook.ipynb
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "executablebooks/jupyter-book",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./konvertierungen"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Leitfaden.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">zurück</p>
+        <p class="prev-next-title">Leitfaden für Computational Essays: Formatierung und Anforderungen</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Inhalt
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zielgruppe">Zielgruppe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#voraussetzungen">Voraussetzungen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-der-voraussetzungen">Installation der Voraussetzungen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pandoc-installation">1. Pandoc Installation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-pakete-installation">2. Python-Pakete Installation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nutzungsmoglichkeiten">Nutzungsmöglichkeiten</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verwendung">Verwendung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konvertierung-von-word-dokumenten-zu-markdown-mit-bildextraktion">Konvertierung von Word-Dokumenten zu Markdown mit Bildextraktion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#was-macht-dieser-schritt">Was macht dieser Schritt?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#warum-ist-dieser-schritt-notwendig">Warum ist dieser Schritt notwendig?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wie-funktioniert-es">Wie funktioniert es?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vorteile-dieses-workflows">Vorteile dieses Workflows</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konvertierung-von-markdown-in-ein-jupyter-notebook">Konvertierung von Markdown in ein Jupyter Notebook</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Warum ist dieser Schritt notwendig?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#was-passiert-in-diesem-schritt">Was passiert in diesem Schritt?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wo-muss-der-benutzer-anderungen-vornehmen">Wo muss der Benutzer Änderungen vornehmen?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Vorteile dieses Workflows</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Durch <a href="https://www.geschichte.hu-berlin.de/de/bereiche-und-lehrstuehle/digital-history">Digital History, Humboldt-Universität zu Berlin</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="http://creativecommons.org/licenses/by/4.0/"><img class="license" alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> This book is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons BY 4.0 License</a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

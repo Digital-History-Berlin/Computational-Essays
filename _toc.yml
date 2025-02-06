@@ -1,7 +1,18 @@
 format: jb-book
 root: home
-chapters:
-- file: Einführung
-  title: "Einführung in Computational Essays"
-- file: Leitfaden
-  title: "Leitfaden für Computational Essays"
+
+parts:
+  - caption: Grundlagen
+    chapters:
+    - file: Einführung
+      title: "Einführung in Computational Essays"
+        
+  - caption: Leitfäden
+    chapters:
+    - file: Leitfaden
+      title: "Leitfaden für Computational Essays"
+        
+  - caption: Konvertierungen
+    chapters:
+    - file: konvertierungen/word_md_notebook
+      title: "Konvertierung von Word Document"

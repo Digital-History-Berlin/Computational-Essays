@@ -1,7 +1,11 @@
-title: Computational Essays -
-author: Noah J. Baumann
+title: Computational Essays
+author: <a href="https://www.geschichte.hu-berlin.de/de/bereiche-und-lehrstuehle/digital-history">Digital History, Humboldt-Universität zu Berlin</a> 
 language: de
 logo: img/Logo_DigitalHistoryBerlin.png
+
+url: "https://pages.cms.hu-berlin.de"
+baseurl: "/digital-history/lehre/computational-essays"
+
 execute:
   execute_notebooks: off
 

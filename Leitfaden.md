@@ -1,13 +1,5 @@
 # Leitfaden für Computational Essays: Formatierung und Anforderungen
 
-## Inhaltsverzeichnis
-
-1. Allgemeine Anforderungen
-2. Struktur des Essays
-3. Formatierung und Stil
-4. Code und Technische Aspekte
-5. Einreichung und Projektstruktur
-
 ## Vorbemerkungen
 
 Diese Richtlinien sind Empfehlungen für die Erstellung eines guten Computational Essays. Die grundlegenden akademischen Prinzipien der Argumentation und Zitation müssen weiterhin befolgt werden - ihre konkrete Umsetzung im Computational Essay kann jedoch variieren.

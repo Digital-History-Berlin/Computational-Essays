@@ -1,16 +1,18 @@
-# The Docker image that will be used to build your app
 image: python:3.9
 
 before_script:
-  - python -V  # Print python version for logs
+  - python -V
   - pip install jupyter-book
 
 pages:
+  stage: deploy
   script:
     - jupyter-book build .
-    - mv _build/html public
+    - mkdir .public
+    - cp -r _build/html/* .public
+    - mv .public public
   artifacts:
     paths:
       - public
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  only:
+    - main

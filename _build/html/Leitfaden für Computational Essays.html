@@ -1,0 +1,869 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Leitfaden für Computational Essays: Formatierung und Anforderungen &#8212; Computational Essays -</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Leitfaden für Computational Essays';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="README.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Computational Essays -</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="README.html">
+                    Computational Essays
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Einf%C3%BChrung.html">Einführung in Computational Essays</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Leitfaden für Computational Essays.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Leitfaden für Computational Essays: Formatierung und Anforderungen</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inhaltsverzeichnis">Inhaltsverzeichnis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vorbemerkungen">Vorbemerkungen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#allgemeine-anforderungen">1. Allgemeine Anforderungen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#umfang-und-verhaltnis">1.1 Umfang und Verhältnis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grundlegende-formatierung">1.2 Grundlegende Formatierung</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-des-essays">2. Struktur des Essays</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#titelseite">2.1 Titelseite</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-und-aufbau">2.2 Struktur und Aufbau</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#beispiel-1-historische-forschungsfrage">Beispiel 1: Historische Forschungsfrage</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#beispiel-2-methodisch-explorativer-ansatz">Beispiel 2: Methodisch-explorativer Ansatz</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-organisation-und-reproduzierbarkeit">2.3 Code-Organisation und Reproduzierbarkeit</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-von-code">Integration von Code</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ausgelagerte-komponenten">Ausgelagerte Komponenten</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dokumentation-der-reproduzierbarkeit">Dokumentation der Reproduzierbarkeit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formatierung-und-stil">3. Formatierung und Stil</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grundlegende-markdown-formatierung">3.1 Grundlegende Markdown-Formatierung</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zellenstruktur-und-absatzformatierung">3.2 Zellenstruktur und Absatzformatierung</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fusznoten-und-zitation">3.3 Fußnoten und Zitation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-markdown-fusznoten">Option 1: Markdown-Fußnoten</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-html-anker-fusznoten">Option 2: HTML-Anker Fußnoten</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#option-3-jupyterlab-citation-manager">Option 3: JupyterLab Citation Manager</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-fur-die-integration-von-code-und-text">3.4 Best Practices für die Integration von Code und Text</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#zu-vermeiden-sind">Zu vermeiden sind:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#stattdessen">Stattdessen:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-und-technische-aspekte">4. Code und Technische Aspekte</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-qualitat">4.1 Code-Qualität</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-dokumentation">4.2 Code-Dokumentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisierungen">4.3 Visualisierungen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einreichung-und-projektstruktur">5. Einreichung und Projektstruktur</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dateiorganisation">5.1 Dateiorganisation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#einreichungsformat">5.2 Einreichungsformat</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#technische-anforderungen">5.3 Technische Anforderungen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#umgang-mit-groszen-datensatzen">5.4 Umgang mit großen Datensätzen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zusatzliche-hinweise">Zusätzliche Hinweise</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="leitfaden-fur-computational-essays-formatierung-und-anforderungen">
+<h1>Leitfaden für Computational Essays: Formatierung und Anforderungen<a class="headerlink" href="#leitfaden-fur-computational-essays-formatierung-und-anforderungen" title="Link to this heading">#</a></h1>
+<section id="inhaltsverzeichnis">
+<h2>Inhaltsverzeichnis<a class="headerlink" href="#inhaltsverzeichnis" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Allgemeine Anforderungen</p></li>
+<li><p>Struktur des Essays</p></li>
+<li><p>Formatierung und Stil</p></li>
+<li><p>Code und Technische Aspekte</p></li>
+<li><p>Einreichung und Projektstruktur</p></li>
+</ol>
+</section>
+<section id="vorbemerkungen">
+<h2>Vorbemerkungen<a class="headerlink" href="#vorbemerkungen" title="Link to this heading">#</a></h2>
+<p>Diese Richtlinien sind Empfehlungen für die Erstellung eines guten Computational Essays. Die grundlegenden akademischen Prinzipien der Argumentation und Zitation müssen weiterhin befolgt werden - ihre konkrete Umsetzung im Computational Essay kann jedoch variieren.</p>
+<p>Für Vorschläge zur Verbesserung dieser Richtlinien kontaktieren Sie bitte: <a class="reference external" href="mailto:noah&#46;jefferson&#46;baumann&#46;1&#37;&#52;&#48;hu-berlin&#46;de">noah<span>&#46;</span>jefferson<span>&#46;</span>baumann<span>&#46;</span>1<span>&#64;</span>hu-berlin<span>&#46;</span>de</a></p>
+</section>
+<section id="allgemeine-anforderungen">
+<h2>1. Allgemeine Anforderungen<a class="headerlink" href="#allgemeine-anforderungen" title="Link to this heading">#</a></h2>
+<section id="umfang-und-verhaltnis">
+<h3>1.1 Umfang und Verhältnis<a class="headerlink" href="#umfang-und-verhaltnis" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Gesamtumfang wird in Zeichen gemessen, nicht Wortanzahl</p></li>
+<li><p>Verhältnis: ca. 60% Text und 40% Code</p></li>
+<li><p>Hinweis: Das Verhältniss ist ein Richtwert; qualitative Aspekte wie Argumentationsstruktur und Codequalität sind wichtiger</p></li>
+</ul>
+<p>Für das Zählen der Zeichen im Notebook hilft Ihnen ein Snippet aus dem folgenden Notebook von Robert Jäschke (IBI):
+<a class="reference external" href="https://scm.cms.hu-berlin.de/ibi/notebooks/-/blob/master/notebooks/Jupyter-Demo.ipynb">https://scm.cms.hu-berlin.de/ibi/notebooks/-/blob/master/notebooks/Jupyter-Demo.ipynb</a></p>
+</section>
+<section id="grundlegende-formatierung">
+<h3>1.2 Grundlegende Formatierung<a class="headerlink" href="#grundlegende-formatierung" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Dateiformate: <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> für das Notebook</p></li>
+<li><p>Projektstruktur als ZIP-Datei</p></li>
+<li><p>Korrekte wissenschaftliche Schreibweise</p></li>
+<li><p>Einheitliche Formatierung</p></li>
+</ul>
+<div style="page-break-after:always"></div>
+</section>
+</section>
+<section id="struktur-des-essays">
+<h2>2. Struktur des Essays<a class="headerlink" href="#struktur-des-essays" title="Link to this heading">#</a></h2>
+<section id="titelseite">
+<h3>2.1 Titelseite<a class="headerlink" href="#titelseite" title="Link to this heading">#</a></h3>
+<p>Die erste Zelle des Notebooks muss folgende Informationen enthalten:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Humboldt</span><span class="o">-</span><span class="n">Universität</span> <span class="n">zu</span> <span class="n">Berlin</span>
+<span class="n">Institut</span> <span class="n">für</span> <span class="n">Geschichtswissenschaften</span>
+<span class="p">[</span><span class="n">Titel</span> <span class="n">des</span> <span class="n">Seminars</span><span class="p">]</span>
+<span class="p">[</span><span class="n">Modul</span><span class="p">]</span>
+
+<span class="n">Dozent</span><span class="p">:</span> <span class="p">[</span><span class="n">Name</span><span class="p">]</span>
+<span class="p">[</span><span class="n">Semester</span><span class="p">]</span>
+
+<span class="n">Titel</span> <span class="n">der</span> <span class="n">Arbeit</span>
+<span class="n">Untertitel</span> <span class="p">(</span><span class="n">falls</span> <span class="n">vorhanden</span><span class="p">)</span>
+
+<span class="n">Verfasser</span><span class="o">/</span><span class="ow">in</span><span class="p">:</span> <span class="p">[</span><span class="n">Name</span><span class="p">]</span>
+<span class="n">Matrikelnummer</span><span class="p">:</span> <span class="p">[</span><span class="n">Nummer</span><span class="p">]</span>
+<span class="n">Studienfach</span><span class="p">:</span> <span class="p">[</span><span class="n">Fach</span><span class="p">]</span>
+<span class="n">Fachsemester</span><span class="p">:</span> <span class="p">[</span><span class="n">Anzahl</span><span class="p">]</span>
+<span class="n">E</span><span class="o">-</span><span class="n">Mail</span><span class="p">:</span> <span class="p">[</span><span class="n">universitäre</span> <span class="n">E</span><span class="o">-</span><span class="n">Mail</span><span class="p">]</span>
+<span class="n">Datum</span><span class="p">:</span> <span class="p">[</span><span class="n">Abgabedatum</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Nach den Titelseiteninformationen sollte in der nächsten Zelle ein Link zum Repository des Projekts (GitLab der HU bevorzugt) eingefügt werden:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Link zum Projektrepository</span>
+<span class="c1"># https://scm.cms.hu-berlin.de//username/project</span>
+</pre></div>
+</div>
+</section>
+<section id="struktur-und-aufbau">
+<h3>2.2 Struktur und Aufbau<a class="headerlink" href="#struktur-und-aufbau" title="Link to this heading">#</a></h3>
+<p>Die Struktur eines Computational Essays sollte sich aus der Forschungsfrage und der gewählten analytischen Herangehensweise ergeben. Hier sind zwei Beispielstrukturen, die als Orientierung dienen können:</p>
+<section id="beispiel-1-historische-forschungsfrage">
+<h4>Beispiel 1: Historische Forschungsfrage<a class="headerlink" href="#beispiel-1-historische-forschungsfrage" title="Link to this heading">#</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="n">Einleitung</span>
+   <span class="o">-</span> <span class="n">Historischer</span> <span class="n">Kontext</span>
+   <span class="o">-</span> <span class="n">Forschungsfrage</span>
+   <span class="o">-</span> <span class="n">Quellenlage</span> <span class="n">und</span> <span class="n">Datengrundlage</span>
+
+<span class="mf">2.</span> <span class="n">Methodischer</span> <span class="n">Ansatz</span>
+   <span class="o">-</span> <span class="n">Begründung</span> <span class="n">der</span> <span class="n">gewählten</span> <span class="n">digitalen</span> <span class="n">Methoden</span>
+   <span class="o">-</span> <span class="n">Kritische</span> <span class="n">Reflexion</span> <span class="n">der</span> <span class="n">Möglichkeiten</span> <span class="n">und</span> <span class="n">Grenzen</span>
+
+<span class="mf">3.</span> <span class="n">Analyse</span>
+   <span class="o">-</span> <span class="n">Aufbereitung</span> <span class="n">und</span> <span class="n">Analyse</span> <span class="n">der</span> <span class="n">Quellen</span>
+   <span class="o">-</span> <span class="n">Darstellung</span> <span class="n">der</span> <span class="n">Ergebnisse</span>
+   <span class="o">-</span> <span class="n">Historische</span> <span class="n">Interpretation</span>
+
+<span class="mf">4.</span> <span class="n">Fazit</span>
+   <span class="o">-</span> <span class="n">Beantwortung</span> <span class="n">der</span> <span class="n">Forschungsfrage</span>
+   <span class="o">-</span> <span class="n">Methodische</span> <span class="n">Reflexion</span>
+   <span class="o">-</span> <span class="n">Ausblick</span>
+
+<span class="mf">5.</span> <span class="n">Literaturverzeichnis</span>
+</pre></div>
+</div>
+</section>
+<section id="beispiel-2-methodisch-explorativer-ansatz">
+<h4>Beispiel 2: Methodisch-explorativer Ansatz<a class="headerlink" href="#beispiel-2-methodisch-explorativer-ansatz" title="Link to this heading">#</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="n">Einleitung</span>
+   <span class="o">-</span> <span class="n">Methodische</span> <span class="n">Fragestellung</span>
+   <span class="o">-</span> <span class="n">Stand</span> <span class="n">der</span> <span class="n">Forschung</span>
+   <span class="o">-</span> <span class="n">Datenbasis</span>
+
+<span class="mf">2.</span> <span class="n">Entwicklung</span> <span class="n">des</span> <span class="n">Analyseverfahrens</span>
+   <span class="o">-</span> <span class="n">Theoretische</span> <span class="n">Grundlagen</span>
+   <span class="o">-</span> <span class="n">Implementierung</span>
+   <span class="o">-</span> <span class="n">Validierung</span>
+
+<span class="mf">3.</span> <span class="n">Anwendung</span>
+   <span class="o">-</span> <span class="n">Fallstudien</span>
+   <span class="o">-</span> <span class="n">Ergebnisanalyse</span>
+   <span class="o">-</span> <span class="n">Methodenkritik</span>
+
+<span class="mf">4.</span> <span class="n">Schlussbetrachtung</span>
+   <span class="o">-</span> <span class="n">Methodische</span> <span class="n">Erkenntnisse</span>
+   <span class="o">-</span> <span class="n">Anwendungspotenziale</span>
+   <span class="o">-</span> <span class="n">Weiterentwicklungsmöglichkeiten</span>
+
+<span class="mf">5.</span> <span class="n">Literaturverzeichnis</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="code-organisation-und-reproduzierbarkeit">
+<h3>2.3 Code-Organisation und Reproduzierbarkeit<a class="headerlink" href="#code-organisation-und-reproduzierbarkeit" title="Link to this heading">#</a></h3>
+<p>Die Organisation des Codes sollte zwei Hauptziele verfolgen:</p>
+<ol class="arabic simple">
+<li><p>Unterstützung der narrativen Struktur des Essays</p></li>
+<li><p>Gewährleistung der vollständigen Reproduzierbarkeit</p></li>
+</ol>
+<section id="integration-von-code">
+<h4>Integration von Code<a class="headerlink" href="#integration-von-code" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Der gesamte für die Argumentation relevante Code sollte direkt im Notebook eingebettet sein</p></li>
+<li><p>Code, der nicht direkt zur narrativen Struktur des Essays beiträgt, kann in separate Dateien ausgelagert und referenziert werden</p></li>
+</ul>
+</section>
+<section id="ausgelagerte-komponenten">
+<h4>Ausgelagerte Komponenten<a class="headerlink" href="#ausgelagerte-komponenten" title="Link to this heading">#</a></h4>
+<p>Ausgelagerte Code-Komponenten:</p>
+<ul class="simple">
+<li><p>müssen im Repository enthalten sein</p></li>
+<li><p>müssen vollständig dokumentiert sein</p></li>
+<li><p>sind nicht Teil der Zeichenzählung des Essays</p></li>
+<li><p>entsprechen in ihrer Funktion dem Anhang einer klassischen wissenschaftlichen Arbeit</p></li>
+</ul>
+</section>
+<section id="dokumentation-der-reproduzierbarkeit">
+<h4>Dokumentation der Reproduzierbarkeit<a class="headerlink" href="#dokumentation-der-reproduzierbarkeit" title="Link to this heading">#</a></h4>
+<p>Im Essay muss klar dokumentiert sein:</p>
+<ul class="simple">
+<li><p>Welche externen Dateien verwendet werden</p></li>
+<li><p>Wie die verschiedenen Komponenten zusammenspielen</p></li>
+<li><p>Wie die Analyse reproduziert werden kann</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="formatierung-und-stil">
+<h2>3. Formatierung und Stil<a class="headerlink" href="#formatierung-und-stil" title="Link to this heading">#</a></h2>
+<section id="grundlegende-markdown-formatierung">
+<h3>3.1 Grundlegende Markdown-Formatierung<a class="headerlink" href="#grundlegende-markdown-formatierung" title="Link to this heading">#</a></h3>
+<p>Jupyter Notebooks verwenden Markdown zur Textformatierung. Hier sind die wichtigsten Grundlagen:</p>
+<ul class="simple">
+<li><p>Überschriften mit # (# Überschrift 1, ## Überschrift 2, etc.)</p></li>
+<li><p>Hervorhebungen mit <em>kursiv</em> oder <strong>fett</strong></p></li>
+<li><p>Aufzählungen mit - oder 1., 2., 3.</p></li>
+<li><p>Links mit <a class="reference internal" href="#URL"><span class="xref myst">Text</span></a></p></li>
+<li><p>Bilder mit <img alt="Alt-Text" src="Bildpfad" /></p></li>
+</ul>
+<p>Für eine umfassende Einführung in Markdown empfehlen wir:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.markdownguide.org/">Markdown Guide</a></p></li>
+<li><p><a class="reference external" href="https://docs.github.com/de/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax">GitHub Markdown Tutorial</a></p></li>
+</ul>
+</section>
+<section id="zellenstruktur-und-absatzformatierung">
+<h3>3.2 Zellenstruktur und Absatzformatierung<a class="headerlink" href="#zellenstruktur-und-absatzformatierung" title="Link to this heading">#</a></h3>
+<p><strong>Wichtig</strong>: Jeder Absatz sollte in einer eigenen Markdown-Zelle stehen. Dies hat zwei wesentliche Vorteile:</p>
+<ol class="arabic simple">
+<li><p>Ermöglicht präzisere Kommentare und Feedback</p></li>
+<li><p>Gewährleistet die korrekte Funktionsweise von Fußnoten</p></li>
+</ol>
+</section>
+<section id="fusznoten-und-zitation">
+<h3>3.3 Fußnoten und Zitation<a class="headerlink" href="#fusznoten-und-zitation" title="Link to this heading">#</a></h3>
+<section id="option-1-markdown-fusznoten">
+<h4>Option 1: Markdown-Fußnoten<a class="headerlink" href="#option-1-markdown-fusznoten" title="Link to this heading">#</a></h4>
+<p>Markdown-Fußnoten funktionieren innerhalb derselben Zelle:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>Hier ist ein Text mit einer Fußnote[^1].
+
+[<span class="nl">^1</span>]: <span class="na">Dies ist der Fußnotentext.</span>
+</pre></div>
+</div>
+<p><strong>Hinweis</strong>: Die Darstellung von Markdown-Fußnoten kann je nach Notebook-Viewer variieren. Dies ist kein Problem für die Bewertung, solange die Markdown-Syntax korrekt ist.</p>
+</section>
+<section id="option-2-html-anker-fusznoten">
+<h4>Option 2: HTML-Anker Fußnoten<a class="headerlink" href="#option-2-html-anker-fusznoten" title="Link to this heading">#</a></h4>
+<p>Alternative Methode mit HTML-Ankern:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>Text mit Fußnote<span class="p">&lt;</span><span class="nt">a</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;cite_ref-1&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>[<span class="p">&lt;</span><span class="nt">sup</span><span class="p">&gt;</span>[1]<span class="p">&lt;/</span><span class="nt">sup</span><span class="p">&gt;</span>](#cite_note-1)
+
+<span class="p">&lt;</span><span class="nt">a</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;cite_note-1&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>1. [^](#cite_ref-1) Fußnotentext
+</pre></div>
+</div>
+</section>
+<section id="option-3-jupyterlab-citation-manager">
+<h4>Option 3: JupyterLab Citation Manager<a class="headerlink" href="#option-3-jupyterlab-citation-manager" title="Link to this heading">#</a></h4>
+<p>Für fortgeschrittene Nutzer steht der <a class="reference external" href="https://github.com/krassowski/jupyterlab-citation-manager">JupyterLab Citation Manager</a> zur Verfügung:</p>
+<ul class="simple">
+<li><p>Installation über die JupyterLab-Erweiterungsverwaltung</p></li>
+<li><p>Voraussetzungen:</p>
+<ul>
+<li><p>JupyterLab &gt; 3.3</p></li>
+<li><p>Moderner Browser (Firefox 64+, Chrome 73+)</p></li>
+<li><p>Zotero-Account</p></li>
+</ul>
+</li>
+<li><p>Bietet:</p>
+<ul>
+<li><p>Verschiedene Zitierstile</p></li>
+<li><p>Automatische Literaturverzeichnisse</p></li>
+<li><p>Integration mit Zotero</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="best-practices-fur-die-integration-von-code-und-text">
+<h3>3.4 Best Practices für die Integration von Code und Text<a class="headerlink" href="#best-practices-fur-die-integration-von-code-und-text" title="Link to this heading">#</a></h3>
+<section id="zu-vermeiden-sind">
+<h4>Zu vermeiden sind:<a class="headerlink" href="#zu-vermeiden-sind" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Code-Blöcke ohne erklärenden Text dazwischen</p></li>
+<li><p>Die Verwendung von Code als alleiniges Erklärungsmittel - Text sollte die Haupterklärung liefern</p></li>
+<li><p>Unnötige Print-Ausgaben, die nur dem Testing dienten</p></li>
+<li><p>Die Verwendung wichtiger Gleichungen in Code-Blöcken ohne vorherige Erklärung und saubere Darstellung</p></li>
+<li><p>Übergroße einzelne Plots, die den Textfluss stören</p></li>
+</ul>
+</section>
+<section id="stattdessen">
+<h4>Stattdessen:<a class="headerlink" href="#stattdessen" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Jeden Code-Block durch erklärenden Text einführen und seine Ergebnisse diskutieren</p></li>
+<li><p>Wichtige Konzepte zuerst im Text erklären, dann im Code implementieren</p></li>
+<li><p>Code-Ausgaben auf das Wesentliche beschränken</p></li>
+<li><p>Visualisierungen in angemessener Größe erstellen, ggf. mehrere Abbildungen nebeneinander anordnen</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="code-und-technische-aspekte">
+<h2>4. Code und Technische Aspekte<a class="headerlink" href="#code-und-technische-aspekte" title="Link to this heading">#</a></h2>
+<section id="code-qualitat">
+<h3>4.1 Code-Qualität<a class="headerlink" href="#code-qualitat" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Übersichtliche, gut dokumentierte Code-Zellen</p></li>
+<li><p>Aussagekräftige Variablennamen</p></li>
+<li><p>Kommentare für komplexe Operationen</p></li>
+<li><p>Vermeidung von Code-Redundanz</p></li>
+<li><p>Fehlerbehandlung implementieren</p></li>
+</ul>
+</section>
+<section id="code-dokumentation">
+<h3>4.2 Code-Dokumentation<a class="headerlink" href="#code-dokumentation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Code-Zelle mit erklärendem Markdown-Text einführen</p></li>
+<li><p>Funktionen mit Docstrings versehen</p></li>
+<li><p>Komplexe Algorithmen schrittweise erklären</p></li>
+<li><p>Output klar beschriften und erläutern</p></li>
+</ul>
+</section>
+<section id="visualisierungen">
+<h3>4.3 Visualisierungen<a class="headerlink" href="#visualisierungen" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Aussagekräftige Titel und Beschriftungen</p></li>
+<li><p>Legende wenn nötig</p></li>
+<li><p>Einheitliche Formatierung</p></li>
+<li><p>Erklärung der Darstellung</p></li>
+</ul>
+</section>
+</section>
+<section id="einreichung-und-projektstruktur">
+<h2>5. Einreichung und Projektstruktur<a class="headerlink" href="#einreichung-und-projektstruktur" title="Link to this heading">#</a></h2>
+<section id="dateiorganisation">
+<h3>5.1 Dateiorganisation<a class="headerlink" href="#dateiorganisation" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>projekt_name/
+├── essay.ipynb
+├── requirements.txt
+├── data/
+│   ├── raw/
+│   └── processed/
+├── images/
+└── README.md
+</pre></div>
+</div>
+</section>
+<section id="einreichungsformat">
+<h3>5.2 Einreichungsformat<a class="headerlink" href="#einreichungsformat" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>ZIP-Datei mit Namen: <code class="docutils literal notranslate"><span class="pre">SE_[Semester]_Name-Vorname_[Kurztitel].zip</span></code></p></li>
+<li><p>Funktionierendes requirements.txt</p></li>
+<li><p>Relative Pfade</p></li>
+<li><p>README mit Kurzbeschreibung</p></li>
+</ul>
+</section>
+<section id="technische-anforderungen">
+<h3>5.3 Technische Anforderungen<a class="headerlink" href="#technische-anforderungen" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Ausführbare Notebooks</p></li>
+<li><p>Reproduzierbare Ergebnisse</p></li>
+<li><p>Dokumentierte Abhängigkeiten</p></li>
+<li><p>Getesteter Code</p></li>
+</ul>
+</section>
+<section id="umgang-mit-groszen-datensatzen">
+<h3>5.4 Umgang mit großen Datensätzen<a class="headerlink" href="#umgang-mit-groszen-datensatzen" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>ZIP-Dateien können nicht zu Groß für die Einreichung sein</p></li>
+<li><p>Bei zu großen Datensätzen:</p>
+<ul>
+<li><p>Notebook mit ausgeführten Zellen einreichen</p></li>
+<li><p>Link zum vollständigen Repository bereitstellen</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="zusatzliche-hinweise">
+<h2>Zusätzliche Hinweise<a class="headerlink" href="#zusatzliche-hinweise" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Regelmäßige Speicherung und Backups</p></li>
+<li><p>Versionskontrolle empfohlen (z.B. Git)</p></li>
+<li><p>Testläufe der kompletten Umgebung</p></li>
+<li><p>Peer-Review vor Abgabe sinnvoll</p></li>
+<li><p>vor Abgabe den Kernel neu starten und alle Zellen ausführen, um die Reproduzierbarkeit zu gewährleisten</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inhaltsverzeichnis">Inhaltsverzeichnis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vorbemerkungen">Vorbemerkungen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#allgemeine-anforderungen">1. Allgemeine Anforderungen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#umfang-und-verhaltnis">1.1 Umfang und Verhältnis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grundlegende-formatierung">1.2 Grundlegende Formatierung</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-des-essays">2. Struktur des Essays</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#titelseite">2.1 Titelseite</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#struktur-und-aufbau">2.2 Struktur und Aufbau</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#beispiel-1-historische-forschungsfrage">Beispiel 1: Historische Forschungsfrage</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#beispiel-2-methodisch-explorativer-ansatz">Beispiel 2: Methodisch-explorativer Ansatz</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-organisation-und-reproduzierbarkeit">2.3 Code-Organisation und Reproduzierbarkeit</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-von-code">Integration von Code</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ausgelagerte-komponenten">Ausgelagerte Komponenten</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dokumentation-der-reproduzierbarkeit">Dokumentation der Reproduzierbarkeit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formatierung-und-stil">3. Formatierung und Stil</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grundlegende-markdown-formatierung">3.1 Grundlegende Markdown-Formatierung</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zellenstruktur-und-absatzformatierung">3.2 Zellenstruktur und Absatzformatierung</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fusznoten-und-zitation">3.3 Fußnoten und Zitation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-markdown-fusznoten">Option 1: Markdown-Fußnoten</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-html-anker-fusznoten">Option 2: HTML-Anker Fußnoten</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#option-3-jupyterlab-citation-manager">Option 3: JupyterLab Citation Manager</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-fur-die-integration-von-code-und-text">3.4 Best Practices für die Integration von Code und Text</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#zu-vermeiden-sind">Zu vermeiden sind:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#stattdessen">Stattdessen:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-und-technische-aspekte">4. Code und Technische Aspekte</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-qualitat">4.1 Code-Qualität</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-dokumentation">4.2 Code-Dokumentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualisierungen">4.3 Visualisierungen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einreichung-und-projektstruktur">5. Einreichung und Projektstruktur</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dateiorganisation">5.1 Dateiorganisation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#einreichungsformat">5.2 Einreichungsformat</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#technische-anforderungen">5.3 Technische Anforderungen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#umgang-mit-groszen-datensatzen">5.4 Umgang mit großen Datensätzen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zusatzliche-hinweise">Zusätzliche Hinweise</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Noah J. Baumann
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

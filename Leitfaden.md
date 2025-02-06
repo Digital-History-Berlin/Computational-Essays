@@ -23,7 +23,7 @@ Für Vorschläge zur Verbesserung dieser Richtlinien kontaktieren Sie bitte: <no
 - Hinweis: Das Verhältniss ist ein Richtwert; qualitative Aspekte wie Argumentationsstruktur und Codequalität sind wichtiger
 
 Für das Zählen der Zeichen im Notebook hilft Ihnen ein Snippet aus dem folgenden Notebook von Robert Jäschke (IBI):
-https://scm.cms.hu-berlin.de/ibi/notebooks/-/blob/master/notebooks/Jupyter-Demo.ipynb
+<https://scm.cms.hu-berlin.de/ibi/notebooks/-/blob/master/notebooks/Jupyter-Demo.ipynb>
 
 ### 1.2 Grundlegende Formatierung
 
@@ -38,7 +38,7 @@ https://scm.cms.hu-berlin.de/ibi/notebooks/-/blob/master/notebooks/Jupyter-Demo.
 
 Die erste Zelle des Notebooks muss folgende Informationen enthalten:
 
-```
+```markdown
 Humboldt-Universität zu Berlin
 Institut für Geschichtswissenschaften
 [Titel des Seminars]
@@ -71,7 +71,7 @@ Die Struktur eines Computational Essays sollte sich aus der Forschungsfrage und 
 
 #### Beispiel 1: Historische Forschungsfrage
 
-```
+```markdown
 1. Einleitung
    - Historischer Kontext
    - Forschungsfrage
@@ -96,7 +96,7 @@ Die Struktur eines Computational Essays sollte sich aus der Forschungsfrage und 
 
 #### Beispiel 2: Methodisch-explorativer Ansatz
 
-```
+```markdown
 1. Einleitung
    - Methodische Fragestellung
    - Stand der Forschung
@@ -256,7 +256,7 @@ Für fortgeschrittene Nutzer steht der [JupyterLab Citation Manager](https://git
 
 ### 5.1 Dateiorganisation
 
-```
+```markdown
 projekt_name/
 ├── essay.ipynb
 ├── requirements.txt

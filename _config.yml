@@ -4,8 +4,8 @@ copyright: "2024"
 language: de
 logo: img/Logo_DigitalHistoryBerlin.png
 
-url: "https://pages.cms.hu-berlin.de"
-baseurl: "/digital-history/lehre/computational-essays"
+url: https://digital-history-berlin.github.io/
+baseurl: /computational-essays
 
 # HTML-specific settings
 html:

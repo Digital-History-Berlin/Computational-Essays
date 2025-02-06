@@ -15,4 +15,4 @@ parts:
   - caption: Konvertierungen
     chapters:
     - file: konvertierungen/word_md_notebook
-      title: "Konvertierung von Word Document"
+      title: "Konvertierung von Word Documenten"

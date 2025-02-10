@@ -14,7 +14,7 @@ parts:
         
   - caption: Konvertierungen
     chapters:
-    - file: konvertierungen/word_md_notebook
+    - file: Konvertierungen/word_md_notebook
       title: "Konvertierung von Word Documenten"
 
   - caption: Praktische Werkzeuge

@@ -63,6 +63,7 @@
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'tools/git-lfs';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js"></script>
     <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
     <link rel="search" title="Suche" href="../search.html" />
     <link rel="prev" title="Anleitung zur Erstellung eines Computational Essays in Jupyter Notebook" href="../konvertierungen/word_md_notebook.html" />
@@ -458,7 +459,7 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="fortgeschrittene-git-funktionen-git-large-file-storage-lfs">
+  <section id="fortgeschrittene-git-funktionen-git-large-file-storage-lfs">
 <h1>Fortgeschrittene Git-Funktionen: Git Large File Storage (LFS)<a class="headerlink" href="#fortgeschrittene-git-funktionen-git-large-file-storage-lfs" title="Link to this heading">#</a></h1>
 <section id="einfuhrung">
 <h2>Einführung<a class="headerlink" href="#einfuhrung" title="Link to this heading">#</a></h2>
@@ -474,16 +475,16 @@
 <section id="was-ist-git-lfs">
 <h2>Was ist Git LFS?<a class="headerlink" href="#was-ist-git-lfs" title="Link to this heading">#</a></h2>
 <p>Git LFS ist eine Erweiterung für Git, die speziell für die Verwaltung großer Dateien entwickelt wurde. Statt die großen Dateien direkt im Git-Repository zu speichern, werden sie in einem separaten Speicher abgelegt und durch kleine Pointer-Dateien im Repository referenziert. Wichtig zu verstehen: Die großen Dateien werden dabei weiterhin versioniert - jede Version einer LFS-Datei wird gespeichert und kann wiederhergestellt werden, genau wie bei normalen Git-Dateien. Der Unterschied liegt nur in der Art der Speicherung und Übertragung.</p>
-<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>graph TD
-    A[Git Repository] --&gt;|Enthält| B[Quellcode]
-    A --&gt;|Enthält| C[Pointer-Datei]
-    C --&gt;|Verweist auf| D[LFS Speicher]
-    D --&gt;|Enthält| E[Große Datei]
+<div class="mermaid">
+graph TD
+    A[Git Repository] -->|Enthält| B[Quellcode]
+    A -->|Enthält| C[Pointer-Datei]
+    C -->|Verweist auf| D[LFS Speicher]
+    D -->|Enthält| E[Große Datei]
     style D fill:#4974a5,stroke:#333,stroke-width:4px
-    E --&gt;|Version 1| F[V1 der großen Datei]
-    E --&gt;|Version 2| G[V2 der großen Datei]
-    E --&gt;|Version 3| H[V3 der großen Datei]
-</pre></div>
+    E -->|Version 1| F[V1 der großen Datei]
+    E -->|Version 2| G[V2 der großen Datei]
+    E -->|Version 3| H[V3 der großen Datei]
 </div>
 </section>
 <section id="warum-brauchen-wir-git-lfs">
@@ -564,7 +565,7 @@
 </ol>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="installation-und-einrichtung-von-git-lfs">
+<section id="installation-und-einrichtung-von-git-lfs">
 <h1>Installation und Einrichtung von Git LFS<a class="headerlink" href="#installation-und-einrichtung-von-git-lfs" title="Link to this heading">#</a></h1>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
@@ -797,18 +798,18 @@ git<span class="w"> </span>lfs<span class="w"> </span>ls-files<span class="w"> <
 <p>Lassen Sie uns im nächsten Abschnitt einen typischen Workflow mit Git LFS durchgehen.</p>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="grundlegende-konzepte-von-git-lfs">
+<section id="grundlegende-konzepte-von-git-lfs">
 <h1>Grundlegende Konzepte von Git LFS<a class="headerlink" href="#grundlegende-konzepte-von-git-lfs" title="Link to this heading">#</a></h1>
 <section id="wie-git-lfs-funktioniert">
 <h2>Wie Git LFS funktioniert<a class="headerlink" href="#wie-git-lfs-funktioniert" title="Link to this heading">#</a></h2>
 <p>Git LFS verwendet ein System von Pointer-Dateien und Remote Storage. Lassen Sie uns Schritt für Schritt durchgehen, wie das funktioniert:</p>
 <section id="die-pointer-datei">
 <h3>Die Pointer-Datei<a class="headerlink" href="#die-pointer-datei" title="Link to this heading">#</a></h3>
-<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>graph LR
-    A[Große Datei] --&gt;|wird ersetzt durch| B[Pointer-Datei]
-    B --&gt;|verweist auf| C[LFS Storage]
-    C --&gt;|enthält| A
-</pre></div>
+<div class="mermaid">
+graph LR
+    A[Große Datei] -->|wird ersetzt durch| B[Pointer-Datei]
+    B -->|verweist auf| C[LFS Storage]
+    C -->|enthält| A
 </div>
 <p>Eine Pointer-Datei ist eine kleine Textdatei, die anstelle der großen Datei im Git Repository gespeichert wird. Sie sieht etwa so aus:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>version https://git-lfs.github.com/spec/v1
@@ -829,42 +830,42 @@ size 1234567
 <ol class="arabic simple">
 <li><p><strong>Beim Hinzufügen einer Datei</strong> (git add)</p></li>
 </ol>
-<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>sequenceDiagram
+<div class="mermaid">
+sequenceDiagram
     participant U as User
     participant G as Git
     participant L as LFS
-    U-&gt;&gt;G: git add großeDatei.npy
-    G-&gt;&gt;L: Prüfe LFS-Tracking
-    L-&gt;&gt;L: Erstelle Hash
-    L-&gt;&gt;L: Speichere Datei im LFS Cache
-    L-&gt;&gt;G: Erstelle Pointer-Datei
-</pre></div>
+    U->>G: git add großeDatei.npy
+    G->>L: Prüfe LFS-Tracking
+    L->>L: Erstelle Hash
+    L->>L: Speichere Datei im LFS Cache
+    L->>G: Erstelle Pointer-Datei
 </div>
 <ol class="arabic simple" start="2">
 <li><p><strong>Beim Push</strong> (git push)</p></li>
 </ol>
-<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>sequenceDiagram
+<div class="mermaid">
+sequenceDiagram
     participant L as Lokales Repo
     participant G as Git Server
     participant S as LFS Storage
-    L-&gt;&gt;G: Push Pointer-Datei
-    L-&gt;&gt;S: Upload große Datei
-    S--&gt;&gt;G: Bestätige Storage
-</pre></div>
+    L->>G: Push Pointer-Datei
+    L->>S: Upload große Datei
+    S-->>G: Bestätige Storage
 </div>
 <ol class="arabic simple" start="3">
 <li><p><strong>Beim Pull</strong> (git pull)</p></li>
 </ol>
-<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>sequenceDiagram
+<div class="mermaid">
+sequenceDiagram
     participant U as User
     participant G as Git
     participant L as LFS
     participant S as LFS Storage
-    U-&gt;&gt;G: git pull
-    G-&gt;&gt;G: Update Pointer-Dateien
-    G-&gt;&gt;L: Prüfe LFS-Dateien
-    L-&gt;&gt;S: Download wenn nötig
-</pre></div>
+    U->>G: git pull
+    G->>G: Update Pointer-Dateien
+    G->>L: Prüfe LFS-Dateien
+    L->>S: Download wenn nötig
 </div>
 </section>
 </section>
@@ -913,12 +914,12 @@ git<span class="w"> </span>lfs<span class="w"> </span>ls-files<span class="w"> <
 <li><p><strong>Clean Filter</strong>: Konvertiert große Dateien in Pointer beim Staging</p></li>
 <li><p><strong>Smudge Filter</strong>: Ersetzt Pointer durch echte Dateien beim Checkout</p></li>
 </ol>
-<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>graph TD
-    A[Arbeitsverzeichnis] --&gt;|Clean| B[Git Repository]
-    B --&gt;|Smudge| A
-    B --&gt;|Pointer| C[LFS Storage]
-    C --&gt;|Große Datei| A
-</pre></div>
+<div class="mermaid">
+graph TD
+    A[Arbeitsverzeichnis] -->|Clean| B[Git Repository]
+    B -->|Smudge| A
+    B -->|Pointer| C[LFS Storage]
+    C -->|Große Datei| A
 </div>
 </section>
 <section id="partial-clone-und-fetch">
@@ -971,7 +972,7 @@ git<span class="w"> </span>lfs<span class="w"> </span>pull
 </ol>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="praktische-anwendung-von-git-lfs">
+<section id="praktische-anwendung-von-git-lfs">
 <h1>Praktische Anwendung von Git LFS<a class="headerlink" href="#praktische-anwendung-von-git-lfs" title="Link to this heading">#</a></h1>
 <section id="typische-workflows-in-den-digital-humanities">
 <h2>Typische Workflows in den Digital Humanities<a class="headerlink" href="#typische-workflows-in-den-digital-humanities" title="Link to this heading">#</a></h2>
@@ -1175,7 +1176,7 @@ git<span class="w"> </span>checkout<span class="w"> </span>--theirs<span class="
 </section>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="fazit">
+<section id="fazit">
 <h1>Fazit<a class="headerlink" href="#fazit" title="Link to this heading">#</a></h1>
 <p>Git LFS ist ein mächtiges Werkzeug für die Digital Humanities, das uns erlaubt, große Dateien effizient zu verwalten. Mit den gelernten Konzepten und Praktiken können Sie:</p>
 <ul class="simple">

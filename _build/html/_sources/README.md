@@ -4,78 +4,72 @@
 
 Dieses Jupyter Book bietet eine umfassende Anleitung zur Erstellung und Arbeit mit Computational Essays in den Digital Humanities. Es richtet sich an Studierende und Forschende, die narrative Schreibweisen mit computergestützten Analysen in ihrer akademischen Arbeit verbinden möchten.
 
-## Inhalt
+## Interaktive Features
 
-Aktuell enthält das Buch:
+### Annotations mit Hypothesis
 
-- **Einführung in Computational Essays**: Eine grundlegende Übersicht darüber, was Computational Essays sind, ihre Bedeutung in den Digital Humanities und ihre wesentlichen Komponenten
-- **Formatierungs- und Anforderungsleitfaden**: Detaillierte Anleitungen zur Strukturierung, Formatierung und Einreichung von Computational Essays, einschließlich technischer Anforderungen und Best Practices
+Dieses Buch unterstützt kollaborative Annotationen durch Hypothesis. Dies ermöglicht:
 
-Geplante Erweiterungen:
+- Direkte Kommentare und Anmerkungen im Text
+- Diskussionen über spezifische Passagen
+- Ergänzende Ressourcen und Links
+- Fragen und Clarifications zu bestimmten Abschnitten
 
-- Konvertierungsleitfäden für verschiedene Formate (LaTeX, PDF, Markdown)
-- Publikationsleitfäden zur Erstellung professioneller PDF-Dokumente
-- Bewertungskriterien und Beurteilungsraster
-- Anleitungen zur Einrichtung virtueller Umgebungen
-- Beispiele und Vorlagen
-- Zitations- und Bibliographieverwaltung
-- Fortgeschrittene Formatierungstechniken
+Um Annotationen zu nutzen:
 
-## Erste Schritte
+1. Erstellen Sie ein kostenloses Hypothesis-Konto
+2. Markieren Sie Text im Buch
+3. Fügen Sie Ihre Anmerkungen oder Kommentare hinzu
+4. Beteiligen Sie sich an bestehenden Diskussionen
+
+## Aktueller Inhalt
+
+Das Buch enthält derzeit:
+
+- **Einführung in Computational Essays**: Grundlegende Konzepte, Bedeutung in den Digital Humanities und wesentliche Komponenten
+- **Formatierungs- und Anforderungsleitfaden**: Detaillierte Anleitungen zur Strukturierung und Einreichung
 
 ### Voraussetzungen
 
-- Grundlegende Kenntnisse in Python
-- Verständnis von Jupyter Notebooks
-- Grundkenntnisse in Markdown
-- Git (optional, aber empfohlen)
+- Grundlegende Python-Kenntnisse
+- Vertrautheit mit Jupyter Notebooks
+- Markdown-Grundkenntnisse
 
-### Installation
+### Lokale Installation
 
-1. Repository klonen:
+```bash
+# Repository klonen
+git clone https://github.com/Digital-History-Berlin/Computational-Essays.git
+```
 
-    ```bash
-    git clone [repository-url]
-    ```
+## Mitarbeit und Feedback
 
-2. Erforderliche Abhängigkeiten installieren:
+Wir begrüßen Ihre Beiträge zur Verbesserung dieses Leitfadens:
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+- **Direkte Annotationen**: Nutzen Sie Hypothesis für Kommentare und Vorschläge im Text
+- **Issue Tracker**: Melden Sie Fehler oder schlagen Sie neue Features vor
+- **Pull Requests**: Tragen Sie direkt zur Weiterentwicklung bei
 
-3. Jupyter Book erstellen:
+### Pull Request Guidelines
 
-    ```bash
-    jupyter-book build .
-    ```
-
-## Verwendung des Leitfadens
-
-Das Buch ist sowohl als Nachschlagewerk als auch als Lernressource konzipiert. Sie können:
-
-- Es sequentiell als vollständigen Leitfaden lesen
-- Es als Referenz für spezifische Aspekte des Computational Essay-Schreibens nutzen
-- Anhand von Beispielen Techniken üben
-- Die Vorlagen und Richtlinien auf Ihre eigene Arbeit anwenden
-
-## Mitwirken
-
-Wir freuen uns über Beiträge zur Verbesserung dieses Leitfadens. Bitte:
-
-1. Erstellen Sie einen Fork des Repositories
-2. Erstellen Sie einen Feature-Branch
-3. Reichen Sie einen Pull Request mit Ihren Änderungen ein
+1. Fork des Repositories erstellen
+2. Feature-Branch anlegen
+3. Änderungen einreichen
+4. Review-Prozess abwarten
 
 ## Kontakt
 
-Für Fragen, Anregungen oder Probleme wenden Sie sich bitte an:
-<noah.jefferson.baumann.1@hu-berlin.de>
+Bei Fragen oder Anregungen:
 
-## Danksagung
+- E-Mail: <noah.jefferson.baumann.1@hu-berlin.de>
+- Hypothesis-Annotationen im Text
 
-Dieser Leitfaden baut auf Materialien auf, die am Institut für Geschichtswissenschaften der Humboldt-Universität zu Berlin entwickelt wurden, und integriert Best Practices aus der Digital Humanities-Community.
+## Lizenz und Danksagung
+
+Dieses Werk ist lizenziert unter einer Creative Commons BY 4.0 Lizenz.
+
+Entwickelt am Institut für Geschichtswissenschaften der Humboldt-Universität zu Berlin in Zusammenarbeit mit der Digital Humanities-Community.
 
 ---
 
-**Hinweis**: Dieses Projekt befindet sich in aktiver Entwicklung. Regelmäßige Updates und neue Inhalte werden fortlaufend hinzugefügt.
+**Status**: Aktives Entwicklungsprojekt mit regelmäßigen Updates. Feedback und Beiträge sind ausdrücklich erwünscht.

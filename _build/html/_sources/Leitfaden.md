@@ -67,23 +67,26 @@ Die Struktur eines Computational Essays sollte sich aus der Forschungsfrage und 
 1. Einleitung
    - Historischer Kontext
    - Forschungsfrage
-   - Quellenlage und Datengrundlage
 
-2. Methodischer Ansatz
+2. Quellenlage und Datenkritik
+   - Quellenlage und historische Quellenkritik
+   - Daten und Datenkritik (Entstehung, Korpus, Vorverarbeitung, Bias, etc.)
+
+3. Methodischer Ansatz
    - Begründung der gewählten digitalen Methoden
    - Kritische Reflexion der Möglichkeiten und Grenzen
 
-3. Analyse
+4. Analyse
    - Aufbereitung und Analyse der Quellen
    - Darstellung der Ergebnisse
    - Historische Interpretation
 
-4. Fazit
+5. Fazit
    - Beantwortung der Forschungsfrage
    - Methodische Reflexion
    - Ausblick
 
-5. Literaturverzeichnis
+6. Literaturverzeichnis
 ```
 
 #### Beispiel 2: Methodisch-explorativer Ansatz

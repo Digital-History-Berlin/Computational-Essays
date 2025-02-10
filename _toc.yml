@@ -1,5 +1,5 @@
 format: jb-book
-root: home
+root: README
 
 parts:
   - caption: Grundlagen
@@ -16,3 +16,8 @@ parts:
     chapters:
     - file: konvertierungen/word_md_notebook
       title: "Konvertierung von Word Documenten"
+
+  - caption: Praktische Werkzeuge
+    chapters:
+    - file: tools/git-lfs
+      title: "Fortgeschrittene Git-Funktionen"

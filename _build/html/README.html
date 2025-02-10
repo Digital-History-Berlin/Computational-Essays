@@ -171,9 +171,25 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Grundlagen</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Einf%C3%BChrung.html">Einführung in Computational Essays</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Leitfäden</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Leitfaden.html">Leitfaden für Computational Essays</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Konvertierungen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="konvertierungen/word_md_notebook.html">Konvertierung von Word Documenten</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Praktische Werkzeuge</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tools/git-lfs.html">Fortgeschrittene Git-Funktionen: Git Large File Storage (LFS)</a></li>
+
+
+
+
 </ul>
 
     </div>
@@ -320,16 +336,21 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uber-dieses-buch">Über dieses Buch</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inhalt">Inhalt</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#erste-schritte">Erste Schritte</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voraussetzungen">Voraussetzungen</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interaktive-features">Interaktive Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#annotations-mit-hypothesis">Annotations mit Hypothesis</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verwendung-des-leitfadens">Verwendung des Leitfadens</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mitwirken">Mitwirken</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aktueller-inhalt">Aktueller Inhalt</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voraussetzungen">Voraussetzungen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lokale-installation">Lokale Installation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mitarbeit-und-feedback">Mitarbeit und Feedback</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pull-request-guidelines">Pull Request Guidelines</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kontakt">Kontakt</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#danksagung">Danksagung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lizenz-und-danksagung">Lizenz und Danksagung</a></li>
 </ul>
             </nav>
         </div>
@@ -347,86 +368,88 @@
 <h2>Über dieses Buch<a class="headerlink" href="#uber-dieses-buch" title="Link to this heading">#</a></h2>
 <p>Dieses Jupyter Book bietet eine umfassende Anleitung zur Erstellung und Arbeit mit Computational Essays in den Digital Humanities. Es richtet sich an Studierende und Forschende, die narrative Schreibweisen mit computergestützten Analysen in ihrer akademischen Arbeit verbinden möchten.</p>
 </section>
-<section id="inhalt">
-<h2>Inhalt<a class="headerlink" href="#inhalt" title="Link to this heading">#</a></h2>
-<p>Aktuell enthält das Buch:</p>
+<section id="interaktive-features">
+<h2>Interaktive Features<a class="headerlink" href="#interaktive-features" title="Link to this heading">#</a></h2>
+<section id="annotations-mit-hypothesis">
+<h3>Annotations mit Hypothesis<a class="headerlink" href="#annotations-mit-hypothesis" title="Link to this heading">#</a></h3>
+<p>Dieses Buch unterstützt kollaborative Annotationen durch Hypothesis. Dies ermöglicht:</p>
 <ul class="simple">
-<li><p><strong>Einführung in Computational Essays</strong>: Eine grundlegende Übersicht darüber, was Computational Essays sind, ihre Bedeutung in den Digital Humanities und ihre wesentlichen Komponenten</p></li>
-<li><p><strong>Formatierungs- und Anforderungsleitfaden</strong>: Detaillierte Anleitungen zur Strukturierung, Formatierung und Einreichung von Computational Essays, einschließlich technischer Anforderungen und Best Practices</p></li>
+<li><p>Direkte Kommentare und Anmerkungen im Text</p></li>
+<li><p>Diskussionen über spezifische Passagen</p></li>
+<li><p>Ergänzende Ressourcen und Links</p></li>
+<li><p>Fragen und Clarifications zu bestimmten Abschnitten</p></li>
 </ul>
-<p>Geplante Erweiterungen:</p>
-<ul class="simple">
-<li><p>Konvertierungsleitfäden für verschiedene Formate (LaTeX, PDF, Markdown)</p></li>
-<li><p>Publikationsleitfäden zur Erstellung professioneller PDF-Dokumente</p></li>
-<li><p>Bewertungskriterien und Beurteilungsraster</p></li>
-<li><p>Anleitungen zur Einrichtung virtueller Umgebungen</p></li>
-<li><p>Beispiele und Vorlagen</p></li>
-<li><p>Zitations- und Bibliographieverwaltung</p></li>
-<li><p>Fortgeschrittene Formatierungstechniken</p></li>
-</ul>
+<p>Um Annotationen zu nutzen:</p>
+<ol class="arabic simple">
+<li><p>Erstellen Sie ein kostenloses Hypothesis-Konto</p></li>
+<li><p>Markieren Sie Text im Buch</p></li>
+<li><p>Fügen Sie Ihre Anmerkungen oder Kommentare hinzu</p></li>
+<li><p>Beteiligen Sie sich an bestehenden Diskussionen</p></li>
+</ol>
 </section>
-<section id="erste-schritte">
-<h2>Erste Schritte<a class="headerlink" href="#erste-schritte" title="Link to this heading">#</a></h2>
+</section>
+<section id="aktueller-inhalt">
+<h2>Aktueller Inhalt<a class="headerlink" href="#aktueller-inhalt" title="Link to this heading">#</a></h2>
+<p>Das Buch enthält derzeit:</p>
+<ul class="simple">
+<li><p><strong>Einführung in Computational Essays</strong>: Grundlegende Konzepte, Bedeutung in den Digital Humanities und wesentliche Komponenten</p></li>
+<li><p><strong>Formatierungs- und Anforderungsleitfaden</strong>: Detaillierte Anleitungen zur Strukturierung und Einreichung</p></li>
+</ul>
 <section id="voraussetzungen">
 <h3>Voraussetzungen<a class="headerlink" href="#voraussetzungen" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Grundlegende Kenntnisse in Python</p></li>
-<li><p>Verständnis von Jupyter Notebooks</p></li>
-<li><p>Grundkenntnisse in Markdown</p></li>
-<li><p>Git (optional, aber empfohlen)</p></li>
+<li><p>Grundlegende Python-Kenntnisse</p></li>
+<li><p>Vertrautheit mit Jupyter Notebooks</p></li>
+<li><p>Markdown-Grundkenntnisse</p></li>
 </ul>
 </section>
-<section id="installation">
-<h3>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h3>
-<ol class="arabic">
-<li><p>Repository klonen:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span><span class="o">[</span>repository-url<span class="o">]</span>
+<section id="lokale-installation">
+<h3>Lokale Installation<a class="headerlink" href="#lokale-installation" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Repository klonen</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Digital-History-Berlin/Computational-Essays.git
 </pre></div>
 </div>
-</li>
-<li><p>Erforderliche Abhängigkeiten installieren:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
-</pre></div>
-</div>
-</li>
-<li><p>Jupyter Book erstellen:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter-book<span class="w"> </span>build<span class="w"> </span>.
-</pre></div>
-</div>
-</li>
-</ol>
 </section>
 </section>
-<section id="verwendung-des-leitfadens">
-<h2>Verwendung des Leitfadens<a class="headerlink" href="#verwendung-des-leitfadens" title="Link to this heading">#</a></h2>
-<p>Das Buch ist sowohl als Nachschlagewerk als auch als Lernressource konzipiert. Sie können:</p>
+<section id="mitarbeit-und-feedback">
+<h2>Mitarbeit und Feedback<a class="headerlink" href="#mitarbeit-und-feedback" title="Link to this heading">#</a></h2>
+<p>Wir begrüßen Ihre Beiträge zur Verbesserung dieses Leitfadens:</p>
 <ul class="simple">
-<li><p>Es sequentiell als vollständigen Leitfaden lesen</p></li>
-<li><p>Es als Referenz für spezifische Aspekte des Computational Essay-Schreibens nutzen</p></li>
-<li><p>Anhand von Beispielen Techniken üben</p></li>
-<li><p>Die Vorlagen und Richtlinien auf Ihre eigene Arbeit anwenden</p></li>
+<li><p><strong>Direkte Annotationen</strong>: Nutzen Sie Hypothesis für Kommentare und Vorschläge im Text</p></li>
+<li><p><strong>Issue Tracker</strong>: Melden Sie Fehler oder schlagen Sie neue Features vor</p></li>
+<li><p><strong>Pull Requests</strong>: Tragen Sie direkt zur Weiterentwicklung bei</p></li>
 </ul>
-</section>
-<section id="mitwirken">
-<h2>Mitwirken<a class="headerlink" href="#mitwirken" title="Link to this heading">#</a></h2>
-<p>Wir freuen uns über Beiträge zur Verbesserung dieses Leitfadens. Bitte:</p>
+<section id="pull-request-guidelines">
+<h3>Pull Request Guidelines<a class="headerlink" href="#pull-request-guidelines" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>Erstellen Sie einen Fork des Repositories</p></li>
-<li><p>Erstellen Sie einen Feature-Branch</p></li>
-<li><p>Reichen Sie einen Pull Request mit Ihren Änderungen ein</p></li>
+<li><p>Fork des Repositories erstellen</p></li>
+<li><p>Feature-Branch anlegen</p></li>
+<li><p>Änderungen einreichen</p></li>
+<li><p>Review-Prozess abwarten</p></li>
 </ol>
+</section>
 </section>
 <section id="kontakt">
 <h2>Kontakt<a class="headerlink" href="#kontakt" title="Link to this heading">#</a></h2>
-<p>Für Fragen, Anregungen oder Probleme wenden Sie sich bitte an:
-<a class="reference external" href="mailto:noah&#46;jefferson&#46;baumann&#46;1&#37;&#52;&#48;hu-berlin&#46;de">noah<span>&#46;</span>jefferson<span>&#46;</span>baumann<span>&#46;</span>1<span>&#64;</span>hu-berlin<span>&#46;</span>de</a></p>
+<p>Bei Fragen oder Anregungen:</p>
+<ul class="simple">
+<li><p>E-Mail: <a class="reference external" href="mailto:noah&#46;jefferson&#46;baumann&#46;1&#37;&#52;&#48;hu-berlin&#46;de">noah<span>&#46;</span>jefferson<span>&#46;</span>baumann<span>&#46;</span>1<span>&#64;</span>hu-berlin<span>&#46;</span>de</a></p></li>
+<li><p>Hypothesis-Annotationen im Text</p></li>
+</ul>
 </section>
-<section id="danksagung">
-<h2>Danksagung<a class="headerlink" href="#danksagung" title="Link to this heading">#</a></h2>
-<p>Dieser Leitfaden baut auf Materialien auf, die am Institut für Geschichtswissenschaften der Humboldt-Universität zu Berlin entwickelt wurden, und integriert Best Practices aus der Digital Humanities-Community.</p>
+<section id="lizenz-und-danksagung">
+<h2>Lizenz und Danksagung<a class="headerlink" href="#lizenz-und-danksagung" title="Link to this heading">#</a></h2>
+<p>Dieses Werk ist lizenziert unter einer Creative Commons BY 4.0 Lizenz.</p>
+<p>Entwickelt am Institut für Geschichtswissenschaften der Humboldt-Universität zu Berlin in Zusammenarbeit mit der Digital Humanities-Community.</p>
 <hr class="docutils" />
-<p><strong>Hinweis</strong>: Dieses Projekt befindet sich in aktiver Entwicklung. Regelmäßige Updates und neue Inhalte werden fortlaufend hinzugefügt.</p>
+<p><strong>Status</strong>: Aktives Entwicklungsprojekt mit regelmäßigen Updates. Feedback und Beiträge sind ausdrücklich erwünscht.</p>
 </section>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -488,16 +511,21 @@
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uber-dieses-buch">Über dieses Buch</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inhalt">Inhalt</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#erste-schritte">Erste Schritte</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voraussetzungen">Voraussetzungen</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interaktive-features">Interaktive Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#annotations-mit-hypothesis">Annotations mit Hypothesis</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verwendung-des-leitfadens">Verwendung des Leitfadens</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mitwirken">Mitwirken</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aktueller-inhalt">Aktueller Inhalt</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voraussetzungen">Voraussetzungen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lokale-installation">Lokale Installation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mitarbeit-und-feedback">Mitarbeit und Feedback</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pull-request-guidelines">Pull Request Guidelines</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kontakt">Kontakt</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#danksagung">Danksagung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lizenz-und-danksagung">Lizenz und Danksagung</a></li>
 </ul>
   </nav></div>
 

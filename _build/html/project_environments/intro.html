@@ -1,0 +1,679 @@
+
+<!DOCTYPE html>
+
+
+<html lang="de" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Einführung in Projektumgebungen für Digital History &#8212; Computational Essays</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=91fba89f"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script src="../_static/translations.js?v=79cc9f76"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'project_environments/intro';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
+    <link rel="search" title="Suche" href="../search.html" />
+    <link rel="next" title="Projektumgebungen mit venv" href="venv_guide.html" />
+    <link rel="prev" title="Einführung in Computational Essays" href="../Einf%C3%BChrung.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="de"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/Logo_DigitalHistoryBerlin.png" class="logo__image only-light" alt="Computational Essays - Home"/>
+    <img src="../_static/Logo_DigitalHistoryBerlin.png" class="logo__image only-dark pst-js-only" alt="Computational Essays - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Suche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Computational Essays: Ein Leitfaden für die Digital Humanities
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Grundlagen</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Einf%C3%BChrung.html">Einführung in Computational Essays</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Einführung in Projektumgebungen</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="venv_guide.html">Projektumgebungen mit venv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conda_guide.html">Projektumgebungen mit conda</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Leitfäden</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Leitfaden.html">Leitfaden für Computational Essays</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Konvertierungen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Konvertierungen/word_md_notebook.html">Konvertierung von Word Documenten</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Praktische Werkzeuge</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tools/git-lfs.html">Fortgeschrittene Git-Funktionen: Git Large File Storage (LFS)</a></li>
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Laden Sie diese Seite herunter">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/project_environments/intro.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Quelldatei herunterladen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="In PDF drucken"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Vollbildmodus"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Einführung in Projektumgebungen für Digital History</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Inhalt </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#was-sind-projektumgebungen">Was sind Projektumgebungen?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ein-beispiel-aus-der-digital-history">Ein Beispiel aus der Digital History</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warum-sind-projektumgebungen-wichtig">Warum sind Projektumgebungen wichtig?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reproduzierbarkeit">1. Reproduzierbarkeit</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#konsistenz-und-stabilitat">2. Konsistenz und Stabilität</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zusammenarbeit">3. Zusammenarbeit</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langzeitarchivierung">4. Langzeitarchivierung</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grundlegende-konzepte">Grundlegende Konzepte</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies-abhangigkeiten">Dependencies (Abhängigkeiten)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paketverwaltung">Paketverwaltung</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wann-nutze-ich-welches-system">Wann nutze ich welches System?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#venv-ist-ideal-fur">venv ist ideal für:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-ist-besser-bei">conda ist besser bei:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nachste-schritte">Nächste Schritte</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="einfuhrung-in-projektumgebungen-fur-digital-history">
+<h1>Einführung in Projektumgebungen für Digital History<a class="headerlink" href="#einfuhrung-in-projektumgebungen-fur-digital-history" title="Link to this heading">#</a></h1>
+<section id="was-sind-projektumgebungen">
+<h2>Was sind Projektumgebungen?<a class="headerlink" href="#was-sind-projektumgebungen" title="Link to this heading">#</a></h2>
+<p>Eine Projektumgebung ist ein isolierter Arbeitsbereich für ein spezifisches Projekt, der alle benötigten Software-Werkzeuge und -Bibliotheken in genau definierten Versionen enthält. Stellen Sie sich dies wie eine digitale Werkstatt vor: Jedes Projekt hat seinen eigenen Raum mit genau den Werkzeugen, die es braucht, ohne dass diese Werkzeuge mit denen anderer Projekte in Konflikt geraten.</p>
+<section id="ein-beispiel-aus-der-digital-history">
+<h3>Ein Beispiel aus der Digital History<a class="headerlink" href="#ein-beispiel-aus-der-digital-history" title="Link to this heading">#</a></h3>
+<p>Nehmen wir an, Sie arbeiten an zwei verschiedenen Forschungsprojekten:</p>
+<ol class="arabic simple">
+<li><p>Eine Analyse historischer Zeitungstexte mit Natural Language Processing (NLP)</p></li>
+<li><p>Eine Netzwerkanalyse von Briefkorrespondenzen des 19. Jahrhunderts</p></li>
+</ol>
+<p>Beide Projekte verwenden möglicherweise unterschiedliche Python-Bibliotheken in verschiedenen Versionen:</p>
+<ul class="simple">
+<li><p>Das Zeitungsprojekt benötigt eine ältere Version von spaCy für die Kompatibilität mit einem bestimmten Modell</p></li>
+<li><p>Die Netzwerkanalyse verwendet die neueste Version von NetworkX und andere aktuelle Bibliotheken</p></li>
+</ul>
+<p>Ohne getrennte Projektumgebungen müssten Sie ständig Bibliotheken neu installieren und könnten nicht einfach zwischen den Projekten wechseln.</p>
+</section>
+</section>
+<section id="warum-sind-projektumgebungen-wichtig">
+<h2>Warum sind Projektumgebungen wichtig?<a class="headerlink" href="#warum-sind-projektumgebungen-wichtig" title="Link to this heading">#</a></h2>
+<section id="reproduzierbarkeit">
+<h3>1. Reproduzierbarkeit<a class="headerlink" href="#reproduzierbarkeit" title="Link to this heading">#</a></h3>
+<p>Für Digital History ist Reproduzierbarkeit von zentraler Bedeutung. Ihre Analyseergebnisse müssen:</p>
+<ul class="simple">
+<li><p>Von anderen Forschenden überprüft werden können</p></li>
+<li><p>In einigen Jahren noch reproduzierbar sein</p></li>
+<li><p>Auf verschiedenen Systemen funktionieren</p></li>
+</ul>
+<p>Eine Projektumgebung dokumentiert genau, welche Werkzeuge in welchen Versionen verwendet wurden.</p>
+</section>
+<section id="konsistenz-und-stabilitat">
+<h3>2. Konsistenz und Stabilität<a class="headerlink" href="#konsistenz-und-stabilitat" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Vermeidung des „Bei mir funktioniert es“-Problems</p></li>
+<li><p>Schutz vor unerwarteten Änderungen durch Updates</p></li>
+<li><p>Garantie, dass alle Teammitglieder mit identischen Werkzeugen arbeiten</p></li>
+</ul>
+</section>
+<section id="zusammenarbeit">
+<h3>3. Zusammenarbeit<a class="headerlink" href="#zusammenarbeit" title="Link to this heading">#</a></h3>
+<p>In der Digital History arbeiten oft Forschende mit unterschiedlichen technischen Hintergründen zusammen:</p>
+<ul class="simple">
+<li><p>Historiker:innen</p></li>
+<li><p>Programmierer:innen</p></li>
+<li><p>Datenanalyst:innen</p></li>
+<li><p>Studierende</p></li>
+</ul>
+<p>Eine definierte Projektumgebung ermöglicht es allen, schnell einzusteigen und mitzuarbeiten.</p>
+</section>
+<section id="langzeitarchivierung">
+<h3>4. Langzeitarchivierung<a class="headerlink" href="#langzeitarchivierung" title="Link to this heading">#</a></h3>
+<p>Digitale Forschung muss auch in Zukunft nachvollziehbar sein:</p>
+<ul class="simple">
+<li><p>Projektumgebungen dokumentieren die technische Basis</p></li>
+<li><p>Ermöglichen die spätere Rekonstruktion der Analyseumgebung</p></li>
+<li><p>Sichern die langfristige Nutzbarkeit digitaler Forschungsergebnisse</p></li>
+</ul>
+</section>
+</section>
+<section id="grundlegende-konzepte">
+<h2>Grundlegende Konzepte<a class="headerlink" href="#grundlegende-konzepte" title="Link to this heading">#</a></h2>
+<section id="dependencies-abhangigkeiten">
+<h3>Dependencies (Abhängigkeiten)<a class="headerlink" href="#dependencies-abhangigkeiten" title="Link to this heading">#</a></h3>
+<p>Dependencies sind Bibliotheken oder Tools, die Ihr Projekt benötigt:</p>
+<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>Projekt: Historische Netzwerkanalyse
+├── Python 3.9
+├── NetworkX 3.1 (für Netzwerkanalyse)
+├── Pandas 2.0 (für Datenverarbeitung)
+└── Matplotlib 3.7 (für Visualisierung)
+</pre></div>
+</div>
+</section>
+<section id="paketverwaltung">
+<h3>Paketverwaltung<a class="headerlink" href="#paketverwaltung" title="Link to this heading">#</a></h3>
+<p>Es gibt zwei Hauptsysteme für Python-Projektumgebungen:</p>
+<ol class="arabic simple">
+<li><p><strong>venv mit pip</strong></p>
+<ul class="simple">
+<li><p>Teil der Python-Standardbibliothek</p></li>
+<li><p>Fokus auf Python-Pakete</p></li>
+<li><p>Einfach und leichtgewichtig</p></li>
+</ul>
+</li>
+<li><p><strong>conda</strong></p>
+<ul class="simple">
+<li><p>Umfassenderes System</p></li>
+<li><p>Verwaltet auch nicht-Python-Dependencies</p></li>
+<li><p>Besonders stark in wissenschaftlichen Anwendungen</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+<section id="wann-nutze-ich-welches-system">
+<h2>Wann nutze ich welches System?<a class="headerlink" href="#wann-nutze-ich-welches-system" title="Link to this heading">#</a></h2>
+<section id="venv-ist-ideal-fur">
+<h3>venv ist ideal für:<a class="headerlink" href="#venv-ist-ideal-fur" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Reine Python-Projekte</p></li>
+<li><p>Einfache Textanalysen</p></li>
+<li><p>Projekte mit wenigen Dependencies</p></li>
+<li><p>Wenn Sie nur pip-Pakete benötigen</p></li>
+</ul>
+</section>
+<section id="conda-ist-besser-bei">
+<h3>conda ist besser bei:<a class="headerlink" href="#conda-ist-besser-bei" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Komplexen Data Science Projekten</p></li>
+<li><p>Wenn Sie spezielle wissenschaftliche Bibliotheken benötigen</p></li>
+<li><p>Projekten mit nicht-Python-Dependencies</p></li>
+</ul>
+</section>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Eine Umgebung pro Projekt</strong></p>
+<ul class="simple">
+<li><p>Jedes Forschungsprojekt bekommt seine eigene Umgebung</p></li>
+<li><p>Keine Vermischung von Dependencies verschiedener Projekte</p></li>
+</ul>
+</li>
+<li><p><strong>Dokumentation</strong></p>
+<ul class="simple">
+<li><p>Erstellen Sie immer eine requirements.txt oder environment.yml</p></li>
+<li><p>Dokumentieren Sie die Schritte zur Einrichtung</p></li>
+<li><p>Notieren Sie wichtige Kommandos</p></li>
+</ul>
+</li>
+<li><p><strong>Versionskontrolle</strong></p>
+<ul class="simple">
+<li><p>requirements.txt oder environment.yml gehören ins Git-Repository</p></li>
+<li><p>Die Umgebung selbst (venv/ oder .conda/) nicht!</p></li>
+<li><p>Nutzen Sie .gitignore entsprechend</p></li>
+</ul>
+</li>
+<li><p><strong>Regelmäßige Updates</strong></p>
+<ul class="simple">
+<li><p>Prüfen Sie regelmäßig auf Sicherheitsupdates</p></li>
+<li><p>Testen Sie nach Updates Ihre Analysen</p></li>
+<li><p>Dokumentieren Sie Änderungen</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="nachste-schritte">
+<h2>Nächste Schritte<a class="headerlink" href="#nachste-schritte" title="Link to this heading">#</a></h2>
+<p>In den folgenden Kapiteln lernen Sie:</p>
+<ol class="arabic simple">
+<li><p>Wie Sie Projektumgebungen mit venv erstellen und verwalten</p></li>
+<li><p>Wie Sie conda für komplexere Projekte nutzen</p></li>
+<li><p>Praktische Beispiele für typische Digital History Projekte</p></li>
+</ol>
+<p>Wählen Sie das für Ihr Projekt passende System und folgen Sie der entsprechenden Anleitung.</p>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "executablebooks/jupyter-book",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./project_environments"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Einf%C3%BChrung.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">zurück</p>
+        <p class="prev-next-title">Einführung in Computational Essays</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="venv_guide.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">weiter</p>
+        <p class="prev-next-title">Projektumgebungen mit venv</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Inhalt
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#was-sind-projektumgebungen">Was sind Projektumgebungen?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ein-beispiel-aus-der-digital-history">Ein Beispiel aus der Digital History</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warum-sind-projektumgebungen-wichtig">Warum sind Projektumgebungen wichtig?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reproduzierbarkeit">1. Reproduzierbarkeit</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#konsistenz-und-stabilitat">2. Konsistenz und Stabilität</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zusammenarbeit">3. Zusammenarbeit</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langzeitarchivierung">4. Langzeitarchivierung</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grundlegende-konzepte">Grundlegende Konzepte</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies-abhangigkeiten">Dependencies (Abhängigkeiten)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paketverwaltung">Paketverwaltung</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wann-nutze-ich-welches-system">Wann nutze ich welches System?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#venv-ist-ideal-fur">venv ist ideal für:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-ist-besser-bei">conda ist besser bei:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nachste-schritte">Nächste Schritte</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Durch <a href="https://www.geschichte.hu-berlin.de/de/bereiche-und-lehrstuehle/digital-history">Digital History, Humboldt-Universität zu Berlin</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="http://creativecommons.org/licenses/by/4.0/"><img class="license" alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> This book is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons BY 4.0 License</a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

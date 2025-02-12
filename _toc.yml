@@ -6,6 +6,13 @@ parts:
     chapters:
     - file: Einführung
       title: "Einführung in Computational Essays"
+    - file: project_environments/intro
+      title: "Einführung in Projektumgebungen"
+      sections:
+        - file: project_environments/venv_guide
+          title: "Projektumgebungen mit venv"
+        - file: project_environments/conda_guide
+          title: "Projektumgebungen mit conda"
         
   - caption: Leitfäden
     chapters:

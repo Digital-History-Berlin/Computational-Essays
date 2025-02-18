@@ -22,7 +22,7 @@ html:
 
 # Execution settings
 execute:
-  execute_notebooks: force
+  execute_notebooks: auto
   timeout: 300
   allow_errors: false
 

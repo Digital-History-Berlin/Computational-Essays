@@ -64,11 +64,13 @@ Bei der Erstellung eines Computational Essays sollten folgende Aspekte beachtet 
   *Sammlung verschiedener Computational Essays mit unterschiedlichen Ansätzen*
 - Notebooks am IBI: [https://pages.cms.hu-berlin.de/ibi/notebooks/]
   *Sammlung von Jupyter Notebooks des Instituts für Bibliotheks- und Informationswissenschaft der HU Berlin*
+- [Liste von Jupyter Notebooks in DH](https://github.com/quinnanya/dh-jupyter)
 
 ## Weiterführende Ressourcen
 
 - [Project Jupyter](https://jupyter.org/)
 - [Python für Digital History](https://digital-history-berlin.github.io/Python-fuer-Historiker-innen/home.html)
+- [Einführung in Jupyter Notebooks](https://programminghistorian.org/en/lessons/jupyter-notebooks)
 
 ## Literatur
 

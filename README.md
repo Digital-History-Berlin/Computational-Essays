@@ -8,7 +8,7 @@ Dieses Jupyter Book bietet eine umfassende Anleitung zur Erstellung und Arbeit m
 
 ### Annotations mit Hypothesis
 
-Dieses Buch unterstützt kollaborative Annotationen durch Hypothesis. Dies ermöglicht:
+Dieses Buch unterstützt kollaborative Annotationen durch [Hypothesis](https://hypothes.is/). Dies ermöglicht:
 
 - Direkte Kommentare und Anmerkungen im Text
 - Diskussionen über spezifische Passagen
@@ -28,12 +28,13 @@ Das Buch enthält derzeit:
 
 - **Einführung in Computational Essays**: Grundlegende Konzepte, Bedeutung in den Digital Humanities und wesentliche Komponenten
 - **Formatierungs- und Anforderungsleitfaden**: Detaillierte Anleitungen zur Strukturierung und Einreichung
+- **Einführung in Projektumgebungen**: Grundlegende Idee, Detaillierte Guides zu venv und Conda
 
 ### Voraussetzungen
 
 - Grundlegende Python-Kenntnisse
 - Vertrautheit mit Jupyter Notebooks
-- Markdown-Grundkenntnisse
+- [Markdown-Grundkenntnisse](https://www.markdownguide.org/basic-syntax/)
 
 ### Lokale Installation
 
@@ -48,14 +49,6 @@ Wir begrüßen Ihre Beiträge zur Verbesserung dieses Leitfadens:
 
 - **Direkte Annotationen**: Nutzen Sie Hypothesis für Kommentare und Vorschläge im Text
 - **Issue Tracker**: Melden Sie Fehler oder schlagen Sie neue Features vor
-- **Pull Requests**: Tragen Sie direkt zur Weiterentwicklung bei
-
-### Pull Request Guidelines
-
-1. Fork des Repositories erstellen
-2. Feature-Branch anlegen
-3. Änderungen einreichen
-4. Review-Prozess abwarten
 
 ## Kontakt
 

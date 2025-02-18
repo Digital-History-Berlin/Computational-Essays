@@ -1,0 +1,1388 @@
+
+<!DOCTYPE html>
+
+
+<html lang="de" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Fortgeschrittene Git-Funktionen: Git Large File Storage (LFS) &#8212; Computational Essays</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=91fba89f"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script src="../_static/translations.js?v=79cc9f76"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tools/git-lfs';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
+    <link rel="search" title="Suche" href="../search.html" />
+    <link rel="prev" title="Anleitung zur Erstellung eines Computational Essays in Jupyter Notebook" href="../Konvertierungen/word_md_notebook.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="de"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/Logo_DigitalHistoryBerlin.png" class="logo__image only-light" alt="Computational Essays - Home"/>
+    <img src="../_static/Logo_DigitalHistoryBerlin.png" class="logo__image only-dark pst-js-only" alt="Computational Essays - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Suche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Computational Essays: Ein Leitfaden für die Digital Humanities
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Grundlagen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Einf%C3%BChrung.html">Einführung in Computational Essays</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../project_environments/intro.html">Einführung in Projektumgebungen</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../project_environments/venv_guide.html">Projektumgebungen mit venv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../project_environments/conda_guide.html">Projektumgebungen mit conda</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Leitfäden</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Leitfaden.html">Leitfaden für Computational Essays</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Konvertierungen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Konvertierungen/word_md_notebook.html">Konvertierung von Word Documenten</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Praktische Werkzeuge</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Fortgeschrittene Git-Funktionen: Git Large File Storage (LFS)</a></li>
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Laden Sie diese Seite herunter">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/tools/git-lfs.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Quelldatei herunterladen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="In PDF drucken"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Vollbildmodus"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Fortgeschrittene Git-Funktionen: Git Large File Storage (LFS)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Inhalt </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Fortgeschrittene Git-Funktionen: Git Large File Storage (LFS)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einfuhrung">Einführung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#was-ist-git-lfs">Was ist Git LFS?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warum-brauchen-wir-git-lfs">Warum brauchen wir Git LFS?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#versionierung-in-git-lfs">Versionierung in Git LFS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wo-finde-ich-weitere-informationen">Wo finde ich weitere Informationen?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#voraussetzungen">Voraussetzungen</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-und-einrichtung-von-git-lfs">Installation und Einrichtung von Git LFS</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#macos">macOS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linux-ubuntu-debian">Linux (Ubuntu/Debian)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uberprufung-der-installation">Überprüfung der Installation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einrichtung">Einrichtung</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#globale-einrichtung">1. Globale Einrichtung</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repository-spezifische-einrichtung">2. Repository-spezifische Einrichtung</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uberprufung-der-einrichtung">Überprüfung der Einrichtung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wichtige-hinweise">Wichtige Hinweise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#haufige-probleme-und-losungen">Häufige Probleme und Lösungen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#support-und-hilfe">Support und Hilfe</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#speicherplatz-management-im-hu-gitlab">Speicherplatz-Management im HU GitLab</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-fur-grosze-dateien">Best Practices für große Dateien</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nachste-schritte">Nächste Schritte</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#grundlegende-konzepte-von-git-lfs">Grundlegende Konzepte von Git LFS</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wie-git-lfs-funktioniert">Wie Git LFS funktioniert</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#die-pointer-datei">Die Pointer-Datei</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#der-workflow">Der Workflow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#praktische-beispiele">Praktische Beispiele</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-datei-tracken">1. Embedding-Datei tracken</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pointer-datei-inspizieren">2. Pointer-Datei inspizieren</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lfs-dateien-auflisten">3. LFS-Dateien auflisten</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#besonderheiten-und-hinweise">Besonderheiten und Hinweise</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#smudge-und-clean-filter">Smudge und Clean Filter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-clone-und-fetch">Partial Clone und Fetch</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#haufige-fragen">Häufige Fragen</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#praktische-anwendung-von-git-lfs">Praktische Anwendung von Git LFS</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typische-workflows-in-den-digital-humanities">Typische Workflows in den Digital Humanities</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#einrichten-eines-neuen-projekts">1. Einrichten eines neuen Projekts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arbeiten-mit-embedding-dateien">2. Arbeiten mit Embedding-Dateien</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kollaboratives-arbeiten">3. Kollaboratives Arbeiten</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#groszere-datensatze-verwalten">4. Größere Datensätze verwalten</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repository-struktur">1. Repository-Struktur</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lfs-dateien-dokumentieren">2. LFS-Dateien dokumentieren</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#versionierung-von-datensatzen">3. Versionierung von Datensätzen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-optimierung">4. Performance-Optimierung</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fehlerbehebung">Fehlerbehebung</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Häufige Probleme und Lösungen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nutzliche-skripte">Nützliche Skripte</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lfs-status-uberprufen">LFS-Status überprüfen</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fazit">Fazit</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="fortgeschrittene-git-funktionen-git-large-file-storage-lfs">
+<h1>Fortgeschrittene Git-Funktionen: Git Large File Storage (LFS)<a class="headerlink" href="#fortgeschrittene-git-funktionen-git-large-file-storage-lfs" title="Link to this heading">#</a></h1>
+<section id="einfuhrung">
+<h2>Einführung<a class="headerlink" href="#einfuhrung" title="Link to this heading">#</a></h2>
+<p>In der digitalen Geschichtswissenschaft arbeiten wir zunehmend mit großen Dateien, insbesondere wenn wir:</p>
+<ul class="simple">
+<li><p>Embedding-Dateien für RAG-Systeme generieren</p></li>
+<li><p>Große Textkorpora verarbeiten</p></li>
+<li><p>Mit Bild- oder Audiodateien arbeiten</p></li>
+<li><p>Trainierte Modelle speichern</p></li>
+</ul>
+<p>Git, unser Standard-Werkzeug für Versionskontrolle, wurde ursprünglich für Quellcode entwickelt - also für kleine Textdateien. Bei großen Dateien (&gt;100MB) stößt Git jedoch an seine Grenzen. Hier kommt Git Large File Storage (Git LFS) ins Spiel.</p>
+</section>
+<section id="was-ist-git-lfs">
+<h2>Was ist Git LFS?<a class="headerlink" href="#was-ist-git-lfs" title="Link to this heading">#</a></h2>
+<p>Git LFS ist eine Erweiterung für Git, die speziell für die Verwaltung großer Dateien entwickelt wurde. Statt die großen Dateien direkt im Git-Repository zu speichern, werden sie in einem separaten Speicher abgelegt und durch kleine Pointer-Dateien im Repository referenziert. Wichtig zu verstehen: Die großen Dateien werden dabei weiterhin versioniert - jede Version einer LFS-Datei wird gespeichert und kann wiederhergestellt werden, genau wie bei normalen Git-Dateien. Der Unterschied liegt nur in der Art der Speicherung und Übertragung.</p>
+<div class="mermaid">
+graph TD
+    A[Git Repository] -->|Enthält| B[Quellcode]
+    A -->|Enthält| C[Pointer-Datei]
+    C -->|Verweist auf| D[LFS Speicher]
+    D -->|Enthält| E[Große Datei]
+    style D fill:#4974a5,stroke:#333,stroke-width:4px
+    E -->|Version 1| F[V1 der großen Datei]
+    E -->|Version 2| G[V2 der großen Datei]
+    E -->|Version 3| H[V3 der großen Datei]
+</div>
+</section>
+<section id="warum-brauchen-wir-git-lfs">
+<h2>Warum brauchen wir Git LFS?<a class="headerlink" href="#warum-brauchen-wir-git-lfs" title="Link to this heading">#</a></h2>
+<p>Konkrete Beispiele aus der Digital Humanities Praxis:</p>
+<ol class="arabic simple">
+<li><p><strong>RAG-Systeme &amp; Embeddings</strong></p>
+<ul class="simple">
+<li><p>Eine typische Embedding-Datei für einen Textkorpus kann leicht 500MB-1GB groß werden</p></li>
+<li><p>Ohne LFS würde dies:</p>
+<ul>
+<li><p>Das Repository aufblähen</p></li>
+<li><p>Klonen und Pushen verlangsamen</p></li>
+<li><p>Möglicherweise die Größenlimits von GitHub überschreiten</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Kollaborative Forschung mit großen Dateien</strong></p>
+<ul class="simple">
+<li><p>Effiziente Zusammenarbeit an großen Datensätzen ohne das komplette Repository herunterladen zu müssen</p></li>
+<li><p>Selektives Herunterladen nur der benötigten großen Dateien</p></li>
+<li><p>Bandbreitenoptimierung bei der Arbeit mit Remote-Repositories</p></li>
+<li><p>Vermeidung von Repository-Bloat bei häufigen Updates großer Dateien</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="versionierung-in-git-lfs">
+<h2>Versionierung in Git LFS<a class="headerlink" href="#versionierung-in-git-lfs" title="Link to this heading">#</a></h2>
+<p>Ein häufiges Missverständnis ist, dass LFS-Dateien nicht versioniert würden. Das stimmt nicht:</p>
+<ol class="arabic simple">
+<li><p><strong>Vollständige Versionierung</strong></p>
+<ul class="simple">
+<li><p>Jede Änderung an einer LFS-Datei wird als neue Version gespeichert</p></li>
+<li><p>Sie können jederzeit zu älteren Versionen zurückkehren</p></li>
+<li><p>Die komplette Historie bleibt erhalten</p></li>
+</ul>
+</li>
+<li><p><strong>Unterschied zur normalen Git-Versionierung</strong></p>
+<ul class="simple">
+<li><p>Bei normalen Git-Dateien: Alle Versionen im Hauptrepository</p></li>
+<li><p>Bei LFS-Dateien: Versionen im LFS-Speicher, nur Pointer im Hauptrepository</p></li>
+<li><p>Das Ergebnis ist das gleiche: Sie haben Zugriff auf alle Versionen</p></li>
+</ul>
+</li>
+<li><p><strong>Praktische Bedeutung</strong></p>
+<ul class="simple">
+<li><p>Sie können <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> für LFS-Dateien nutzen</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span></code> funktioniert wie gewohnt</p></li>
+<li><p>Branches können verschiedene Versionen der LFS-Dateien enthalten</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="wo-finde-ich-weitere-informationen">
+<h2>Wo finde ich weitere Informationen?<a class="headerlink" href="#wo-finde-ich-weitere-informationen" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://git-lfs.com/">Offizielle Git LFS Dokumentation</a></p></li>
+<li><p><a class="reference external" href="https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage">GitHub’s Guide zu Git LFS</a></p></li>
+<li><p><a class="reference external" href="https://docs.gitlab.com/ee/topics/git/lfs/">GitLab LFS Dokumentation</a></p></li>
+</ul>
+</section>
+<section id="voraussetzungen">
+<h2>Voraussetzungen<a class="headerlink" href="#voraussetzungen" title="Link to this heading">#</a></h2>
+<p>Bevor wir mit den praktischen Übungen beginnen, stellen Sie sicher, dass Sie:</p>
+<ul class="simple">
+<li><p>Git auf Ihrem System installiert haben</p></li>
+<li><p>Grundlegende Git-Befehle kennen (clone, add, commit, push, pull)</p></li>
+<li><p>Zugriff auf ein Git-Repository haben (z.B. auf GitHub oder GitLab)</p></li>
+</ul>
+<p>In den folgenden Abschnitten werden wir:</p>
+<ol class="arabic simple">
+<li><p>Git LFS installieren und konfigurieren</p></li>
+<li><p>Lernen, wie man große Dateien tracked</p></li>
+<li><p>Best Practices für die Arbeit mit LFS kennenlernen</p></li>
+<li><p>Einen typischen Workflow mit Embedding-Dateien durchgehen</p></li>
+</ol>
+</section>
+</section>
+<section id="installation-und-einrichtung-von-git-lfs">
+<h1>Installation und Einrichtung von Git LFS<a class="headerlink" href="#installation-und-einrichtung-von-git-lfs" title="Link to this heading">#</a></h1>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<p>Die Installation von Git LFS unterscheidet sich je nach Betriebssystem. Wählen Sie die für Sie passende Methode:</p>
+<section id="windows">
+<h3>Windows<a class="headerlink" href="#windows" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Automatische Installation mit Git for Windows</strong></p>
+<ul class="simple">
+<li><p>Wenn Sie Git neu installieren: Git LFS ist bereits in den neueren Versionen von <a class="reference external" href="https://gitforwindows.org/">Git for Windows</a> enthalten</p></li>
+<li><p>Bei der Installation „Git LFS“ Option aktivieren</p></li>
+</ul>
+</li>
+<li><p><strong>Manuelle Installation</strong></p>
+<ul class="simple">
+<li><p>Laden Sie den Installer von der <a class="reference external" href="https://github.com/git-lfs/git-lfs/releases/latest">Git LFS Releases</a> Seite herunter</p></li>
+<li><p>Führen Sie die .exe Datei aus</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="macos">
+<h3>macOS<a class="headerlink" href="#macos" title="Link to this heading">#</a></h3>
+<p>Mit Homebrew (empfohlen):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>git-lfs
+</pre></div>
+</div>
+</section>
+<section id="linux-ubuntu-debian">
+<h3>Linux (Ubuntu/Debian)<a class="headerlink" href="#linux-ubuntu-debian" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>git-lfs
+</pre></div>
+</div>
+</section>
+<section id="uberprufung-der-installation">
+<h3>Überprüfung der Installation<a class="headerlink" href="#uberprufung-der-installation" title="Link to this heading">#</a></h3>
+<p>Nach der Installation können Sie in einem Terminal/der Kommandozeile überprüfen, ob Git LFS korrekt installiert wurde:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>lfs<span class="w"> </span>version
+</pre></div>
+</div>
+<p>Die Ausgabe sollte etwa so aussehen:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span><span class="o">-</span><span class="n">lfs</span><span class="o">/</span><span class="mf">3.4.0</span> <span class="p">(</span><span class="n">GitHub</span><span class="p">;</span> <span class="n">linux</span> <span class="n">amd64</span><span class="p">;</span> <span class="n">go</span> <span class="mf">1.20.3</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="einrichtung">
+<h2>Einrichtung<a class="headerlink" href="#einrichtung" title="Link to this heading">#</a></h2>
+<section id="globale-einrichtung">
+<h3>1. Globale Einrichtung<a class="headerlink" href="#globale-einrichtung" title="Link to this heading">#</a></h3>
+<p>Nach der Installation müssen Sie Git LFS einmalig global einrichten:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>lfs<span class="w"> </span>install
+</pre></div>
+</div>
+<p>Erfolgreiche Ausgabe:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Updated</span> <span class="n">Git</span> <span class="n">hooks</span><span class="o">.</span>
+<span class="n">Git</span> <span class="n">LFS</span> <span class="n">initialized</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="repository-spezifische-einrichtung">
+<h3>2. Repository-spezifische Einrichtung<a class="headerlink" href="#repository-spezifische-einrichtung" title="Link to this heading">#</a></h3>
+<p>Für jedes Repository, in dem Sie Git LFS nutzen möchten:</p>
+<ol class="arabic simple">
+<li><p>Navigieren Sie zum Repository:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>mein-repository
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Initialisieren Sie Git LFS für das Repository:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>lfs<span class="w"> </span>install
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Legen Sie fest, welche Dateitypen mit LFS verwaltet werden sollen:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Beispiel für Embedding-Dateien</span>
+git<span class="w"> </span>lfs<span class="w"> </span>track<span class="w"> </span><span class="s2">&quot;*.npy&quot;</span>
+git<span class="w"> </span>lfs<span class="w"> </span>track<span class="w"> </span><span class="s2">&quot;*.bin&quot;</span>
+git<span class="w"> </span>lfs<span class="w"> </span>track<span class="w"> </span><span class="s2">&quot;*.h5&quot;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Eine <code class="docutils literal notranslate"><span class="pre">.gitattributes</span></code> wird automatisch erstellt und muss zum Repository hinzugefügt werden:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>.gitattributes
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Configure Git LFS tracking&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="uberprufung-der-einrichtung">
+<h2>Überprüfung der Einrichtung<a class="headerlink" href="#uberprufung-der-einrichtung" title="Link to this heading">#</a></h2>
+<p>Sie können überprüfen, welche Dateitypen für LFS konfiguriert sind:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>lfs<span class="w"> </span>track
+</pre></div>
+</div>
+<p>Ausgabe sollte die konfigurierten Patterns zeigen:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Listing</span> <span class="n">tracked</span> <span class="n">patterns</span>
+    <span class="o">*.</span><span class="n">npy</span> <span class="p">(</span><span class="o">.</span><span class="n">gitattributes</span><span class="p">)</span>
+    <span class="o">*.</span><span class="n">bin</span> <span class="p">(</span><span class="o">.</span><span class="n">gitattributes</span><span class="p">)</span>
+    <span class="o">*.</span><span class="n">h5</span> <span class="p">(</span><span class="o">.</span><span class="n">gitattributes</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="wichtige-hinweise">
+<h2>Wichtige Hinweise<a class="headerlink" href="#wichtige-hinweise" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>Speicherplatzbedarf</strong></p>
+<ul class="simple">
+<li><p>Git LFS benötigt lokalen Speicherplatz für den LFS Cache</p></li>
+<li><p>Standard: <code class="docutils literal notranslate"><span class="pre">~/.git-lfs</span></code> (Linux/macOS) oder <code class="docutils literal notranslate"><span class="pre">%LocalAppData%\GitLfs</span></code> (Windows)</p></li>
+<li><p>Cache-Größe kann konfiguriert werden</p></li>
+</ul>
+</li>
+<li><p><strong>HU Berlin GitLab Limits</strong></p>
+<ul class="simple">
+<li><p>Gesamtspeicher pro Namespace: 10.0 GiB (inkl. Repository und LFS)</p></li>
+<li><p>Maximale Push-Größe: 5 GiB</p></li>
+<li><p>Maximale Import-Größe: 5 GiB</p></li>
+<li><p>Maximale Dateigröße für Anhänge: 100 MiB</p></li>
+</ul>
+<p>Diese Limits gelten für:</p>
+<ul class="simple">
+<li><p>Repository-Inhalte</p></li>
+<li><p>LFS-Objekte</p></li>
+<li><p>Container Registry</p></li>
+<li><p>Packages</p></li>
+<li><p>Wikis</p></li>
+</ul>
+<p><em>Tipp: Sie können Ihre aktuelle Speichernutzung unter „<a class="reference external" href="https://scm.cms.hu-berlin.de/-/profile/usage_quotas#storage-quota-tab">Settings &gt; Usage Quotas</a>“ in GitLab überprüfen.</em></p>
+</li>
+<li><p><strong>Andere Hosting-Plattformen</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-storage-and-bandwidth-usage">GitHub (kostenlos)</a></p></li>
+</ul>
+</li>
+<li><p><strong>Bandbreite</strong></p>
+<ul class="simple">
+<li><p>Große LFS-Dateien benötigen entsprechende Bandbreite</p></li>
+<li><p>Selective Checkout möglich (siehe nächstes Kapitel)</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<section id="haufige-probleme-und-losungen">
+<h3>Häufige Probleme und Lösungen<a class="headerlink" href="#haufige-probleme-und-losungen" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p><strong>„git-lfs not found“</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prüfen Sie den PATH</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$PATH</span>
+<span class="c1"># Oder installieren Sie neu</span>
+git<span class="w"> </span>lfs<span class="w"> </span>install
+</pre></div>
+</div>
+</li>
+<li><p><strong>Konflikt mit existierenden Dateien</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Bereits gepushte große Dateien erst entfernen</span>
+git<span class="w"> </span>rm<span class="w"> </span>--cached<span class="w"> </span>großeDatei.npy
+<span class="c1"># Dann neu hinzufügen</span>
+git<span class="w"> </span>add<span class="w"> </span>großeDatei.npy
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="support-und-hilfe">
+<h3>Support und Hilfe<a class="headerlink" href="#support-und-hilfe" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/git-lfs/git-lfs/issues">Offizielle Git LFS Issues</a></p></li>
+<li><p><a class="reference external" href="https://github.com/git-lfs/git-lfs/blob/main/docs/man/git-lfs-faq.adoc">Git LFS FAQ</a></p></li>
+<li><p><a class="reference external" href="https://docs.gitlab.com/ee/topics/git/lfs/">GitLab Dokumentation</a></p></li>
+</ul>
+</section>
+</section>
+<section id="speicherplatz-management-im-hu-gitlab">
+<h2>Speicherplatz-Management im HU GitLab<a class="headerlink" href="#speicherplatz-management-im-hu-gitlab" title="Link to this heading">#</a></h2>
+<section id="best-practices-fur-grosze-dateien">
+<h3>Best Practices für große Dateien<a class="headerlink" href="#best-practices-fur-grosze-dateien" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p><strong>Vor dem Push prüfen</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Größe der LFS-Objekte anzeigen</span>
+git<span class="w"> </span>lfs<span class="w"> </span>ls-files<span class="w"> </span>--size
+</pre></div>
+</div>
+</li>
+<li><p><strong>Regelmäßige Überprüfung</strong></p>
+<ul class="simple">
+<li><p>Überprüfen Sie regelmäßig Ihre Speichernutzung in GitLab</p></li>
+<li><p>Navigieren Sie zu: Settings &gt; Usage Quotas</p></li>
+<li><p>Achten Sie besonders auf:</p>
+<ul>
+<li><p>Repository-Größe</p></li>
+<li><p>LFS-Objekte</p></li>
+<li><p>Gesamtnutzung</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Strategien zur Speicheroptimierung</strong></p>
+<ul class="simple">
+<li><p>Große Datensätze in kleinere Teile aufteilen</p></li>
+<li><p>Nicht mehr benötigte LFS-Objekte bereinigen</p></li>
+<li><p>Temporäre oder generierte Dateien im <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> ausschließen</p></li>
+<li><p>Embedding-Dateien komprimieren, wenn möglich</p></li>
+</ul>
+</li>
+<li><p><strong>Alternative Speicherlösungen</strong></p>
+<ul class="simple">
+<li><p>Für sehr große Datensätze: HU Box oder andere Speicherdienste nutzen</p></li>
+<li><p>Links zu externen Speicherorten im Repository dokumentieren</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+<section id="nachste-schritte">
+<h2>Nächste Schritte<a class="headerlink" href="#nachste-schritte" title="Link to this heading">#</a></h2>
+<p>Nach erfolgreicher Installation und Einrichtung können Sie:</p>
+<ol class="arabic simple">
+<li><p>Große Dateien zu Ihrem Repository hinzufügen</p></li>
+<li><p>Mit LFS-Dateien arbeiten wie mit normalen Git-Dateien</p></li>
+<li><p>Erweiterte Funktionen nutzen (siehe nächstes Kapitel)</p></li>
+</ol>
+<p>Lassen Sie uns im nächsten Abschnitt einen typischen Workflow mit Git LFS durchgehen.</p>
+</section>
+</section>
+<section id="grundlegende-konzepte-von-git-lfs">
+<h1>Grundlegende Konzepte von Git LFS<a class="headerlink" href="#grundlegende-konzepte-von-git-lfs" title="Link to this heading">#</a></h1>
+<section id="wie-git-lfs-funktioniert">
+<h2>Wie Git LFS funktioniert<a class="headerlink" href="#wie-git-lfs-funktioniert" title="Link to this heading">#</a></h2>
+<p>Git LFS verwendet ein System von Pointer-Dateien und Remote Storage. Lassen Sie uns Schritt für Schritt durchgehen, wie das funktioniert:</p>
+<section id="die-pointer-datei">
+<h3>Die Pointer-Datei<a class="headerlink" href="#die-pointer-datei" title="Link to this heading">#</a></h3>
+<div class="mermaid">
+graph LR
+    A[Große Datei] -->|wird ersetzt durch| B[Pointer-Datei]
+    B -->|verweist auf| C[LFS Storage]
+    C -->|enthält| A
+</div>
+<p>Eine Pointer-Datei ist eine kleine Textdatei, die anstelle der großen Datei im Git Repository gespeichert wird. Sie sieht etwa so aus:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>version https://git-lfs.github.com/spec/v1
+oid sha256:4b9458b125a3b60f387e92f0f212d9548000262385434785477be6ecd1c7edab
+size 1234567
+</pre></div>
+</div>
+<p>Die Pointer-Datei enthält:</p>
+<ul class="simple">
+<li><p>Die LFS-Version</p></li>
+<li><p>Einen eindeutigen Hash (OID) der eigentlichen Datei</p></li>
+<li><p>Die Größe der eigentlichen Datei</p></li>
+</ul>
+</section>
+<section id="der-workflow">
+<h3>Der Workflow<a class="headerlink" href="#der-workflow" title="Link to this heading">#</a></h3>
+<p>Wenn Sie mit Git LFS arbeiten, passiert Folgendes:</p>
+<ol class="arabic simple">
+<li><p><strong>Beim Hinzufügen einer Datei</strong> (git add)</p></li>
+</ol>
+<div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant G as Git
+    participant L as LFS
+    U->>G: git add großeDatei.npy
+    G->>L: Prüfe LFS-Tracking
+    L->>L: Erstelle Hash
+    L->>L: Speichere Datei im LFS Cache
+    L->>G: Erstelle Pointer-Datei
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Beim Push</strong> (git push)</p></li>
+</ol>
+<div class="mermaid">
+sequenceDiagram
+    participant L as Lokales Repo
+    participant G as Git Server
+    participant S as LFS Storage
+    L->>G: Push Pointer-Datei
+    L->>S: Upload große Datei
+    S-->>G: Bestätige Storage
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Beim Pull</strong> (git pull)</p></li>
+</ol>
+<div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant G as Git
+    participant L as LFS
+    participant S as LFS Storage
+    U->>G: git pull
+    G->>G: Update Pointer-Dateien
+    G->>L: Prüfe LFS-Dateien
+    L->>S: Download wenn nötig
+</div>
+</section>
+</section>
+<section id="praktische-beispiele">
+<h2>Praktische Beispiele<a class="headerlink" href="#praktische-beispiele" title="Link to this heading">#</a></h2>
+<section id="embedding-datei-tracken">
+<h3>1. Embedding-Datei tracken<a class="headerlink" href="#embedding-datei-tracken" title="Link to this heading">#</a></h3>
+<p>Nehmen wir an, Sie haben eine Embedding-Datei für Ihren Textkorpus:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Datei zum LFS-Tracking hinzufügen</span>
+git<span class="w"> </span>lfs<span class="w"> </span>track<span class="w"> </span><span class="s2">&quot;embeddings.npy&quot;</span>
+
+<span class="c1"># Status überprüfen</span>
+git<span class="w"> </span>lfs<span class="w"> </span>status
+
+<span class="c1"># Datei hinzufügen wie gewohnt</span>
+git<span class="w"> </span>add<span class="w"> </span>embeddings.npy
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add embeddings for text corpus&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="pointer-datei-inspizieren">
+<h3>2. Pointer-Datei inspizieren<a class="headerlink" href="#pointer-datei-inspizieren" title="Link to this heading">#</a></h3>
+<p>Sie können sich den Inhalt einer Pointer-Datei ansehen:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Zeigt den Inhalt der Pointer-Datei</span>
+git<span class="w"> </span>lfs<span class="w"> </span>pointer<span class="w"> </span>--file<span class="w"> </span>embeddings.npy
+</pre></div>
+</div>
+</section>
+<section id="lfs-dateien-auflisten">
+<h3>3. LFS-Dateien auflisten<a class="headerlink" href="#lfs-dateien-auflisten" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Alle LFS-Dateien anzeigen</span>
+git<span class="w"> </span>lfs<span class="w"> </span>ls-files
+
+<span class="c1"># Mit Details</span>
+git<span class="w"> </span>lfs<span class="w"> </span>ls-files<span class="w"> </span>--size<span class="w"> </span>--format<span class="w"> </span><span class="s2">&quot;%(size) %(name)&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="besonderheiten-und-hinweise">
+<h2>Besonderheiten und Hinweise<a class="headerlink" href="#besonderheiten-und-hinweise" title="Link to this heading">#</a></h2>
+<section id="smudge-und-clean-filter">
+<h3>Smudge und Clean Filter<a class="headerlink" href="#smudge-und-clean-filter" title="Link to this heading">#</a></h3>
+<p>Git LFS nutzt zwei wichtige Filter:</p>
+<ol class="arabic simple">
+<li><p><strong>Clean Filter</strong>: Konvertiert große Dateien in Pointer beim Staging</p></li>
+<li><p><strong>Smudge Filter</strong>: Ersetzt Pointer durch echte Dateien beim Checkout</p></li>
+</ol>
+<div class="mermaid">
+graph TD
+    A[Arbeitsverzeichnis] -->|Clean| B[Git Repository]
+    B -->|Smudge| A
+    B -->|Pointer| C[LFS Storage]
+    C -->|Große Datei| A
+</div>
+</section>
+<section id="partial-clone-und-fetch">
+<h3>Partial Clone und Fetch<a class="headerlink" href="#partial-clone-und-fetch" title="Link to this heading">#</a></h3>
+<p>Git LFS ermöglicht auch:</p>
+<ul class="simple">
+<li><p>Selektives Herunterladen von LFS-Dateien</p></li>
+<li><p>Verzögertes Laden großer Dateien</p></li>
+<li><p>Priorisierung bestimmter LFS-Dateien</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Nur bestimmte LFS-Dateien holen</span>
+git<span class="w"> </span>lfs<span class="w"> </span>fetch<span class="w"> </span>--include<span class="o">=</span><span class="s2">&quot;path/to/file&quot;</span>
+
+<span class="c1"># Alle LFS-Dateien eines Commits holen</span>
+git<span class="w"> </span>lfs<span class="w"> </span>pull
+</pre></div>
+</div>
+</section>
+</section>
+<section id="haufige-fragen">
+<h2>Häufige Fragen<a class="headerlink" href="#haufige-fragen" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>Wie groß sollte eine Datei sein, um LFS zu nutzen?</strong></p>
+<ul class="simple">
+<li><p>Faustregel: &gt; 100MB</p></li>
+<li><p>Abhängig von Ihrem Workflow</p></li>
+<li><p>Beachten Sie Repository-Limits</p></li>
+</ul>
+</li>
+<li><p><strong>Dateitypen und Kompression</strong></p>
+<p>a) <strong>Allgemeines Verhalten</strong></p>
+<ul class="simple">
+<li><p>LFS versucht Dateien beim Transfer zu komprimieren</p></li>
+<li><p>Im Storage werden vorher unkrompierte Dateien weiter unkomprimiert gespeichert</p></li>
+</ul>
+<p>b) <strong>Bereits komprimierte Formate</strong></p>
+<ul class="simple">
+<li><p>Dateien wie <code class="docutils literal notranslate"><span class="pre">.npz</span></code>, <code class="docutils literal notranslate"><span class="pre">.zip</span></code>, <code class="docutils literal notranslate"><span class="pre">.gz</span></code>, <code class="docutils literal notranslate"><span class="pre">.jpg</span></code>, <code class="docutils literal notranslate"><span class="pre">.png</span></code> sind bereits komprimiert</p></li>
+<li><p>LFS erkennt dies und überspringt die Transferkompression</p></li>
+<li><p>Keine zusätzliche Speicherersparnis durch LFS möglich</p></li>
+</ul>
+</li>
+<li><p><strong>Was passiert bei Konflikten?</strong></p>
+<ul class="simple">
+<li><p>LFS-Dateien werden wie normale Dateien behandelt</p></li>
+<li><p>Git’s übliche Konfliktlösung greift</p></li>
+<li><p>Binary-Konflikte erfordern manuelle Auflösung</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+<section id="praktische-anwendung-von-git-lfs">
+<h1>Praktische Anwendung von Git LFS<a class="headerlink" href="#praktische-anwendung-von-git-lfs" title="Link to this heading">#</a></h1>
+<section id="typische-workflows-in-den-digital-humanities">
+<h2>Typische Workflows in den Digital Humanities<a class="headerlink" href="#typische-workflows-in-den-digital-humanities" title="Link to this heading">#</a></h2>
+<section id="einrichten-eines-neuen-projekts">
+<h3>1. Einrichten eines neuen Projekts<a class="headerlink" href="#einrichten-eines-neuen-projekts" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Neues Repository erstellen</span>
+git<span class="w"> </span>init<span class="w"> </span>mein-dh-projekt
+<span class="nb">cd</span><span class="w"> </span>mein-dh-projekt
+
+<span class="c1"># Git LFS aktivieren</span>
+git<span class="w"> </span>lfs<span class="w"> </span>install
+
+<span class="c1"># Typische Dateitypen für DH-Projekte tracken</span>
+git<span class="w"> </span>lfs<span class="w"> </span>track<span class="w"> </span><span class="s2">&quot;*.pkl&quot;</span><span class="w">  </span><span class="c1"># Für Embeddings und Modelle</span>
+git<span class="w"> </span>lfs<span class="w"> </span>track<span class="w"> </span><span class="s2">&quot;*.npz&quot;</span><span class="w">  </span><span class="c1"># Für komprimierte NumPy Arrays</span>
+git<span class="w"> </span>lfs<span class="w"> </span>track<span class="w"> </span><span class="s2">&quot;*.csv&quot;</span><span class="w">  </span><span class="c1"># Für große Datensätze</span>
+git<span class="w"> </span>lfs<span class="w"> </span>track<span class="w"> </span><span class="s2">&quot;*.xml&quot;</span><span class="w">  </span><span class="c1"># Für große XML-Korpora</span>
+
+<span class="c1"># .gitattributes committen</span>
+git<span class="w"> </span>add<span class="w"> </span>.gitattributes
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Configure Git LFS tracking&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="arbeiten-mit-embedding-dateien">
+<h3>2. Arbeiten mit Embedding-Dateien<a class="headerlink" href="#arbeiten-mit-embedding-dateien" title="Link to this heading">#</a></h3>
+<p>Ein typischer Workflow für RAG-Systeme:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sentence_transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">SentenceTransformer</span>
+
+<span class="c1"># Embeddings erstellen</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">SentenceTransformer</span><span class="p">(</span><span class="s1">&#39;all-MiniLM-L6-v2&#39;</span><span class="p">)</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Ihre&quot;</span><span class="p">,</span> <span class="s2">&quot;Beispiel&quot;</span><span class="p">,</span> <span class="s2">&quot;Texte&quot;</span><span class="p">]</span>
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
+
+<span class="c1"># Als NPZ speichern (bereits komprimiert)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">savez_compressed</span><span class="p">(</span><span class="s1">&#39;embeddings.npz&#39;</span><span class="p">,</span> <span class="n">embeddings</span><span class="o">=</span><span class="n">embeddings</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Embedding-Datei zu Git hinzufügen</span>
+git<span class="w"> </span>add<span class="w"> </span>embeddings.npz
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add text corpus embeddings&quot;</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
+</pre></div>
+</div>
+</section>
+<section id="kollaboratives-arbeiten">
+<h3>3. Kollaboratives Arbeiten<a class="headerlink" href="#kollaboratives-arbeiten" title="Link to this heading">#</a></h3>
+<p>Wenn mehrere Personen am Projekt arbeiten:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Repository klonen</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://gitlab.hu-berlin.de/projekt/name.git
+
+<span class="c1"># LFS-Dateien initial nicht herunterladen</span>
+git<span class="w"> </span>lfs<span class="w"> </span>install<span class="w"> </span>--skip-smudge
+
+<span class="c1"># Nur bestimmte LFS-Dateien holen</span>
+git<span class="w"> </span>lfs<span class="w"> </span>pull<span class="w"> </span>--include<span class="o">=</span><span class="s2">&quot;embeddings/wichtig.npz&quot;</span>
+
+<span class="c1"># Später alle LFS-Dateien nachladen</span>
+git<span class="w"> </span>lfs<span class="w"> </span>pull
+</pre></div>
+</div>
+</section>
+<section id="groszere-datensatze-verwalten">
+<h3>4. Größere Datensätze verwalten<a class="headerlink" href="#groszere-datensatze-verwalten" title="Link to this heading">#</a></h3>
+<p>Für Projekte mit mehreren großen Dateien:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Überblick über LFS-Dateien bekommen</span>
+git<span class="w"> </span>lfs<span class="w"> </span>ls-files<span class="w"> </span>--size
+
+<span class="c1"># Speichernutzung analysieren</span>
+du<span class="w"> </span>-sh<span class="w"> </span>.git/lfs/objects/
+
+<span class="c1"># Bestimmte Dateitypen vom LFS-Tracking ausschließen</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;temp/*.npz&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.gitignore
+</pre></div>
+</div>
+</section>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">#</a></h2>
+<section id="repository-struktur">
+<h3>1. Repository-Struktur<a class="headerlink" href="#repository-struktur" title="Link to this heading">#</a></h3>
+<p>Mögliche Struktur für DH-Projekte mit LFS:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>projekt/
+├── data/
+│   ├── raw/                # Rohdaten (nicht in LFS)
+│   ├── processed/          # Verarbeitete Daten
+│   └── embeddings/         # LFS-getrackte Embeddings
+├── notebooks/              # Jupyter Notebooks
+├── .gitattributes          # LFS-Konfiguration
+└── .gitignore              # Ignorierte Dateien
+</pre></div>
+</div>
+</section>
+<section id="lfs-dateien-dokumentieren">
+<h3>2. LFS-Dateien dokumentieren<a class="headerlink" href="#lfs-dateien-dokumentieren" title="Link to this heading">#</a></h3>
+<p>Erstellen Sie eine <code class="docutils literal notranslate"><span class="pre">lfs-files.md</span></code>:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gh"># LFS-Dateien in diesem Repository</span>
+
+<span class="gu">## embeddings/corpus_embeddings.npz</span>
+<span class="k">-</span><span class="w"> </span>Erstellt mit: all-MiniLM-L6-v2
+<span class="k">-</span><span class="w"> </span>Datum: 2024-02-10
+<span class="k">-</span><span class="w"> </span>Größe: 2.3GB
+<span class="k">-</span><span class="w"> </span>Verwendung: RAG-System für historische Dokumente
+
+<span class="gu">## models/finetuned_model.pkl</span>
+<span class="k">-</span><span class="w"> </span>Basis: BERT-base-german-cased
+<span class="k">-</span><span class="w"> </span>Trainingskorpus: Deutsche Zeitungen 1850-1900
+<span class="k">-</span><span class="w"> </span>Größe: 1.1GB
+</pre></div>
+</div>
+</section>
+<section id="versionierung-von-datensatzen">
+<h3>3. Versionierung von Datensätzen<a class="headerlink" href="#versionierung-von-datensatzen" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Neue Version eines Datensatzes hinzufügen</span>
+git<span class="w"> </span>add<span class="w"> </span>data/processed/dataset_v2.npz
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Update dataset with additional sources</span>
+
+<span class="s2">- Added newspapers from 1860-1865</span>
+<span class="s2">- Improved OCR quality</span>
+<span class="s2">- Size: 3.2GB&quot;</span>
+
+<span class="c1"># Zwischen Versionen wechseln</span>
+git<span class="w"> </span>checkout<span class="w"> </span>v1.0<span class="w"> </span>data/processed/dataset.npz
+</pre></div>
+</div>
+</section>
+<section id="performance-optimierung">
+<h3>4. Performance-Optimierung<a class="headerlink" href="#performance-optimierung" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Lokalen LFS-Cache aufräumen</span>
+git<span class="w"> </span>lfs<span class="w"> </span>prune
+
+<span class="c1"># Nur benötigte LFS-Dateien herunterladen</span>
+git<span class="w"> </span>clone<span class="w"> </span>--filter<span class="o">=</span>blob:none<span class="w"> </span>--sparse<span class="w"> </span>&lt;url&gt;
+git<span class="w"> </span>sparse-checkout<span class="w"> </span><span class="nb">set</span><span class="w"> </span>data/embeddings/wichtig.npz
+</pre></div>
+</div>
+</section>
+</section>
+<section id="fehlerbehebung">
+<h2>Fehlerbehebung<a class="headerlink" href="#fehlerbehebung" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>Häufige Probleme und Lösungen<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Push Error wegen Größenlimit</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prüfen der Dateigrößen</span>
+git<span class="w"> </span>lfs<span class="w"> </span>ls-files<span class="w"> </span>--size
+
+<span class="c1"># Große Dateien aufteilen</span>
+split<span class="w"> </span>-b<span class="w"> </span>2G<span class="w"> </span>große_datei.npz<span class="w"> </span>teil_
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Langsamer Download</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Nur notwendige Dateien laden</span>
+git<span class="w"> </span>lfs<span class="w"> </span>fetch<span class="w"> </span>--include<span class="o">=</span><span class="s2">&quot;pfad/zur/datei&quot;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Konflikte in LFS-Dateien</strong></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Aktuelle Version behalten</span>
+git<span class="w"> </span>checkout<span class="w"> </span>--ours<span class="w"> </span>pfad/zur/datei.npz
+<span class="c1"># ODER Remote-Version übernehmen</span>
+git<span class="w"> </span>checkout<span class="w"> </span>--theirs<span class="w"> </span>pfad/zur/datei.npz
+</pre></div>
+</div>
+</section>
+</section>
+<section id="nutzliche-skripte">
+<h2>Nützliche Skripte<a class="headerlink" href="#nutzliche-skripte" title="Link to this heading">#</a></h2>
+<section id="lfs-status-uberprufen">
+<h3>LFS-Status überprüfen<a class="headerlink" href="#lfs-status-uberprufen" title="Link to this heading">#</a></h3>
+<p>Dieses Python-Skript bietet eine übersichtliche Darstellung aller LFS-Dateien in Ihrem Repository. Es ruft <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">lfs</span> <span class="pre">ls-files</span> <span class="pre">--json</span></code> auf, verarbeitet die Ausgabe und zeigt jede Datei mit ihrer Größe in MB an, einschließlich einer Gesamtsumme.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_lfs_status</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Überprüft Status der LFS-Dateien im Repository.&quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;git&#39;</span><span class="p">,</span> <span class="s1">&#39;lfs&#39;</span><span class="p">,</span> <span class="s1">&#39;ls-files&#39;</span><span class="p">,</span> <span class="s1">&#39;--json&#39;</span><span class="p">],</span>
+                          <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+    
+    <span class="n">total_size</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LFS-Dateien im Repository:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+        <span class="n">size_mb</span> <span class="o">=</span> <span class="n">file</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)</span>
+        <span class="n">total_size</span> <span class="o">+=</span> <span class="n">size_mb</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">file</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">size_mb</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MB&quot;</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gesamtgröße: </span><span class="si">{</span><span class="n">total_size</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MB&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">get_lfs_status</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="fazit">
+<h1>Fazit<a class="headerlink" href="#fazit" title="Link to this heading">#</a></h1>
+<p>Git LFS ist ein mächtiges Werkzeug für die Digital Humanities, das uns erlaubt, große Dateien effizient zu verwalten. Mit den gelernten Konzepten und Praktiken können Sie:</p>
+<ul class="simple">
+<li><p>Große Datensets verwalten</p></li>
+<li><p>Kollaborativ arbeiten</p></li>
+<li><p>Forschung reproduzierbar machen</p></li>
+<li><p>Effizient mit Ressourcen umgehen</p></li>
+</ul>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "executablebooks/jupyter-book",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./tools"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Konvertierungen/word_md_notebook.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">zurück</p>
+        <p class="prev-next-title">Anleitung zur Erstellung eines Computational Essays in Jupyter Notebook</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Inhalt
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Fortgeschrittene Git-Funktionen: Git Large File Storage (LFS)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einfuhrung">Einführung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#was-ist-git-lfs">Was ist Git LFS?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warum-brauchen-wir-git-lfs">Warum brauchen wir Git LFS?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#versionierung-in-git-lfs">Versionierung in Git LFS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wo-finde-ich-weitere-informationen">Wo finde ich weitere Informationen?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#voraussetzungen">Voraussetzungen</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-und-einrichtung-von-git-lfs">Installation und Einrichtung von Git LFS</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#macos">macOS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linux-ubuntu-debian">Linux (Ubuntu/Debian)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uberprufung-der-installation">Überprüfung der Installation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einrichtung">Einrichtung</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#globale-einrichtung">1. Globale Einrichtung</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repository-spezifische-einrichtung">2. Repository-spezifische Einrichtung</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uberprufung-der-einrichtung">Überprüfung der Einrichtung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wichtige-hinweise">Wichtige Hinweise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#haufige-probleme-und-losungen">Häufige Probleme und Lösungen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#support-und-hilfe">Support und Hilfe</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#speicherplatz-management-im-hu-gitlab">Speicherplatz-Management im HU GitLab</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-fur-grosze-dateien">Best Practices für große Dateien</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nachste-schritte">Nächste Schritte</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#grundlegende-konzepte-von-git-lfs">Grundlegende Konzepte von Git LFS</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wie-git-lfs-funktioniert">Wie Git LFS funktioniert</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#die-pointer-datei">Die Pointer-Datei</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#der-workflow">Der Workflow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#praktische-beispiele">Praktische Beispiele</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-datei-tracken">1. Embedding-Datei tracken</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pointer-datei-inspizieren">2. Pointer-Datei inspizieren</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lfs-dateien-auflisten">3. LFS-Dateien auflisten</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#besonderheiten-und-hinweise">Besonderheiten und Hinweise</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#smudge-und-clean-filter">Smudge und Clean Filter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-clone-und-fetch">Partial Clone und Fetch</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#haufige-fragen">Häufige Fragen</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#praktische-anwendung-von-git-lfs">Praktische Anwendung von Git LFS</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typische-workflows-in-den-digital-humanities">Typische Workflows in den Digital Humanities</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#einrichten-eines-neuen-projekts">1. Einrichten eines neuen Projekts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arbeiten-mit-embedding-dateien">2. Arbeiten mit Embedding-Dateien</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kollaboratives-arbeiten">3. Kollaboratives Arbeiten</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#groszere-datensatze-verwalten">4. Größere Datensätze verwalten</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repository-struktur">1. Repository-Struktur</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lfs-dateien-dokumentieren">2. LFS-Dateien dokumentieren</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#versionierung-von-datensatzen">3. Versionierung von Datensätzen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-optimierung">4. Performance-Optimierung</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fehlerbehebung">Fehlerbehebung</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Häufige Probleme und Lösungen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nutzliche-skripte">Nützliche Skripte</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lfs-status-uberprufen">LFS-Status überprüfen</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fazit">Fazit</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Durch <a href="https://www.geschichte.hu-berlin.de/de/bereiche-und-lehrstuehle/digital-history">Digital History, Humboldt-Universität zu Berlin</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="http://creativecommons.org/licenses/by/4.0/"><img class="license" alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> This book is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons BY 4.0 License</a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

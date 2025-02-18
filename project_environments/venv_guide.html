@@ -1,0 +1,898 @@
+
+<!DOCTYPE html>
+
+
+<html lang="de" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Projektumgebungen mit venv &#8212; Computational Essays</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=91fba89f"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script src="../_static/translations.js?v=79cc9f76"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'project_environments/venv_guide';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
+    <link rel="search" title="Suche" href="../search.html" />
+    <link rel="next" title="Projektumgebungen mit conda" href="conda_guide.html" />
+    <link rel="prev" title="Einführung in Projektumgebungen für Digital History" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="de"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/Logo_DigitalHistoryBerlin.png" class="logo__image only-light" alt="Computational Essays - Home"/>
+    <img src="../_static/Logo_DigitalHistoryBerlin.png" class="logo__image only-dark pst-js-only" alt="Computational Essays - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Suche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Computational Essays: Ein Leitfaden für die Digital Humanities
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Grundlagen</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Einf%C3%BChrung.html">Einführung in Computational Essays</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Einführung in Projektumgebungen</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Projektumgebungen mit venv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conda_guide.html">Projektumgebungen mit conda</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Leitfäden</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Leitfaden.html">Leitfaden für Computational Essays</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Konvertierungen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Konvertierungen/word_md_notebook.html">Konvertierung von Word Documenten</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Praktische Werkzeuge</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tools/git-lfs.html">Fortgeschrittene Git-Funktionen: Git Large File Storage (LFS)</a></li>
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Laden Sie diese Seite herunter">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/project_environments/venv_guide.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Quelldatei herunterladen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="In PDF drucken"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Vollbildmodus"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Projektumgebungen mit venv</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Inhalt </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#was-ist-venv">Was ist venv?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#voraussetzungen">Voraussetzungen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-von-python">Installation von Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#macos">macOS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#projektstruktur-erstellen">Projektstruktur erstellen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verzeichnis-erstellen">Verzeichnis erstellen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#virtuelle-umgebung-erstellen">Virtuelle Umgebung erstellen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-befehle">Basis-Befehle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#umgebung-aktivieren">Umgebung aktivieren</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pakete-installieren">Pakete installieren</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements-datei-erstellen">Requirements-Datei erstellen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pakete-aus-requirements-installieren">Pakete aus Requirements installieren</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebook-einrichten">Jupyter Notebook einrichten</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#umgebung-verwalten">Umgebung verwalten</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deaktivieren">Deaktivieren</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#status-prufen">Status prüfen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-fur-digital-history-projekte">Best Practices für Digital History Projekte</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dokumentation">1. Dokumentation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datenquellen">Datenquellen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyseschritte">Analyseschritte</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-python-wird-nicht-erkannt">Windows: „python wird nicht erkannt“</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#macos-linux-berechtigungsprobleme">macOS/Linux: Berechtigungsprobleme</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#allgemein-paketinstallationsfehler">Allgemein: Paketinstallationsfehler</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#praktische-beispiele">Praktische Beispiele</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-mining-projekt-einrichten">1. Text-Mining Projekt einrichten</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#netzwerkanalyse-projekt">2. Netzwerkanalyse-Projekt</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nachste-schritte">Nächste Schritte</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weiterfuhrende-ressourcen">Weiterführende Ressourcen</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="projektumgebungen-mit-venv">
+<h1>Projektumgebungen mit venv<a class="headerlink" href="#projektumgebungen-mit-venv" title="Link to this heading">#</a></h1>
+<section id="was-ist-venv">
+<h2>Was ist venv?<a class="headerlink" href="#was-ist-venv" title="Link to this heading">#</a></h2>
+<p>venv ist das standardmäßige Tool zur Erstellung virtueller Umgebungen in Python. Es ist:</p>
+<ul class="simple">
+<li><p>Teil der Python-Standardbibliothek</p></li>
+<li><p>Leichtgewichtig und einfach zu nutzen</p></li>
+<li><p>Auf allen Plattformen verfügbar</p></li>
+<li><p>Ideal für die meisten Digital History Projekte</p></li>
+</ul>
+</section>
+<section id="voraussetzungen">
+<h2>Voraussetzungen<a class="headerlink" href="#voraussetzungen" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Python 3.x installiert (venv ist seit Python 3.3 Teil der Standardbibliothek)</p></li>
+<li><p>Grundlegende Kenntnisse der Kommandozeile</p></li>
+<li><p>Für Windows: PowerShell oder Command Prompt</p></li>
+<li><p>Für macOS/Linux: Terminal</p></li>
+</ul>
+</section>
+<section id="installation-von-python">
+<h2>Installation von Python<a class="headerlink" href="#installation-von-python" title="Link to this heading">#</a></h2>
+<p>Bevor Sie venv nutzen können, muss Python korrekt installiert sein.</p>
+<section id="windows">
+<h3>Windows<a class="headerlink" href="#windows" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>Laden Sie Python von <a class="reference external" href="https://www.python.org/downloads/">python.org/downloads</a> herunter</p></li>
+<li><p>Führen Sie den Installer aus</p></li>
+<li><p><strong>Wichtig:</strong> Aktivieren Sie „Add Python to PATH“</p></li>
+<li><p>Verifizieren Sie die Installation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>--version
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="macos">
+<h3>macOS<a class="headerlink" href="#macos" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>Via Homebrew (empfohlen):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>python
+</pre></div>
+</div>
+</li>
+<li><p>Oder von <a class="reference external" href="https://www.python.org/downloads/">python.org/downloads</a></p></li>
+<li><p>Verifizieren:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>--version
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="linux">
+<h3>Linux<a class="headerlink" href="#linux" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>Python ist meist vorinstalliert</p></li>
+<li><p>Falls nicht:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ubuntu/Debian</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3
+
+<span class="c1"># Fedora</span>
+sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>python3
+</pre></div>
+</div>
+</li>
+<li><p>Verifizieren:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>--version
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+<section id="projektstruktur-erstellen">
+<h2>Projektstruktur erstellen<a class="headerlink" href="#projektstruktur-erstellen" title="Link to this heading">#</a></h2>
+<p>Ein gut organisiertes Projekt ist der erste Schritt:</p>
+<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>digital_history_project/
+├── data/                  # Rohdaten und verarbeitete Daten
+│   ├── raw/
+│   └── processed/
+├── notebooks/            # Jupyter Notebooks
+├── src/                  # Python-Skripte
+├── requirements.txt      # Projektabhängigkeiten
+└── README.md            # Projektdokumentation
+</pre></div>
+</div>
+<section id="verzeichnis-erstellen">
+<h3>Verzeichnis erstellen<a class="headerlink" href="#verzeichnis-erstellen" title="Link to this heading">#</a></h3>
+<p>Windows:</p>
+<div class="highlight-cmd notranslate"><div class="highlight"><pre><span></span>mkdir digital_history_project
+cd digital_history_project
+</pre></div>
+</div>
+<p>macOS/Linux:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>digital_history_project
+<span class="nb">cd</span><span class="w"> </span>digital_history_project
+</pre></div>
+</div>
+</section>
+</section>
+<section id="virtuelle-umgebung-erstellen">
+<h2>Virtuelle Umgebung erstellen<a class="headerlink" href="#virtuelle-umgebung-erstellen" title="Link to this heading">#</a></h2>
+<section id="basis-befehle">
+<h3>Basis-Befehle<a class="headerlink" href="#basis-befehle" title="Link to this heading">#</a></h3>
+<p>Windows (Command Prompt):</p>
+<div class="highlight-cmd notranslate"><div class="highlight"><pre><span></span>python -m venv venv
+</pre></div>
+</div>
+<p>macOS/Linux:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+</pre></div>
+</div>
+</section>
+<section id="umgebung-aktivieren">
+<h3>Umgebung aktivieren<a class="headerlink" href="#umgebung-aktivieren" title="Link to this heading">#</a></h3>
+<p>Windows (Command Prompt):</p>
+<div class="highlight-cmd notranslate"><div class="highlight"><pre><span></span>venv\Scripts\activate
+</pre></div>
+</div>
+<p>Windows (PowerShell):</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">.\</span><span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">Activate</span>
+</pre></div>
+</div>
+<p>macOS/Linux:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>venv/bin/activate
+</pre></div>
+</div>
+<p>Nach der Aktivierung sehen Sie <code class="docutils literal notranslate"><span class="pre">(venv)</span></code> am Anfang Ihrer Kommandozeile.</p>
+</section>
+</section>
+<section id="pakete-installieren">
+<h2>Pakete installieren<a class="headerlink" href="#pakete-installieren" title="Link to this heading">#</a></h2>
+<p>Mit aktivierter Umgebung können Sie nun Pakete installieren:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Grundlegende Data Science Pakete</span>
+pip<span class="w"> </span>install<span class="w"> </span>pandas<span class="w"> </span>numpy<span class="w"> </span>matplotlib
+
+<span class="c1"># Spezielle Digital History Pakete</span>
+pip<span class="w"> </span>install<span class="w"> </span>spacy<span class="w"> </span>networkx<span class="w"> </span>nltk
+</pre></div>
+</div>
+<section id="requirements-datei-erstellen">
+<h3>Requirements-Datei erstellen<a class="headerlink" href="#requirements-datei-erstellen" title="Link to this heading">#</a></h3>
+<p>Dokumentieren Sie Ihre Pakete:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>freeze<span class="w"> </span>&gt;<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+<p>Beispiel <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>:</p>
+<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>numpy==1.21.2
+pandas==1.3.3
+matplotlib==3.4.3
+spacy==3.1.3
+networkx==2.6.3
+nltk==3.6.3
+</pre></div>
+</div>
+</section>
+<section id="pakete-aus-requirements-installieren">
+<h3>Pakete aus Requirements installieren<a class="headerlink" href="#pakete-aus-requirements-installieren" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+</section>
+</section>
+<section id="jupyter-notebook-einrichten">
+<h2>Jupyter Notebook einrichten<a class="headerlink" href="#jupyter-notebook-einrichten" title="Link to this heading">#</a></h2>
+<p>Für Digital History Projekte ist Jupyter besonders nützlich:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Jupyter Notebook installieren</span>
+pip<span class="w"> </span>install<span class="w"> </span>notebook
+
+<span class="c1"># JupyterLab installieren (empfohlen)</span>
+pip<span class="w"> </span>install<span class="w"> </span>jupyterlab
+
+<span class="c1"># Starten</span>
+jupyter<span class="w"> </span>lab
+</pre></div>
+</div>
+</section>
+<section id="umgebung-verwalten">
+<h2>Umgebung verwalten<a class="headerlink" href="#umgebung-verwalten" title="Link to this heading">#</a></h2>
+<section id="deaktivieren">
+<h3>Deaktivieren<a class="headerlink" href="#deaktivieren" title="Link to this heading">#</a></h3>
+<p>Windows/macOS/Linux:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>deactivate
+</pre></div>
+</div>
+</section>
+<section id="status-prufen">
+<h3>Status prüfen<a class="headerlink" href="#status-prufen" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Liste aller installierten Pakete</span>
+pip<span class="w"> </span>list
+
+<span class="c1"># Spezifische Paketversion</span>
+pip<span class="w"> </span>show<span class="w"> </span>pandas
+</pre></div>
+</div>
+</section>
+</section>
+<section id="best-practices-fur-digital-history-projekte">
+<h2>Best Practices für Digital History Projekte<a class="headerlink" href="#best-practices-fur-digital-history-projekte" title="Link to this heading">#</a></h2>
+<section id="dokumentation">
+<h3>1. Dokumentation<a class="headerlink" href="#dokumentation" title="Link to this heading">#</a></h3>
+<p>Erstellen Sie eine ausführliche README.md:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gh"># Historische Netzwerkanalyse</span>
+
+<span class="gu">## Setup</span>
+<span class="k">1.</span> Python 3.9+ erforderlich
+<span class="k">2.</span> Virtuelle Umgebung erstellen:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # oder venv\Scripts\activate unter Windows
+   pip install -r requirements.txt
+</pre></div>
+</div>
+</section>
+</section>
+<section id="datenquellen">
+<h2>Datenquellen<a class="headerlink" href="#datenquellen" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Briefkorrespondenz aus dem Zeitraum 1840-1860</p></li>
+<li><p>Quelle: Staatsbibliothek zu Berlin</p></li>
+</ul>
+</section>
+<section id="analyseschritte">
+<h2>Analyseschritte<a class="headerlink" href="#analyseschritte" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p>Datenbereinigung (clean_data.py)</p></li>
+<li><p>Netzwerkanalyse (analyze_network.ipynb)</p></li>
+<li><p>Versionskontrolle</p>
+<ul class="simple">
+<li><p>Ihre <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>:</p></li>
+</ul>
+<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>venv/
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+</pre></div>
+</div>
+</li>
+<li><p>Reproduzierbarkeit</p></li>
+</ol>
+<ul class="simple">
+<li><p>Nutzen Sie <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code></p></li>
+<li><p>Dokumentieren Sie die Python-Version</p></li>
+<li><p>Beschreiben Sie systemspezifische Anforderungen</p></li>
+</ul>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<section id="windows-python-wird-nicht-erkannt">
+<h3>Windows: „python wird nicht erkannt“<a class="headerlink" href="#windows-python-wird-nicht-erkannt" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Python neu installieren mit „Add to PATH“</p></li>
+<li><p>Oder PATH manuell setzen:</p>
+<ul class="simple">
+<li><p>Systemsteuerung → System → Erweiterte Systemeinstellungen</p></li>
+<li><p>Umgebungsvariablen → Path → Neu</p></li>
+<li><p>Python-Pfad hinzufügen</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="macos-linux-berechtigungsprobleme">
+<h3>macOS/Linux: Berechtigungsprobleme<a class="headerlink" href="#macos-linux-berechtigungsprobleme" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Berechtigungen für venv-Ordner prüfen</span>
+ls<span class="w"> </span>-la<span class="w"> </span>venv/
+
+<span class="c1"># Berechtigungen anpassen falls nötig</span>
+chmod<span class="w"> </span>-R<span class="w"> </span>u+w<span class="w"> </span>venv/
+</pre></div>
+</div>
+</section>
+<section id="allgemein-paketinstallationsfehler">
+<h3>Allgemein: Paketinstallationsfehler<a class="headerlink" href="#allgemein-paketinstallationsfehler" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>pip aktualisieren:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+</pre></div>
+</div>
+</li>
+<li><p>Cache leeren:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>cache<span class="w"> </span>purge
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+<section id="praktische-beispiele">
+<h2>Praktische Beispiele<a class="headerlink" href="#praktische-beispiele" title="Link to this heading">#</a></h2>
+<section id="text-mining-projekt-einrichten">
+<h3>1. Text-Mining Projekt einrichten<a class="headerlink" href="#text-mining-projekt-einrichten" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>text_mining_project
+<span class="nb">cd</span><span class="w"> </span>text_mining_project
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+<span class="c1"># Aktivieren (siehe oben)</span>
+pip<span class="w"> </span>install<span class="w"> </span>spacy<span class="w"> </span>pandas<span class="w"> </span>nltk<span class="w"> </span>jupyterlab
+python<span class="w"> </span>-m<span class="w"> </span>spacy<span class="w"> </span>download<span class="w"> </span>de_core_news_sm
+</pre></div>
+</div>
+</section>
+<section id="netzwerkanalyse-projekt">
+<h3>2. Netzwerkanalyse-Projekt<a class="headerlink" href="#netzwerkanalyse-projekt" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>network_analysis
+<span class="nb">cd</span><span class="w"> </span>network_analysis
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+<span class="c1"># Aktivieren (siehe oben)</span>
+pip<span class="w"> </span>install<span class="w"> </span>networkx<span class="w"> </span>pandas<span class="w"> </span>matplotlib<span class="w"> </span>jupyterlab
+</pre></div>
+</div>
+</section>
+</section>
+<section id="nachste-schritte">
+<h2>Nächste Schritte<a class="headerlink" href="#nachste-schritte" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Erstellen Sie ein neues Projekt mit venv</p></li>
+<li><p>Installieren Sie die benötigten Pakete</p></li>
+<li><p>Erstellen Sie eine requirements.txt</p></li>
+<li><p>Teilen Sie das Projekt mit Kollegen</p></li>
+</ol>
+</section>
+<section id="weiterfuhrende-ressourcen">
+<h2>Weiterführende Ressourcen<a class="headerlink" href="#weiterfuhrende-ressourcen" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/venv.html">Offizielle Python venv Dokumentation</a></p></li>
+<li><p><a class="reference external" href="https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/">Python Packaging User Guide</a></p></li>
+<li><p><a class="reference external" href="https://realpython.com/python-virtual-environments-a-primer/">Real Python: Python Virtual Environments</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "executablebooks/jupyter-book",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./project_environments"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">zurück</p>
+        <p class="prev-next-title">Einführung in Projektumgebungen für Digital History</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="conda_guide.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">weiter</p>
+        <p class="prev-next-title">Projektumgebungen mit conda</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Inhalt
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#was-ist-venv">Was ist venv?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#voraussetzungen">Voraussetzungen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-von-python">Installation von Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#macos">macOS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#projektstruktur-erstellen">Projektstruktur erstellen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verzeichnis-erstellen">Verzeichnis erstellen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#virtuelle-umgebung-erstellen">Virtuelle Umgebung erstellen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-befehle">Basis-Befehle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#umgebung-aktivieren">Umgebung aktivieren</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pakete-installieren">Pakete installieren</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements-datei-erstellen">Requirements-Datei erstellen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pakete-aus-requirements-installieren">Pakete aus Requirements installieren</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebook-einrichten">Jupyter Notebook einrichten</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#umgebung-verwalten">Umgebung verwalten</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deaktivieren">Deaktivieren</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#status-prufen">Status prüfen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-fur-digital-history-projekte">Best Practices für Digital History Projekte</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dokumentation">1. Dokumentation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datenquellen">Datenquellen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyseschritte">Analyseschritte</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-python-wird-nicht-erkannt">Windows: „python wird nicht erkannt“</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#macos-linux-berechtigungsprobleme">macOS/Linux: Berechtigungsprobleme</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#allgemein-paketinstallationsfehler">Allgemein: Paketinstallationsfehler</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#praktische-beispiele">Praktische Beispiele</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-mining-projekt-einrichten">1. Text-Mining Projekt einrichten</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#netzwerkanalyse-projekt">2. Netzwerkanalyse-Projekt</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nachste-schritte">Nächste Schritte</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weiterfuhrende-ressourcen">Weiterführende Ressourcen</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Durch <a href="https://www.geschichte.hu-berlin.de/de/bereiche-und-lehrstuehle/digital-history">Digital History, Humboldt-Universität zu Berlin</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="http://creativecommons.org/licenses/by/4.0/"><img class="license" alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> This book is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons BY 4.0 License</a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,979 @@
+
+<!DOCTYPE html>
+
+
+<html lang="de" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Projektumgebungen mit conda &#8212; Computational Essays</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=91fba89f"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script src="../_static/translations.js?v=79cc9f76"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'project_environments/conda_guide';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
+    <link rel="search" title="Suche" href="../search.html" />
+    <link rel="next" title="Leitfaden für Computational Essays: Formatierung und Anforderungen" href="../Leitfaden.html" />
+    <link rel="prev" title="Projektumgebungen mit venv" href="venv_guide.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="de"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/Logo_DigitalHistoryBerlin.png" class="logo__image only-light" alt="Computational Essays - Home"/>
+    <img src="../_static/Logo_DigitalHistoryBerlin.png" class="logo__image only-dark pst-js-only" alt="Computational Essays - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Suche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Computational Essays: Ein Leitfaden für die Digital Humanities
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Grundlagen</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Einf%C3%BChrung.html">Einführung in Computational Essays</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Einführung in Projektumgebungen</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="venv_guide.html">Projektumgebungen mit venv</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Projektumgebungen mit conda</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Leitfäden</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Leitfaden.html">Leitfaden für Computational Essays</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Konvertierungen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Konvertierungen/word_md_notebook.html">Konvertierung von Word Documenten</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Praktische Werkzeuge</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tools/git-lfs.html">Fortgeschrittene Git-Funktionen: Git Large File Storage (LFS)</a></li>
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Laden Sie diese Seite herunter">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/project_environments/conda_guide.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Quelldatei herunterladen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="In PDF drucken"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Vollbildmodus"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Projektumgebungen mit conda</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Inhalt </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#was-ist-conda">Was ist conda?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#das-conda-okosystem">Das conda-Ökosystem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anaconda-vs-miniconda-vs-conda">Anaconda vs. Miniconda vs. conda</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#empfehlung-fur-digital-history-projekte">Empfehlung für Digital History Projekte</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#miniconda-installieren">Miniconda installieren</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#macos">macOS</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-verifizieren">Installation verifizieren</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-umgebungen-erstellen-und-verwalten">Conda-Umgebungen erstellen und verwalten</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grundlegende-befehle">Grundlegende Befehle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-forge-der-community-channel">conda-forge: Der Community-Channel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-datei-erstellen-und-nutzen">Environment-Datei erstellen und nutzen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#umgebung-exportieren">Umgebung exportieren</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#praktische-beispiele-fur-digital-history">Praktische Beispiele für Digital History</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#textanalyse-umgebung">1. Textanalyse-Umgebung</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#netzwerkanalyse-umgebung">2. Netzwerkanalyse-Umgebung</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-vs-pip-venv">conda vs. pip &amp; venv</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wann-conda">Wann conda?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wann-venv-pip">Wann venv+pip?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#umgebungen-organisieren">1. Umgebungen organisieren</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#abhangigkeiten-dokumentieren">2. Abhängigkeiten dokumentieren</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-aktuell-halten">3. Conda aktuell halten</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#der-conda-cache-verstehen-und-verwalten">4. Der conda Cache verstehen und verwalten</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#haufige-probleme-und-losungen">Häufige Probleme und Lösungen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paketmanagement-probleme">Paketmanagement-Probleme</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weiterfuhrende-ressourcen">Weiterführende Ressourcen</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="projektumgebungen-mit-conda">
+<h1>Projektumgebungen mit conda<a class="headerlink" href="#projektumgebungen-mit-conda" title="Link to this heading">#</a></h1>
+<section id="was-ist-conda">
+<h2>Was ist conda?<a class="headerlink" href="#was-ist-conda" title="Link to this heading">#</a></h2>
+<p>conda ist mehr als nur ein Tool für virtuelle Umgebungen – es ist ein umfassendes Paket- und Umgebungsmanagement-System, das besonders in der wissenschaftlichen Community verbreitet ist. Anders als venv+pip kann conda:</p>
+<ul class="simple">
+<li><p>Nicht nur Python-Pakete, sondern auch andere Softwareabhängigkeiten verwalten</p></li>
+<li><p>Komplexe Abhängigkeiten automatisch auflösen</p></li>
+<li><p>Binäre Pakete für verschiedene Plattformen bereitstellen</p></li>
+<li><p>Mit unterschiedlichen Python-Versionen in verschiedenen Umgebungen arbeiten</p></li>
+</ul>
+</section>
+<section id="das-conda-okosystem">
+<h2>Das conda-Ökosystem<a class="headerlink" href="#das-conda-okosystem" title="Link to this heading">#</a></h2>
+<section id="anaconda-vs-miniconda-vs-conda">
+<h3>Anaconda vs. Miniconda vs. conda<a class="headerlink" href="#anaconda-vs-miniconda-vs-conda" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>conda</strong></p>
+<ul class="simple">
+<li><p>Der Paket- und Umgebungsmanager selbst</p></li>
+<li><p>Kann mit beiden Distributionen verwendet werden</p></li>
+</ul>
+</li>
+<li><p><strong>Anaconda</strong></p>
+<ul class="simple">
+<li><p>Vollständige Distribution mit:</p>
+<ul>
+<li><p>conda</p></li>
+<li><p>Python</p></li>
+<li><p>250+ vorinstallierte wissenschaftliche Pakete</p></li>
+<li><p>Anaconda Navigator (GUI)</p></li>
+<li><p>IDE und andere Tools</p></li>
+</ul>
+</li>
+<li><p>Vorteile:</p>
+<ul>
+<li><p>Alles vorinstalliert</p></li>
+<li><p>Benutzerfreundlich durch GUI</p></li>
+</ul>
+</li>
+<li><p>Nachteile:</p>
+<ul>
+<li><p>Größer (etwa 3GB)</p></li>
+<li><p>Kann zu Konflikten führen</p></li>
+<li><p>Nicht alle Pakete werden benötigt</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Miniconda</strong></p>
+<ul class="simple">
+<li><p>Minimale Distribution mit:</p>
+<ul>
+<li><p>conda</p></li>
+<li><p>Python</p></li>
+<li><p>Wenige Basispakete</p></li>
+</ul>
+</li>
+<li><p>Vorteile:</p>
+<ul>
+<li><p>Leichtgewichtig</p></li>
+<li><p>Flexibel</p></li>
+<li><p>Nur nötige Pakete installieren</p></li>
+</ul>
+</li>
+<li><p>Nachteile:</p>
+<ul>
+<li><p>Mehr manuelle Konfiguration nötig</p></li>
+<li><p>Keine GUI</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="empfehlung-fur-digital-history-projekte">
+<h3>Empfehlung für Digital History Projekte<a class="headerlink" href="#empfehlung-fur-digital-history-projekte" title="Link to this heading">#</a></h3>
+<p>Für die meisten Digital History Projekte empfehlen wir <strong>Miniconda</strong>, weil:</p>
+<ul class="simple">
+<li><p>Es einen sauberen, minimalen Start bietet</p></li>
+<li><p>Sie nur die wirklich benötigten Pakete installieren</p></li>
+<li><p>Es weniger Speicherplatz verbraucht</p></li>
+<li><p>Es mehr Kontrolle über Ihre Umgebungen gibt</p></li>
+</ul>
+</section>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<section id="miniconda-installieren">
+<h3>Miniconda installieren<a class="headerlink" href="#miniconda-installieren" title="Link to this heading">#</a></h3>
+<section id="windows">
+<h4>Windows<a class="headerlink" href="#windows" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p>Laden Sie den <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda3 Windows Installer</a> herunter</p></li>
+<li><p>Führen Sie den Installer aus</p></li>
+<li><p><strong>Wichtig:</strong> Wählen Sie „Add Miniconda3 to PATH“ während der Installation</p></li>
+</ol>
+</section>
+<section id="macos">
+<h4>macOS<a class="headerlink" href="#macos" title="Link to this heading">#</a></h4>
+<ol class="arabic">
+<li><p>Via Homebrew (empfohlen):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>--cask<span class="w"> </span>miniconda
+conda<span class="w"> </span>init<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>basename<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">SHELL</span><span class="si">}</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Oder manuell:</p>
+<ul>
+<li><p>Laden Sie den <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda3 macOS Installer</a> herunter</p></li>
+<li><p>Im Terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>Miniconda3-latest-MacOSX-x86_64.sh
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="linux">
+<h4>Linux<a class="headerlink" href="#linux" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash<span class="w"> </span>Miniconda3-latest-Linux-x86_64.sh
+</pre></div>
+</div>
+</section>
+</section>
+<section id="installation-verifizieren">
+<h3>Installation verifizieren<a class="headerlink" href="#installation-verifizieren" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>--version
+</pre></div>
+</div>
+</section>
+</section>
+<section id="conda-umgebungen-erstellen-und-verwalten">
+<h2>Conda-Umgebungen erstellen und verwalten<a class="headerlink" href="#conda-umgebungen-erstellen-und-verwalten" title="Link to this heading">#</a></h2>
+<section id="grundlegende-befehle">
+<h3>Grundlegende Befehle<a class="headerlink" href="#grundlegende-befehle" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p><strong>Neue Umgebung erstellen</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Basis-Umgebung</span>
+conda<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>dh_project<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.9
+
+<span class="c1"># Mit zusätzlichen Paketen</span>
+conda<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>text_analysis<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.9<span class="w"> </span>pandas<span class="w"> </span>spacy<span class="w"> </span>nltk
+</pre></div>
+</div>
+</li>
+<li><p><strong>Umgebung aktivieren</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Windows</span>
+conda<span class="w"> </span>activate<span class="w"> </span>dh_project
+
+<span class="c1"># macOS/Linux</span>
+conda<span class="w"> </span>activate<span class="w"> </span>dh_project
+</pre></div>
+</div>
+</li>
+<li><p><strong>Pakete installieren</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ein einzelnes Paket</span>
+conda<span class="w"> </span>install<span class="w"> </span>pandas
+
+<span class="c1"># Mehrere Pakete</span>
+conda<span class="w"> </span>install<span class="w"> </span>pandas<span class="w"> </span>numpy<span class="w"> </span>matplotlib
+
+<span class="c1"># Spezifische Version</span>
+conda<span class="w"> </span>install<span class="w"> </span><span class="nv">pandas</span><span class="o">=</span><span class="m">1</span>.4.2
+</pre></div>
+</div>
+</li>
+<li><p><strong>Umgebung deaktivieren</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>deactivate
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="conda-forge-der-community-channel">
+<h3>conda-forge: Der Community-Channel<a class="headerlink" href="#conda-forge-der-community-channel" title="Link to this heading">#</a></h3>
+<p>conda-forge ist ein wichtiger Community-betriebener Paket-Channel für conda. Während die Standard-conda-Installation (auch „defaults channel“ genannt) Pakete von Anaconda Inc. bezieht, bietet conda-forge:</p>
+<ul class="simple">
+<li><p>Aktuellere Versionen von Paketen</p></li>
+<li><p>Eine größere Auswahl an Paketen</p></li>
+<li><p>Community-getestete und -gewartete Pakete</p></li>
+<li><p>Schnellere Updates bei Sicherheitsproblemen</p></li>
+</ul>
+<p>Für Digital History Projekte ist conda-forge besonders nützlich, weil:</p>
+<ul class="simple">
+<li><p>Viele spezielle Bibliotheken für Textanalyse und Datenverarbeitung hier zuerst erscheinen</p></li>
+<li><p>Die Pakete oft besser aufeinander abgestimmt sind</p></li>
+<li><p>Sie Zugriff auf die neuesten Features und Verbesserungen haben</p></li>
+</ul>
+<p>Conda-forge nutzen:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Einzelnes Paket von conda-forge installieren</span>
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>spacy
+
+<span class="c1"># conda-forge als Standard-Channel setzen (empfohlen)</span>
+conda<span class="w"> </span>config<span class="w"> </span>--add<span class="w"> </span>channels<span class="w"> </span>conda-forge
+conda<span class="w"> </span>config<span class="w"> </span>--set<span class="w"> </span>channel_priority<span class="w"> </span>strict
+</pre></div>
+</div>
+<p>Nachdem Sie conda-forge als Standard gesetzt haben, können Sie Pakete einfach mit <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">paketname</span></code> installieren, ohne <code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">conda-forge</span></code> anzugeben.</p>
+</section>
+<section id="environment-datei-erstellen-und-nutzen">
+<h3>Environment-Datei erstellen und nutzen<a class="headerlink" href="#environment-datei-erstellen-und-nutzen" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># environment.yml</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dh_project</span>
+<span class="nt">channels</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">defaults</span>
+<span class="nt">dependencies</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python=3.9</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pandas</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">spacy</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nltk</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pip</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">somepackage</span>
+</pre></div>
+</div>
+<p>Umgebung aus Datei erstellen:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>environment.yml
+</pre></div>
+</div>
+</section>
+<section id="umgebung-exportieren">
+<h3>Umgebung exportieren<a class="headerlink" href="#umgebung-exportieren" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span><span class="nb">export</span><span class="w"> </span>&gt;<span class="w"> </span>environment.yml
+</pre></div>
+</div>
+</section>
+</section>
+<section id="praktische-beispiele-fur-digital-history">
+<h2>Praktische Beispiele für Digital History<a class="headerlink" href="#praktische-beispiele-fur-digital-history" title="Link to this heading">#</a></h2>
+<section id="textanalyse-umgebung">
+<h3>1. Textanalyse-Umgebung<a class="headerlink" href="#textanalyse-umgebung" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">text_analysis</span>
+<span class="nt">channels</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">defaults</span>
+<span class="nt">dependencies</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python=3.9</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">spacy</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nltk</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pandas</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jupyterlab</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pip</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">germansentiment</span>
+</pre></div>
+</div>
+</section>
+<section id="netzwerkanalyse-umgebung">
+<h3>2. Netzwerkanalyse-Umgebung<a class="headerlink" href="#netzwerkanalyse-umgebung" title="Link to this heading">#</a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">network_analysis</span>
+<span class="nt">channels</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">defaults</span>
+<span class="nt">dependencies</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python=3.9</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networkx</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pandas</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">matplotlib</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jupyter</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python-louvain</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="conda-vs-pip-venv">
+<h2>conda vs. pip &amp; venv<a class="headerlink" href="#conda-vs-pip-venv" title="Link to this heading">#</a></h2>
+<section id="wann-conda">
+<h3>Wann conda?<a class="headerlink" href="#wann-conda" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Komplexe wissenschaftliche Pakete (NumPy, SciPy, etc.)</p></li>
+<li><p>Wenn Sie nicht-Python-Abhängigkeiten benötigen</p></li>
+<li><p>Für reproduzierbare Data Science Umgebungen</p></li>
+<li><p>Wenn Sie häufig zwischen Python-Versionen wechseln</p></li>
+</ul>
+</section>
+<section id="wann-venv-pip">
+<h3>Wann venv+pip?<a class="headerlink" href="#wann-venv-pip" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Für reine Python-Projekte</p></li>
+<li><p>Wenn Sie nur PyPI-Pakete benötigen</p></li>
+<li><p>Für leichtgewichtige Entwicklung</p></li>
+<li><p>Wenn Projektgröße wichtig ist</p></li>
+</ul>
+</section>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">#</a></h2>
+<section id="umgebungen-organisieren">
+<h3>1. Umgebungen organisieren<a class="headerlink" href="#umgebungen-organisieren" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Projektspezifische Namen verwenden</span>
+conda<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>dh_newspapers_1850
+
+<span class="c1"># Umgebungen auflisten</span>
+conda<span class="w"> </span>env<span class="w"> </span>list
+
+<span class="c1"># Ungenutzte Umgebungen entfernen</span>
+conda<span class="w"> </span>env<span class="w"> </span>remove<span class="w"> </span>--name<span class="w"> </span>alte_umgebung
+</pre></div>
+</div>
+</section>
+<section id="abhangigkeiten-dokumentieren">
+<h3>2. Abhängigkeiten dokumentieren<a class="headerlink" href="#abhangigkeiten-dokumentieren" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Immer eine environment.yml erstellen</p></li>
+<li><p>Minimale Abhängigkeiten angeben</p></li>
+<li><p>Versionen spezifizieren für kritische Pakete</p></li>
+</ul>
+</section>
+<section id="conda-aktuell-halten">
+<h3>3. Conda aktuell halten<a class="headerlink" href="#conda-aktuell-halten" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># conda selbst aktualisieren</span>
+conda<span class="w"> </span>update<span class="w"> </span>conda
+
+<span class="c1"># Alle Pakete in aktiver Umgebung aktualisieren</span>
+conda<span class="w"> </span>update<span class="w"> </span>--all
+</pre></div>
+</div>
+</section>
+<section id="der-conda-cache-verstehen-und-verwalten">
+<h3>4. Der conda Cache verstehen und verwalten<a class="headerlink" href="#der-conda-cache-verstehen-und-verwalten" title="Link to this heading">#</a></h3>
+<p>conda speichert heruntergeladene Pakete und deren Abhängigkeiten in einem Cache-Verzeichnis auf Ihrem Computer. Dies umfasst:</p>
+<ul class="simple">
+<li><p><strong>Paket-Tarfiles</strong>: Die ursprünglich heruntergeladenen Paketdateien</p></li>
+<li><p><strong>Extrahierte Pakete</strong>: Entpackte Versionen der Pakete</p></li>
+<li><p><strong>Index-Cache</strong>: Informationen über verfügbare Pakete und deren Versionen</p></li>
+</ul>
+<p>Der Cache hilft conda:</p>
+<ul class="simple">
+<li><p>Pakete schneller zu installieren (keine erneute Downloads nötig)</p></li>
+<li><p>Offline zu arbeiten mit bereits gecachten Paketen</p></li>
+<li><p>Frühere Versionen von Paketen wiederherzustellen</p></li>
+</ul>
+<p>Mit der Zeit kann der Cache jedoch viel Speicherplatz belegen. Verwaltung des Cache:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Gesamten Cache aufräumen (alle ungenutzten Dateien)</span>
+conda<span class="w"> </span>clean<span class="w"> </span>--all
+
+<span class="c1"># Nur heruntergeladene Paket-Tarfiles entfernen</span>
+conda<span class="w"> </span>clean<span class="w"> </span>--tarballs
+
+<span class="c1"># Nur ungenutzte, extrahierte Pakete entfernen</span>
+conda<span class="w"> </span>clean<span class="w"> </span>--packages
+
+<span class="c1"># Index-Cache aktualisieren (bei Problemen mit Paketsuche)</span>
+conda<span class="w"> </span>clean<span class="w"> </span>--index-cache
+</pre></div>
+</div>
+<p>Tipp: Führen Sie regelmäßig <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">clean</span> <span class="pre">--all</span></code> aus, wenn Sie Speicherplatz sparen möchten.</p>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<section id="haufige-probleme-und-losungen">
+<h3>Häufige Probleme und Lösungen<a class="headerlink" href="#haufige-probleme-und-losungen" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p><strong>Konflikte zwischen Paketen</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Strikte Channel-Priorität setzen</span>
+conda<span class="w"> </span>config<span class="w"> </span>--set<span class="w"> </span>channel_priority<span class="w"> </span>strict
+
+<span class="c1"># Neu installieren mit --strict-channel-priority</span>
+conda<span class="w"> </span>install<span class="w"> </span>--strict-channel-priority<span class="w"> </span>package_name
+</pre></div>
+</div>
+</li>
+<li><p><strong>Langsame Installation</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Schnellere Installation mit mamba</span>
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>mamba
+mamba<span class="w"> </span>install<span class="w"> </span>package_name
+</pre></div>
+</div>
+</li>
+<li><p><strong>Speicherprobleme</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cache leeren</span>
+conda<span class="w"> </span>clean<span class="w"> </span>--all
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="paketmanagement-probleme">
+<h3>Paketmanagement-Probleme<a class="headerlink" href="#paketmanagement-probleme" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p><strong>Conda vs. pip</strong></p>
+<ul class="simple">
+<li><p>Nutzen Sie conda für primäre Pakete</p></li>
+<li><p>pip nur für Pakete, die nicht in conda verfügbar sind</p></li>
+<li><p>pip-Pakete am Ende der environment.yml auflisten</p></li>
+</ul>
+</li>
+<li><p><strong>Dependency Konflikte</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Detaillierte Infos anzeigen</span>
+conda<span class="w"> </span>install<span class="w"> </span>package_name<span class="w"> </span>--verbose
+
+<span class="c1"># Alternative Versionen suchen</span>
+conda<span class="w"> </span>search<span class="w"> </span>package_name
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+<section id="weiterfuhrende-ressourcen">
+<h2>Weiterführende Ressourcen<a class="headerlink" href="#weiterfuhrende-ressourcen" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.conda.io/">Conda Dokumentation</a></p></li>
+<li><p><a class="reference external" href="https://conda-forge.org/">conda-forge</a></p></li>
+<li><p><a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/cheatsheet.html">Conda Cheat Sheet</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "executablebooks/jupyter-book",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./project_environments"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="venv_guide.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">zurück</p>
+        <p class="prev-next-title">Projektumgebungen mit venv</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Leitfaden.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">weiter</p>
+        <p class="prev-next-title">Leitfaden für Computational Essays: Formatierung und Anforderungen</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Inhalt
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#was-ist-conda">Was ist conda?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#das-conda-okosystem">Das conda-Ökosystem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anaconda-vs-miniconda-vs-conda">Anaconda vs. Miniconda vs. conda</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#empfehlung-fur-digital-history-projekte">Empfehlung für Digital History Projekte</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#miniconda-installieren">Miniconda installieren</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#macos">macOS</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-verifizieren">Installation verifizieren</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-umgebungen-erstellen-und-verwalten">Conda-Umgebungen erstellen und verwalten</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grundlegende-befehle">Grundlegende Befehle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-forge-der-community-channel">conda-forge: Der Community-Channel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-datei-erstellen-und-nutzen">Environment-Datei erstellen und nutzen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#umgebung-exportieren">Umgebung exportieren</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#praktische-beispiele-fur-digital-history">Praktische Beispiele für Digital History</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#textanalyse-umgebung">1. Textanalyse-Umgebung</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#netzwerkanalyse-umgebung">2. Netzwerkanalyse-Umgebung</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-vs-pip-venv">conda vs. pip &amp; venv</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wann-conda">Wann conda?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wann-venv-pip">Wann venv+pip?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#umgebungen-organisieren">1. Umgebungen organisieren</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#abhangigkeiten-dokumentieren">2. Abhängigkeiten dokumentieren</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-aktuell-halten">3. Conda aktuell halten</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#der-conda-cache-verstehen-und-verwalten">4. Der conda Cache verstehen und verwalten</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#haufige-probleme-und-losungen">Häufige Probleme und Lösungen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paketmanagement-probleme">Paketmanagement-Probleme</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weiterfuhrende-ressourcen">Weiterführende Ressourcen</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Durch <a href="https://www.geschichte.hu-berlin.de/de/bereiche-und-lehrstuehle/digital-history">Digital History, Humboldt-Universität zu Berlin</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="http://creativecommons.org/licenses/by/4.0/"><img class="license" alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> This book is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons BY 4.0 License</a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

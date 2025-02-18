@@ -1,0 +1,581 @@
+
+<!DOCTYPE html>
+
+
+<html lang="de" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Einführung in Computational Essays &#8212; Computational Essays</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=91fba89f"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script src="_static/translations.js?v=79cc9f76"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Einführung';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="genindex.html" />
+    <link rel="search" title="Suche" href="search.html" />
+    <link rel="next" title="Einführung in Projektumgebungen für Digital History" href="project_environments/intro.html" />
+    <link rel="prev" title="Computational Essays: Ein Leitfaden für die Digital Humanities" href="README.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="de"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/Logo_DigitalHistoryBerlin.png" class="logo__image only-light" alt="Computational Essays - Home"/>
+    <img src="_static/Logo_DigitalHistoryBerlin.png" class="logo__image only-dark pst-js-only" alt="Computational Essays - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Suche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="README.html">
+                    Computational Essays: Ein Leitfaden für die Digital Humanities
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Grundlagen</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Einführung in Computational Essays</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="project_environments/intro.html">Einführung in Projektumgebungen</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="project_environments/venv_guide.html">Projektumgebungen mit venv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project_environments/conda_guide.html">Projektumgebungen mit conda</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Leitfäden</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Leitfaden.html">Leitfaden für Computational Essays</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Konvertierungen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Konvertierungen/word_md_notebook.html">Konvertierung von Word Documenten</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Praktische Werkzeuge</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tools/git-lfs.html">Fortgeschrittene Git-Funktionen: Git Large File Storage (LFS)</a></li>
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Laden Sie diese Seite herunter">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Einführung.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Quelldatei herunterladen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="In PDF drucken"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Vollbildmodus"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Einführung in Computational Essays</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Inhalt </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#was-sind-computational-essays">Was sind Computational Essays?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grundlegende-komponenten">Grundlegende Komponenten</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bedeutung-fur-die-digital-history">Bedeutung für die Digital History</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einsatz-in-forschung-und-lehre">Einsatz in Forschung und Lehre</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#technische-grundlagen">Technische Grundlagen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abgrenzung-und-format">Abgrenzung und Format</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grundprinzipien-fur-das-verfassen">Grundprinzipien für das Verfassen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#beispiele">Beispiele</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weiterfuhrende-ressourcen">Weiterführende Ressourcen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#literatur">Literatur</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="einfuhrung-in-computational-essays">
+<h1>Einführung in Computational Essays<a class="headerlink" href="#einfuhrung-in-computational-essays" title="Link to this heading">#</a></h1>
+<section id="was-sind-computational-essays">
+<h2>Was sind Computational Essays?<a class="headerlink" href="#was-sind-computational-essays" title="Link to this heading">#</a></h2>
+<p>Computational Essays sind eine moderne Form des wissenschaftlichen Schreibens, die Text, ausführbaren Code und Visualisierungen in einem interaktiven Dokument vereint. Sie ermöglichen es, komplexe Analysen transparent und nachvollziehbar darzustellen, indem sie die narrative Struktur traditioneller wissenschaftlicher Arbeiten mit den Möglichkeiten computergestützter Forschung verbinden.</p>
+</section>
+<section id="grundlegende-komponenten">
+<h2>Grundlegende Komponenten<a class="headerlink" href="#grundlegende-komponenten" title="Link to this heading">#</a></h2>
+<p>Ein Computational Essay besteht aus drei wesentlichen Elementen:</p>
+<ol class="arabic simple">
+<li><p><strong>Erklärender Text</strong>: Wissenschaftliche Prosa, die die Forschungsfrage, Methodik und Interpretationen darlegt</p></li>
+<li><p><strong>Ausführbarer Code</strong>: Programmcode, der direkt im Dokument ausgeführt werden kann</p></li>
+<li><p><strong>Visualisierungen und Ausgaben</strong>: Grafiken, Diagramme und Analyseergebnisse, die durch den Code generiert werden</p></li>
+</ol>
+<p>Diese Komponenten arbeiten zusammen, um eine kohärente und nachvollziehbare wissenschaftliche Argumentation zu entwickeln.</p>
+</section>
+<section id="bedeutung-fur-die-digital-history">
+<h2>Bedeutung für die Digital History<a class="headerlink" href="#bedeutung-fur-die-digital-history" title="Link to this heading">#</a></h2>
+<p>In der digitalen Geschichtswissenschaft bieten Computational Essays besondere Vorteile:</p>
+<ul class="simple">
+<li><p><strong>Transparenz</strong>: Die verwendeten Methoden und Analysen sind vollständig dokumentiert und reproduzierbar</p></li>
+<li><p><strong>Interaktivität</strong>: Leser können Analysen nachvollziehen und mit den Daten interagieren</p></li>
+<li><p><strong>Integration</strong>: Traditionelle historische Methoden können mit digitalen Werkzeugen kombiniert werden</p></li>
+<li><p><strong>Dokumentation</strong>: Der gesamte Forschungsprozess wird nachvollziehbar dargestellt</p></li>
+</ul>
+</section>
+<section id="einsatz-in-forschung-und-lehre">
+<h2>Einsatz in Forschung und Lehre<a class="headerlink" href="#einsatz-in-forschung-und-lehre" title="Link to this heading">#</a></h2>
+<p>Computational Essays dienen sowohl als:</p>
+<ul class="simple">
+<li><p>Werkzeug für die Forschung und Analyse</p></li>
+<li><p>Format für wissenschaftliche Publikationen</p></li>
+<li><p>Lehr- und Lernmaterial („Worked Examples“)</p></li>
+<li><p>Prüfungsformat im akademischen Kontext</p></li>
+</ul>
+</section>
+<section id="technische-grundlagen">
+<h2>Technische Grundlagen<a class="headerlink" href="#technische-grundlagen" title="Link to this heading">#</a></h2>
+<p>Die häufigste Umsetzungsform von Computational Essays sind Jupyter Notebooks. Diese bieten:</p>
+<ul class="simple">
+<li><p>Eine webbasierte Arbeitsumgebung</p></li>
+<li><p>Unterstützung für verschiedene Programmiersprachen</p></li>
+<li><p>Möglichkeiten zur Integration von Markdown-formatiertem Text</p></li>
+<li><p>Werkzeuge für die Erstellung von Visualisierungen</p></li>
+<li><p>Optionen für das Teilen und Publizieren der Arbeit</p></li>
+</ul>
+</section>
+<section id="abgrenzung-und-format">
+<h2>Abgrenzung und Format<a class="headerlink" href="#abgrenzung-und-format" title="Link to this heading">#</a></h2>
+<p>Wichtig ist zu verstehen, dass nicht jedes Jupyter Notebook automatisch ein Computational Essay ist und nicht jeder Computational Essay zwangsläufig als Jupyter Notebook erstellt werden muss. Ein Jupyter Notebook kann beispielsweise auch ein reines Tutorial, eine Codesammlung oder eine technische Dokumentation sein. Umgekehrt können Computational Essays auch in anderen Formaten wie R Markdown oder Wolfram Notebooks erstellt werden.</p>
+<p>Für Prüfungsleistungen am Lehrstuhl für Digital History ist die Einreichung als Jupyter Notebook jedoch verpflichtend, da dieses Format die beste Unterstützung für reproduzierbare Forschung und standardisierte Bewertung bietet.</p>
+</section>
+<section id="grundprinzipien-fur-das-verfassen">
+<h2>Grundprinzipien für das Verfassen<a class="headerlink" href="#grundprinzipien-fur-das-verfassen" title="Link to this heading">#</a></h2>
+<p>Bei der Erstellung eines Computational Essays sollten folgende Aspekte beachtet werden:</p>
+<ol class="arabic simple">
+<li><p><strong>Klare Forschungsfrage</strong>: Die Fragestellung sollte präzise formuliert und durch computationelle Methoden bearbeitbar sein</p></li>
+<li><p><strong>Ausgewogenes Verhältnis</strong>: Text und Code sollten in einem angemessenen Verhältnis stehen</p></li>
+<li><p><strong>Nachvollziehbarkeit</strong>: Alle Schritte der Analyse müssen klar dokumentiert sein</p></li>
+<li><p><strong>Wissenschaftliche Standards</strong>: Übliche akademische Konventionen wie korrektes Zitieren sind einzuhalten</p></li>
+<li><p><strong>Reproduzierbarkeit</strong>: Der Code muss ausführbar und die Ergebnisse reproduzierbar sein</p></li>
+</ol>
+</section>
+<section id="beispiele">
+<h2>Beispiele<a class="headerlink" href="#beispiele" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>UiO Computational Essay Showroom: [https://uio-ccse.github.io/computational-essay-showroom/intro.html]
+<em>Sammlung verschiedener Computational Essays mit unterschiedlichen Ansätzen</em></p></li>
+<li><p>Notebooks am IBI: [https://pages.cms.hu-berlin.de/ibi/notebooks/]
+<em>Sammlung von Jupyter Notebooks des Instituts für Bibliotheks- und Informationswissenschaft der HU Berlin</em></p></li>
+<li><p><a class="reference external" href="https://github.com/quinnanya/dh-jupyter">Liste von Jupyter Notebooks in DH</a></p></li>
+</ul>
+</section>
+<section id="weiterfuhrende-ressourcen">
+<h2>Weiterführende Ressourcen<a class="headerlink" href="#weiterfuhrende-ressourcen" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://jupyter.org/">Project Jupyter</a></p></li>
+<li><p><a class="reference external" href="https://digital-history-berlin.github.io/Python-fuer-Historiker-innen/home.html">Python für Digital History</a></p></li>
+<li><p><a class="reference external" href="https://programminghistorian.org/en/lessons/jupyter-notebooks">Einführung in Jupyter Notebooks</a></p></li>
+</ul>
+</section>
+<section id="literatur">
+<h2>Literatur<a class="headerlink" href="#literatur" title="Link to this heading">#</a></h2>
+<p>Wolfram, Stephen: „What Is a Computational Essay?“, in: Stephen Wolfram Writings, 14.11.2017.</p>
+<p>Knuth, Donald: „Literate Programming“, in: The Computer Journal 27, Nr. 2 (1984), S. 97-111.</p>
+<p>Millman, K. Jarrod / Perez, Fernando, Developing open source scientific practice, in: Stodden, Victoria / Leisch, Friedrich / Peng, Roger, Implementing Reproducible Research, Chapman and Hall/CRC Press 2014, S. 149-183, S. 174.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "executablebooks/jupyter-book",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="README.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">zurück</p>
+        <p class="prev-next-title">Computational Essays: Ein Leitfaden für die Digital Humanities</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="project_environments/intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">weiter</p>
+        <p class="prev-next-title">Einführung in Projektumgebungen für Digital History</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Inhalt
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#was-sind-computational-essays">Was sind Computational Essays?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grundlegende-komponenten">Grundlegende Komponenten</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bedeutung-fur-die-digital-history">Bedeutung für die Digital History</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einsatz-in-forschung-und-lehre">Einsatz in Forschung und Lehre</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#technische-grundlagen">Technische Grundlagen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#abgrenzung-und-format">Abgrenzung und Format</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grundprinzipien-fur-das-verfassen">Grundprinzipien für das Verfassen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#beispiele">Beispiele</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weiterfuhrende-ressourcen">Weiterführende Ressourcen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#literatur">Literatur</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Durch <a href="https://www.geschichte.hu-berlin.de/de/bereiche-und-lehrstuehle/digital-history">Digital History, Humboldt-Universität zu Berlin</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="http://creativecommons.org/licenses/by/4.0/"><img class="license" alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> This book is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons BY 4.0 License</a>.
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

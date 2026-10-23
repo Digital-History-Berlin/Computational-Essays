@@ -23,6 +23,8 @@ parts:
     chapters:
     - file: tools/git-grundlagen
       title: "Git-Grundlagen"
+    - file: tools/ssh
+      title: "SSH-Schlüssel einrichten"
     - file: tools/git-history
       title: "Git-Historie nachvollziehen und bearbeiten"
     - file: tools/git-lfs

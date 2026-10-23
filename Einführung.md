@@ -71,6 +71,7 @@ Bei der Erstellung eines Computational Essays sollten folgende Aspekte beachtet 
 - [Project Jupyter](https://jupyter.org/)
 - [Python für Digital History](https://digital-history-berlin.github.io/Python-fuer-Historiker-innen/home.html)
 - [Einführung in Jupyter Notebooks](https://programminghistorian.org/en/lessons/jupyter-notebooks)
+- [Zeitschrift für digitale Geisteswissenschaften (ZfdG)](https://zfdg.de): Open-Access-Zeitschrift mit Artikeln und Data Papers aus den digitalen Geisteswissenschaften (siehe {doc}`Forschungsdaten dokumentieren <fdm/forschungsdaten-dokumentieren>`)
 
 ## Literatur
 

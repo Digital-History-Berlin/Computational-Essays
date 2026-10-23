@@ -30,7 +30,7 @@ Nach diesem Kapitel können Sie:
 - ein Datenwörterbuch anlegen, das jede Spalte einer Tabelle beschreibt
 - Unsicherheiten, etwa bei Datierungen, und Normdaten einheitlich erfassen
 - Ihre Daten automatisch gegen ihr Datenwörterbuch prüfen
-- Metadatenstandards und persistente Identifikatoren einordnen und wissen, wo Sie Daten veröffentlichen können
+- Metadatenstandards und persistente Identifikatoren einordnen und wissen, wo Sie Daten veröffentlichen und in einem Data Paper vorstellen können
 
 ### Voraussetzungen
 
@@ -356,6 +356,7 @@ Dokumentation beschreibt nicht nur das Ergebnis, sondern auch den Weg dorthin:
 - Rohdaten sind unverändert; alle Bearbeitungsschritte stehen im Code.
 - Die Daten wurden gegen ihr Datenwörterbuch geprüft.
 - Daten, die nicht veröffentlicht werden dürfen, sind nicht im Repository und ihr Speicherort ist dokumentiert.
+- Eigene Fotos, etwa von Archivalien, enthalten keine ungewollten Metadaten wie GPS-Koordinaten. Smartphones speichern sie oft automatisch in der Bilddatei.
 ```
 
 Für die Veröffentlichung von Forschungsdaten empfiehlt die HU den Grundsatz **„Zugänglich, wenn möglich, eingeschränkt, wenn notwendig“**: Veröffentlichen Sie, was Sie veröffentlichen dürfen, und schränken Sie den Zugang nur ein, wo Rechte Dritter oder der Schutz von Personen es verlangen.
@@ -367,6 +368,30 @@ Damit Ihre Daten dauerhaft auffindbar und zitierbar bleiben, sollten sie eine **
 - Fachrepositorien für Ihre Disziplin finden Sie im Verzeichnis [re3data.org](https://www.re3data.org).
 
 Unter welcher Lizenz Sie Daten veröffentlichen und was bei Rechten an Quellen zu beachten ist, behandelt das Kapitel {doc}`Lizenzen für Code und Daten <lizenzen>`. Für eine persönliche Beratung steht die [Initiative Forschungsdatenmanagement der HU](https://www.cms.hu-berlin.de/en/dl-en/dataman-en/home/home) zur Verfügung (forschungsdaten@hu-berlin.de).
+
+### Daten in einem Data Paper vorstellen
+
+Ein Datensatz mit DOI ist zitierbar, aber andere Forschende erfahren meist erst von ihm, wenn er in einer Zeitschrift vorgestellt wird. Dafür gibt es **Data Papers**: Artikel, die einen bereits veröffentlichten Datensatz beschreiben, also wie er entstanden ist, wie er aufgebaut ist und wofür er sich eignet. Die Daten selbst bleiben im Repositorium, der Artikel verweist auf sie. So wird die Arbeit, die in Erhebung und Dokumentation steckt, als eigene wissenschaftliche Leistung sichtbar und zitierbar.
+
+Im deutschsprachigen Raum bietet die [Zeitschrift für digitale Geisteswissenschaften (ZfdG)](https://zfdg.de) dieses Format an. Die ZfdG ist eine Open-Access-Zeitschrift, die der Forschungsverbund Marbach Weimar Wolfenbüttel gemeinsam mit dem Verband Digital Humanities im deutschsprachigen Raum (DHd) herausgibt. Ihre Beiträge erscheinen unter der Lizenz CC BY-SA 4.0 und erhalten eine DOI. Für Data Papers nennt die ZfdG (Stand Oktober 2026) folgende Bedingungen:
+
+- **Voraussetzungen:** Die Daten stammen aus einem geisteswissenschaftlichen Kontext, sind bereits veröffentlicht, frei zugänglich und über eine persistente Kennung erreichbar. Es gibt eine Strategie für ihre Langzeitarchivierung, und sie folgen verbreiteten Datenstandards.
+- **Umfang:** höchstens 5.000 Wörter. An die Stelle des Abstracts tritt eine tabellarische Beschreibung des Datensatzes.
+- **Einreichung:** zunächst ein Exposé von höchstens 1.000 Wörtern an die Redaktion (redaktion@zfdg.de), das auch die Metadaten der Datenpublikation nennt, etwa Titel, Autor:innen, Version, Repositorium und DOI.
+- **Begutachtung:** offen durch die Fachcommunity (*Open Peer Review*).
+
+Die ZfdG gibt für Data Papers eine feste Gliederung vor. Haben Sie Ihre Daten wie in diesem Kapitel beschrieben dokumentiert, liegt das Material für die ersten drei Teile bereits vor:
+
+| Teil des Data Papers | Grundlage in Ihrer Dokumentation |
+|---|---|
+| Zielstellung, Kontext und Datenquellen | Projekt-README sowie die Abschnitte „Überblick“ und „Quellen“ der Daten-README |
+| Beschreibung der Datenerhebung | Abschnitt „Erhebung und Bearbeitung“ der Daten-README, Notebooks und Skripte |
+| Strukturelle Beschreibung der Datenpublikation | Dateien, Formate und Datenwörterbuch |
+| Interpretationsansätze, Nutzungshorizonte, Limitationen und verwandte Arbeiten | Ihr Essay: Was lässt sich mit den Daten zeigen, was nicht, und wo sind sie lückenhaft oder unsicher? |
+
+Der letzte Teil geht über die Dokumentation hinaus: Hier ordnen Sie die Daten in die Forschung ein und benennen ihre Grenzen, etwa Lücken in der Überlieferung oder unsichere Datierungen. Beispiele finden Sie unter den [Veröffentlichungen der ZfdG](https://zfdg.de/v-wie-veroeffentlichungen), etwa zur [digitalen Edition der Tagebücher Fürst Christians II. von Anhalt-Bernburg](https://zfdg.de/2025_001) oder zum [Marburger Urkundenrepositorium](https://zfdg.de/2025_004). Die jeweils gültigen Bedingungen stehen auf der Seite [P wie Publizieren](https://zfdg.de/p-wie-publizieren).
+
+Haben Sie etwa in einer Abschlussarbeit einen Datensatz erstellt, der auch für andere nützlich ist, besprechen Sie mit Ihren Betreuenden, ob sich ein Data Paper lohnt. Englischsprachige Data Papers veröffentlicht unter anderem das [Journal of Open Humanities Data](https://openhumanitiesdata.metajnl.com).
 
 ## 9. Für größere Arbeiten: ein Datenmanagementplan
 
@@ -392,6 +417,8 @@ Die HU bietet dazu [Video-Tutorials](https://www.cms.hu-berlin.de/de/dl/dataman/
 - Forschungsdatenmanagement an der HU: [Dokumentation und Metadaten](https://www.cms.hu-berlin.de/de/dl/dataman/teilen/dokumentation), [Normdaten](https://www.cms.hu-berlin.de/de/dl/dataman/teilen/dokumentation/normdaten), [Persistente Identifikation](https://www.cms.hu-berlin.de/de/dl/dataman/teilen/pid) und die [README-Vorlage der HU](https://cms.hu-berlin.de/de/dl/dataman/readme-template/view)
 - [Leitfragen zum Forschungsdatenmanagement für Studierende](https://www.ibi.hu-berlin.de/de/studium/rundumdasstudium/fdm-fuer-studierende/leitfragen_fdm_finale_version_dez_21.pdf/view) des Instituts für Bibliotheks- und Informationswissenschaft der HU
 - [DFG-Handreichung zum Umgang mit Forschungsdaten in den Geschichtswissenschaften](https://www.dfg.de/resource/blob/401324/handreichung-fk-112-geschichtswissenschaften.pdf)
+- [Zeitschrift für digitale Geisteswissenschaften (ZfdG)](https://zfdg.de): Artikel und Data Papers aus den digitalen Geisteswissenschaften, Bedingungen für Data Papers unter [P wie Publizieren](https://zfdg.de/p-wie-publizieren)
+- AG Digitales Publizieren des DHd: [Digitales Publizieren in den Geisteswissenschaften: Begriffe, Standards, Empfehlungen](https://doi.org/10.17175/wp_2021_001_v2), ZfdG Working Papers 1 (2021)
 - [forschungsdaten.info](https://forschungsdaten.info): deutschsprachiges Informationsportal, u. a. zum Thema „Beschreiben und Dokumentieren“
 - James Baker: [Preserving Your Research Data](https://programminghistorian.org/en/lessons/preserving-your-research-data), The Programming Historian (englisch): Dokumentation und Ordnung von Forschungsdaten für Historiker:innen
 - [Extended Date/Time Format (EDTF)](https://www.loc.gov/standards/datetime/): Spezifikation der Library of Congress (englisch)

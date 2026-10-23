@@ -17,7 +17,7 @@ abstract: >-
   Arbeit mit Computational Essays in den Digital Humanities. Es richtet sich an
   Studierende und Forschende, die narrative Schreibweisen mit computergestützten
   Analysen in ihrer akademischen Arbeit verbinden möchten.
-url: "https://digital-history-berlin.github.io/computational-essays/"
+url: "https://digital-history.pages.cms.hu-berlin.de/lehre/computational-essays/"
 repository-code: "https://github.com/Digital-History-Berlin/Computational-Essays"
 # Licence of the text. Code is under the MIT licence, see LICENSE.md
 license: CC-BY-4.0

@@ -28,7 +28,7 @@ Das Buch enthält derzeit:
 
 - **Einführung in Computational Essays**: Grundlegende Konzepte, Bedeutung in den Digital Humanities und wesentliche Komponenten
 - **Formatierungs- und Anforderungsleitfaden**: Detaillierte Anleitungen zur Strukturierung und Einreichung
-- **Einführung in Projektumgebungen**: Grundlegende Idee, Detaillierte Guides zu venv und Conda
+- **Einführung in Projektumgebungen**: Grundlegende Idee, Detaillierte Guides zu uv, venv und Conda
 - **Versionskontrolle mit Git**: Git-Grundlagen, SSH-Schlüssel, Git-Historie nachvollziehen und bearbeiten, Git LFS für große Dateien
 - **Forschungsdatenmanagement**: Forschungsdaten dokumentieren, Lizenzen für Code und Daten
 
@@ -54,6 +54,14 @@ source venv/bin/activate  # unter Windows: venv\Scripts\activate
 # Abhängigkeiten installieren und das Buch bauen
 pip install -r requirements.txt
 jupyter-book build .
+```
+
+Mit uv (siehe Kapitel „Projektumgebungen mit uv“) ersetzen Sie die letzten Schritte durch:
+
+```bash
+uv venv --python 3.12
+uv pip install -r requirements.txt
+uv run jupyter-book build .
 ```
 
 Das Ergebnis öffnen Sie anschließend mit der Datei `_build/html/index.html` im Browser.

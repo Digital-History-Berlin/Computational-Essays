@@ -9,6 +9,8 @@ parts:
     - file: project_environments/intro
       title: "Einführung in Projektumgebungen"
       sections:
+        - file: project_environments/uv_guide
+          title: "Projektumgebungen mit uv"
         - file: project_environments/venv_guide
           title: "Projektumgebungen mit venv"
         - file: project_environments/conda_guide

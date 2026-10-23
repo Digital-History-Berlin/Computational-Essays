@@ -1,5 +1,9 @@
 # Projektumgebungen mit venv
 
+```{note}
+Für neue Projekte empfehlen wir {doc}`uv <uv_guide>`, das Umgebungen derselben Art anlegt, aber Python-Versionen und Paketversionen selbst verwaltet. Diese Anleitung ist hilfreich, wenn Sie uv nicht installieren können oder in einem Projekt arbeiten, das venv verwendet.
+```
+
 ## Was ist venv?
 
 venv ist das standardmäßige Tool zur Erstellung virtueller Umgebungen in Python. Es ist:

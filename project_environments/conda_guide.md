@@ -1,5 +1,9 @@
 # Projektumgebungen mit conda
 
+```{note}
+conda ist die richtige Wahl, wenn Ihr Projekt Software außerhalb von Python benötigt, die sich über PyPI nicht oder nur schwer installieren lässt. Für Projekte, deren Pakete es auf PyPI gibt, empfehlen wir {doc}`uv <uv_guide>`.
+```
+
 ## Was ist conda?
 
 conda ist mehr als nur ein Tool für virtuelle Umgebungen – es ist ein umfassendes Paket- und Umgebungsmanagement-System, das besonders in der wissenschaftlichen Community verbreitet ist. Anders als venv+pip kann conda:

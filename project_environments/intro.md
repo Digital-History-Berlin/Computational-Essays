@@ -71,26 +71,36 @@ Projekt: Historische Netzwerkanalyse
 
 ### Paketverwaltung
 
-Es gibt zwei Hauptsysteme für Python-Projektumgebungen:
+Dieses Buch stellt drei Werkzeuge für Python-Projektumgebungen vor:
 
-1. **venv mit pip**
+1. **uv** (empfohlen)
+   - Ein Programm für Python-Versionen, Umgebungen und Pakete
+   - Hält die genauen Versionen aller Pakete automatisch fest
+   - Sehr schnell und kompatibel mit venv und pip
+
+2. **venv mit pip**
    - Teil der Python-Standardbibliothek
    - Fokus auf Python-Pakete
    - Einfach und leichtgewichtig
 
-2. **conda**
+3. **conda**
    - Umfassenderes System
    - Verwaltet auch nicht-Python-Dependencies
    - Besonders stark in wissenschaftlichen Anwendungen
 
 ## Wann nutze ich welches System?
 
+### uv ist die Empfehlung für:
+
+- Neue Projekte, insbesondere Computational Essays
+- Projekte, die andere nachvollziehen und wiederholen sollen
+- Alle Projekte, deren Pakete es auf PyPI gibt, also die allermeisten
+
 ### venv ist ideal für:
 
-- Reine Python-Projekte
-- Einfache Textanalysen
-- Projekte mit wenigen Dependencies
-- Wenn Sie nur pip-Pakete benötigen
+- Rechner, auf denen Sie kein zusätzliches Programm installieren können
+- Projekte, die bereits mit venv und einer requirements.txt arbeiten
+- Das Verständnis der Grundlagen: uv verwendet im Hintergrund dieselbe Art von Umgebung
 
 ### conda ist besser bei:
 
@@ -105,13 +115,13 @@ Es gibt zwei Hauptsysteme für Python-Projektumgebungen:
    - Keine Vermischung von Dependencies verschiedener Projekte
 
 2. **Dokumentation**
-   - Erstellen Sie immer eine requirements.txt oder environment.yml
+   - Halten Sie die Pakete immer in einer Datei fest: pyproject.toml und uv.lock (uv), requirements.txt (venv) oder environment.yml (conda)
    - Dokumentieren Sie die Schritte zur Einrichtung
    - Notieren Sie wichtige Kommandos
 
 3. **Versionskontrolle**
-   - requirements.txt oder environment.yml gehören ins Git-Repository
-   - Die Umgebung selbst (venv/ oder .conda/) nicht!
+   - Diese Dateien gehören ins Git-Repository
+   - Die Umgebung selbst (.venv/, venv/ oder .conda/) nicht!
    - Nutzen Sie .gitignore entsprechend
 
 4. **Regelmäßige Updates**
@@ -123,8 +133,9 @@ Es gibt zwei Hauptsysteme für Python-Projektumgebungen:
 
 In den folgenden Kapiteln lernen Sie:
 
-1. Wie Sie Projektumgebungen mit venv erstellen und verwalten
-2. Wie Sie conda für komplexere Projekte nutzen
-3. Praktische Beispiele für typische Digital History Projekte
+1. Wie Sie Projektumgebungen mit uv erstellen und verwalten
+2. Wie Sie dasselbe mit venv und pip erreichen
+3. Wie Sie conda für komplexere Projekte nutzen
+4. Praktische Beispiele für typische Digital History Projekte
 
 Wählen Sie das für Ihr Projekt passende System und folgen Sie der entsprechenden Anleitung.

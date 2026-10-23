@@ -374,7 +374,7 @@ Ist das Repository öffentlich, kann es sinnvoll sein, es für die Dauer der Ber
 
 ### Werkzeug: `git filter-repo`
 
-Das Git-Projekt selbst empfiehlt für diese Aufgabe [git filter-repo](https://github.com/newren/git-filter-repo) anstelle des älteren `git filter-branch`. Es ist ein Python-Programm und kann z. B. mit `pip install git-filter-repo` (in einer Projektumgebung) oder unter macOS mit `brew install git-filter-repo` installiert werden.
+Das Git-Projekt selbst empfiehlt für diese Aufgabe [git filter-repo](https://github.com/newren/git-filter-repo) anstelle des älteren `git filter-branch`. Es ist ein Python-Programm und kann z. B. mit `uv tool install git-filter-repo`, mit `pip install git-filter-repo` (in einer Projektumgebung) oder unter macOS mit `brew install git-filter-repo` installiert werden.
 
 ```bash
 # 1. In einem frischen Klon arbeiten

@@ -37,7 +37,7 @@ Nach diesem Kapitel können Sie:
 Für die Codebeispiele benötigen Sie Grundkenntnisse in Python und eine {doc}`Projektumgebung <../project_environments/intro>` mit dem Paket `pandas`:
 
 ```bash
-uv add pandas        # in einem Projekt, das mit uv verwaltet wird
+uv add pandas        # in einem mit uv angelegten Projekt
 pip install pandas   # in einer mit venv angelegten Umgebung
 ```
 

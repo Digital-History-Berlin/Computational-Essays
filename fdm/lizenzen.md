@@ -29,7 +29,8 @@ Nach diesem Kapitel können Sie:
 Für den praktischen Teil benötigen Sie ein Git-Repository (siehe {doc}`Git-Grundlagen <../tools/git-grundlagen>`) und das Programm `reuse`, das Sie in Ihrer {doc}`Projektumgebung <../project_environments/intro>` installieren:
 
 ```bash
-pip install reuse
+uv tool install reuse   # mit uv, siehe Projektumgebungen mit uv
+pip install reuse       # in einer mit venv angelegten Umgebung
 ```
 
 ## 1. Grundbegriffe
@@ -296,7 +297,7 @@ repository-code: "https://scm.cms.hu-berlin.de/benutzername/briefwechsel-1848"
 Geben Sie `version` und `date-released` an, damit eine Literaturangabe Jahr und Fassung enthält. Unter `license` steht nur eine Lizenz: Mehrere Einträge bedeuten im Citation File Format „die eine oder die andere“, nicht „beide für verschiedene Teile“. Ob die Datei gültig ist und wie die Angabe aussieht, prüfen Sie mit dem Programm `cffconvert`:
 
 ```bash
-pip install cffconvert
+uv tool install cffconvert   # oder: pip install cffconvert
 cffconvert --validate
 cffconvert -f apalike
 ```

@@ -284,7 +284,7 @@ Ohne `--oneline` zeigt `git log` zusätzlich Autor:in und Datum jedes Commits. W
 
 Nicht jede Datei im Projektordner gehört ins Repository:
 
-- **Virtuelle Umgebungen** (`venv/`, `.venv/`): Sie lassen sich aus der `requirements.txt` jederzeit neu erzeugen (siehe {doc}`Projektumgebungen <../project_environments/intro>`).
+- **Virtuelle Umgebungen** (`venv/`, `.venv/`): Sie lassen sich aus der `requirements.txt` bzw. der `uv.lock` jederzeit neu erzeugen (siehe {doc}`Projektumgebungen <../project_environments/intro>`).
 - **Automatisch erzeugte Dateien** wie `.ipynb_checkpoints/` oder `__pycache__/`
 - **Rohdaten mit Personenbezug oder unklaren Rechten**: Dokumentieren Sie stattdessen in der README, woher die Daten stammen und wo sie liegen (siehe {doc}`Forschungsdaten dokumentieren <../fdm/forschungsdaten-dokumentieren>`).
 - **Zugangsdaten** wie API-Schlüssel oder Passwörter, etwa in einer Datei `.env`

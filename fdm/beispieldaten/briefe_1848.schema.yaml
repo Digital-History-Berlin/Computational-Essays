@@ -1,0 +1,62 @@
+# Table Schema (Frictionless) für briefe_1848.csv
+# Beschreibt jede Spalte und legt Regeln fest, gegen die sich die Daten prüfen lassen.
+fields:
+  - name: brief_id
+    type: string
+    description: Eindeutige Kennung des Briefs in diesem Datensatz (B und dreistellige Nummer).
+    constraints:
+      required: true
+      unique: true
+      pattern: "B[0-9]{3}"
+  - name: absender
+    type: string
+    description: Person, die den Brief geschrieben hat, in normierter Schreibweise (Vorname Nachname).
+    constraints:
+      required: true
+  - name: empfaenger
+    type: string
+    description: Person, an die der Brief gerichtet ist, in normierter Schreibweise (Vorname Nachname).
+    constraints:
+      required: true
+  - name: datum
+    type: string
+    description: >-
+      Datum des Briefs im Extended Date/Time Format (EDTF): JJJJ-MM-TT.
+      "?" kennzeichnet ein unsicheres, "~" ein ungefähres Datum, "XX" eine unbekannte Stelle.
+    constraints:
+      required: true
+      pattern: "[0-9]{4}(-([0-9]{2}|XX)){0,2}[?~%]?"
+  - name: ort
+    type: string
+    description: Abfassungsort in heutiger Schreibweise.
+    constraints:
+      required: true
+  - name: ort_gnd
+    type: string
+    description: >-
+      GND-Nummer des Abfassungsorts. Leer, wenn der Ort keinen Eintrag in der GND hat.
+      Alle Orte dieses Datensatzes haben GND-Nummern der Form 1234567-8.
+    constraints:
+      pattern: "[0-9]{7}-[0-9X]"
+  - name: seiten
+    type: integer
+    description: Umfang des Briefs in beschriebenen Seiten.
+    constraints:
+      required: true
+      minimum: 1
+  - name: transkription
+    type: string
+    description: Stand der Transkription des Briefs.
+    constraints:
+      required: true
+      enum:
+        - vollständig
+        - teilweise
+        - keine
+  - name: signatur
+    type: string
+    description: Signatur des Originals im Archiv.
+    constraints:
+      required: true
+primaryKey:
+  - brief_id

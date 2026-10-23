@@ -29,7 +29,8 @@ Das Buch enthält derzeit:
 - **Einführung in Computational Essays**: Grundlegende Konzepte, Bedeutung in den Digital Humanities und wesentliche Komponenten
 - **Formatierungs- und Anforderungsleitfaden**: Detaillierte Anleitungen zur Strukturierung und Einreichung
 - **Einführung in Projektumgebungen**: Grundlegende Idee, Detaillierte Guides zu venv und Conda
-- **Versionskontrolle mit Git**: Git-Grundlagen, Git-Historie nachvollziehen und bearbeiten, Git LFS für große Dateien
+- **Versionskontrolle mit Git**: Git-Grundlagen, SSH-Schlüssel, Git-Historie nachvollziehen und bearbeiten, Git LFS für große Dateien
+- **Forschungsdatenmanagement**: Forschungsdaten dokumentieren
 
 ### Voraussetzungen
 
@@ -39,7 +40,7 @@ Das Buch enthält derzeit:
 
 ### Lokale Installation
 
-Um das Buch lokal zu bauen, etwa um Änderungen vor dem Hochladen zu prüfen:
+Um das Buch lokal zu bauen, etwa um Änderungen vor dem Hochladen zu prüfen (benötigt Python 3.11 oder neuer):
 
 ```bash
 # Repository klonen

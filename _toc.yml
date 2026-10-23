@@ -30,6 +30,11 @@ parts:
     - file: tools/git-lfs
       title: "Große Dateien mit Git LFS"
 
+  - caption: Forschungsdatenmanagement
+    chapters:
+    - file: fdm/forschungsdaten-dokumentieren
+      title: "Forschungsdaten dokumentieren"
+
   - caption: Konvertierungen
     chapters:
     - file: Konvertierungen/word_md_notebook

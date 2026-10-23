@@ -20,6 +20,9 @@ exclude_patterns:
   - LICENSE.md
   # Files created when the Word conversion example is run locally
   - "Konvertierungen/Sample_*"
+  # Example data and templates are linked or included, not pages of their own
+  - "fdm/beispieldaten/*"
+  - "fdm/vorlagen/*"
 
 # HTML-specific settings
 html:

@@ -4,6 +4,9 @@ on:
   push:
     branches:
     - main
+  # Build pull requests too, so broken pages or code show up before merging
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   deploy-book:
@@ -12,17 +15,19 @@ jobs:
       contents: write
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/setup-python@v4
+    - uses: actions/setup-python@v5
       with:
-        python-version: '3.9'
+        python-version: '3.12'
+        cache: pip
     - name: Install dependencies
       run: |
-        pip install jupyter-book
+        pip install -r requirements.txt
     - name: Build book
       run: |
         jupyter-book build .
     - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+      if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+      uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./_build/html

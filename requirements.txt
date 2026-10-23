@@ -1,0 +1,4 @@
+# Packages needed to build this book (see README).
+# Jupyter Book 2 uses a different configuration format (myst.yml),
+# so the book stays on version 1 until it is migrated.
+jupyter-book>=1.0.4,<2

@@ -1,5 +1,9 @@
 # Projektumgebungen mit conda
 
+```{note}
+conda ist die richtige Wahl, wenn Ihr Projekt Software außerhalb von Python benötigt, die sich über PyPI nicht oder nur schwer installieren lässt. Für Projekte, deren Pakete es auf PyPI gibt, empfehlen wir {doc}`uv <uv_guide>`.
+```
+
 ## Was ist conda?
 
 conda ist mehr als nur ein Tool für virtuelle Umgebungen – es ist ein umfassendes Paket- und Umgebungsmanagement-System, das besonders in der wissenschaftlichen Community verbreitet ist. Anders als venv+pip kann conda:
@@ -279,7 +283,7 @@ conda update conda
 conda update --all
 ```
 
-### 4. Der conda Cache verstehen und verwalten
+### 4. Den conda-Cache verstehen und verwalten
 
 conda speichert heruntergeladene Pakete und deren Abhängigkeiten in einem Cache-Verzeichnis auf Ihrem Computer. Dies umfasst:
 
@@ -289,7 +293,7 @@ conda speichert heruntergeladene Pakete und deren Abhängigkeiten in einem Cache
 
 Der Cache hilft conda:
 
-- Pakete schneller zu installieren (keine erneute Downloads nötig)
+- Pakete schneller zu installieren (keine erneuten Downloads nötig)
 - Offline zu arbeiten mit bereits gecachten Paketen
 - Frühere Versionen von Paketen wiederherzustellen
 

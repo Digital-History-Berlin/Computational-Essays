@@ -1,18 +1,28 @@
-image: python:3.9
+# Builds the book on GitLab (e.g. the HU GitLab at scm.cms.hu-berlin.de) and
+# publishes it with GitLab Pages. The jobs need a runner: on the HU GitLab,
+# enable the shared runners under Settings > CI/CD > Runners.
+image: python:3.12
 
 before_script:
-  - python -V
-  - pip install jupyter-book
+  - python --version
+  - pip install -r requirements.txt
 
+# Build merge requests too, so broken pages or code show up before merging
+build:
+  stage: test
+  script:
+    - jupyter-book build .
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+# Publish the default branch (main) as the GitLab Pages site
 pages:
   stage: deploy
   script:
     - jupyter-book build .
-    - mkdir .public
-    - cp -r _build/html/* .public
-    - mv .public public
+    - mv _build/html public
   artifacts:
     paths:
       - public
-  only:
-    - main
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

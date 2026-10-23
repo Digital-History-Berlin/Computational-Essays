@@ -1,0 +1,19 @@
+# Build output: the book is built by CI on every push to main
+_build/
+
+# Python and Jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Files created when the Word conversion example is run
+Konvertierungen/Sample_Markdown*.md
+Konvertierungen/Sample_Notebook.ipynb

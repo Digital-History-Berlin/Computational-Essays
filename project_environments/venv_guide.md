@@ -1,5 +1,9 @@
 # Projektumgebungen mit venv
 
+```{note}
+Für neue Projekte empfehlen wir {doc}`uv <uv_guide>`, das Umgebungen derselben Art anlegt, aber Python-Versionen und Paketversionen selbst verwaltet. Diese Anleitung ist hilfreich, wenn Sie uv nicht installieren können oder in einem Projekt arbeiten, das venv verwendet.
+```
+
 ## Was ist venv?
 
 venv ist das standardmäßige Tool zur Erstellung virtueller Umgebungen in Python. Es ist:
@@ -70,7 +74,7 @@ Bevor Sie venv nutzen können, muss Python korrekt installiert sein.
 
 Ein gut organisiertes Projekt ist der erste Schritt:
 
-```txt
+```text
 digital_history_project/
 ├── data/                  # Rohdaten und verarbeitete Daten
 │   ├── raw/
@@ -85,7 +89,7 @@ digital_history_project/
 
 Windows:
 
-```cmd
+```bat
 mkdir digital_history_project
 cd digital_history_project
 ```
@@ -103,7 +107,7 @@ cd digital_history_project
 
 Windows (Command Prompt):
 
-```cmd
+```bat
 python -m venv venv
 ```
 
@@ -117,7 +121,7 @@ python3 -m venv venv
 
 Windows (Command Prompt):
 
-```cmd
+```bat
 venv\Scripts\activate
 ```
 
@@ -157,7 +161,7 @@ pip freeze > requirements.txt
 
 Beispiel `requirements.txt`:
 
-```txt
+```text
 numpy==1.21.2
 pandas==1.3.3
 matplotlib==3.4.3
@@ -213,7 +217,7 @@ pip show pandas
 
 Erstellen Sie eine ausführliche README.md:
 
-```markdown
+````markdown
 # Historische Netzwerkanalyse
 
 ## Setup
@@ -234,18 +238,20 @@ Erstellen Sie eine ausführliche README.md:
 
 1. Datenbereinigung (clean_data.py)
 2. Netzwerkanalyse (analyze_network.ipynb)
-3. Versionskontrolle
+````
 
-    - Ihre `.gitignore`:
+### 2. Versionskontrolle
 
-    ```txt
-    venv/
-    __pycache__/
-    .ipynb_checkpoints/
-    *.pyc
-    ```
+Schließen Sie die Umgebung und automatisch erzeugte Dateien in Ihrer `.gitignore` aus:
 
-4. Reproduzierbarkeit
+```text
+venv/
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+```
+
+### 3. Reproduzierbarkeit
 
 - Nutzen Sie `requirements.txt`
 - Dokumentieren Sie die Python-Version

@@ -9,6 +9,8 @@ parts:
     - file: project_environments/intro
       title: "Einführung in Projektumgebungen"
       sections:
+        - file: project_environments/uv_guide
+          title: "Projektumgebungen mit uv"
         - file: project_environments/venv_guide
           title: "Projektumgebungen mit venv"
         - file: project_environments/conda_guide
@@ -19,12 +21,27 @@ parts:
     - file: Leitfaden
       title: "Leitfaden für Computational Essays"
         
+  - caption: Versionskontrolle mit Git
+    chapters:
+    - file: tools/git-grundlagen
+      title: "Git-Grundlagen"
+    - file: tools/ssh
+      title: "SSH-Schlüssel einrichten"
+    - file: tools/git-branches
+      title: "Branches und Merge Requests"
+    - file: tools/git-history
+      title: "Git-Historie nachvollziehen und bearbeiten"
+    - file: tools/git-lfs
+      title: "Große Dateien mit Git LFS"
+
+  - caption: Forschungsdatenmanagement
+    chapters:
+    - file: fdm/forschungsdaten-dokumentieren
+      title: "Forschungsdaten dokumentieren"
+    - file: fdm/lizenzen
+      title: "Lizenzen für Code und Daten"
+
   - caption: Konvertierungen
     chapters:
     - file: Konvertierungen/word_md_notebook
-      title: "Konvertierung von Word Documenten"
-
-  - caption: Praktische Werkzeuge
-    chapters:
-    - file: tools/git-lfs
-      title: "Fortgeschrittene Git-Funktionen"
+      title: "Konvertierung von Word-Dokumenten"

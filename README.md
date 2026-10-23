@@ -55,12 +55,15 @@ Wir begrüßen Ihre Beiträge zur Verbesserung dieses Leitfadens:
 
 Bei Fragen oder Anregungen:
 
+- Ansprechperson: Noah J. Kim-Baumann ([ORCID](https://orcid.org/0009-0004-6368-3061))
 - E-Mail: <noah.jefferson.baumann.1@hu-berlin.de>
 - Hypothesis-Annotationen im Text
 
 ## Lizenz und Danksagung
 
-Dieses Werk ist lizenziert unter einer Creative Commons BY 4.0 Lizenz.
+Texte und Abbildungen dieses Buchs stehen unter der Lizenz [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.de), der enthaltene Code unter der MIT-Lizenz. Einzelheiten und Ausnahmen finden Sie in [LICENSE.md](https://github.com/Digital-History-Berlin/Computational-Essays/blob/main/LICENSE.md).
+
+Wenn Sie das Buch zitieren möchten, finden Sie die Angaben in [CITATION.cff](https://github.com/Digital-History-Berlin/Computational-Essays/blob/main/CITATION.cff). Auf GitHub erzeugt die Schaltfläche *Cite this repository* daraus eine fertige Literaturangabe.
 
 Entwickelt am Institut für Geschichtswissenschaften der Humboldt-Universität zu Berlin in Zusammenarbeit mit der Digital Humanities-Community.
 

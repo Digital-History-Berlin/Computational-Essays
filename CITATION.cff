@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "Wenn Sie dieses Buch verwenden, zitieren Sie es bitte mit diesen Angaben."
+title: "Computational Essays: Ein Leitfaden für die Digital Humanities"
+authors:
+  - name: "Digital History, Humboldt-Universität zu Berlin"
+    city: Berlin
+    country: DE
+    website: "https://www.geschichte.hu-berlin.de/de/bereiche-und-lehrstuehle/digital-history"
+contact:
+  - given-names: Noah J.
+    family-names: Kim-Baumann
+    affiliation: "Digital History, Humboldt-Universität zu Berlin"
+    email: noah.jefferson.baumann.1@hu-berlin.de
+    orcid: "https://orcid.org/0009-0004-6368-3061"
+abstract: >-
+  Dieses Jupyter Book bietet eine umfassende Anleitung zur Erstellung und
+  Arbeit mit Computational Essays in den Digital Humanities. Es richtet sich an
+  Studierende und Forschende, die narrative Schreibweisen mit computergestützten
+  Analysen in ihrer akademischen Arbeit verbinden möchten.
+url: "https://digital-history-berlin.github.io/computational-essays/"
+repository-code: "https://github.com/Digital-History-Berlin/Computational-Essays"
+# Licence of the text. Code is under the MIT licence, see LICENSE.md
+license: CC-BY-4.0
+keywords:
+  - Computational Essays
+  - Digital History
+  - Digital Humanities
+  - Jupyter
+  - Forschungsdatenmanagement

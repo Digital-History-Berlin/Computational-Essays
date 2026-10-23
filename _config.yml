@@ -16,6 +16,8 @@ exclude_patterns:
   - "**.ipynb_checkpoints"
   - .venv
   - venv
+  # Files created when the Word conversion example is run locally
+  - "Konvertierungen/Sample_*"
 
 # HTML-specific settings
 html:

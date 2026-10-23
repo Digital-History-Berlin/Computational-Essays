@@ -13,3 +13,7 @@ venv/
 # Operating system files
 .DS_Store
 Thumbs.db
+
+# Files created when the Word conversion example is run
+Konvertierungen/Sample_Markdown*.md
+Konvertierungen/Sample_Notebook.ipynb

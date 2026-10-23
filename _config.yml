@@ -7,6 +7,16 @@ logo: img/Logo_DigitalHistoryBerlin.png
 url: https://digital-history-berlin.github.io/
 baseurl: /computational-essays
 
+# Files that are not part of the book. Setting this replaces Jupyter Book's
+# defaults, so they are repeated here before the local virtual environments
+exclude_patterns:
+  - _build
+  - Thumbs.db
+  - .DS_Store
+  - "**.ipynb_checkpoints"
+  - .venv
+  - venv
+
 # HTML-specific settings
 html:
   comments:
@@ -25,6 +35,10 @@ execute:
   execute_notebooks: auto
   timeout: 300
   allow_errors: false
+  # The Word conversion notebook needs pandoc and writes files next to
+  # itself, so it is shown with its stored outputs instead of being run
+  exclude_patterns:
+    - "Konvertierungen/*"
 
 # LaTeX settings
 latex:

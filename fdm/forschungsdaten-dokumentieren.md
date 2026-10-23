@@ -343,7 +343,7 @@ Dokumentation beschreibt nicht nur das Ergebnis, sondern auch den Weg dorthin:
 - Daten, die nicht veröffentlicht werden dürfen, sind nicht im Repository und ihr Speicherort ist dokumentiert.
 ```
 
-Möchten Sie Ihre Daten über die Abgabe hinaus zugänglich machen, eignet sich ein Repositorium wie [Zenodo](https://zenodo.org), das jeder veröffentlichten Fassung eine dauerhafte DOI zuweist. Welche Angebote die HU selbst hat und wie Sie Ihre Daten dort ablegen können, klärt die Beratung der [Initiative Forschungsdatenmanagement der HU](https://www.cms.hu-berlin.de/en/dl-en/dataman-en/home/home). Unter welcher Lizenz Sie Daten veröffentlichen und was bei Rechten an Quellen zu beachten ist, behandelt das Kapitel zu Lizenzen.
+Möchten Sie Ihre Daten über die Abgabe hinaus zugänglich machen, eignet sich ein Repositorium wie [Zenodo](https://zenodo.org), das jeder veröffentlichten Fassung eine dauerhafte DOI zuweist. Welche Angebote die HU selbst hat und wie Sie Ihre Daten dort ablegen können, klärt die Beratung der [Initiative Forschungsdatenmanagement der HU](https://www.cms.hu-berlin.de/en/dl-en/dataman-en/home/home). Unter welcher Lizenz Sie Daten veröffentlichen und was bei Rechten an Quellen zu beachten ist, behandelt das Kapitel {doc}`Lizenzen für Code und Daten <lizenzen>`.
 
 ## Übung
 

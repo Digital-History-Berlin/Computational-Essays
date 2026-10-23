@@ -490,7 +490,7 @@ Eine vollständige Sicherung mit allen Branches und Tags erhalten Sie mit `git c
 git clone --mirror https://scm.cms.hu-berlin.de/benutzername/briefwechsel-1848.git
 ```
 
-Möchten Sie ein Projekt öffentlich weiterführen, können Sie es auf eine Plattform außerhalb der Universität übertragen. Eine Möglichkeit ist [Codeberg](https://codeberg.org), eine gemeinnützige Plattform für freie Software und offene Inhalte. Codeberg ist allerdings für öffentliche Projekte unter einer offenen Lizenz gedacht; private Repositorys erlaubt es nur in engen Grenzen (siehe die [Codeberg-FAQ](https://docs.codeberg.org/getting-started/faq/)). Nach dem Anlegen eines leeren Projekts auf Codeberg übertragen Sie Ihre Branches und Tags so:
+Möchten Sie ein Projekt öffentlich weiterführen, können Sie es auf eine Plattform außerhalb der Universität übertragen. Eine Möglichkeit ist [Codeberg](https://codeberg.org), eine gemeinnützige Plattform für freie Software und offene Inhalte. Codeberg ist allerdings für öffentliche Projekte unter einer offenen Lizenz gedacht (siehe {doc}`Lizenzen für Code und Daten <../fdm/lizenzen>`); private Repositorys erlaubt es nur in engen Grenzen (siehe die [Codeberg-FAQ](https://docs.codeberg.org/getting-started/faq/)). Nach dem Anlegen eines leeren Projekts auf Codeberg übertragen Sie Ihre Branches und Tags so:
 
 ```bash
 git remote add codeberg https://codeberg.org/benutzername/briefwechsel-1848.git

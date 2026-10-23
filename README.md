@@ -30,7 +30,7 @@ Das Buch enthält derzeit:
 - **Formatierungs- und Anforderungsleitfaden**: Detaillierte Anleitungen zur Strukturierung und Einreichung
 - **Einführung in Projektumgebungen**: Grundlegende Idee, Detaillierte Guides zu venv und Conda
 - **Versionskontrolle mit Git**: Git-Grundlagen, SSH-Schlüssel, Git-Historie nachvollziehen und bearbeiten, Git LFS für große Dateien
-- **Forschungsdatenmanagement**: Forschungsdaten dokumentieren
+- **Forschungsdatenmanagement**: Forschungsdaten dokumentieren, Lizenzen für Code und Daten
 
 ### Voraussetzungen
 

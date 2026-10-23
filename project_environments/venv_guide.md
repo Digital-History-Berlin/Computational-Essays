@@ -213,7 +213,7 @@ pip show pandas
 
 Erstellen Sie eine ausführliche README.md:
 
-```markdown
+````markdown
 # Historische Netzwerkanalyse
 
 ## Setup
@@ -234,18 +234,20 @@ Erstellen Sie eine ausführliche README.md:
 
 1. Datenbereinigung (clean_data.py)
 2. Netzwerkanalyse (analyze_network.ipynb)
-3. Versionskontrolle
+````
 
-    - Ihre `.gitignore`:
+### 2. Versionskontrolle
 
-    ```txt
-    venv/
-    __pycache__/
-    .ipynb_checkpoints/
-    *.pyc
-    ```
+Schließen Sie die Umgebung und automatisch erzeugte Dateien in Ihrer `.gitignore` aus:
 
-4. Reproduzierbarkeit
+```txt
+venv/
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+```
+
+### 3. Reproduzierbarkeit
 
 - Nutzen Sie `requirements.txt`
 - Dokumentieren Sie die Python-Version

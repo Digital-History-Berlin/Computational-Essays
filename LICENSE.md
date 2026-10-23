@@ -38,6 +38,10 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTI
 USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
 
+## Fotos im Beispieldokument
+
+Die beiden Fotos im Word-Dokument `Konvertierungen/Sample_Academic_Document.docx` und ihre Kopien im Ordner `Konvertierungen/images/media/` hat Noah J. Kim-Baumann aufgenommen. Sie stehen ebenfalls unter CC BY 4.0; nennen Sie bei einer Weiterverwendung Noah J. Kim-Baumann.
+
 ## Ausnahmen
 
 Das Logo des Lehrstuhls (`img/Logo_DigitalHistoryBerlin.png`) ist von diesen Lizenzen ausgenommen.

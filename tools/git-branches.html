@@ -1,0 +1,971 @@
+
+<!DOCTYPE html>
+
+
+<html lang="de" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Branches und Merge Requests: gemeinsam an einem Projekt arbeiten &#8212; Computational Essays</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=91fba89f"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Klicken zum Anzeigen';</script>
+    <script>let toggleHintHide = 'Klicken zum Ausblenden';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script src="../_static/translations.js?v=79cc9f76"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tools/git-branches';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
+    <link rel="search" title="Suche" href="../search.html" />
+    <link rel="next" title="Git-Historie: nachvollziehen, korrigieren und bereinigen" href="git-history.html" />
+    <link rel="prev" title="SSH-Schlüssel einrichten" href="ssh.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="de"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Zum Hauptinhalt springen</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Zurück zum Anfang</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Versionswarnung"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Website-Navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Suche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Suche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="Auf dieser Seite">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/Logo_DigitalHistoryBerlin.png" class="logo__image only-light" alt="Computational Essays - Home"/>
+    <img src="../_static/Logo_DigitalHistoryBerlin.png" class="logo__image only-dark pst-js-only" alt="Computational Essays - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Suche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Computational Essays: Ein Leitfaden für die Digital Humanities
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Grundlagen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Einf%C3%BChrung.html">Einführung in Computational Essays</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../project_environments/intro.html">Einführung in Projektumgebungen</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../project_environments/uv_guide.html">Projektumgebungen mit uv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../project_environments/venv_guide.html">Projektumgebungen mit venv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../project_environments/conda_guide.html">Projektumgebungen mit conda</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Leitfäden</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Leitfaden.html">Leitfaden für Computational Essays</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Versionskontrolle mit Git</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="git-grundlagen.html">Git-Grundlagen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssh.html">SSH-Schlüssel einrichten</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Branches und Merge Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git-history.html">Git-Historie nachvollziehen und bearbeiten</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git-lfs.html">Große Dateien mit Git LFS</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Forschungsdatenmanagement</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../fdm/forschungsdaten-dokumentieren.html">Forschungsdaten dokumentieren</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fdm/lizenzen.html">Lizenzen für Code und Daten</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Konvertierungen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Konvertierungen/word_md_notebook.html">Konvertierung von Word-Dokumenten</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Laden Sie diese Seite herunter">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/tools/git-branches.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Quelldatei herunterladen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="In PDF drucken"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Vollbildmodus"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Farbmodus" data-bs-title="Farbmodus"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Hell"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dunkel"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Systemeinstellungen"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Branches und Merge Requests: gemeinsam an einem Projekt arbeiten</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Inhalt </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einfuhrung">Einführung</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lernziele">Lernziele</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voraussetzungen">Voraussetzungen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wozu-branches">1. Wozu Branches?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#branches-auf-dem-server">2. Branches auf dem Server</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#einen-branch-hochladen">Einen Branch hochladen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#die-branches-anderer-herunterladen">Die Branches anderer herunterladen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#branches-benennen">Branches benennen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-requests-im-gitlab-der-hu">3. Merge Requests im GitLab der HU</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#einen-merge-request-anlegen">Einen Merge Request anlegen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anderungen-begutachten">Änderungen begutachten</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zusammenfuhren">Zusammenführen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einen-branch-aktuell-halten">4. Einen Branch aktuell halten</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konflikte-in-merge-requests">5. Konflikte in Merge Requests</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#den-konflikt-lokal-auflosen">Den Konflikt lokal auflösen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#den-konflikt-in-gitlab-auflosen">Den Konflikt in GitLab auflösen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geschutzte-branches">6. Geschützte Branches</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ein-arbeitsablauf-fur-gruppenprojekte-im-seminar">7. Ein Arbeitsablauf für Gruppenprojekte im Seminar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#haufige-probleme">Häufige Probleme</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ubung">Übung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kurzreferenz">Kurzreferenz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weiterfuhrende-ressourcen">Weiterführende Ressourcen</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="branches-und-merge-requests-gemeinsam-an-einem-projekt-arbeiten">
+<h1>Branches und Merge Requests: gemeinsam an einem Projekt arbeiten<a class="headerlink" href="#branches-und-merge-requests-gemeinsam-an-einem-projekt-arbeiten" title="Link to this heading">#</a></h1>
+<section id="einfuhrung">
+<h2>Einführung<a class="headerlink" href="#einfuhrung" title="Link to this heading">#</a></h2>
+<p>Im Kapitel <a class="reference internal" href="git-grundlagen.html"><span class="doc">Git-Grundlagen</span></a> haben Sie Branches als eigene Entwicklungsstränge kennengelernt: Sie haben einen Branch angelegt, ihn mit <code class="docutils literal notranslate"><span class="pre">main</span></code> zusammengeführt und einen Konflikt aufgelöst, alles auf Ihrem eigenen Rechner. Ihre volle Stärke zeigen Branches aber erst zusammen mit einem Server wie dem GitLab der HU. Dort lässt sich jeder Branch mit einem <strong>Merge Request</strong> verbinden: einer Anfrage, die Änderungen eines Branches in <code class="docutils literal notranslate"><span class="pre">main</span></code> zu übernehmen, die andere vorher ansehen, kommentieren und verbessern können.</p>
+<p>Für einen Computational Essay ist das in zwei Situationen hilfreich. Bei <strong>Gruppenarbeiten im Seminar</strong> arbeitet jede Person auf einem eigenen Branch, ohne die Arbeit der anderen zu stören, und die Gruppe entscheidet gemeinsam, was in die gemeinsame Fassung eingeht. Und auch wenn Sie <strong>allein</strong> arbeiten, können Sie eine neue Auswertung auf einem Branch ausprobieren, während auf <code class="docutils literal notranslate"><span class="pre">main</span></code> immer eine funktionierende Fassung bleibt.</p>
+<section id="lernziele">
+<h3>Lernziele<a class="headerlink" href="#lernziele" title="Link to this heading">#</a></h3>
+<p>Nach diesem Kapitel können Sie:</p>
+<ul class="simple">
+<li><p>Branches auf den Server laden und die Branches anderer herunterladen</p></li>
+<li><p>im GitLab der HU einen Merge Request anlegen, begutachten und zusammenführen</p></li>
+<li><p>einen Branch auf dem aktuellen Stand von <code class="docutils literal notranslate"><span class="pre">main</span></code> halten</p></li>
+<li><p>Konflikte in einem Merge Request auflösen</p></li>
+<li><p>erklären, warum Sie auf einen geschützten Branch nicht direkt pushen können</p></li>
+<li><p>mit einer Gruppe einen einfachen Arbeitsablauf mit Branches und Merge Requests vereinbaren</p></li>
+</ul>
+</section>
+<section id="voraussetzungen">
+<h3>Voraussetzungen<a class="headerlink" href="#voraussetzungen" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Sie kennen die Grundbefehle aus dem Kapitel <a class="reference internal" href="git-grundlagen.html"><span class="doc">Git-Grundlagen</span></a>, insbesondere Abschnitt 7 zu Branches und Konflikten.</p></li>
+<li><p>Sie haben ein Projekt im GitLab der HU und können sich per Token oder <a class="reference internal" href="ssh.html"><span class="doc">SSH-Schlüssel</span></a> anmelden.</p></li>
+<li><p>Für die Übung brauchen Sie eine zweite Person, mit der Sie gemeinsam an einem Projekt arbeiten.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Bemerkung</p>
+<p>Alle Befehle in diesem Kapitel wurden mit Git 2.43 getestet. Die Bezeichnungen in der GitLab-Oberfläche können je nach Version leicht von den hier genannten abweichen.</p>
+</div>
+</section>
+</section>
+<section id="wozu-branches">
+<h2>1. Wozu Branches?<a class="headerlink" href="#wozu-branches" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Ausprobieren ohne Risiko.</strong> Eine alternative Auswertung, ein neues Register oder eine Umstrukturierung des Essays entsteht auf einem eigenen Branch. Gelingt sie, führen Sie sie zusammen; misslingt sie, löschen Sie den Branch.</p></li>
+<li><p><strong>Parallel arbeiten.</strong> Zwei Personen können gleichzeitig an verschiedenen Teilen arbeiten, ohne sich bei jedem Push in die Quere zu kommen.</p></li>
+<li><p><strong>Vor der Übernahme prüfen.</strong> Änderungen werden besprochen, bevor sie in die gemeinsame Fassung eingehen, ähnlich wie bei einem Lektorat.</p></li>
+</ul>
+<p>Daraus ergibt sich eine einfache Regel: <strong><code class="docutils literal notranslate"><span class="pre">main</span></code> enthält immer eine Fassung, die Sie in diesem Moment abgeben oder zeigen könnten.</strong> Alles, was noch nicht so weit ist, liegt auf einem eigenen Branch.</p>
+<p>Die Beispiele in diesem Kapitel zeigen zwei Studierende, Kim und Jona, die gemeinsam am Projekt <code class="docutils literal notranslate"><span class="pre">briefwechsel-1848</span></code> arbeiten. Kim legt ein Ortsregister an, Jona überarbeitet die Einleitung in der <code class="docutils literal notranslate"><span class="pre">README.md</span></code>.</p>
+</section>
+<section id="branches-auf-dem-server">
+<h2>2. Branches auf dem Server<a class="headerlink" href="#branches-auf-dem-server" title="Link to this heading">#</a></h2>
+<section id="einen-branch-hochladen">
+<h3>Einen Branch hochladen<a class="headerlink" href="#einen-branch-hochladen" title="Link to this heading">#</a></h3>
+<p>Kim legt wie gewohnt einen Branch an und committet darauf:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>switch<span class="w"> </span>-c<span class="w"> </span>ortsregister
+<span class="c1"># Datei orte.csv anlegen, dann:</span>
+git<span class="w"> </span>add<span class="w"> </span>orte.csv
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Ortsregister mit GND-Nummern angelegt"</span>
+</pre></div>
+</div>
+<p>Ein neuer Branch existiert zunächst nur lokal. Beim ersten Hochladen verknüpfen Sie ihn mit <code class="docutils literal notranslate"><span class="pre">-u</span></code> mit einem gleichnamigen Branch auf dem Server; danach genügt wie bei <code class="docutils literal notranslate"><span class="pre">main</span></code> ein einfaches <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>ortsregister
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>remote:
+remote: To create a merge request for ortsregister, visit:
+remote:   https://scm.cms.hu-berlin.de/benutzername/briefwechsel-1848/-/merge_requests/new?merge_request%5Bsource_branch%5D=ortsregister
+remote:
+To https://scm.cms.hu-berlin.de/benutzername/briefwechsel-1848.git
+ * [new branch]      ortsregister -&gt; ortsregister
+branch 'ortsregister' set up to track 'origin/ortsregister'.
+</pre></div>
+</div>
+<p>Die Zeilen, die mit <code class="docutils literal notranslate"><span class="pre">remote:</span></code> beginnen, stammen von GitLab. Sie enthalten einen Link, über den Sie direkt einen Merge Request für den neuen Branch anlegen können (siehe Abschnitt 3).</p>
+</section>
+<section id="die-branches-anderer-herunterladen">
+<h3>Die Branches anderer herunterladen<a class="headerlink" href="#die-branches-anderer-herunterladen" title="Link to this heading">#</a></h3>
+<p>Jona möchte sich Kims Ortsregister ansehen. Solange Jonas Repository nichts von dem neuen Branch weiß, schlägt der Wechsel fehl:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>switch<span class="w"> </span>ortsregister
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>fatal: invalid reference: ortsregister
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code> lädt alle neuen Commits und Branches vom Server, ohne etwas an Ihren eigenen Branches oder Dateien zu ändern. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-a</span></code> zeigt danach neben den lokalen auch die Branches auf dem Server an, die mit <code class="docutils literal notranslate"><span class="pre">remotes/origin/</span></code> beginnen:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>fetch
+git<span class="w"> </span>branch<span class="w"> </span>-a
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>* main
+  remotes/origin/HEAD -&gt; origin/main
+  remotes/origin/main
+  remotes/origin/ortsregister
+</pre></div>
+</div>
+<p>Jetzt gelingt der Wechsel. Git legt dabei automatisch einen lokalen Branch an, der mit dem auf dem Server verknüpft ist:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>switch<span class="w"> </span>ortsregister
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Switched to a new branch 'ortsregister'
+branch 'ortsregister' set up to track 'origin/ortsregister'.
+</pre></div>
+</div>
+</section>
+<section id="branches-benennen">
+<h3>Branches benennen<a class="headerlink" href="#branches-benennen" title="Link to this heading">#</a></h3>
+<p>Ein guter Name sagt, worum es auf dem Branch geht: <code class="docutils literal notranslate"><span class="pre">ortsregister</span></code>, <code class="docutils literal notranslate"><span class="pre">auswertung-netzwerk</span></code>, <code class="docutils literal notranslate"><span class="pre">korrektur-datierungen</span></code>. Verwenden Sie Kleinbuchstaben und Bindestriche, keine Leerzeichen und keine Umlaute. Legen Sie neue Branches immer vom aktuellen Stand von <code class="docutils literal notranslate"><span class="pre">main</span></code> aus an:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>switch<span class="w"> </span>main
+git<span class="w"> </span>pull
+git<span class="w"> </span>switch<span class="w"> </span>-c<span class="w"> </span>auswertung-netzwerk
+</pre></div>
+</div>
+</section>
+</section>
+<section id="merge-requests-im-gitlab-der-hu">
+<h2>3. Merge Requests im GitLab der HU<a class="headerlink" href="#merge-requests-im-gitlab-der-hu" title="Link to this heading">#</a></h2>
+<p>Ein <strong>Merge Request</strong> ist eine Anfrage, die Commits eines Branches (<em>source branch</em>) in einen anderen Branch (<em>target branch</em>), meist <code class="docutils literal notranslate"><span class="pre">main</span></code>, zu übernehmen. Die Seite eines Merge Requests zeigt alle Änderungen, sammelt die Diskussion darüber und führt den Branch am Ende mit einem Klick zusammen.</p>
+<section id="einen-merge-request-anlegen">
+<h3>Einen Merge Request anlegen<a class="headerlink" href="#einen-merge-request-anlegen" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Öffnen Sie den Link aus der Ausgabe von <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> oder wählen Sie im Projekt in der linken Leiste <em>Code &gt; Merge requests</em> und dann <em>New merge request</em>. Wählen Sie im zweiten Fall Ihren Branch als <em>Source branch</em> und <code class="docutils literal notranslate"><span class="pre">main</span></code> als <em>Target branch</em> und klicken Sie auf <em>Compare branches and continue</em>.</p></li>
+<li><p>Geben Sie einen <strong>Titel</strong> ein, der sagt, was der Merge Request bewirkt, etwa „Ortsregister mit GND-Nummern“.</p></li>
+<li><p>Beschreiben Sie in der <strong>Beschreibung</strong> (<em>Description</em>), was Sie geändert haben, warum, und worauf die begutachtende Person besonders achten soll.</p></li>
+<li><p>Ist die Arbeit noch nicht fertig, Sie möchten aber schon Rückmeldungen erhalten, setzen Sie den Haken bei <em>Mark as draft</em>. Ein Entwurf (<em>Draft</em>) kann nicht versehentlich zusammengeführt werden.</p></li>
+<li><p>Tragen Sie unter <em>Reviewer</em> die Person ein, die Ihre Änderungen begutachten soll, etwa ein anderes Mitglied Ihrer Gruppe.</p></li>
+<li><p>Lassen Sie den Haken bei <em>Delete source branch when merge request is accepted</em> gesetzt. Der Branch auf dem Server wird dann nach dem Zusammenführen gelöscht.</p></li>
+<li><p>Klicken Sie auf <em>Create merge request</em>.</p></li>
+</ol>
+<p>Sie können auf dem Branch weiterarbeiten, nachdem Sie den Merge Request angelegt haben. Jeder neue Commit, den Sie auf den Branch pushen, erscheint automatisch im Merge Request.</p>
+</section>
+<section id="anderungen-begutachten">
+<h3>Änderungen begutachten<a class="headerlink" href="#anderungen-begutachten" title="Link to this heading">#</a></h3>
+<p>Als Reviewer finden Sie die Änderungen im Merge Request unter dem Reiter <em>Changes</em>. Fahren Sie mit der Maus über eine Zeile, erscheint ein Sprechblasen-Symbol, über das Sie diese Zeile kommentieren. Mit <em>Start a review</em> sammeln Sie mehrere Kommentare und schicken sie am Ende gemeinsam mit <em>Submit review</em> ab; mit <em>Add comment now</em> erscheint ein Kommentar sofort.</p>
+<p>Jeder Kommentar eröffnet einen <strong>Thread</strong>, in dem Autor:in und Reviewer antworten können. Ist ein Punkt erledigt, etwa weil die Autor:in eine Korrektur gepusht hat, markiert eine der beiden Personen ihn mit <em>Resolve thread</em> als gelöst.</p>
+<p>Gute Rückmeldungen sind konkret und begründet: „Für Potsdam fehlt die Prüfziffer der GND-Nummer“ hilft mehr als „Bitte prüfen“. Begutachten Sie nicht nur den Code, sondern auch, ob die Änderung zur Fragestellung des Essays passt und ob die Dokumentation mitgewachsen ist.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tipp</p>
+<p>Änderungen an Jupyter Notebooks sind in der Diff-Ansicht schwer zu lesen, weil Notebooks als JSON gespeichert werden und Ausgaben wie Tabellen oder Bilder enthalten. Leeren Sie die Ausgaben vor dem Commit (siehe <a class="reference internal" href="git-grundlagen.html"><span class="doc">Git-Grundlagen</span></a>, Abschnitt 5). Schreiben Sie in der Beschreibung des Merge Requests, welche Zellen sich geändert haben.</p>
+</div>
+</section>
+<section id="zusammenfuhren">
+<h3>Zusammenführen<a class="headerlink" href="#zusammenfuhren" title="Link to this heading">#</a></h3>
+<p>Ist alles besprochen und ein Entwurf mit <em>Mark as ready</em> als fertig markiert, führt eine berechtigte Person den Merge Request mit <em>Merge</em> zusammen. Wer das darf, hängt davon ab, wie <code class="docutils literal notranslate"><span class="pre">main</span></code> geschützt ist (siehe Abschnitt 6). GitLab legt dabei einen Merge-Commit an, der in der Historie festhält, dass und wann der Branch übernommen wurde.</p>
+<p>Auf Ihrem Rechner ist <code class="docutils literal notranslate"><span class="pre">main</span></code> danach nicht mehr aktuell. Holen Sie den neuen Stand und räumen Sie auf:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>switch<span class="w"> </span>main
+git<span class="w"> </span>pull
+git<span class="w"> </span>branch<span class="w"> </span>-d<span class="w"> </span>ortsregister
+git<span class="w"> </span>fetch<span class="w"> </span>--prune
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-d</span></code> löscht den lokalen Branch. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span> <span class="pre">--prune</span></code> entfernt die Verweise auf Branches, die auf dem Server gelöscht wurden, sodass <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-a</span></code> nur noch die vorhandenen anzeigt:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> - [deleted]         (none)     -&gt; origin/ortsregister
+</pre></div>
+</div>
+<p>Einen Branch auf dem Server, den GitLab nicht automatisch gelöscht hat, löschen Sie mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">--delete</span> <span class="pre">&lt;branchname&gt;</span></code>.</p>
+</section>
+</section>
+<section id="einen-branch-aktuell-halten">
+<h2>4. Einen Branch aktuell halten<a class="headerlink" href="#einen-branch-aktuell-halten" title="Link to this heading">#</a></h2>
+<p>Während Jona an der Einleitung arbeitet, wurden andere Merge Requests zusammengeführt, und <code class="docutils literal notranslate"><span class="pre">main</span></code> hat sich weiterentwickelt. Je länger ein Branch existiert, desto weiter entfernt er sich von <code class="docutils literal notranslate"><span class="pre">main</span></code> und desto wahrscheinlicher werden Konflikte. Holen Sie deshalb regelmäßig den neuen Stand von <code class="docutils literal notranslate"><span class="pre">main</span></code> in Ihren Branch:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>switch<span class="w"> </span>einleitung
+git<span class="w"> </span>fetch
+git<span class="w"> </span>merge<span class="w"> </span>origin/main
+git<span class="w"> </span>push
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code> lädt den neuen Stand vom Server, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span> <span class="pre">origin/main</span></code> führt ihn in Ihren aktuellen Branch zusammen. Git öffnet dafür wie bei <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> einen Editor mit einer vorbereiteten Nachricht, die Sie nur speichern und schließen müssen. Mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> erscheint der Merge auch im Merge Request.</p>
+<div class="admonition note">
+<p class="admonition-title">Bemerkung</p>
+<p>In vielen Anleitungen finden Sie für diesen Schritt <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code> statt <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code>. Ein Rebase schreibt die Commits Ihres Branches neu und erfordert danach einen Force Push. Das ist bei einem Branch, auf dem auch andere arbeiten, riskant. Bleiben Sie deshalb bei <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code>, wie es das Kapitel <a class="reference internal" href="git-history.html"><span class="doc">Git-Historie</span></a> begründet.</p>
+</div>
+</section>
+<section id="konflikte-in-merge-requests">
+<h2>5. Konflikte in Merge Requests<a class="headerlink" href="#konflikte-in-merge-requests" title="Link to this heading">#</a></h2>
+<p>Haben auf <code class="docutils literal notranslate"><span class="pre">main</span></code> und auf Ihrem Branch Änderungen an derselben Stelle stattgefunden, kann GitLab den Merge Request nicht zusammenführen. Statt der Schaltfläche <em>Merge</em> erscheint dann ein Hinweis auf Konflikte, zusammen mit den Schaltflächen <em>Resolve conflicts</em> und <em>Resolve locally</em>.</p>
+<p>Im Beispiel hat Kim in der <code class="docutils literal notranslate"><span class="pre">README.md</span></code> den Satz „Die Korrespondenz beginnt im März 1848.“ zu „… im Frühjahr 1848.“ geändert, und dieser Merge Request wurde bereits zusammengeführt. Jona hat denselben Satz auf dem Branch <code class="docutils literal notranslate"><span class="pre">einleitung</span></code> zu „… am 18. März 1848.“ geändert.</p>
+<section id="den-konflikt-lokal-auflosen">
+<h3>Den Konflikt lokal auflösen<a class="headerlink" href="#den-konflikt-lokal-auflosen" title="Link to this heading">#</a></h3>
+<p>Dieser Weg funktioniert immer und entspricht dem, was Sie aus den Git-Grundlagen kennen. Jona holt den neuen Stand von <code class="docutils literal notranslate"><span class="pre">main</span></code> in den eigenen Branch, wie in Abschnitt 4:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>switch<span class="w"> </span>einleitung
+git<span class="w"> </span>fetch
+git<span class="w"> </span>merge<span class="w"> </span>origin/main
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Auto-merging README.md
+CONFLICT (content): Merge conflict in README.md
+Automatic merge failed; fix conflicts and then commit the result.
+</pre></div>
+</div>
+<p>In der Datei stehen beide Fassungen:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Die Korrespondenz beginnt am 18. März 1848.
+=======
+Die Korrespondenz beginnt im Frühjahr 1848.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; origin/main
+</pre></div>
+</div>
+<p>Beachten Sie die Reihenfolge: Weil Sie diesmal <code class="docutils literal notranslate"><span class="pre">main</span></code> in Ihren Branch zusammenführen, steht oben unter <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> die Fassung <strong>Ihres Branches</strong> und unten die von <code class="docutils literal notranslate"><span class="pre">main</span></code>, also genau umgekehrt wie im Beispiel der Git-Grundlagen. Entscheiden Sie inhaltlich, welche Fassung gilt, oder formulieren Sie eine neue, entfernen Sie die Markierungszeilen, und schließen Sie den Merge ab:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>README.md
+git<span class="w"> </span>commit<span class="w"> </span>--no-edit
+git<span class="w"> </span>push
+</pre></div>
+</div>
+<p>Nach dem Push erkennt GitLab, dass der Konflikt gelöst ist, und der Merge Request lässt sich zusammenführen. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--oneline</span> <span class="pre">--graph</span></code> zeigt, wie der Stand von <code class="docutils literal notranslate"><span class="pre">main</span></code> mit beiden zusammengeführten Merge Requests in den Branch <code class="docutils literal notranslate"><span class="pre">einleitung</span></code> eingeflossen ist:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>*   89f8010 Merge remote-tracking branch 'origin/main' into einleitung
+|\
+| *   66158a3 Merge branch 'datierung-vorsichtig' into 'main'
+| |\
+| | * 5f6d2b7 Datierung vorsichtiger formuliert
+| |/
+| *   443888c Merge branch 'ortsregister' into 'main'
+| |\
+| | * 71964da Ortsregister mit GND-Nummern angelegt
+| |/
+* / b86c972 Beginn der Korrespondenz genau datiert
+|/
+* 47c6b27 Projekt angelegt
+</pre></div>
+</div>
+</section>
+<section id="den-konflikt-in-gitlab-auflosen">
+<h3>Den Konflikt in GitLab auflösen<a class="headerlink" href="#den-konflikt-in-gitlab-auflosen" title="Link to this heading">#</a></h3>
+<p>Einfache Konflikte in Textdateien können Sie auch im Browser lösen. Mit <em>Resolve conflicts</em> zeigt GitLab die betroffenen Stellen an. Für jede wählen Sie <em>Use ours</em> oder <em>Use theirs</em>, oder Sie bearbeiten die Datei mit <em>Edit inline</em> selbst. GitLab legt dann auf Ihrem Branch einen Merge-Commit an. Holen Sie ihn vor dem Weiterarbeiten mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> auf Ihren Rechner.</p>
+<p>Bei Konflikten in Notebooks oder bei vielen Konflikten auf einmal ist der lokale Weg übersichtlicher, weil Sie das Ergebnis vor dem Push ausführen und prüfen können.</p>
+</section>
+</section>
+<section id="geschutzte-branches">
+<h2>6. Geschützte Branches<a class="headerlink" href="#geschutzte-branches" title="Link to this heading">#</a></h2>
+<p>In der Grundeinstellung von GitLab ist der Standard-Branch <code class="docutils literal notranslate"><span class="pre">main</span></code> <strong>geschützt</strong> (<em>protected</em>):</p>
+<ul class="simple">
+<li><p>Nur Personen mit der Rolle <em>Maintainer</em> oder <em>Owner</em> dürfen direkt auf <code class="docutils literal notranslate"><span class="pre">main</span></code> pushen und Merge Requests in <code class="docutils literal notranslate"><span class="pre">main</span></code> zusammenführen.</p></li>
+<li><p>Niemand darf einen Force Push auf <code class="docutils literal notranslate"><span class="pre">main</span></code> ausführen, also dessen Historie überschreiben.</p></li>
+</ul>
+<p>Wer ein Projekt im eigenen Namensraum anlegt, ist dessen <em>Owner</em>; liegt das Projekt in einer Gruppe Ihrer Dozierenden, legen diese die Rollen fest. Laden Sie die anderen Mitglieder einer Gruppe als <em>Developer</em> ein, können sie eigene Branches pushen und Merge Requests anlegen, aber nicht in <code class="docutils literal notranslate"><span class="pre">main</span></code> zusammenführen. Das übernimmt dann die Person, die das Projekt angelegt hat. Für eine Seminargruppe ist das oft genau richtig, weil jede Änderung vor der Übernahme noch einmal angesehen wird. Soll jedes Mitglied zusammenführen dürfen, geben Sie den Mitgliedern die Rolle <em>Maintainer</em> oder ändern Sie die Regeln für <code class="docutils literal notranslate"><span class="pre">main</span></code> unter <em>Settings &gt; Repository</em> im Abschnitt <em>Protected branches</em> (in neueren Versionen <em>Branch rules</em>), etwa <em>Allowed to merge</em> auf <em>Developers + Maintainers</em>. Die Administration einer GitLab-Instanz kann diese Grundeinstellungen ändern; welche Regeln in Ihrem Projekt gelten, sehen Sie ebenfalls dort.</p>
+<p>Pushen Sie als <em>Developer</em> versehentlich direkt auf <code class="docutils literal notranslate"><span class="pre">main</span></code>, lehnt GitLab das ab:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>remote: GitLab: You are not allowed to push code to protected branches on this project.
+To https://scm.cms.hu-berlin.de/benutzername/briefwechsel-1848.git
+ ! [remote rejected] main -&gt; main (pre-receive hook declined)
+error: failed to push some refs to 'https://scm.cms.hu-berlin.de/benutzername/briefwechsel-1848.git'
+</pre></div>
+</div>
+<p>Ihre Commits sind nicht verloren. Machen Sie aus ihnen einen Branch, laden Sie ihn hoch und legen Sie dafür einen Merge Request an. Setzen Sie danach Ihr lokales <code class="docutils literal notranslate"><span class="pre">main</span></code> auf den Stand des Servers zurück:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>switch<span class="w"> </span>-c<span class="w"> </span>notiz<span class="w">              </span><span class="c1"># neuer Branch mit Ihren Commits</span>
+git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>notiz
+git<span class="w"> </span>switch<span class="w"> </span>main
+git<span class="w"> </span>reset<span class="w"> </span>--hard<span class="w"> </span>origin/main<span class="w">     </span><span class="c1"># main wieder auf den Stand des Servers</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warnung</p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span> <span class="pre">--hard</span></code> verwirft alle nicht committeten Änderungen und alle Commits auf <code class="docutils literal notranslate"><span class="pre">main</span></code>, die nicht auf dem Server liegen. Führen Sie es erst aus, wenn Ihre Commits wie oben auf einem eigenen Branch gesichert sind, und prüfen Sie vorher mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>, dass nichts Uncommittetes mehr vorhanden ist.</p>
+</div>
+</section>
+<section id="ein-arbeitsablauf-fur-gruppenprojekte-im-seminar">
+<h2>7. Ein Arbeitsablauf für Gruppenprojekte im Seminar<a class="headerlink" href="#ein-arbeitsablauf-fur-gruppenprojekte-im-seminar" title="Link to this heading">#</a></h2>
+<p>Vereinbaren Sie zu Beginn eines Gruppenprojekts, wie Sie zusammenarbeiten. Ein bewährter Ablauf:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Schritt</p></th>
+<th class="head"><p>Wer</p></th>
+<th class="head"><p>Was</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>eine Person</p></td>
+<td><p>Projekt anlegen (<em>Private</em>, ggf. im Namensraum der Seminargruppe), die anderen Mitglieder als <em>Developer</em> und die Betreuenden hinzufügen (siehe <a class="reference internal" href="git-grundlagen.html"><span class="doc">Git-Grundlagen</span></a>, Abschnitt 6)</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>alle</p></td>
+<td><p>Für jede Aufgabe einen Branch vom aktuellen <code class="docutils literal notranslate"><span class="pre">main</span></code> anlegen: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span> <span class="pre">main</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span> <span class="pre">-c</span> <span class="pre">&lt;aufgabe&gt;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>alle</p></td>
+<td><p>Regelmäßig committen und den Branch pushen</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>alle</p></td>
+<td><p>Früh einen Merge Request als Entwurf anlegen, damit die anderen sehen, woran Sie arbeiten</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>alle</p></td>
+<td><p>Den Branch regelmäßig mit <code class="docutils literal notranslate"><span class="pre">main</span></code> zusammenführen (Abschnitt 4)</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>eine andere Person</p></td>
+<td><p>Den Merge Request begutachten</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>berechtigte Person</p></td>
+<td><p>Zusammenführen; alle holen danach den neuen Stand mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span> <span class="pre">main</span></code> und <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Einige Absprachen ersparen Ihnen die meisten Konflikte:</p>
+<ul class="simple">
+<li><p><strong>Kleine, kurzlebige Branches.</strong> Ein Branch für eine Aufgabe, die in wenigen Tagen erledigt ist, lässt sich leichter begutachten und zusammenführen als einer, der wochenlang wächst.</p></li>
+<li><p><strong>Aufteilen statt gemeinsam bearbeiten.</strong> Konflikte in Notebooks sind mühsam aufzulösen, weil Notebooks als JSON gespeichert werden. Teilen Sie den Essay so auf, dass möglichst jede Person an eigenen Dateien arbeitet, etwa an einem Notebook pro Analyseschritt, oder schreiben Sie längere Textteile in Markdown-Dateien.</p></li>
+<li><p><strong>Nicht direkt auf <code class="docutils literal notranslate"><span class="pre">main</span></code> arbeiten</strong>, auch nicht für kleine Korrekturen, damit alle wissen, wann sich <code class="docutils literal notranslate"><span class="pre">main</span></code> ändert.</p></li>
+</ul>
+<p>Auch wenn Sie allein arbeiten, können Sie Merge Requests nutzen, etwa um eine neue Auswertung erst zu übernehmen, wenn sie vollständig ist, oder um Ihre Betreuenden um Rückmeldung zu einem Abschnitt zu bitten, wenn diese das anbieten.</p>
+</section>
+<section id="haufige-probleme">
+<h2>Häufige Probleme<a class="headerlink" href="#haufige-probleme" title="Link to this heading">#</a></h2>
+<p><strong><code class="docutils literal notranslate"><span class="pre">fatal:</span> <span class="pre">invalid</span> <span class="pre">reference:</span> <span class="pre">&lt;branchname&gt;</span></code></strong>
+Der Branch existiert in Ihrem Repository nicht. Wurde er von einer anderen Person angelegt, laden Sie ihn mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code> herunter. Prüfen Sie mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-a</span></code> die genaue Schreibweise.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">error:</span> <span class="pre">Your</span> <span class="pre">local</span> <span class="pre">changes</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">following</span> <span class="pre">files</span> <span class="pre">would</span> <span class="pre">be</span> <span class="pre">overwritten</span> <span class="pre">by</span> <span class="pre">checkout</span></code></strong>
+Sie haben Änderungen, die noch nicht committet sind und beim Wechsel des Branches verloren gingen. Committen Sie sie oder legen Sie sie mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">stash</span></code> vorübergehend beiseite. Mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">stash</span> <span class="pre">pop</span></code> holen Sie sie später, auf demselben oder einem anderen Branch, zurück.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">error:</span> <span class="pre">the</span> <span class="pre">branch</span> <span class="pre">'&lt;branchname&gt;'</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">fully</span> <span class="pre">merged</span></code></strong>
+Der Branch enthält Commits, die noch in keinem anderen Branch enthalten sind. Prüfen Sie, ob Sie sie noch brauchen. Nur wenn Sie sicher sind, löschen Sie den Branch mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-D</span> <span class="pre">&lt;branchname&gt;</span></code>.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">!</span> <span class="pre">[remote</span> <span class="pre">rejected]</span> <span class="pre">main</span> <span class="pre">-&gt;</span> <span class="pre">main</span> <span class="pre">(pre-receive</span> <span class="pre">hook</span> <span class="pre">declined)</span></code></strong>
+<code class="docutils literal notranslate"><span class="pre">main</span></code> ist geschützt. Legen Sie wie in Abschnitt 6 beschrieben einen Branch an und stellen Sie einen Merge Request.</p>
+<p><strong>Der Merge Request enthält Commits, die nicht zu ihm gehören.</strong>
+Der Branch wurde von einem veralteten Stand oder von einem anderen Branch aus angelegt. Legen Sie Branches immer vom aktuellen <code class="docutils literal notranslate"><span class="pre">main</span></code> aus an (Abschnitt 2).</p>
+<p><strong>Nach dem Zusammenführen fehlen die Änderungen auf Ihrem Rechner.</strong>
+Zusammengeführt wurde nur auf dem Server. Wechseln Sie mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span> <span class="pre">main</span></code> und holen Sie den neuen Stand mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code>.</p>
+</section>
+<section id="ubung">
+<h2>Übung<a class="headerlink" href="#ubung" title="Link to this heading">#</a></h2>
+<p>Diese Übung bearbeiten Sie zu zweit, Person A und Person B.</p>
+<ol class="arabic simple">
+<li><p>A legt im GitLab der HU ein privates Projekt mit einer <code class="docutils literal notranslate"><span class="pre">README.md</span></code> und einer Tabelle <code class="docutils literal notranslate"><span class="pre">briefe.csv</span></code> an und fügt B als <em>Developer</em> hinzu. B klont das Projekt.</p></li>
+<li><p>A legt einen Branch <code class="docutils literal notranslate"><span class="pre">ortsregister</span></code> an und ergänzt eine Datei <code class="docutils literal notranslate"><span class="pre">orte.csv</span></code>. B legt einen Branch <code class="docutils literal notranslate"><span class="pre">einleitung</span></code> an und ergänzt in der <code class="docutils literal notranslate"><span class="pre">README.md</span></code> einen Absatz zur Fragestellung. Beide pushen ihren Branch und legen einen Merge Request an, in dem die jeweils andere Person als Reviewer eingetragen ist.</p></li>
+<li><p>Begutachten Sie den Merge Request der anderen Person, hinterlassen Sie mindestens einen Kommentar zu einer Zeile, und beantworten bzw. lösen Sie die Kommentare zu Ihrem eigenen. Führen Sie dann beide Merge Requests zusammen.</p></li>
+<li><p>Erzeugen Sie einen Konflikt: Beide ändern auf einem neuen Branch dieselbe Zeile der <code class="docutils literal notranslate"><span class="pre">README.md</span></code> unterschiedlich und legen Merge Requests an. Führen Sie den ersten zusammen und lösen Sie den Konflikt im zweiten lokal auf, wie in Abschnitt 5 beschrieben.</p></li>
+<li><p>B versucht, einen Commit direkt auf <code class="docutils literal notranslate"><span class="pre">main</span></code> zu pushen. Lesen Sie die Fehlermeldung und retten Sie den Commit wie in Abschnitt 6 beschrieben in einen Merge Request.</p></li>
+<li><p>Räumen Sie auf: Löschen Sie alle zusammengeführten Branches lokal und auf dem Server, und prüfen Sie das Ergebnis mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span> <span class="pre">--prune</span></code> und <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-a</span></code>.</p></li>
+</ol>
+</section>
+<section id="kurzreferenz">
+<h2>Kurzreferenz<a class="headerlink" href="#kurzreferenz" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Ziel</p></th>
+<th class="head"><p>Befehl</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Branch vom aktuellen <code class="docutils literal notranslate"><span class="pre">main</span></code> anlegen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span> <span class="pre">main</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span> <span class="pre">-c</span> <span class="pre">&lt;name&gt;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Branch zum ersten Mal hochladen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">-u</span> <span class="pre">origin</span> <span class="pre">&lt;name&gt;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Neue Branches vom Server holen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Alle Branches anzeigen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-a</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Zu einem Branch vom Server wechseln</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span> <span class="pre">&lt;name&gt;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Branch mit dem neuen Stand von <code class="docutils literal notranslate"><span class="pre">main</span></code> zusammenführen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span> <span class="pre">origin/main</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Änderungen vorübergehend beiseitelegen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">stash</span></code>, später <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">stash</span> <span class="pre">pop</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Lokalen Branch löschen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-d</span> <span class="pre">&lt;name&gt;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Branch auf dem Server löschen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">--delete</span> <span class="pre">&lt;name&gt;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Verweise auf gelöschte Branches entfernen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span> <span class="pre">--prune</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="weiterfuhrende-ressourcen">
+<h2>Weiterführende Ressourcen<a class="headerlink" href="#weiterfuhrende-ressourcen" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://git-scm.com/book/de/v2/Git-Branching-Branches-auf-einen-Blick">Pro Git (deutsche Übersetzung), Kapitel 3: Git Branching</a></p></li>
+<li><p><a class="reference external" href="https://learngitbranching.js.org/?locale=de_DE">Learn Git Branching</a>: interaktive Übungen, auch zu Branches auf dem Server</p></li>
+<li><p><a class="reference external" href="https://coderefinery.github.io/git-collaborative/">CodeRefinery: Collaborative distributed version control</a>: Zusammenarbeit mit Branches und Merge Requests (englisch, CC BY 4.0)</p></li>
+<li><p>GitLab-Dokumentation zu <a class="reference external" href="https://docs.gitlab.com/user/project/merge_requests/">Merge Requests</a>, <a class="reference external" href="https://docs.gitlab.com/user/project/merge_requests/conflicts/">Merge-Konflikten</a> und <a class="reference external" href="https://docs.gitlab.com/user/project/repository/branches/protected/">geschützten Branches</a> (englisch)</p></li>
+<li><p><a class="reference external" href="https://cms-webtech.pages.cms.hu-berlin.de/gitlab-documentation/docs/home/">GitLab-Dokumentation des CMS</a>: Anleitung zum GitLab der HU</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "executablebooks/jupyter-book",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./tools"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="ssh.html"
+       title="Vorherige Seite">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">zurück</p>
+        <p class="prev-next-title">SSH-Schlüssel einrichten</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="git-history.html"
+       title="Nächste Seite">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">weiter</p>
+        <p class="prev-next-title">Git-Historie: nachvollziehen, korrigieren und bereinigen</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Inhalt
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einfuhrung">Einführung</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lernziele">Lernziele</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voraussetzungen">Voraussetzungen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wozu-branches">1. Wozu Branches?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#branches-auf-dem-server">2. Branches auf dem Server</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#einen-branch-hochladen">Einen Branch hochladen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#die-branches-anderer-herunterladen">Die Branches anderer herunterladen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#branches-benennen">Branches benennen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge-requests-im-gitlab-der-hu">3. Merge Requests im GitLab der HU</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#einen-merge-request-anlegen">Einen Merge Request anlegen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anderungen-begutachten">Änderungen begutachten</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zusammenfuhren">Zusammenführen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einen-branch-aktuell-halten">4. Einen Branch aktuell halten</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konflikte-in-merge-requests">5. Konflikte in Merge Requests</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#den-konflikt-lokal-auflosen">Den Konflikt lokal auflösen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#den-konflikt-in-gitlab-auflosen">Den Konflikt in GitLab auflösen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geschutzte-branches">6. Geschützte Branches</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ein-arbeitsablauf-fur-gruppenprojekte-im-seminar">7. Ein Arbeitsablauf für Gruppenprojekte im Seminar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#haufige-probleme">Häufige Probleme</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ubung">Übung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kurzreferenz">Kurzreferenz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weiterfuhrende-ressourcen">Weiterführende Ressourcen</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Durch <a href="https://www.geschichte.hu-berlin.de/de/bereiche-und-lehrstuehle/digital-history">Digital History, Humboldt-Universität zu Berlin</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="https://creativecommons.org/licenses/by/4.0/deed.de"><img class="license" alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> Texte und Abbildungen dieses Buchs stehen unter der Lizenz <a href="https://creativecommons.org/licenses/by/4.0/deed.de">CC BY 4.0</a>, Code unter der MIT-Lizenz (<a href="https://github.com/Digital-History-Berlin/Computational-Essays/blob/main/LICENSE.md">Details</a>).
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

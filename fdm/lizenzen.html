@@ -1,0 +1,1040 @@
+
+<!DOCTYPE html>
+
+
+<html lang="de" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lizenzen für Code und Daten &#8212; Computational Essays</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=91fba89f"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Klicken zum Anzeigen';</script>
+    <script>let toggleHintHide = 'Klicken zum Ausblenden';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script src="../_static/translations.js?v=79cc9f76"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'fdm/lizenzen';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
+    <link rel="search" title="Suche" href="../search.html" />
+    <link rel="next" title="Anleitung zur Erstellung eines Computational Essays in Jupyter Notebook" href="../Konvertierungen/word_md_notebook.html" />
+    <link rel="prev" title="Forschungsdaten dokumentieren" href="forschungsdaten-dokumentieren.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="de"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Zum Hauptinhalt springen</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Zurück zum Anfang</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Versionswarnung"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Website-Navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Suche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Suche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="Auf dieser Seite">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/Logo_DigitalHistoryBerlin.png" class="logo__image only-light" alt="Computational Essays - Home"/>
+    <img src="../_static/Logo_DigitalHistoryBerlin.png" class="logo__image only-dark pst-js-only" alt="Computational Essays - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Suche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Computational Essays: Ein Leitfaden für die Digital Humanities
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Grundlagen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Einf%C3%BChrung.html">Einführung in Computational Essays</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../project_environments/intro.html">Einführung in Projektumgebungen</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../project_environments/uv_guide.html">Projektumgebungen mit uv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../project_environments/venv_guide.html">Projektumgebungen mit venv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../project_environments/conda_guide.html">Projektumgebungen mit conda</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Leitfäden</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Leitfaden.html">Leitfaden für Computational Essays</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Versionskontrolle mit Git</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tools/git-grundlagen.html">Git-Grundlagen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/ssh.html">SSH-Schlüssel einrichten</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/git-branches.html">Branches und Merge Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/git-history.html">Git-Historie nachvollziehen und bearbeiten</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/git-lfs.html">Große Dateien mit Git LFS</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Forschungsdatenmanagement</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="forschungsdaten-dokumentieren.html">Forschungsdaten dokumentieren</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lizenzen für Code und Daten</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Konvertierungen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Konvertierungen/word_md_notebook.html">Konvertierung von Word-Dokumenten</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Laden Sie diese Seite herunter">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/fdm/lizenzen.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Quelldatei herunterladen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="In PDF drucken"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Vollbildmodus"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Farbmodus" data-bs-title="Farbmodus"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Hell"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dunkel"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Systemeinstellungen"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lizenzen für Code und Daten</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Inhalt </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einfuhrung">Einführung</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lernziele">Lernziele</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voraussetzungen">Voraussetzungen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grundbegriffe">1. Grundbegriffe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#material-anderer-nutzen-rechte-an-historischen-quellen">2. Material anderer nutzen: Rechte an historischen Quellen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wann-ist-eine-quelle-gemeinfrei">Wann ist eine Quelle gemeinfrei?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sonderfalle-die-in-der-geschichtswissenschaft-wichtig-sind">Sonderfälle, die in der Geschichtswissenschaft wichtig sind</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fotografien-scans-und-digitalisate">Fotografien, Scans und Digitalisate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#datenbanken">Datenbanken</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-und-data-mining">Text und Data Mining</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zitieren-und-fur-die-eigene-forschung-kopieren">Zitieren und für die eigene Forschung kopieren</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nicht-nur-urheberrecht">Nicht nur Urheberrecht</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#schutzfristen-auf-einen-blick">Schutzfristen auf einen Blick</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eigene-ergebnisse-lizenzieren">3. Eigene Ergebnisse lizenzieren</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#welche-rechte-haben-sie">Welche Rechte haben Sie?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#texte-und-abbildungen-creative-commons">Texte und Abbildungen: Creative Commons</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daten-cc-by-oder-cc0">Daten: CC BY oder CC0</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-mit-apache-oder-gpl">Code: MIT, Apache oder GPL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gemischte-inhalte-notebooks">Gemischte Inhalte: Notebooks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lizenzen-kombinieren">Lizenzen kombinieren</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lizenzen-im-repository-angeben">4. Lizenzen im Repository angeben</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#die-einfache-variante-eine-license-datei">Die einfache Variante: eine LICENSE-Datei</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#genauer-spdx-kennungen-und-reuse">Genauer: SPDX-Kennungen und REUSE</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zitierbar-machen-citation-cff-und-doi">5. Zitierbar machen: CITATION.cff und DOI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#beratung-an-der-hu">6. Beratung an der HU</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checkliste">Checkliste</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ubung">Übung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weiterfuhrende-ressourcen">Weiterführende Ressourcen</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lizenzen-fur-code-und-daten">
+<h1>Lizenzen für Code und Daten<a class="headerlink" href="#lizenzen-fur-code-und-daten" title="Link to this heading">#</a></h1>
+<div class="warning admonition">
+<p class="admonition-title">Keine Rechtsberatung</p>
+<p>Dieses Kapitel gibt einen Überblick über Rechtsfragen, die Ihnen bei der Arbeit mit historischen Quellen und beim Veröffentlichen eigener Ergebnisse begegnen (Stand der Angaben: Oktober 2026). Es ersetzt keine Rechtsberatung. Bei konkreten Fragen wenden Sie sich an Ihre Betreuenden, an die <a class="reference internal" href="#hu-rechtsberatung"><span class="std std-ref">Beratungsstellen der HU</span></a> oder an den <a class="reference external" href="https://nfdi4culture.de/about-us/success-stories/expert-guidance-the-legal-helpdesk-as-a-central-point-of-contact-for-legal-questions-in-research-data-management.html">Legal Helpdesk von NFDI4Culture</a>.</p>
+</div>
+<section id="einfuhrung">
+<h2>Einführung<a class="headerlink" href="#einfuhrung" title="Link to this heading">#</a></h2>
+<p>Wer mit historischen Quellen arbeitet und die Ergebnisse veröffentlicht, bewegt sich in zwei Richtungen:</p>
+<ol class="arabic simple">
+<li><p><strong>Material anderer nutzen:</strong> Dürfen Sie den Brief aus dem Archiv transkribieren und veröffentlichen? Das Digitalisat der Bibliothek in Ihren Essay einbinden? Einen Datensatz aus einer Online-Datenbank weiterverarbeiten?</p></li>
+<li><p><strong>Eigene Ergebnisse freigeben:</strong> Unter welchen Bedingungen dürfen andere Ihren Essay, Ihre Daten und Ihren Code weiterverwenden?</p></li>
+</ol>
+<p>Beide Fragen hängen mit dem <strong>Urheberrecht</strong> zusammen. Es entsteht automatisch, sobald ein Werk geschaffen ist; eine Anmeldung oder ein ©-Vermerk ist nicht nötig. Daraus folgt etwas, das oft übersehen wird: Ein Repository, das ohne Lizenz öffentlich zugänglich ist, ist nicht „frei“. Andere dürfen den Inhalt zwar ansehen, aber nur im Rahmen gesetzlicher Ausnahmen wie des Zitatrechts nutzen. Erst eine <strong>Lizenz</strong> erlaubt ihnen mehr. Für das Forschungsdatenmanagement ist das zentral: Daten sind nur dann nachnutzbar, wenn klar ist, wer sie wie nutzen darf.</p>
+<section id="lernziele">
+<h3>Lernziele<a class="headerlink" href="#lernziele" title="Link to this heading">#</a></h3>
+<p>Nach diesem Kapitel können Sie:</p>
+<ul class="simple">
+<li><p>einschätzen, ob eine historische Quelle oder ein Digitalisat urheberrechtlich geschützt ist, und erkennen, wann Sie nachfragen sollten</p></li>
+<li><p>passende Lizenzen für eigene Texte, Daten und Code auswählen</p></li>
+<li><p>Lizenzen in einem Repository so angeben, dass Menschen und Programme sie verstehen</p></li>
+<li><p>Ihr Projekt mit einer <code class="docutils literal notranslate"><span class="pre">CITATION.cff</span></code> zitierbar machen</p></li>
+</ul>
+</section>
+<section id="voraussetzungen">
+<h3>Voraussetzungen<a class="headerlink" href="#voraussetzungen" title="Link to this heading">#</a></h3>
+<p>Für den praktischen Teil benötigen Sie ein Git-Repository (siehe <a class="reference internal" href="../tools/git-grundlagen.html"><span class="doc">Git-Grundlagen</span></a>) und das Programm <code class="docutils literal notranslate"><span class="pre">reuse</span></code>, das Sie in Ihrer <a class="reference internal" href="../project_environments/intro.html"><span class="doc">Projektumgebung</span></a> installieren:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>tool<span class="w"> </span>install<span class="w"> </span>reuse<span class="w">   </span><span class="c1"># mit uv, siehe Projektumgebungen mit uv</span>
+pip<span class="w"> </span>install<span class="w"> </span>reuse<span class="w">       </span><span class="c1"># in einer mit venv angelegten Umgebung</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="grundbegriffe">
+<h2>1. Grundbegriffe<a class="headerlink" href="#grundbegriffe" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Werk:</strong> Das Urheberrecht schützt <em>persönliche geistige Schöpfungen</em>, also Texte, Bilder, Musik, Software usw. mit einem Mindestmaß an Individualität (§ 2 UrhG). Reine Fakten, etwa dass ein Brief am 18. März 1848 in Berlin geschrieben wurde, sind kein Werk.</p></li>
+<li><p><strong>Verwandte Schutzrechte:</strong> Einige Leistungen sind geschützt, ohne Werk zu sein, etwa einfache Fotografien, wissenschaftliche Ausgaben oder Datenbanken. Für sie gelten eigene, meist kürzere Schutzfristen.</p></li>
+<li><p><strong>Gemeinfreiheit:</strong> Ist die Schutzfrist abgelaufen, darf jede Person das Werk ohne Erlaubnis nutzen.</p></li>
+<li><p><strong>Lizenz:</strong> eine Erlaubnis der Rechteinhaberin oder des Rechteinhabers, ein Werk unter bestimmten Bedingungen zu nutzen. Offene Lizenzen wie Creative Commons erteilen diese Erlaubnis allen im Voraus.</p></li>
+</ul>
+</section>
+<section id="material-anderer-nutzen-rechte-an-historischen-quellen">
+<h2>2. Material anderer nutzen: Rechte an historischen Quellen<a class="headerlink" href="#material-anderer-nutzen-rechte-an-historischen-quellen" title="Link to this heading">#</a></h2>
+<p>Bei historischen Quellen ist die Ausgangslage oft günstig, denn viele sind gemeinfrei. Es gibt aber Ausnahmen und weitere Regeln jenseits des Urheberrechts, die gerade in der Geschichtswissenschaft eine Rolle spielen.</p>
+<section id="wann-ist-eine-quelle-gemeinfrei">
+<h3>Wann ist eine Quelle gemeinfrei?<a class="headerlink" href="#wann-ist-eine-quelle-gemeinfrei" title="Link to this heading">#</a></h3>
+<p>Das Urheberrecht erlischt <strong>70 Jahre nach dem Tod</strong> der Urheberin oder des Urhebers (§ 64 UrhG). Gerechnet wird ab dem Ende des Kalenderjahres, in dem sie oder er gestorben ist (§ 69). Die Briefe einer Person, die 1955 gestorben ist, sind also seit dem 1. Januar 2026 gemeinfrei. Haben mehrere Personen ein Werk gemeinsam geschaffen, zählt der Tod der zuletzt verstorbenen (§ 65).</p>
+<p>Bei <strong>anonymen oder unter einem Pseudonym veröffentlichten Werken</strong> erlischt der Schutz 70 Jahre nach der Veröffentlichung, bei unveröffentlichten Werken 70 Jahre nach ihrer Entstehung (§ 66). Wird die Identität der Urheberin oder des Urhebers in dieser Zeit bekannt, gilt wieder die Frist ab dem Tod.</p>
+<p>Für die meisten Quellen des 19. Jahrhunderts ist die Schutzfrist damit abgelaufen. Bei Quellen des 20. Jahrhunderts, etwa Briefen, Tagebüchern oder Fotografien, ist sie es häufig nicht. Nicht jedes Schriftstück ist allerdings ein Werk: Ob ein Formular, eine Liste oder eine kurze Notiz die nötige Individualität hat, hängt vom Einzelfall ab.</p>
+</section>
+<section id="sonderfalle-die-in-der-geschichtswissenschaft-wichtig-sind">
+<h3>Sonderfälle, die in der Geschichtswissenschaft wichtig sind<a class="headerlink" href="#sonderfalle-die-in-der-geschichtswissenschaft-wichtig-sind" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Amtliche Werke</strong> wie Gesetze, Verordnungen, amtliche Erlasse und Bekanntmachungen sowie Gerichtsentscheidungen sind nicht urheberrechtlich geschützt (§ 5). Interne Verwaltungsakten fallen nicht ohne Weiteres darunter.</p></li>
+<li><p><strong>Wissenschaftliche Ausgaben</strong> gemeinfreier Texte sind geschützt, wenn sie das Ergebnis wissenschaftlich sichtender Tätigkeit sind und sich wesentlich von bisherigen Ausgaben unterscheiden, und zwar 25 Jahre lang ab ihrem Erscheinen (§ 70). Eine kritische Edition aus dem Jahr 2010 kann also noch geschützt sein, obwohl der edierte Text gemeinfrei ist. Transkribieren Sie dann besser selbst aus dem Original oder einer älteren Ausgabe.</p></li>
+<li><p><strong>Nachgelassene Werke:</strong> Wer ein bisher nicht erschienenes, gemeinfreies Werk erstmals erlaubterweise erscheinen lässt oder öffentlich wiedergibt, erhält daran für 25 Jahre ein ausschließliches Recht (§ 71). Für die Archivarbeit heißt das: Ein Brief aus dem 19. Jahrhundert, den eine andere Person vor wenigen Jahren erstmals veröffentlicht hat, kann noch geschützt sein. Umgekehrt können Sie selbst dieses Recht erwerben, wenn Sie einen bisher unveröffentlichten Brief als Erste:r veröffentlichen.</p></li>
+</ul>
+</section>
+<section id="fotografien-scans-und-digitalisate">
+<h3>Fotografien, Scans und Digitalisate<a class="headerlink" href="#fotografien-scans-und-digitalisate" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Fotografien mit künstlerischer Gestaltung</strong> (<em>Lichtbildwerke</em>) sind wie andere Werke bis 70 Jahre nach dem Tod der Fotografin oder des Fotografen geschützt.</p></li>
+<li><p><strong>Einfache Fotografien</strong> (<em>Lichtbilder</em>) sind 50 Jahre nach ihrem Erscheinen bzw. ihrer ersten erlaubten öffentlichen Wiedergabe geschützt, wenn sie nicht erschienen sind, 50 Jahre nach ihrer Herstellung (§ 72).</p></li>
+<li><p><strong>Reproduktionen gemeinfreier visueller Werke</strong> sind seit dem 7. Juni 2021 nicht mehr durch verwandte Schutzrechte geschützt (§ 68). Das Foto eines gemeinfreien Gemäldes oder einer gemeinfreien Zeichnung dürfen Sie urheberrechtlich also nutzen, auch wenn ein Museum es angefertigt hat.</p></li>
+<li><p><strong>Digitalisate von Handschriften und Drucken:</strong> Ob § 68 auch Scans von Texten erfasst, ist rechtlich nicht geklärt, ebenso, ob reine Scans überhaupt als Lichtbilder geschützt sind. Viele Archive und Bibliotheken stellen ihre Digitalisate inzwischen ausdrücklich unter eine offene Lizenz oder als gemeinfrei zur Verfügung. Achten Sie auf diese Angaben und richten Sie sich danach.</p></li>
+</ul>
+</section>
+<section id="datenbanken">
+<h3>Datenbanken<a class="headerlink" href="#datenbanken" title="Link to this heading">#</a></h3>
+<p>Wer mit wesentlichem Aufwand eine Datenbank aufgebaut hat, hat daran ein eigenes Schutzrecht, auch wenn die einzelnen Einträge gemeinfrei sind (§§ 87a ff.). Es erlischt 15 Jahre nach der Veröffentlichung der Datenbank (§ 87d); wird sie wesentlich verändert, gilt sie als neue Datenbank. Möchten Sie größere Teile einer Online-Datenbank übernehmen, etwa durch automatisiertes Herunterladen, prüfen Sie deshalb deren Lizenz und Nutzungsbedingungen. Viele Datenbanken der Digital Humanities stehen unter offenen Lizenzen.</p>
+</section>
+<section id="text-und-data-mining">
+<h3>Text und Data Mining<a class="headerlink" href="#text-und-data-mining" title="Link to this heading">#</a></h3>
+<p>Für automatisierte Auswertungen von Texten und Daten erlaubt das Gesetz, Vervielfältigungen anzufertigen:</p>
+<ul class="simple">
+<li><p>Für die <strong>wissenschaftliche Forschung</strong> dürfen Forschungsorganisationen, Kulturerbe-Einrichtungen sowie einzelne Forschende, die keine kommerziellen Zwecke verfolgen, Texte und Daten, zu denen sie rechtmäßig Zugang haben, für Text und Data Mining vervielfältigen (§ 60d). Ein Nutzungsvorbehalt der Rechteinhaber gilt hier nicht.</p></li>
+<li><p>Außerhalb der Forschung ist Text und Data Mining ebenfalls erlaubt, Rechteinhaber können es aber ausschließen, bei Online-Angeboten in maschinenlesbarer Form (§ 44b).</p></li>
+</ul>
+<p>Diese Regeln erlauben die Analyse, nicht die Veröffentlichung: Ein urheberrechtlich geschütztes Korpus dürfen Sie deshalb nicht einfach in Ihr öffentliches Repository stellen.</p>
+</section>
+<section id="zitieren-und-fur-die-eigene-forschung-kopieren">
+<h3>Zitieren und für die eigene Forschung kopieren<a class="headerlink" href="#zitieren-und-fur-die-eigene-forschung-kopieren" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Zitieren</strong> dürfen Sie veröffentlichte Werke, soweit der Umfang durch den Zweck des Zitats gerechtfertigt ist, etwa als Beleg für Ihre Argumentation (§ 51). Das Zitat muss unverändert bleiben (§ 62) und die Quelle angeben (§ 63). Unveröffentlichte, noch geschützte Archivalien wie Briefe oder Tagebücher deckt das Zitatrecht nicht.</p></li>
+<li><p>Für die <strong>eigene nicht kommerzielle wissenschaftliche Forschung</strong> dürfen Sie bis zu 75 Prozent eines geschützten Werkes vervielfältigen und bis zu 15 Prozent einem abgegrenzten Personenkreis für dessen eigene Forschung zugänglich machen (§ 60c).</p></li>
+</ul>
+</section>
+<section id="nicht-nur-urheberrecht">
+<h3>Nicht nur Urheberrecht<a class="headerlink" href="#nicht-nur-urheberrecht" title="Link to this heading">#</a></h3>
+<p>Auch wenn eine Quelle gemeinfrei ist, können andere Regeln ihre Nutzung einschränken:</p>
+<ul class="simple">
+<li><p><strong>Benutzungsordnungen von Archiven und Bibliotheken</strong> sind Verträge, denen Sie mit der Nutzung zustimmen. Sie können etwa verlangen, dass Sie vor der Veröffentlichung von Reproduktionen um Erlaubnis fragen, unabhängig vom Urheberrecht. Der Bundesgerichtshof hat ein solches Fotografierverbot eines Museums bestätigt (Urteil vom 20. Dezember 2018, I ZR 104/17).</p></li>
+<li><p><strong>Archivrechtliche Schutzfristen</strong> regeln den Zugang zu Archivgut. Im Bundesarchiv endet die allgemeine Schutzfrist 30 Jahre nach Entstehung der Unterlagen. Für Archivgut, das sich auf Personen bezieht, endet sie 10 Jahre nach dem Tod der betroffenen Person; ist das Todesdatum unbekannt, 100 Jahre nach ihrer Geburt, und ist beides unbekannt, 60 Jahre nach Entstehung der Unterlagen (§ 11 BArchG). Für das Landesarchiv Berlin gelten ähnliche Fristen nach dem Berliner Archivgesetz.</p></li>
+<li><p><strong>Datenschutz:</strong> Die Datenschutz-Grundverordnung gilt nicht für die Daten Verstorbener (Erwägungsgrund 27). Viele Personen, die in Quellen des 20. Jahrhunderts genannt werden, leben aber noch; für ihre Daten gilt sie.</p></li>
+<li><p><strong>Bildnisse von Personen</strong> dürfen in der Regel nur mit deren Einwilligung veröffentlicht werden, bis 10 Jahre nach ihrem Tod mit Einwilligung der Angehörigen. Ausgenommen sind unter anderem Bildnisse aus dem Bereich der Zeitgeschichte (§§ 22, 23 Kunsturhebergesetz).</p></li>
+</ul>
+</section>
+<section id="schutzfristen-auf-einen-blick">
+<h3>Schutzfristen auf einen Blick<a class="headerlink" href="#schutzfristen-auf-einen-blick" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Material</p></th>
+<th class="head"><p>Schutz</p></th>
+<th class="head"><p>Dauer</p></th>
+<th class="head"><p>Vorschrift (UrhG)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Texte, Bilder, künstlerische Fotografien</p></td>
+<td><p>Urheberrecht</p></td>
+<td><p>bis 70 Jahre nach dem Tod der Urheber:in</p></td>
+<td><p>§§ 64, 65</p></td>
+</tr>
+<tr class="row-odd"><td><p>Anonyme und pseudonyme Werke</p></td>
+<td><p>Urheberrecht</p></td>
+<td><p>70 Jahre nach Veröffentlichung bzw. Entstehung</p></td>
+<td><p>§ 66</p></td>
+</tr>
+<tr class="row-even"><td><p>Gesetze, Erlasse, Bekanntmachungen, Entscheidungen</p></td>
+<td><p>kein Schutz</p></td>
+<td><p>–</p></td>
+<td><p>§ 5</p></td>
+</tr>
+<tr class="row-odd"><td><p>Wissenschaftliche Ausgaben gemeinfreier Texte</p></td>
+<td><p>verwandtes Schutzrecht</p></td>
+<td><p>25 Jahre nach Erscheinen</p></td>
+<td><p>§ 70</p></td>
+</tr>
+<tr class="row-even"><td><p>Erstausgaben nachgelassener Werke</p></td>
+<td><p>verwandtes Schutzrecht</p></td>
+<td><p>25 Jahre nach Erscheinen</p></td>
+<td><p>§ 71</p></td>
+</tr>
+<tr class="row-odd"><td><p>Einfache Fotografien</p></td>
+<td><p>verwandtes Schutzrecht</p></td>
+<td><p>50 Jahre nach Erscheinen bzw. Herstellung</p></td>
+<td><p>§ 72</p></td>
+</tr>
+<tr class="row-even"><td><p>Reproduktionen gemeinfreier visueller Werke</p></td>
+<td><p>kein Schutz (seit 7. Juni 2021)</p></td>
+<td><p>–</p></td>
+<td><p>§ 68</p></td>
+</tr>
+<tr class="row-odd"><td><p>Datenbanken mit wesentlicher Investition</p></td>
+<td><p>Datenbankherstellerrecht</p></td>
+<td><p>15 Jahre nach Veröffentlichung</p></td>
+<td><p>§ 87d</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Alle Fristen enden mit dem Ablauf des Kalenderjahres (§ 69). Im Zweifel fragen Sie beim Archiv oder der Bibliothek nach, die das Original verwahrt, und dokumentieren die Antwort in der README Ihrer Daten.</p>
+</section>
+</section>
+<section id="eigene-ergebnisse-lizenzieren">
+<h2>3. Eigene Ergebnisse lizenzieren<a class="headerlink" href="#eigene-ergebnisse-lizenzieren" title="Link to this heading">#</a></h2>
+<section id="welche-rechte-haben-sie">
+<h3>Welche Rechte haben Sie?<a class="headerlink" href="#welche-rechte-haben-sie" title="Link to this heading">#</a></h3>
+<p>Lizenzieren können Sie nur, woran Sie selbst die Rechte haben. Ihren Essay, Ihre Abbildungen und Ihren Code haben Sie als Studierende selbst geschaffen; die Rechte daran liegen bei Ihnen. Enthält Ihr Projekt Material anderer, etwa Digitalisate oder einen übernommenen Datensatz, gilt für diese Teile weiterhin deren Lizenz oder Rechtslage, und Sie müssen sie in Ihrer Dokumentation gesondert ausweisen.</p>
+<p>Arbeiten Sie dagegen als Beschäftigte der Universität, etwa als studentische Hilfskraft in einem Projekt, liegen die wirtschaftlichen Rechte an Software, die Sie im Rahmen Ihrer Aufgaben schreiben, in der Regel bei der Universität (§ 69b UrhG). Klären Sie in diesem Fall mit der Projektleitung, unter welcher Lizenz der Code veröffentlicht wird.</p>
+</section>
+<section id="texte-und-abbildungen-creative-commons">
+<h3>Texte und Abbildungen: Creative Commons<a class="headerlink" href="#texte-und-abbildungen-creative-commons" title="Link to this heading">#</a></h3>
+<p>Für Texte, Abbildungen und andere Inhalte haben sich die <a class="reference external" href="https://creativecommons.org/licenses/?lang=de">Creative-Commons-Lizenzen</a> durchgesetzt. Sie bestehen aus Bausteinen:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Baustein</p></th>
+<th class="head"><p>Bedeutung</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>BY</strong> (Namensnennung)</p></td>
+<td><p>Wer das Material nutzt, muss Sie als Urheber:in nennen. Ist in allen CC-Lizenzen enthalten.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>SA</strong> (Weitergabe unter gleichen Bedingungen)</p></td>
+<td><p>Bearbeitungen müssen unter derselben Lizenz veröffentlicht werden.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>NC</strong> (nicht kommerziell)</p></td>
+<td><p>Kommerzielle Nutzung ist ausgeschlossen.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>ND</strong> (keine Bearbeitung)</p></td>
+<td><p>Das Material darf nur unverändert weitergegeben werden.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Für wissenschaftliche Texte ist <strong>CC BY 4.0</strong> die übliche Wahl: Sie erlaubt jede Nutzung, verlangt aber die Nennung der Urheberschaft, wie es wissenschaftlichen Gepflogenheiten entspricht. Mit den Bausteinen NC und ND sollten Sie zurückhaltend sein. Was „kommerziell“ ist, lässt sich oft nicht klar sagen, sodass NC auch erwünschte Nutzungen verhindern kann, etwa in Lehrbüchern; ND verbietet schon Übersetzungen und Auszüge. Bei der Auswahl hilft der <a class="reference external" href="https://creativecommons.org/choose/">Lizenzwähler von Creative Commons</a>.</p>
+</section>
+<section id="daten-cc-by-oder-cc0">
+<h3>Daten: CC BY oder CC0<a class="headerlink" href="#daten-cc-by-oder-cc0" title="Link to this heading">#</a></h3>
+<p>Einzelne Fakten sind nicht urheberrechtlich geschützt, Datensätze als Ganzes aber unter Umständen schon, etwa durch das Datenbankrecht. Eine Lizenz schafft hier Klarheit. Üblich sind:</p>
+<ul class="simple">
+<li><p><strong>CC BY 4.0</strong>, wenn Sie eine Namensnennung verlangen möchten</p></li>
+<li><p><strong>CC0 1.0</strong>, mit der Sie auf alle Rechte verzichten, soweit das rechtlich möglich ist. Nach deutschem Recht kann man auf das Urheberrecht nicht verzichten (§ 29 UrhG); CC0 wirkt hier deshalb als umfassende, bedingungslose Lizenz. Für die wissenschaftliche Zitation ändert das nichts: Wer Ihre Daten verwendet, zitiert sie nach den Regeln guter wissenschaftlicher Praxis ohnehin.</p></li>
+</ul>
+<p>Die HU empfiehlt im Einklang mit ihrer <a class="reference external" href="https://edoc-info.hu-berlin.de/de/nutzung/oa_hu/oa">Open-Access-Erklärung</a> möglichst offene Lizenzen für Forschungsdaten, etwa CC0, CC BY oder CC BY-SA, und rät davon ab, Creative-Commons-Lizenzen für Software zu verwenden (siehe <a class="reference external" href="https://www.cms.hu-berlin.de/de/dl/dataman/teilen/rechtliche-aspekte/lizenzen">Lizenz wählen</a> und die <a class="reference external" href="https://cms.hu-berlin.de/de/dl/dataman/lizenzuebersicht">Lizenzübersicht der HU</a>). Ob und welche Lizenz Sie wählen, entscheiden Sie selbst, solange Rechte Dritter nicht entgegenstehen.</p>
+</section>
+<section id="code-mit-apache-oder-gpl">
+<h3>Code: MIT, Apache oder GPL<a class="headerlink" href="#code-mit-apache-oder-gpl" title="Link to this heading">#</a></h3>
+<p>Für Software rät Creative Commons ausdrücklich davon ab, CC-Lizenzen zu verwenden, weil sie Fragen wie den Umgang mit Quellcode nicht regeln. Für Code gibt es eigene Lizenzen, die sich in zwei Gruppen teilen:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Lizenz</p></th>
+<th class="head"><p>Art</p></th>
+<th class="head"><p>Kurz gesagt</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>MIT</strong></p></td>
+<td><p>freizügig (<em>permissive</em>)</p></td>
+<td><p>Jede Nutzung ist erlaubt, solange der Lizenztext mit dem Copyright-Hinweis erhalten bleibt. Kurz und weit verbreitet.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Apache 2.0</strong></p></td>
+<td><p>freizügig</p></td>
+<td><p>Wie MIT, regelt zusätzlich Patentrechte.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>GPL 3.0</strong></p></td>
+<td><p><em>Copyleft</em></p></td>
+<td><p>Wer veränderte Fassungen weitergibt, muss sie ebenfalls unter der GPL und mit Quellcode veröffentlichen.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Für die Codebeispiele eines Computational Essays ist eine freizügige Lizenz wie MIT meist die passende Wahl: Andere sollen Ihre Auswertungen nachvollziehen und Teile davon in eigenen Projekten verwenden können. Bei der Auswahl hilft <a class="reference external" href="https://choosealicense.com/">choosealicense.com</a>.</p>
+</section>
+<section id="gemischte-inhalte-notebooks">
+<h3>Gemischte Inhalte: Notebooks<a class="headerlink" href="#gemischte-inhalte-notebooks" title="Link to this heading">#</a></h3>
+<p>Ein Jupyter Notebook enthält meist beides, Text und Code. Bewährt hat sich, beides getrennt zu lizenzieren: den Text unter CC BY 4.0, den Code unter MIT. So hält es auch dieses Buch, wie seine Datei <a class="reference external" href="https://github.com/Digital-History-Berlin/Computational-Essays/blob/main/LICENSE.md"><code class="docutils literal notranslate"><span class="pre">LICENSE.md</span></code></a> zeigt. Wie Sie eine solche Aufteilung im Repository angeben, beschreibt der nächste Abschnitt.</p>
+</section>
+<section id="lizenzen-kombinieren">
+<h3>Lizenzen kombinieren<a class="headerlink" href="#lizenzen-kombinieren" title="Link to this heading">#</a></h3>
+<p>Übernehmen Sie Material, das unter einer Lizenz mit dem Baustein <strong>SA</strong> steht, oder Code unter der <strong>GPL</strong>, müssen Sie Ihre Bearbeitungen unter derselben Lizenz weitergeben. Material unter CC BY oder MIT können Sie dagegen auch in Arbeiten verwenden, die Sie anders lizenzieren, solange Sie die Herkunft angeben. Prüfen Sie deshalb vor der Wahl Ihrer Lizenz, unter welchen Bedingungen das übernommene Material steht.</p>
+</section>
+</section>
+<section id="lizenzen-im-repository-angeben">
+<h2>4. Lizenzen im Repository angeben<a class="headerlink" href="#lizenzen-im-repository-angeben" title="Link to this heading">#</a></h2>
+<section id="die-einfache-variante-eine-license-datei">
+<h3>Die einfache Variante: eine LICENSE-Datei<a class="headerlink" href="#die-einfache-variante-eine-license-datei" title="Link to this heading">#</a></h3>
+<p>Am einfachsten legen Sie im Hauptordner des Repositorys eine Datei <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code> mit dem vollständigen Lizenztext an. GitLab und andere Plattformen erkennen verbreitete Lizenzen darin automatisch. Die Lizenztexte finden Sie auf <a class="reference external" href="https://choosealicense.com/">choosealicense.com</a> bzw. bei <a class="reference external" href="https://creativecommons.org/licenses/?lang=de">Creative Commons</a>. Gelten für verschiedene Teile verschiedene Lizenzen, beschreiben Sie in der Datei, welche Lizenz für welche Dateien gilt.</p>
+</section>
+<section id="genauer-spdx-kennungen-und-reuse">
+<h3>Genauer: SPDX-Kennungen und REUSE<a class="headerlink" href="#genauer-spdx-kennungen-und-reuse" title="Link to this heading">#</a></h3>
+<p>Bei gemischten Projekten bleibt mit einer einzigen Datei oft offen, welche Lizenz genau für welche Datei gilt. Genauer und für Programme lesbar wird es mit zwei Werkzeugen:</p>
+<ul class="simple">
+<li><p><strong>SPDX-Kennungen</strong> sind standardisierte Kurzbezeichnungen für Lizenzen, etwa <code class="docutils literal notranslate"><span class="pre">MIT</span></code>, <code class="docutils literal notranslate"><span class="pre">CC-BY-4.0</span></code> oder <code class="docutils literal notranslate"><span class="pre">CC0-1.0</span></code> (siehe die <a class="reference external" href="https://spdx.org/licenses/">SPDX-Lizenzliste</a>).</p></li>
+<li><p>Die <strong><a class="reference external" href="https://reuse.software">REUSE-Spezifikation</a></strong> legt fest, wie Sie für jede Datei Urheberschaft und Lizenz mit SPDX-Kennungen angeben, und das Programm <code class="docutils literal notranslate"><span class="pre">reuse</span></code> prüft, ob das vollständig gelungen ist.</p></li>
+</ul>
+<p>Als Beispiel dient wieder das Projekt <code class="docutils literal notranslate"><span class="pre">briefwechsel-1848</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>briefwechsel-1848/
+├── README.md
+├── essay.ipynb
+├── requirements.txt
+├── CITATION.cff
+├── data/processed/briefe_1848.csv
+├── images/karte.png
+└── src/bereinigung.py
+</pre></div>
+</div>
+<p><strong>Schritt 1: den Stand prüfen.</strong> <code class="docutils literal notranslate"><span class="pre">reuse</span> <span class="pre">lint</span></code> zeigt, welche Dateien noch keine Angaben haben:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>reuse<span class="w"> </span>lint
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># MISSING COPYRIGHT AND LICENSING INFORMATION
+
+The following files have no copyright and licensing information:
+* CITATION.cff
+* README.md
+* data/processed/briefe_1848.csv
+* essay.ipynb
+* images/karte.png
+* requirements.txt
+* src/bereinigung.py
+...
+Unfortunately, your project is not compliant with version 3.3 of the REUSE Specification :-(
+</pre></div>
+</div>
+<p><strong>Schritt 2: die Lizenztexte herunterladen.</strong> <code class="docutils literal notranslate"><span class="pre">reuse</span> <span class="pre">download</span></code> legt die vollständigen Texte im Ordner <code class="docutils literal notranslate"><span class="pre">LICENSES</span></code> ab:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>reuse<span class="w"> </span>download<span class="w"> </span>MIT<span class="w"> </span>CC-BY-4.0<span class="w"> </span>CC0-1.0
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Successfully downloaded LICENSES/CC0-1.0.txt.
+Successfully downloaded LICENSES/MIT.txt.
+Successfully downloaded LICENSES/CC-BY-4.0.txt.
+</pre></div>
+</div>
+<p><strong>Schritt 3: Dateien mit Kommentaren kennzeichnen.</strong> In Dateien, die Kommentare erlauben, schreibt <code class="docutils literal notranslate"><span class="pre">reuse</span> <span class="pre">annotate</span></code> die Angaben als Kopfzeilen hinein:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>reuse<span class="w"> </span>annotate<span class="w"> </span>--copyright<span class="w"> </span><span class="s2">"Vorname Nachname"</span><span class="w"> </span>--license<span class="w"> </span>MIT<span class="w"> </span>src/bereinigung.py
+reuse<span class="w"> </span>annotate<span class="w"> </span>--copyright<span class="w"> </span><span class="s2">"Vorname Nachname"</span><span class="w"> </span>--license<span class="w"> </span>CC-BY-4.0<span class="w"> </span>README.md
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># SPDX-FileCopyrightText: 2026 Vorname Nachname
+#
+# SPDX-License-Identifier: MIT
+
+import pandas as pd
+</pre></div>
+</div>
+<p><strong>Schritt 4: alle übrigen Dateien in <code class="docutils literal notranslate"><span class="pre">REUSE.toml</span></code> beschreiben.</strong> Daten, Bilder und Notebooks können keine solchen Kommentare enthalten. Für sie legen Sie im Hauptordner eine Datei <code class="docutils literal notranslate"><span class="pre">REUSE.toml</span></code> an, in der Sie Dateien oder ganzen Ordnern eine Lizenz zuordnen. <code class="docutils literal notranslate"><span class="pre">CC-BY-4.0</span> <span class="pre">AND</span> <span class="pre">MIT</span></code> beschreibt dabei ein Notebook, dessen Text unter CC BY und dessen Code unter MIT steht:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+
+<span class="k">[[annotations]]</span>
+<span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"data/**"</span><span class="p">,</span><span class="w"> </span><span class="s2">"images/**"</span><span class="p">]</span>
+<span class="n">SPDX-FileCopyrightText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"2026 Vorname Nachname"</span>
+<span class="n">SPDX-License-Identifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"CC-BY-4.0"</span>
+
+<span class="k">[[annotations]]</span>
+<span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"essay.ipynb"</span>
+<span class="n">SPDX-FileCopyrightText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"2026 Vorname Nachname"</span>
+<span class="n">SPDX-License-Identifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"CC-BY-4.0 AND MIT"</span>
+
+<span class="k">[[annotations]]</span>
+<span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"requirements.txt"</span>
+<span class="n">SPDX-FileCopyrightText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"2026 Vorname Nachname"</span>
+<span class="n">SPDX-License-Identifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"MIT"</span>
+
+<span class="k">[[annotations]]</span>
+<span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"CITATION.cff"</span>
+<span class="n">SPDX-FileCopyrightText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"2026 Vorname Nachname"</span>
+<span class="n">SPDX-License-Identifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"CC0-1.0"</span>
+</pre></div>
+</div>
+<p>Auch die Datei <code class="docutils literal notranslate"><span class="pre">CITATION.cff</span></code> braucht eine Angabe; <code class="docutils literal notranslate"><span class="pre">reuse</span> <span class="pre">annotate</span></code> kennt ihre Endung nicht, deshalb steht sie ebenfalls in <code class="docutils literal notranslate"><span class="pre">REUSE.toml</span></code>.</p>
+<p><strong>Schritt 5: erneut prüfen.</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>reuse<span class="w"> </span>lint
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>* Files with copyright information: 7 / 7
+* Files with license information: 7 / 7
+
+Congratulations! Your project is compliant with version 3.3 of the REUSE Specification :-)
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">reuse</span> <span class="pre">lint</span></code> endet mit einem Fehlercode, solange Angaben fehlen. Deshalb eignet es sich auch für eine automatische Prüfung bei jedem Push, etwa als Job in der Datei <code class="docutils literal notranslate"><span class="pre">.gitlab-ci.yml</span></code>.</p>
+</section>
+</section>
+<section id="zitierbar-machen-citation-cff-und-doi">
+<h2>5. Zitierbar machen: CITATION.cff und DOI<a class="headerlink" href="#zitierbar-machen-citation-cff-und-doi" title="Link to this heading">#</a></h2>
+<p>Eine Lizenz regelt, <em>ob</em> andere Ihre Arbeit nutzen dürfen; wie sie sie <em>zitieren</em>, legen Sie mit einer Datei <code class="docutils literal notranslate"><span class="pre">CITATION.cff</span></code> im Hauptordner fest. Das Format (<a class="reference external" href="https://citation-file-format.github.io/">Citation File Format</a>) ist einfach zu lesen und wird von Plattformen und Literaturverwaltungen ausgewertet:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">cff-version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.2.0</span>
+<span class="nt">message</span><span class="p">:</span><span class="w"> </span><span class="s">"Wenn</span><span class="nv"> </span><span class="s">Sie</span><span class="nv"> </span><span class="s">diese</span><span class="nv"> </span><span class="s">Arbeit</span><span class="nv"> </span><span class="s">verwenden,</span><span class="nv"> </span><span class="s">zitieren</span><span class="nv"> </span><span class="s">Sie</span><span class="nv"> </span><span class="s">sie</span><span class="nv"> </span><span class="s">bitte</span><span class="nv"> </span><span class="s">so."</span>
+<span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">"Familienkorrespondenz</span><span class="nv"> </span><span class="s">im</span><span class="nv"> </span><span class="s">Revolutionsjahr</span><span class="nv"> </span><span class="s">1848:</span><span class="nv"> </span><span class="s">ein</span><span class="nv"> </span><span class="s">Computational</span><span class="nv"> </span><span class="s">Essay"</span>
+<span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">software</span>
+<span class="nt">authors</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">given-names</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Vorname</span>
+<span class="w">    </span><span class="nt">family-names</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Nachname</span>
+<span class="w">    </span><span class="nt">affiliation</span><span class="p">:</span><span class="w"> </span><span class="s">"Humboldt-Universität</span><span class="nv"> </span><span class="s">zu</span><span class="nv"> </span><span class="s">Berlin"</span>
+<span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">"1.0"</span>
+<span class="nt">date-released</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2026-03-31</span>
+<span class="c1"># Lizenz des Textes; der Code steht unter MIT (siehe LICENSES/)</span>
+<span class="nt">license</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CC-BY-4.0</span>
+<span class="nt">repository-code</span><span class="p">:</span><span class="w"> </span><span class="s">"https://scm.cms.hu-berlin.de/benutzername/briefwechsel-1848"</span>
+</pre></div>
+</div>
+<p>Geben Sie <code class="docutils literal notranslate"><span class="pre">version</span></code> und <code class="docutils literal notranslate"><span class="pre">date-released</span></code> an, damit eine Literaturangabe Jahr und Fassung enthält. Unter <code class="docutils literal notranslate"><span class="pre">license</span></code> steht nur eine Lizenz: Mehrere Einträge bedeuten im Citation File Format „die eine oder die andere“, nicht „beide für verschiedene Teile“. Ob die Datei gültig ist und wie die Angabe aussieht, prüfen Sie mit dem Programm <code class="docutils literal notranslate"><span class="pre">cffconvert</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>tool<span class="w"> </span>install<span class="w"> </span>cffconvert<span class="w">   </span><span class="c1"># oder: pip install cffconvert</span>
+cffconvert<span class="w"> </span>--validate
+cffconvert<span class="w"> </span>-f<span class="w"> </span>apalike
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Citation metadata are valid according to schema version 1.2.0.
+Nachname V. (2026). Familienkorrespondenz im Revolutionsjahr 1848: ein Computational Essay (version 1.0). URL: https://scm.cms.hu-berlin.de/benutzername/briefwechsel-1848
+</pre></div>
+</div>
+<p>Für eine dauerhafte Zitierbarkeit unabhängig vom GitLab der HU, das Projekte ein Jahr nach dem Ende Ihres Studiums löscht (siehe <a class="reference internal" href="../tools/git-grundlagen.html#gitlab-nach-dem-studium"><span class="std std-ref">Nach dem Studium</span></a>), können Sie eine Fassung Ihres Projekts bei <a class="reference external" href="https://zenodo.org">Zenodo</a> veröffentlichen. Zenodo vergibt eine DOI, unter der die Fassung dauerhaft erreichbar bleibt.</p>
+</section>
+<section id="beratung-an-der-hu">
+<span id="hu-rechtsberatung"></span><h2>6. Beratung an der HU<a class="headerlink" href="#beratung-an-der-hu" title="Link to this heading">#</a></h2>
+<p>Ob Sie eine Quelle veröffentlichen dürfen oder welche Lizenz zu Ihrem Projekt passt, hängt oft vom Einzelfall ab. Mit Fragen zu einer Seminar- oder Abschlussarbeit wenden Sie sich am besten zuerst an Ihre Betreuenden. Darüber hinaus nennt die HU für rechtliche Fragen im Forschungsdatenmanagement unter anderem diese Ansprechpartner:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Thema</p></th>
+<th class="head"><p>Ansprechpartner</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Urheberrecht und Lizenzen</p></td>
+<td><p><a class="reference external" href="https://www.ub.hu-berlin.de/de/ueber-uns/kontakt/ansprechpartner/ansprechpartner-fachreferentinnen-und-fachreferenten">Fachreferentinnen und Fachreferenten der Universitätsbibliothek</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Datenschutz und Persönlichkeitsrechte, etwa bei Quellen mit Angaben zu lebenden Personen</p></td>
+<td><p><a class="reference external" href="https://www.hu-berlin.de/de/datenschutz">Datenschutzbeauftragte der HU</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Lizenzen, Richtlinien der HU und weitere rechtliche Fragen zu Forschungsdaten</p></td>
+<td><p><a class="reference external" href="https://www.cms.hu-berlin.de/en/dl-en/dataman-en/home/home">Initiative Forschungsdatenmanagement</a> (<a class="reference external" href="mailto:forschungsdaten&#37;&#52;&#48;hu-berlin&#46;de">forschungsdaten<span>&#64;</span>hu-berlin<span>&#46;</span>de</a>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Rechte an Arbeitsergebnissen, wenn Sie als studentische Hilfskraft beschäftigt sind</p></td>
+<td><p><a class="reference external" href="https://www.personalabteilung.hu-berlin.de/">Personalabteilung</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Verträge mit Kooperationspartnern, etwa Archiven oder Unternehmen</p></td>
+<td><p><a class="reference external" href="https://www.hu-berlin.de/de/forschung/szf/koop_IP">Servicezentrum Forschung</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Die Seite <a class="reference external" href="https://www.cms.hu-berlin.de/de/dl/dataman/teilen/rechtliche-aspekte">Rechtliche Aspekte</a> der HU gibt außerdem einen Überblick über alle Rechtsgebiete, die im Forschungsdatenmanagement eine Rolle spielen können, mit Verweisen auf die einschlägigen Vorschriften.</p>
+</section>
+<section id="checkliste">
+<h2>Checkliste<a class="headerlink" href="#checkliste" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Vor der Veröffentlichung</p>
+<ul class="simple">
+<li><p>Für alle übernommenen Quellen, Digitalisate und Datensätze ist geklärt und dokumentiert, ob und wie Sie sie nutzen dürfen.</p></li>
+<li><p>Personenbezogene Daten und Archivgut mit laufender Schutzfrist sind nicht im Repository.</p></li>
+<li><p>Das Repository enthält eine Lizenz für Texte, eine für Code und, falls vorhanden, eine für Daten.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reuse</span> <span class="pre">lint</span></code> meldet keine fehlenden Angaben.</p></li>
+<li><p>Eine <code class="docutils literal notranslate"><span class="pre">CITATION.cff</span></code> mit Version und Datum beschreibt, wie das Projekt zitiert wird.</p></li>
+</ul>
+</div>
+</section>
+<section id="ubung">
+<h2>Übung<a class="headerlink" href="#ubung" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Wählen Sie für das Projekt aus dem Kapitel <a class="reference internal" href="../tools/git-grundlagen.html"><span class="doc">Git-Grundlagen</span></a> Lizenzen für Text, Code und Daten und begründen Sie Ihre Wahl in zwei Sätzen.</p></li>
+<li><p>Führen Sie <code class="docutils literal notranslate"><span class="pre">reuse</span> <span class="pre">lint</span></code> aus, laden Sie die Lizenztexte herunter, kennzeichnen Sie Ihre Dateien mit <code class="docutils literal notranslate"><span class="pre">reuse</span> <span class="pre">annotate</span></code> und einer <code class="docutils literal notranslate"><span class="pre">REUSE.toml</span></code>, bis das Projekt den Test besteht.</p></li>
+<li><p>Legen Sie eine <code class="docutils literal notranslate"><span class="pre">CITATION.cff</span></code> an und prüfen Sie sie mit <code class="docutils literal notranslate"><span class="pre">cffconvert</span> <span class="pre">--validate</span></code>.</p></li>
+<li><p>Suchen Sie für eine Quelle aus Ihrem eigenen Forschungsinteresse heraus, ob sie gemeinfrei ist und unter welchen Bedingungen das Archiv oder die Bibliothek Digitalisate zur Verfügung stellt.</p></li>
+</ol>
+</section>
+<section id="weiterfuhrende-ressourcen">
+<h2>Weiterführende Ressourcen<a class="headerlink" href="#weiterfuhrende-ressourcen" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Forschungsdatenmanagement an der HU: <a class="reference external" href="https://www.cms.hu-berlin.de/de/dl/dataman/teilen/rechtliche-aspekte">Rechtliche Aspekte</a> mit weiterführender Literatur, <a class="reference external" href="https://www.cms.hu-berlin.de/de/dl/dataman/teilen/rechtliche-aspekte/lizenzen">Lizenz wählen</a> und die <a class="reference external" href="https://cms.hu-berlin.de/de/dl/dataman/lizenzuebersicht">Lizenzübersicht der HU</a></p></li>
+<li><p>Paul Klimpel, John Weitzmann: <a class="reference external" href="http://nbn-resolving.de/urn:nbn:de:gbv:7-dariah-2015-5-0">Forschen in der digitalen Welt. Juristische Handreichung für die Geisteswissenschaften</a> (DARIAH-DE Working Papers 12), Göttingen 2015. Stand 2015, also vor den Änderungen des Urheberrechts von 2018 und 2021, die etwa Text und Data Mining und Reproduktionen gemeinfreier Werke betreffen</p></li>
+<li><p>Till Kreutzer, Henning Lahmann: <a class="reference external" href="https://doi.org/10.15460/HUP.195">Rechtsfragen bei Open Science. Ein Leitfaden</a>, Hamburg University Press 2019</p></li>
+<li><p>Till Kreutzer: <a class="reference external" href="https://www.bpb.de/lernen/digitale-bildung/oer-material-fuer-alle/220538/open-content-ein-praxisleitfaden-zur-nutzung-von-creative-commons-lizenzen/">Open Content – Ein Praxisleitfaden zur Nutzung von Creative-Commons-Lizenzen</a>, Deutsche UNESCO-Kommission, hbz und Wikimedia Deutschland (CC BY 4.0)</p></li>
+<li><p><a class="reference external" href="https://www.gesetze-im-internet.de/urhg/">Urheberrechtsgesetz (UrhG)</a> und <a class="reference external" href="https://www.gesetze-im-internet.de/barchg_2017/">Bundesarchivgesetz (BArchG)</a> im Wortlaut</p></li>
+<li><p><a class="reference external" href="https://choosealicense.com/">choosealicense.com</a>: Hilfe bei der Wahl einer Lizenz für Software (englisch)</p></li>
+<li><p><a class="reference external" href="https://reuse.software">REUSE</a>: Spezifikation und Anleitung (englisch)</p></li>
+<li><p><a class="reference external" href="https://citation-file-format.github.io/">Citation File Format</a> (englisch)</p></li>
+<li><p><a class="reference external" href="https://nfdi4culture.de/about-us/success-stories/expert-guidance-the-legal-helpdesk-as-a-central-point-of-contact-for-legal-questions-in-research-data-management.html">Legal Helpdesk von NFDI4Culture</a>: Beratung zu Urheber- und Datenschutzrecht für die Kulturwissenschaften</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "executablebooks/jupyter-book",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./fdm"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="forschungsdaten-dokumentieren.html"
+       title="Vorherige Seite">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">zurück</p>
+        <p class="prev-next-title">Forschungsdaten dokumentieren</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Konvertierungen/word_md_notebook.html"
+       title="Nächste Seite">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">weiter</p>
+        <p class="prev-next-title">Anleitung zur Erstellung eines Computational Essays in Jupyter Notebook</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Inhalt
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einfuhrung">Einführung</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lernziele">Lernziele</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voraussetzungen">Voraussetzungen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grundbegriffe">1. Grundbegriffe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#material-anderer-nutzen-rechte-an-historischen-quellen">2. Material anderer nutzen: Rechte an historischen Quellen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wann-ist-eine-quelle-gemeinfrei">Wann ist eine Quelle gemeinfrei?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sonderfalle-die-in-der-geschichtswissenschaft-wichtig-sind">Sonderfälle, die in der Geschichtswissenschaft wichtig sind</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fotografien-scans-und-digitalisate">Fotografien, Scans und Digitalisate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#datenbanken">Datenbanken</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-und-data-mining">Text und Data Mining</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zitieren-und-fur-die-eigene-forschung-kopieren">Zitieren und für die eigene Forschung kopieren</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nicht-nur-urheberrecht">Nicht nur Urheberrecht</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#schutzfristen-auf-einen-blick">Schutzfristen auf einen Blick</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eigene-ergebnisse-lizenzieren">3. Eigene Ergebnisse lizenzieren</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#welche-rechte-haben-sie">Welche Rechte haben Sie?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#texte-und-abbildungen-creative-commons">Texte und Abbildungen: Creative Commons</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daten-cc-by-oder-cc0">Daten: CC BY oder CC0</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-mit-apache-oder-gpl">Code: MIT, Apache oder GPL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gemischte-inhalte-notebooks">Gemischte Inhalte: Notebooks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lizenzen-kombinieren">Lizenzen kombinieren</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lizenzen-im-repository-angeben">4. Lizenzen im Repository angeben</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#die-einfache-variante-eine-license-datei">Die einfache Variante: eine LICENSE-Datei</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#genauer-spdx-kennungen-und-reuse">Genauer: SPDX-Kennungen und REUSE</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zitierbar-machen-citation-cff-und-doi">5. Zitierbar machen: CITATION.cff und DOI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#beratung-an-der-hu">6. Beratung an der HU</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#checkliste">Checkliste</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ubung">Übung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weiterfuhrende-ressourcen">Weiterführende Ressourcen</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Durch <a href="https://www.geschichte.hu-berlin.de/de/bereiche-und-lehrstuehle/digital-history">Digital History, Humboldt-Universität zu Berlin</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="https://creativecommons.org/licenses/by/4.0/deed.de"><img class="license" alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> Texte und Abbildungen dieses Buchs stehen unter der Lizenz <a href="https://creativecommons.org/licenses/by/4.0/deed.de">CC BY 4.0</a>, Code unter der MIT-Lizenz (<a href="https://github.com/Digital-History-Berlin/Computational-Essays/blob/main/LICENSE.md">Details</a>).
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

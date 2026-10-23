@@ -1,0 +1,1826 @@
+
+<!DOCTYPE html>
+
+
+<html lang="de" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Forschungsdaten dokumentieren &#8212; Computational Essays</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=91fba89f"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Klicken zum Anzeigen';</script>
+    <script>let toggleHintHide = 'Klicken zum Ausblenden';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script src="../_static/translations.js?v=79cc9f76"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'fdm/forschungsdaten-dokumentieren';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
+    <link rel="search" title="Suche" href="../search.html" />
+    <link rel="next" title="Lizenzen für Code und Daten" href="lizenzen.html" />
+    <link rel="prev" title="Große Dateien mit Git LFS" href="../tools/git-lfs.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="de"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Zum Hauptinhalt springen</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Zurück zum Anfang</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Versionswarnung"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Website-Navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Suche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Suche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="Auf dieser Seite">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/Logo_DigitalHistoryBerlin.png" class="logo__image only-light" alt="Computational Essays - Home"/>
+    <img src="../_static/Logo_DigitalHistoryBerlin.png" class="logo__image only-dark pst-js-only" alt="Computational Essays - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Suche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Computational Essays: Ein Leitfaden für die Digital Humanities
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Grundlagen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Einf%C3%BChrung.html">Einführung in Computational Essays</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../project_environments/intro.html">Einführung in Projektumgebungen</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../project_environments/uv_guide.html">Projektumgebungen mit uv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../project_environments/venv_guide.html">Projektumgebungen mit venv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../project_environments/conda_guide.html">Projektumgebungen mit conda</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Leitfäden</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Leitfaden.html">Leitfaden für Computational Essays</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Versionskontrolle mit Git</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tools/git-grundlagen.html">Git-Grundlagen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/ssh.html">SSH-Schlüssel einrichten</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/git-branches.html">Branches und Merge Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/git-history.html">Git-Historie nachvollziehen und bearbeiten</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/git-lfs.html">Große Dateien mit Git LFS</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Forschungsdatenmanagement</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Forschungsdaten dokumentieren</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lizenzen.html">Lizenzen für Code und Daten</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Konvertierungen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Konvertierungen/word_md_notebook.html">Konvertierung von Word-Dokumenten</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Laden Sie diese Seite herunter">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/fdm/forschungsdaten-dokumentieren.ipynb" target="_blank"
+   class="btn btn-sm btn-download-notebook-button dropdown-item"
+   title="Notebook-Datei herunterladen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="../_sources/fdm/forschungsdaten-dokumentieren.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Quelldatei herunterladen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="In PDF drucken"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Vollbildmodus"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Farbmodus" data-bs-title="Farbmodus"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Hell"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dunkel"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Systemeinstellungen"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Forschungsdaten dokumentieren</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Inhalt </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einfuhrung">Einführung</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lernziele">Lernziele</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voraussetzungen">Voraussetzungen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#was-dokumentiert-werden-sollte">1. Was dokumentiert werden sollte</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ordnerstruktur-und-dateinamen">2. Ordnerstruktur und Dateinamen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eine-struktur-fur-ihr-projekt">Eine Struktur für Ihr Projekt</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dateinamen">Dateinamen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#offene-dateiformate">Offene Dateiformate</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#die-daten-readme">3. Die Daten-README</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#das-datenworterbuch">4. Das Datenwörterbuch</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#einen-entwurf-erzeugen">Einen Entwurf erzeugen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#den-entwurf-vervollstandigen">Den Entwurf vervollständigen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#das-fertige-datenworterbuch">Das fertige Datenwörterbuch</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#daten-gegen-das-datenworterbuch-prufen">5. Daten gegen das Datenwörterbuch prüfen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metadaten-und-standards">6. Metadaten und Standards</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#die-verarbeitung-nachvollziehbar-machen">7. Die Verarbeitung nachvollziehbar machen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#veroffentlichen-und-archivieren">8. Veröffentlichen und archivieren</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daten-in-einem-data-paper-vorstellen">Daten in einem Data Paper vorstellen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fur-groszere-arbeiten-ein-datenmanagementplan">9. Für größere Arbeiten: ein Datenmanagementplan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ubung">Übung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weiterfuhrende-ressourcen">Weiterführende Ressourcen</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="forschungsdaten-dokumentieren">
+<h1>Forschungsdaten dokumentieren<a class="headerlink" href="#forschungsdaten-dokumentieren" title="Link to this heading">#</a></h1>
+<section id="einfuhrung">
+<h2>Einführung<a class="headerlink" href="#einfuhrung" title="Link to this heading">#</a></h2>
+<p>Stellen Sie sich vor, Sie öffnen in zwei Jahren die Tabelle, mit der Sie Ihren Computational Essay geschrieben haben, oder eine Kommilitonin möchte mit Ihren Daten weiterarbeiten. Was bedeutet in der Spalte <code class="docutils literal notranslate"><span class="pre">datum</span></code> der Eintrag <code class="docutils literal notranslate"><span class="pre">1848-05?</span></code>? Aus welchem Archiv stammen die Briefe, und warum fehlen die aus dem Jahr 1849? Wurden die Ortsnamen aus der Quelle übernommen oder vereinheitlicht? Ohne Dokumentation lassen sich diese Fragen kaum noch beantworten, und die Daten verlieren ihren Wert, auch für Sie selbst.</p>
+<p>Für die Geschichtswissenschaft ist dieser Punkt besonders wichtig. Die Handreichung der DFG für die Geschichtswissenschaften unterscheidet zwischen <strong>historischen Quellen</strong> und ihren <strong>Derivaten</strong>: Eine Tabelle mit Metadaten zu Briefen ist nicht die Quelle selbst, sondern das Ergebnis vieler Entscheidungen über Auswahl, Lesung, Datierung und Normierung. Die Dokumentation macht diese Entscheidungen nachvollziehbar. Sie ist gewissermaßen die Quellenkritik Ihrer Daten.</p>
+<p>Gut dokumentierte Daten erfüllen außerdem die <strong>FAIR-Prinzipien</strong>, die sich in der Forschung als Maßstab durchgesetzt haben: Daten sollen <em>auffindbar</em> (findable), <em>zugänglich</em> (accessible), <em>mit anderen Daten kombinierbar</em> (interoperable) und <em>nachnutzbar</em> (reusable) sein. Zu allen vier trägt Dokumentation bei, am unmittelbarsten zur Nachnutzbarkeit.</p>
+<p>Der <a class="reference internal" href="../Leitfaden.html"><span class="doc">Leitfaden</span></a> sieht für Computational Essays einen Abschnitt zu Quellenlage und Datenkritik sowie eine README im Projekt vor. Dieses Kapitel zeigt, wie Sie beides so anlegen, dass Ihre Daten auch ohne Sie verständlich bleiben.</p>
+<section id="lernziele">
+<h3>Lernziele<a class="headerlink" href="#lernziele" title="Link to this heading">#</a></h3>
+<p>Nach diesem Kapitel können Sie:</p>
+<ul class="simple">
+<li><p>Ordner und Dateien eines Projekts nachvollziehbar benennen und strukturieren</p></li>
+<li><p>eine README für einen Datensatz schreiben</p></li>
+<li><p>ein Datenwörterbuch anlegen, das jede Spalte einer Tabelle beschreibt</p></li>
+<li><p>Unsicherheiten, etwa bei Datierungen, und Normdaten einheitlich erfassen</p></li>
+<li><p>Ihre Daten automatisch gegen ihr Datenwörterbuch prüfen</p></li>
+<li><p>Metadatenstandards und persistente Identifikatoren einordnen und wissen, wo Sie Daten veröffentlichen und in einem Data Paper vorstellen können</p></li>
+</ul>
+</section>
+<section id="voraussetzungen">
+<h3>Voraussetzungen<a class="headerlink" href="#voraussetzungen" title="Link to this heading">#</a></h3>
+<p>Für die Codebeispiele benötigen Sie Grundkenntnisse in Python und eine <a class="reference internal" href="../project_environments/intro.html"><span class="doc">Projektumgebung</span></a> mit dem Paket <code class="docutils literal notranslate"><span class="pre">pandas</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>add<span class="w"> </span>pandas<span class="w">        </span><span class="c1"># in einem mit uv angelegten Projekt</span>
+pip<span class="w"> </span>install<span class="w"> </span>pandas<span class="w">   </span><span class="c1"># in einer mit venv angelegten Umgebung</span>
+</pre></div>
+</div>
+<p>Als Beispiel dient ein kleiner, frei erfundener Datensatz: die Metadaten zu acht Briefen, die sich Mitglieder einer Familie Albrecht im Jahr 1848 geschrieben haben. Er liegt im Repository dieses Buchs im Ordner <a class="reference external" href="https://github.com/Digital-History-Berlin/Computational-Essays/tree/main/fdm/beispieldaten"><code class="docutils literal notranslate"><span class="pre">fdm/beispieldaten</span></code></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Bemerkung</p>
+<p>Dieses Kapitel ist selbst ein Notebook, gespeichert als Textdatei im Format MyST Markdown. Alle Codezellen werden ausgeführt, wenn das Buch erstellt wird; die Ausgaben, die Sie sehen, sind also echte Ergebnisse. Die Ausgaben stammen von pandas 3. In älteren Versionen erscheinen Textspalten mit dem Datentyp <code class="docutils literal notranslate"><span class="pre">object</span></code> statt <code class="docutils literal notranslate"><span class="pre">str</span></code>.</p>
+</div>
+</section>
+</section>
+<section id="was-dokumentiert-werden-sollte">
+<h2>1. Was dokumentiert werden sollte<a class="headerlink" href="#was-dokumentiert-werden-sollte" title="Link to this heading">#</a></h2>
+<p>Dokumentation entsteht auf mehreren Ebenen, die unterschiedliche Fragen beantworten:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Ebene</p></th>
+<th class="head"><p>Beantwortet die Frage</p></th>
+<th class="head"><p>Typische Form</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Projekt-README</p></td>
+<td><p>Worum geht es, wie ist das Projekt aufgebaut, wie lässt sich die Analyse wiederholen?</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">README.md</span></code> im Projektordner</p></td>
+</tr>
+<tr class="row-odd"><td><p>Daten-README</p></td>
+<td><p>Woher stammen die Daten, wie wurden sie bearbeitet, wer darf sie wie nutzen?</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">README.md</span></code> im Datenordner</p></td>
+</tr>
+<tr class="row-even"><td><p>Datenwörterbuch</p></td>
+<td><p>Was bedeutet jede Spalte, welche Werte sind erlaubt?</p></td>
+<td><p>Tabelle, z. B. als CSV-Datei</p></td>
+</tr>
+<tr class="row-odd"><td><p>Code-Dokumentation</p></td>
+<td><p>Was tut eine Funktion, warum wurde ein Schritt so umgesetzt?</p></td>
+<td><p>Docstrings und Kommentare</p></td>
+</tr>
+<tr class="row-even"><td><p>Der Essay selbst</p></td>
+<td><p>Welche methodischen Entscheidungen wurden getroffen, und was folgt daraus?</p></td>
+<td><p>Abschnitt zu Quellenlage und Datenkritik</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Die Ebenen ergänzen sich. Der Essay diskutiert, <em>warum</em> Sie etwa unsichere Datierungen in die Analyse aufgenommen haben; die Daten-README und das Datenwörterbuch halten fest, <em>wie</em> sie gekennzeichnet sind.</p>
+<p>Häufig ist außerdem von <strong>Metadaten</strong> die Rede. Gemeint ist ein Ausschnitt der Dokumentation, der vor allem dazu dient, Daten zu <em>finden</em>: Titel, Urheber:innen, Zeitraum, Ort, Schlagwörter, Rechte. Die Dokumentation geht weit darüber hinaus und beschreibt etwa, wie die Daten entstanden sind und was jede Spalte bedeutet. Wie Metadaten nach Standards erfasst werden, behandelt <a class="reference internal" href="#fdm-metadaten"><span class="std std-ref">Abschnitt 6</span></a>.</p>
+</section>
+<section id="ordnerstruktur-und-dateinamen">
+<h2>2. Ordnerstruktur und Dateinamen<a class="headerlink" href="#ordnerstruktur-und-dateinamen" title="Link to this heading">#</a></h2>
+<section id="eine-struktur-fur-ihr-projekt">
+<h3>Eine Struktur für Ihr Projekt<a class="headerlink" href="#eine-struktur-fur-ihr-projekt" title="Link to this heading">#</a></h3>
+<p>Eine einheitliche Ordnerstruktur hilft anderen (und Ihnen), sich schnell zurechtzufinden. Für einen Computational Essay hat sich folgende Struktur bewährt, die der Projektstruktur im <a class="reference internal" href="../Leitfaden.html"><span class="doc">Leitfaden</span></a> entspricht:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>briefwechsel-1848/
+├── README.md                    # Projekt: Fragestellung, Aufbau, Reproduktion
+├── essay.ipynb                  # der Computational Essay
+├── requirements.txt             # Pakete der Projektumgebung
+├── data/
+│   ├── raw/                     # Rohdaten: werden nie verändert
+│   │   └── README.md            # Herkunft und Rechte der Rohdaten
+│   └── processed/               # aus den Rohdaten erzeugte Daten
+│       ├── README.md            # Daten-README
+│       ├── briefe_1848.csv
+│       └── briefe_1848_datenwoerterbuch.csv
+├── src/                         # ausgelagerte Skripte
+└── images/                      # Abbildungen
+</pre></div>
+</div>
+<p>Die wichtigste Regel steckt in den beiden Datenordnern: <strong>Rohdaten werden nie verändert.</strong> Jede Bereinigung oder Umformung geschieht in Code, der aus <code class="docutils literal notranslate"><span class="pre">data/raw</span></code> die Dateien in <code class="docutils literal notranslate"><span class="pre">data/processed</span></code> erzeugt. So lässt sich jeder Schritt wiederholen und überprüfen. Dürfen die Rohdaten nicht veröffentlicht werden, etwa wegen Personenbezugs, schließen Sie den Ordner mit einer <a class="reference internal" href="../tools/git-grundlagen.html#gitignore"><span class="std std-ref">.gitignore</span></a> aus und dokumentieren in der README, wo die Daten liegen und wer Zugang erhält.</p>
+</section>
+<section id="dateinamen">
+<h3>Dateinamen<a class="headerlink" href="#dateinamen" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Regel</p></th>
+<th class="head"><p>Statt</p></th>
+<th class="head"><p>Besser</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Keine Leerzeichen, Umlaute oder Sonderzeichen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Briefe</span> <span class="pre">Ü</span> <span class="pre">1848</span> <span class="pre">(final).csv</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">briefe_1848.csv</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Datumsangaben im Format JJJJ-MM-TT, damit sie richtig sortiert werden</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">interview</span> <span class="pre">3.2.26.wav</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2026-02-03_interview.wav</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Nummern mit führenden Nullen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scan1.tif</span></code>, <code class="docutils literal notranslate"><span class="pre">scan10.tif</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scan_001.tif</span></code>, <code class="docutils literal notranslate"><span class="pre">scan_010.tif</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Versionen über Git, nicht über Dateinamen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">briefe_v2_korrigiert.csv</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">briefe_1848.csv</span></code> mit Commit-Historie</p></td>
+</tr>
+<tr class="row-even"><td><p>Einheitlich klein schreiben, Wörter mit <code class="docutils literal notranslate"><span class="pre">_</span></code> oder <code class="docutils literal notranslate"><span class="pre">-</span></code> trennen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">BriefeAlbrecht.CSV</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">briefe_albrecht.csv</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="offene-dateiformate">
+<h3>Offene Dateiformate<a class="headerlink" href="#offene-dateiformate" title="Link to this heading">#</a></h3>
+<p>Für die langfristige Nutzbarkeit sind offene, gut dokumentierte Formate besser als die Formate einzelner Programme:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Art der Daten</p></th>
+<th class="head"><p>Empfohlen</p></th>
+<th class="head"><p>Weniger geeignet</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Tabellen</p></td>
+<td><p>CSV (Zeichenkodierung UTF-8)</p></td>
+<td><p>XLSX, Numbers</p></td>
+</tr>
+<tr class="row-odd"><td><p>Texte</p></td>
+<td><p>TXT, Markdown, TEI-XML</p></td>
+<td><p>DOCX, Pages</p></td>
+</tr>
+<tr class="row-even"><td><p>Bilder</p></td>
+<td><p>TIFF, PNG</p></td>
+<td><p>JPEG mit starker Kompression, proprietäre Kameraformate</p></td>
+</tr>
+<tr class="row-odd"><td><p>Strukturierte Daten</p></td>
+<td><p>JSON, XML</p></td>
+<td><p>Formate einzelner Datenbankprogramme</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Bei CSV-Dateien gehören Zeichenkodierung und Trennzeichen in die Dokumentation. Deutschsprachige Tabellenkalkulationen speichern CSV oft mit Semikolon statt Komma als Trennzeichen; beides ist in Ordnung, solange es angegeben ist.</p>
+</section>
+</section>
+<section id="die-daten-readme">
+<h2>3. Die Daten-README<a class="headerlink" href="#die-daten-readme" title="Link to this heading">#</a></h2>
+<p>Die README eines Datensatzes ist eine Textdatei, die jemandem, der die Daten zum ersten Mal sieht, alles Nötige mitteilt. Die Humboldt-Universität stellt dafür eine <a class="reference external" href="https://cms.hu-berlin.de/de/dl/dataman/readme-template/view">README-Vorlage</a> bereit. Für historische Daten sind einige Angaben besonders wichtig:</p>
+<ul class="simple">
+<li><p><strong>Quellen und Auswahl:</strong> Archiv, Bestand und Signaturen oder die verwendete Edition, und welche Quellen aus welchem Grund aufgenommen wurden und welche nicht</p></li>
+<li><p><strong>Bearbeitungsschritte</strong> mit Datum: Erfassung, Transkription, OCR (mit Programm und Version), Normierung, Bereinigung</p></li>
+<li><p><strong>Konventionen:</strong> Transkriptionsrichtlinien, Kennzeichnung unsicherer Angaben, verwendete Normdateien</p></li>
+<li><p><strong>Rechte:</strong> Lizenz der Daten, Rechte an den Quellen, Nutzungsbedingungen von Archiven und Einschränkungen etwa wegen Personenbezugs</p></li>
+</ul>
+<p>Eine Vorlage mit diesen Abschnitten, die auf der Vorlage der HU aufbaut, können Sie herunterladen: <a class="reference download internal" download="" href="../_downloads/86272973899a42cdf7692a513b5beb8f/README_daten_vorlage.md"><code class="xref download docutils literal notranslate"><span class="pre">README-Vorlage</span> <span class="pre">für</span> <span class="pre">Datensätze</span></code></a>. So sieht sie ausgefüllt für den Beispieldatensatz aus:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gh"># Briefwechsel der Familie Albrecht 1848</span>
+
+<span class="k">&gt; </span><span class="ge">**Hinweis:** Dieser Datensatz ist frei erfunden. Er dient als Beispiel im Kapitel „Forschungsdaten dokumentieren“ des Buchs *Computational Essays*. Personen, Briefe und Archiv existieren nicht; die GND-Nummern der Orte Berlin und Potsdam sind echt.</span>
+
+<span class="gu">## Überblick</span>
+
+<span class="k">-</span><span class="w"> </span><span class="gs">**Inhalt:**</span> Metadaten zu 8 Briefen, die Mitglieder der Familie Albrecht im Jahr 1848 einander geschrieben haben
+<span class="k">-</span><span class="w"> </span><span class="gs">**Kontext:**</span> Computational Essay „Familienkorrespondenz im Revolutionsjahr 1848“, Seminar „Digitale Quellenanalyse“, Humboldt-Universität zu Berlin
+<span class="k">-</span><span class="w"> </span><span class="gs">**Erstellt von:**</span> Vorname Nachname, Humboldt-Universität zu Berlin (vorname.nachname@hu-berlin.de)
+<span class="k">-</span><span class="w"> </span><span class="gs">**Erstellt:**</span> 12.–16. Januar 2026
+<span class="k">-</span><span class="w"> </span><span class="gs">**Version:**</span> 1.0 (im Repository als Git-Tag <span class="sb">`daten-v1.0`</span> markiert)
+<span class="k">-</span><span class="w"> </span><span class="gs">**Kennung:**</span> noch keine; bei einer Veröffentlichung erhält der Datensatz eine DOI
+<span class="k">-</span><span class="w"> </span><span class="gs">**Schlagwörter:**</span> Briefe; Familienkorrespondenz; Revolution 1848/49; Berlin; Potsdam
+<span class="k">-</span><span class="w"> </span><span class="gs">**Sprache:**</span> Deutsch
+
+<span class="gu">## Quellen</span>
+
+<span class="k">-</span><span class="w"> </span><span class="gs">**Bestand:**</span> Familienarchiv Albrecht (fiktiv), Nr. 1–8
+<span class="k">-</span><span class="w"> </span><span class="gs">**Auswahl:**</span> alle im Bestand erhaltenen Briefe aus dem Jahr 1848; Briefe anderer Jahre wurden nicht erfasst
+<span class="k">-</span><span class="w"> </span><span class="gs">**Zugang zu den Originalen:**</span> Einsicht vor Ort; Digitalisate liegen nicht vor
+
+<span class="gu">## Erhebung und Bearbeitung</span>
+
+<span class="k">1.</span> Erfassung der Metadaten aus den Originalen in einer Tabellenkalkulation (12.01.2026)
+<span class="k">2.</span> Datierung: Ist im Brief kein Datum genannt, wurde es aus dem Inhalt erschlossen und im Extended Date/Time Format (EDTF) gekennzeichnet: <span class="sb">`?`</span> für unsicher, <span class="sb">`~`</span> für ungefähr, <span class="sb">`XX`</span> für unbekannte Stellen (13.01.2026)
+<span class="k">3.</span> Orte in heutiger Schreibweise normiert und, soweit vorhanden, mit der Gemeinsamen Normdatei (GND) verknüpft (14.01.2026)
+<span class="k">4.</span> Stand der Transkription nachgetragen (15.01.2026)
+<span class="k">5.</span> Prüfung der Tabelle gegen das Datenwörterbuch <span class="sb">`briefe_1848_datenwoerterbuch.csv`</span> (16.01.2026)
+
+Transkriptionsrichtlinien: buchstabengetreu, Abkürzungen werden nicht aufgelöst, unsichere Lesungen stehen in eckigen Klammern.
+
+<span class="gu">## Dateien</span>
+
+| Datei | Inhalt |
+|---|---|
+| <span class="sb">`briefe_1848.csv`</span> | Metadaten der Briefe (UTF-8, Trennzeichen: Semikolon, eine Zeile pro Brief) |
+| <span class="sb">`briefe_1848_datenwoerterbuch.csv`</span> | Datenwörterbuch: Beschreibung und Prüfregeln aller Spalten (UTF-8, Trennzeichen: Semikolon) |
+| <span class="sb">`briefe_1848_fehlerhaft.csv`</span> | Kopie mit absichtlichen Fehlern für die Übung im Kapitel |
+
+<span class="gu">## Spalten</span>
+
+| Spalte | Bedeutung |
+|---|---|
+| <span class="sb">`brief_id`</span> | Kennung des Briefs im Datensatz |
+| <span class="sb">`absender`</span>, <span class="sb">`empfaenger`</span> | Personen in normierter Schreibweise |
+| <span class="sb">`datum`</span> | Datum im EDTF-Format, ggf. mit Kennzeichnung der Unsicherheit |
+| <span class="sb">`ort`</span>, <span class="sb">`ort_gnd`</span> | Abfassungsort und seine GND-Nummer (leer, wenn nicht vorhanden) |
+| <span class="sb">`seiten`</span> | Umfang in beschriebenen Seiten |
+| <span class="sb">`transkription`</span> | Stand der Transkription: <span class="sb">`vollständig`</span>, <span class="sb">`teilweise`</span> oder <span class="sb">`keine`</span> |
+| <span class="sb">`signatur`</span> | Signatur des Originals |
+
+Die vollständige Beschreibung mit allen Regeln steht in <span class="sb">`briefe_1848_datenwoerterbuch.csv`</span>. Leere Felder bedeuten „nicht vorhanden“, nicht „unbekannt“.
+
+<span class="gu">## Software</span>
+
+<span class="k">-</span><span class="w"> </span>Erfassung: Tabellenkalkulation (LibreOffice Calc)
+<span class="k">-</span><span class="w"> </span>Prüfung: Python 3.12, pandas 3.1 (Funktion <span class="sb">`daten_pruefen`</span> aus dem Kapitel „Forschungsdaten dokumentieren“)
+
+<span class="gu">## Rechte und Lizenz</span>
+
+<span class="k">-</span><span class="w"> </span>Die Metadaten in diesem Ordner stehen unter der Lizenz CC BY 4.0.
+<span class="k">-</span><span class="w"> </span>Die Briefe selbst sind gemeinfrei. Die Originale gehören dem Archiv; ihre Nutzung richtet sich nach dessen Benutzungsordnung.
+
+<span class="gu">## Zitierempfehlung</span>
+
+Nachname, Vorname (2026): Briefwechsel der Familie Albrecht 1848, Version 1.0 [Datensatz].
+
+<span class="gu">## Kontakt</span>
+
+Vorname Nachname, vorname.nachname@hu-berlin.de
+</pre></div>
+</div>
+</section>
+<section id="das-datenworterbuch">
+<h2>4. Das Datenwörterbuch<a class="headerlink" href="#das-datenworterbuch" title="Link to this heading">#</a></h2>
+<p>Ein <strong>Datenwörterbuch</strong> (auch <em>Codebuch</em>) beschreibt jede Spalte einer Tabelle: was sie bedeutet, welchen Datentyp sie hat, in welchem Format die Werte stehen, welche Werte erlaubt sind und was ein leeres Feld bedeutet. Hier ist der Beispieldatensatz:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">briefe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"beispieldaten/briefe_1848.csv"</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">";"</span><span class="p">)</span>
+<span class="n">briefe</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>brief_id</th>
+      <th>absender</th>
+      <th>empfaenger</th>
+      <th>datum</th>
+      <th>ort</th>
+      <th>ort_gnd</th>
+      <th>seiten</th>
+      <th>transkription</th>
+      <th>signatur</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>B001</td>
+      <td>Hans Albrecht</td>
+      <td>Grete Albrecht</td>
+      <td>1848-03-18</td>
+      <td>Berlin</td>
+      <td>4005728-8</td>
+      <td>2</td>
+      <td>vollständig</td>
+      <td>Familienarchiv Albrecht (fiktiv), Nr. 1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>B002</td>
+      <td>Grete Albrecht</td>
+      <td>Hans Albrecht</td>
+      <td>1848-04-02</td>
+      <td>Potsdam</td>
+      <td>4046948-7</td>
+      <td>1</td>
+      <td>vollständig</td>
+      <td>Familienarchiv Albrecht (fiktiv), Nr. 2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>B003</td>
+      <td>Grete Albrecht</td>
+      <td>Hans Albrecht</td>
+      <td>1848-04-20</td>
+      <td>Potsdam</td>
+      <td>4046948-7</td>
+      <td>3</td>
+      <td>teilweise</td>
+      <td>Familienarchiv Albrecht (fiktiv), Nr. 3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>B004</td>
+      <td>Hans Albrecht</td>
+      <td>Grete Albrecht</td>
+      <td>1848-05?</td>
+      <td>Berlin</td>
+      <td>4005728-8</td>
+      <td>2</td>
+      <td>vollständig</td>
+      <td>Familienarchiv Albrecht (fiktiv), Nr. 4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>B005</td>
+      <td>Hans Albrecht</td>
+      <td>Friedrich Albrecht</td>
+      <td>1848-06-XX</td>
+      <td>Berlin</td>
+      <td>4005728-8</td>
+      <td>1</td>
+      <td>keine</td>
+      <td>Familienarchiv Albrecht (fiktiv), Nr. 5</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>B006</td>
+      <td>Friedrich Albrecht</td>
+      <td>Hans Albrecht</td>
+      <td>1848-07~</td>
+      <td>Gut Albrechtshof</td>
+      <td>NaN</td>
+      <td>4</td>
+      <td>teilweise</td>
+      <td>Familienarchiv Albrecht (fiktiv), Nr. 6</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>B007</td>
+      <td>Grete Albrecht</td>
+      <td>Friedrich Albrecht</td>
+      <td>1848-09-14</td>
+      <td>Potsdam</td>
+      <td>4046948-7</td>
+      <td>2</td>
+      <td>vollständig</td>
+      <td>Familienarchiv Albrecht (fiktiv), Nr. 7</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>B008</td>
+      <td>Hans Albrecht</td>
+      <td>Grete Albrecht</td>
+      <td>1848-11-10</td>
+      <td>Berlin</td>
+      <td>4005728-8</td>
+      <td>3</td>
+      <td>keine</td>
+      <td>Familienarchiv Albrecht (fiktiv), Nr. 8</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="einen-entwurf-erzeugen">
+<h3>Einen Entwurf erzeugen<a class="headerlink" href="#einen-entwurf-erzeugen" title="Link to this heading">#</a></h3>
+<p>Einen Teil des Datenwörterbuchs kann pandas aus der Tabelle selbst ableiten: die Spaltennamen, die erkannten Datentypen, die Zahl der ausgefüllten und fehlenden Werte und einige Beispiele. Die folgende Funktion erzeugt daraus einen Entwurf mit einer Zeile pro Spalte:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">beispiele</span><span class="p">(</span><span class="n">spalte</span><span class="p">,</span> <span class="n">anzahl</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Gibt die ersten verschiedenen Werte einer Spalte als Text zurück."""</span>
+    <span class="n">werte</span> <span class="o">=</span> <span class="n">spalte</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">unique</span><span class="p">()[:</span><span class="n">anzahl</span><span class="p">]</span>
+    <span class="k">return</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">wert</span><span class="p">)</span> <span class="k">for</span> <span class="n">wert</span> <span class="ow">in</span> <span class="n">werte</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">datenwoerterbuch_entwurf</span><span class="p">(</span><span class="n">tabelle</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Erstellt den Entwurf eines Datenwörterbuchs (eine Zeile pro Spalte)."""</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s2">"spalte"</span><span class="p">:</span> <span class="n">tabelle</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
+        <span class="s2">"datentyp"</span><span class="p">:</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">typ</span><span class="p">)</span> <span class="k">for</span> <span class="n">typ</span> <span class="ow">in</span> <span class="n">tabelle</span><span class="o">.</span><span class="n">dtypes</span><span class="p">],</span>
+        <span class="s2">"ausgefüllt"</span><span class="p">:</span> <span class="n">tabelle</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+        <span class="s2">"fehlend"</span><span class="p">:</span> <span class="n">tabelle</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+        <span class="s2">"verschieden"</span><span class="p">:</span> <span class="n">tabelle</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+        <span class="s2">"beispiele"</span><span class="p">:</span> <span class="n">tabelle</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">beispiele</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+        <span class="s2">"beschreibung"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="p">})</span>
+
+
+<span class="n">entwurf</span> <span class="o">=</span> <span class="n">datenwoerterbuch_entwurf</span><span class="p">(</span><span class="n">briefe</span><span class="p">)</span>
+<span class="n">entwurf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>spalte</th>
+      <th>datentyp</th>
+      <th>ausgefüllt</th>
+      <th>fehlend</th>
+      <th>verschieden</th>
+      <th>beispiele</th>
+      <th>beschreibung</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>brief_id</td>
+      <td>str</td>
+      <td>8</td>
+      <td>0</td>
+      <td>8</td>
+      <td>B001, B002, B003</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>absender</td>
+      <td>str</td>
+      <td>8</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Hans Albrecht, Grete Albrecht, Friedrich Albrecht</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>empfaenger</td>
+      <td>str</td>
+      <td>8</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Grete Albrecht, Hans Albrecht, Friedrich Albrecht</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>datum</td>
+      <td>str</td>
+      <td>8</td>
+      <td>0</td>
+      <td>8</td>
+      <td>1848-03-18, 1848-04-02, 1848-04-20</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ort</td>
+      <td>str</td>
+      <td>8</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Berlin, Potsdam, Gut Albrechtshof</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>ort_gnd</td>
+      <td>str</td>
+      <td>7</td>
+      <td>1</td>
+      <td>2</td>
+      <td>4005728-8, 4046948-7</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>seiten</td>
+      <td>int64</td>
+      <td>8</td>
+      <td>0</td>
+      <td>4</td>
+      <td>2, 1, 3</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>transkription</td>
+      <td>str</td>
+      <td>8</td>
+      <td>0</td>
+      <td>3</td>
+      <td>vollständig, teilweise, keine</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>signatur</td>
+      <td>str</td>
+      <td>8</td>
+      <td>0</td>
+      <td>8</td>
+      <td>Familienarchiv Albrecht (fiktiv), Nr. 1, Familienarchiv Albrecht (fiktiv), Nr. 2, Familienarchiv Albrecht (fiktiv), Nr. 3</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Mit <code class="docutils literal notranslate"><span class="pre">to_csv</span></code> speichern Sie den Entwurf als Tabelle, die Sie anschließend in einer Tabellenkalkulation vervollständigen:</p>
+<div class="cell tag_skip-execution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">entwurf</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">"datenwoerterbuch_entwurf.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="den-entwurf-vervollstandigen">
+<h3>Den Entwurf vervollständigen<a class="headerlink" href="#den-entwurf-vervollstandigen" title="Link to this heading">#</a></h3>
+<p>Was die Spalte <code class="docutils literal notranslate"><span class="pre">beschreibung</span></code> enthalten muss, kann kein Programm erraten. Bei historischen Daten verdienen dabei einige Punkte besondere Aufmerksamkeit.</p>
+<p><strong>Unsichere und ungefähre Datierungen.</strong> Viele Quellen sind nicht oder nur ungenau datiert. Statt solche Angaben wegzulassen oder in eine Bemerkungsspalte auszulagern, können Sie sie mit dem <strong>Extended Date/Time Format (EDTF)</strong> einheitlich kennzeichnen. EDTF ist ein Standard der Library of Congress und heute Teil der Norm ISO 8601-2:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Eintrag</p></th>
+<th class="head"><p>Bedeutung</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">1848-03-18</span></code></p></td>
+<td><p>18. März 1848</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">1848-05?</span></code></p></td>
+<td><p>Mai 1848, aber unsicher</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">1848-07~</span></code></p></td>
+<td><p>ungefähr Juli 1848</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">1848-06-XX</span></code></p></td>
+<td><p>Juni 1848, Tag unbekannt</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">1848?</span></code></p></td>
+<td><p>1848, aber unsicher</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Weil die Konvention festgelegt ist, lässt sie sich auch auswerten, etwa um alle Briefe zu finden, deren Datum nicht genau feststeht:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Markierungen für unsichere oder unbekannte Angaben: ? ~ % X</span>
+<span class="n">briefe</span><span class="p">[</span><span class="s2">"datum_unsicher"</span><span class="p">]</span> <span class="o">=</span> <span class="n">briefe</span><span class="p">[</span><span class="s2">"datum"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">"[?~</span><span class="si">%X</span><span class="s2">]"</span><span class="p">)</span>
+<span class="n">briefe</span><span class="p">[[</span><span class="s2">"brief_id"</span><span class="p">,</span> <span class="s2">"datum"</span><span class="p">,</span> <span class="s2">"datum_unsicher"</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>brief_id</th>
+      <th>datum</th>
+      <th>datum_unsicher</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>B001</td>
+      <td>1848-03-18</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>B002</td>
+      <td>1848-04-02</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>B003</td>
+      <td>1848-04-20</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>B004</td>
+      <td>1848-05?</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>B005</td>
+      <td>1848-06-XX</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>B006</td>
+      <td>1848-07~</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>B007</td>
+      <td>1848-09-14</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>B008</td>
+      <td>1848-11-10</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Normdaten.</strong> Namen sind mehrdeutig: „Berlin“ kann die Stadt an der Spree oder einen gleichnamigen Ort anderswo bezeichnen, und historische Schreibweisen wechseln. Eine Kennung aus einer <strong>Normdatei</strong> legt eindeutig fest, was gemeint ist:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Wofür</p></th>
+<th class="head"><p>Normdatei</p></th>
+<th class="head"><p>Hinweis</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Personen, Orte, Körperschaften und Sachbegriffe</p></td>
+<td><p><a class="reference external" href="https://www.dnb.de/DE/Professionell/Standardisierung/GND/gnd_node.html">Gemeinsame Normdatei (GND)</a></p></td>
+<td><p>von der Deutschen Nationalbibliothek und Bibliotheken gemeinsam geführt; im deutschsprachigen Raum am weitesten verbreitet</p></td>
+</tr>
+<tr class="row-odd"><td><p>Personen, international</p></td>
+<td><p><a class="reference external" href="https://viaf.org">VIAF</a></p></td>
+<td><p>führt die GND mit den Normdateien anderer Länder zusammen</p></td>
+</tr>
+<tr class="row-even"><td><p>Orte mit Koordinaten</p></td>
+<td><p><a class="reference external" href="https://www.geonames.org">GeoNames</a></p></td>
+<td><p>geografische Datenbank mit weltweiten Ortsangaben</p></td>
+</tr>
+<tr class="row-odd"><td><p>Personen, Orte, Ereignisse, übergreifend</p></td>
+<td><p><a class="reference external" href="https://www.wikidata.org">Wikidata</a></p></td>
+<td><p>offene, gemeinschaftlich gepflegte Wissensdatenbank</p></td>
+</tr>
+<tr class="row-even"><td><p>Sie selbst als Autor:in</p></td>
+<td><p><a class="reference external" href="https://orcid.org">ORCID</a></p></td>
+<td><p>kostenlose Kennung für Forschende, die Sie bei Veröffentlichungen angeben</p></td>
+</tr>
+<tr class="row-odd"><td><p>Forschungseinrichtungen</p></td>
+<td><p><a class="reference external" href="https://ror.org">ROR</a></p></td>
+<td><p>Kennungen für Universitäten und Institute</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Im Beispiel verweist die GND-Nummer <code class="docutils literal notranslate"><span class="pre">4005728-8</span></code> auf Berlin und <code class="docutils literal notranslate"><span class="pre">4046948-7</span></code> auf Potsdam. Ähnlich wie Normdateien legen <strong>kontrollierte Vokabulare</strong> fest, mit welchen Begriffen Sie etwas beschreiben, etwa bei Schlagwörtern; auch hierfür bietet die GND Sachbegriffe. Dokumentieren Sie, welche Normdateien und Vokabulare Sie verwenden.</p>
+<p><strong>Leere Felder.</strong> Ein leeres Feld kann „nicht vorhanden“, „unbekannt“ oder „nicht erhoben“ bedeuten. Legen Sie fest, was es in Ihrem Datensatz bedeutet. Im Beispiel ist <code class="docutils literal notranslate"><span class="pre">ort_gnd</span></code> beim Gut Albrechtshof leer, weil der Ort keinen Eintrag in der GND hat, nicht weil er nicht nachgeschlagen wurde.</p>
+<p><strong>Normierte und originale Schreibweisen.</strong> Wenn Sie Namen oder Orte vereinheitlichen, geht die Schreibweise der Quelle verloren. Ist sie für Ihre Fragestellung relevant, erfassen Sie sie in einer eigenen Spalte.</p>
+</section>
+<section id="das-fertige-datenworterbuch">
+<h3>Das fertige Datenwörterbuch<a class="headerlink" href="#das-fertige-datenworterbuch" title="Link to this heading">#</a></h3>
+<p>Für den Beispieldatensatz ist das Datenwörterbuch selbst eine CSV-Datei, die neben den Daten liegt. Sie lässt sich in jeder Tabellenkalkulation bearbeiten und mit pandas einlesen:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">woerterbuch</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">"beispieldaten/briefe_1848_datenwoerterbuch.csv"</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">";"</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">str</span>
+<span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>
+<span class="n">woerterbuch</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>spalte</th>
+      <th>beschreibung</th>
+      <th>datentyp</th>
+      <th>pflichtfeld</th>
+      <th>eindeutig</th>
+      <th>erlaubte_werte</th>
+      <th>muster</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>brief_id</td>
+      <td>Kennung des Briefs in diesem Datensatz: B und dreistellige Nummer</td>
+      <td>Text</td>
+      <td>ja</td>
+      <td>ja</td>
+      <td></td>
+      <td>B[0-9]{3}</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>absender</td>
+      <td>Person, die den Brief geschrieben hat, in normierter Schreibweise (Vorname Nachname)</td>
+      <td>Text</td>
+      <td>ja</td>
+      <td>nein</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>empfaenger</td>
+      <td>Person, an die der Brief gerichtet ist, in normierter Schreibweise (Vorname Nachname)</td>
+      <td>Text</td>
+      <td>ja</td>
+      <td>nein</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>datum</td>
+      <td>Datum im Extended Date/Time Format (EDTF): JJJJ-MM-TT, "?" = unsicher, "~" = ungefähr, "XX" = unbekannte Stelle</td>
+      <td>Text</td>
+      <td>ja</td>
+      <td>nein</td>
+      <td></td>
+      <td>[0-9]{4}(-([0-9]{2}|XX)){0,2}[?~%]?</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ort</td>
+      <td>Abfassungsort in heutiger Schreibweise</td>
+      <td>Text</td>
+      <td>ja</td>
+      <td>nein</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>ort_gnd</td>
+      <td>GND-Nummer des Abfassungsorts, leer, wenn der Ort keinen Eintrag in der GND hat</td>
+      <td>Text</td>
+      <td>nein</td>
+      <td>nein</td>
+      <td></td>
+      <td>[0-9]{7}-[0-9X]</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>seiten</td>
+      <td>Umfang des Briefs in beschriebenen Seiten</td>
+      <td>ganze Zahl</td>
+      <td>ja</td>
+      <td>nein</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>transkription</td>
+      <td>Stand der Transkription des Briefs</td>
+      <td>Text</td>
+      <td>ja</td>
+      <td>nein</td>
+      <td>vollständig, teilweise, keine</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>signatur</td>
+      <td>Signatur des Originals im Archiv</td>
+      <td>Text</td>
+      <td>ja</td>
+      <td>nein</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Neben der Beschreibung enthält es für jede Spalte einige <strong>Regeln</strong>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Spalte im Datenwörterbuch</p></th>
+<th class="head"><p>Bedeutung</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">datentyp</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Text</span></code> oder <code class="docutils literal notranslate"><span class="pre">ganze</span> <span class="pre">Zahl</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pflichtfeld</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ja</span></code>, wenn das Feld nie leer sein darf</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">eindeutig</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ja</span></code>, wenn jeder Wert nur einmal vorkommen darf, wie bei einer Kennung</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">erlaubte_werte</span></code></p></td>
+<td><p>die einzigen zulässigen Werte, durch Kommas getrennt</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">muster</span></code></p></td>
+<td><p>ein regulärer Ausdruck, dem jeder Wert entsprechen muss</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Ein <strong>regulärer Ausdruck</strong> beschreibt den Aufbau eines Textes. <code class="docutils literal notranslate"><span class="pre">B[0-9]{3}</span></code> bedeutet etwa „ein B, gefolgt von genau drei Ziffern“, <code class="docutils literal notranslate"><span class="pre">[0-9]{7}-[0-9X]</span></code> „sieben Ziffern, ein Bindestrich und eine Ziffer oder ein X“. Das Muster für die Spalte <code class="docutils literal notranslate"><span class="pre">datum</span></code> beschreibt die oben genannten EDTF-Angaben.</p>
+</section>
+</section>
+<section id="daten-gegen-das-datenworterbuch-prufen">
+<h2>5. Daten gegen das Datenwörterbuch prüfen<a class="headerlink" href="#daten-gegen-das-datenworterbuch-prufen" title="Link to this heading">#</a></h2>
+<p>Weil die Regeln im Datenwörterbuch so festgehalten sind, dass ein Programm sie lesen kann, lässt sich automatisch prüfen, ob die Daten ihrer Dokumentation entsprechen. Die folgende Funktion geht das Datenwörterbuch Zeile für Zeile durch und sammelt alle Verstöße. Jede Prüfung ist dabei eine einzelne pandas-Anweisung:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">daten_pruefen</span><span class="p">(</span><span class="n">tabelle</span><span class="p">,</span> <span class="n">woerterbuch</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Prüft eine Tabelle gegen ihr Datenwörterbuch und listet Verstöße."""</span>
+    <span class="n">probleme</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">melden</span><span class="p">(</span><span class="n">zeilen</span><span class="p">,</span> <span class="n">spalte</span><span class="p">,</span> <span class="n">problem</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">zeilen</span><span class="p">:</span>
+            <span class="n">wert</span> <span class="o">=</span> <span class="n">tabelle</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="n">spalte</span><span class="p">]</span>
+            <span class="n">probleme</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s2">"zeile"</span><span class="p">:</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span>  <span class="c1"># Zeile in der Datei; Kopfzeile = 1</span>
+                <span class="s2">"spalte"</span><span class="p">:</span> <span class="n">spalte</span><span class="p">,</span>
+                <span class="s2">"wert"</span><span class="p">:</span> <span class="s2">"(leer)"</span> <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">wert</span><span class="p">)</span> <span class="k">else</span> <span class="n">wert</span><span class="p">,</span>
+                <span class="s2">"problem"</span><span class="p">:</span> <span class="n">problem</span><span class="p">,</span>
+            <span class="p">})</span>
+
+    <span class="k">for</span> <span class="n">spalte</span> <span class="ow">in</span> <span class="n">tabelle</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">woerterbuch</span><span class="p">[</span><span class="s2">"spalte"</span><span class="p">]):</span>
+        <span class="n">probleme</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"zeile"</span><span class="p">:</span> <span class="s2">"–"</span><span class="p">,</span> <span class="s2">"spalte"</span><span class="p">:</span> <span class="n">spalte</span><span class="p">,</span> <span class="s2">"wert"</span><span class="p">:</span> <span class="s2">"–"</span><span class="p">,</span>
+                         <span class="s2">"problem"</span><span class="p">:</span> <span class="s2">"Spalte fehlt im Datenwörterbuch"</span><span class="p">})</span>
+
+    <span class="k">for</span> <span class="n">regel</span> <span class="ow">in</span> <span class="n">woerterbuch</span><span class="o">.</span><span class="n">itertuples</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">regel</span><span class="o">.</span><span class="n">spalte</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tabelle</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">probleme</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"zeile"</span><span class="p">:</span> <span class="s2">"–"</span><span class="p">,</span> <span class="s2">"spalte"</span><span class="p">:</span> <span class="n">regel</span><span class="o">.</span><span class="n">spalte</span><span class="p">,</span> <span class="s2">"wert"</span><span class="p">:</span> <span class="s2">"–"</span><span class="p">,</span>
+                             <span class="s2">"problem"</span><span class="p">:</span> <span class="s2">"Spalte fehlt in der Tabelle"</span><span class="p">})</span>
+            <span class="k">continue</span>
+        <span class="n">werte</span> <span class="o">=</span> <span class="n">tabelle</span><span class="p">[</span><span class="n">regel</span><span class="o">.</span><span class="n">spalte</span><span class="p">]</span>
+        <span class="n">vorhanden</span> <span class="o">=</span> <span class="n">werte</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">regel</span><span class="o">.</span><span class="n">pflichtfeld</span> <span class="o">==</span> <span class="s2">"ja"</span><span class="p">:</span>
+            <span class="n">melden</span><span class="p">(</span><span class="n">werte</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">~</span><span class="n">vorhanden</span><span class="p">],</span> <span class="n">regel</span><span class="o">.</span><span class="n">spalte</span><span class="p">,</span>
+                   <span class="s2">"Pflichtfeld ist leer"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">regel</span><span class="o">.</span><span class="n">eindeutig</span> <span class="o">==</span> <span class="s2">"ja"</span><span class="p">:</span>
+            <span class="n">doppelt</span> <span class="o">=</span> <span class="n">werte</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">vorhanden</span>
+            <span class="n">melden</span><span class="p">(</span><span class="n">werte</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">doppelt</span><span class="p">],</span> <span class="n">regel</span><span class="o">.</span><span class="n">spalte</span><span class="p">,</span>
+                   <span class="s2">"Wert kommt mehrfach vor"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">regel</span><span class="o">.</span><span class="n">datentyp</span> <span class="o">==</span> <span class="s2">"ganze Zahl"</span><span class="p">:</span>
+            <span class="n">zahlen</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">werte</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"coerce"</span><span class="p">)</span>
+            <span class="n">keine_zahl</span> <span class="o">=</span> <span class="n">vorhanden</span> <span class="o">&amp;</span> <span class="o">~</span><span class="p">(</span><span class="n">zahlen</span> <span class="o">%</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">melden</span><span class="p">(</span><span class="n">werte</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">keine_zahl</span><span class="p">],</span> <span class="n">regel</span><span class="o">.</span><span class="n">spalte</span><span class="p">,</span> <span class="s2">"keine ganze Zahl"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">regel</span><span class="o">.</span><span class="n">erlaubte_werte</span><span class="p">:</span>
+            <span class="n">erlaubt</span> <span class="o">=</span> <span class="n">regel</span><span class="o">.</span><span class="n">erlaubte_werte</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">", "</span><span class="p">)</span>
+            <span class="n">melden</span><span class="p">(</span><span class="n">werte</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">vorhanden</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">werte</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">erlaubt</span><span class="p">)],</span>
+                   <span class="n">regel</span><span class="o">.</span><span class="n">spalte</span><span class="p">,</span> <span class="s2">"Wert ist nicht erlaubt"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">regel</span><span class="o">.</span><span class="n">muster</span><span class="p">:</span>
+            <span class="n">passt</span> <span class="o">=</span> <span class="n">werte</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="n">regel</span><span class="o">.</span><span class="n">muster</span><span class="p">)</span>
+            <span class="n">melden</span><span class="p">(</span><span class="n">werte</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">vorhanden</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">passt</span><span class="p">],</span> <span class="n">regel</span><span class="o">.</span><span class="n">spalte</span><span class="p">,</span>
+                   <span class="s2">"Wert entspricht nicht dem Muster"</span><span class="p">)</span>
+
+    <span class="n">spalten</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"zeile"</span><span class="p">,</span> <span class="s2">"spalte"</span><span class="p">,</span> <span class="s2">"wert"</span><span class="p">,</span> <span class="s2">"problem"</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">probleme</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">spalten</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"zeile"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Für die Datei <code class="docutils literal notranslate"><span class="pre">briefe_1848.csv</span></code> findet die Prüfung nichts:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">original</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"beispieldaten/briefe_1848.csv"</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">";"</span><span class="p">)</span>
+<span class="n">daten_pruefen</span><span class="p">(</span><span class="n">original</span><span class="p">,</span> <span class="n">woerterbuch</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>spalte</th>
+      <th>wert</th>
+      <th>problem</th>
+    </tr>
+    <tr>
+      <th>zeile</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Die Datei wird hier neu eingelesen, weil die Tabelle <code class="docutils literal notranslate"><span class="pre">briefe</span></code> inzwischen die Spalte <code class="docutils literal notranslate"><span class="pre">datum_unsicher</span></code> enthält, die in Abschnitt 4 ergänzt wurde. Prüfen Sie stattdessen <code class="docutils literal notranslate"><span class="pre">briefe</span></code>, meldet die Funktion diese Spalte, weil sie im Datenwörterbuch fehlt. Abgeleitete Spalten, die Sie im Code berechnen, müssen Sie nicht dokumentieren, solange Sie sie nicht mit den Daten abspeichern.</p>
+<p>Interessanter ist eine Kopie, in die sich typische Fehler eingeschlichen haben, wie sie bei der Erfassung von Hand entstehen:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fehlerhaft</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"beispieldaten/briefe_1848_fehlerhaft.csv"</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">";"</span><span class="p">)</span>
+<span class="n">daten_pruefen</span><span class="p">(</span><span class="n">fehlerhaft</span><span class="p">,</span> <span class="n">woerterbuch</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>spalte</th>
+      <th>wert</th>
+      <th>problem</th>
+    </tr>
+    <tr>
+      <th>zeile</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>7</th>
+      <td>brief_id</td>
+      <td>B005</td>
+      <td>Wert kommt mehrfach vor</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>empfaenger</td>
+      <td>(leer)</td>
+      <td>Pflichtfeld ist leer</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>datum</td>
+      <td>20.04.1848</td>
+      <td>Wert entspricht nicht dem Muster</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>ort_gnd</td>
+      <td>4005728</td>
+      <td>Wert entspricht nicht dem Muster</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>seiten</td>
+      <td>eine</td>
+      <td>keine ganze Zahl</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>transkription</td>
+      <td>fertig</td>
+      <td>Wert ist nicht erlaubt</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Die Prüfung findet alle sechs Fehler in einem Durchgang. Sie geht dabei die Spalten in der Reihenfolge des Datenwörterbuchs durch; die Zeilennummern beziehen sich auf die Datei, in der die Kopfzeile die erste Zeile ist:</p>
+<ul class="simple">
+<li><p><strong>Zeile 7:</strong> Die Kennung <code class="docutils literal notranslate"><span class="pre">B005</span></code> kommt doppelt vor.</p></li>
+<li><p><strong>Zeile 8:</strong> Der Empfänger fehlt.</p></li>
+<li><p><strong>Zeile 4:</strong> Das Datum <code class="docutils literal notranslate"><span class="pre">20.04.1848</span></code> folgt nicht dem vereinbarten EDTF-Format.</p></li>
+<li><p><strong>Zeile 5:</strong> Der GND-Nummer fehlt die Prüfziffer.</p></li>
+<li><p><strong>Zeile 6:</strong> Die Seitenzahl steht als Wort (<code class="docutils literal notranslate"><span class="pre">eine</span></code>) statt als Zahl in der Tabelle.</p></li>
+<li><p><strong>Zeile 9:</strong> <code class="docutils literal notranslate"><span class="pre">fertig</span></code> ist kein erlaubter Wert für den Stand der Transkription.</p></li>
+</ul>
+<p>Eine solche Prüfung lohnt sich nach jeder Bearbeitung der Daten, und bei größeren Datensätzen findet sie Fehler, die beim Durchsehen leicht übersehen werden. Weil die Funktion auch Spalten meldet, die im Datenwörterbuch fehlen, erinnert sie Sie zugleich daran, die Dokumentation aktuell zu halten. Das Datenwörterbuch ist damit eine einzige Quelle für beides: die Beschreibung für Menschen und die Regeln für die Prüfung.</p>
+</section>
+<section id="metadaten-und-standards">
+<span id="fdm-metadaten"></span><h2>6. Metadaten und Standards<a class="headerlink" href="#metadaten-und-standards" title="Link to this heading">#</a></h2>
+<p>Metadaten machen Daten auffindbar. Wenn Sie Daten in einem Repositorium veröffentlichen, fragt dieses sie meist in einem Formular ab und speichert sie nach einem <strong>Metadatenstandard</strong>, damit Suchmaschinen und Kataloge sie einheitlich auswerten können. Für Ihre Arbeit sind vor allem diese Standards von Bedeutung:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Standard</p></th>
+<th class="head"><p>Wofür</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://schema.datacite.org">DataCite</a></p></td>
+<td><p>fachübergreifender Standard für Forschungsdaten, auf dem die Vergabe von DOIs beruht</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://www.dublincore.org">Dublin Core</a></p></td>
+<td><p>einfacher, fachübergreifender Standard mit 15 Grundelementen wie Titel, Urheber:in, Datum, Thema und Rechte</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://tei-c.org">Text Encoding Initiative (TEI)</a></p></td>
+<td><p>Standard der Geisteswissenschaften für die Auszeichnung von Texten, etwa für digitale Editionen; der TEI-Header enthält die Metadaten zu Quelle und Bearbeitung</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Die Angaben, die diese Standards verlangen, decken sich weitgehend mit denen einer guten Daten-README: Titel, Urheber:innen und Mitwirkende, Zeitraum, Ort, Schlagwörter, Sprache, Rechte, Dateien und Formate, Methode, Quellen und verwandte Ressourcen. Haben Sie die README sorgfältig geschrieben, übernehmen Sie diese Angaben beim Veröffentlichen einfach in das Formular des Repositoriums. Zu fachspezifischen Standards beraten an der HU die <a class="reference external" href="https://www.ub.hu-berlin.de/de/ueber-uns/kontakt/ansprechpartner/ansprechpartner-fachreferentinnen-und-fachreferenten">Fachreferentinnen und Fachreferenten der Universitätsbibliothek</a>.</p>
+</section>
+<section id="die-verarbeitung-nachvollziehbar-machen">
+<h2>7. Die Verarbeitung nachvollziehbar machen<a class="headerlink" href="#die-verarbeitung-nachvollziehbar-machen" title="Link to this heading">#</a></h2>
+<p>Dokumentation beschreibt nicht nur das Ergebnis, sondern auch den Weg dorthin:</p>
+<ul class="simple">
+<li><p><strong>Rohdaten bleiben unverändert.</strong> Alle Schritte von <code class="docutils literal notranslate"><span class="pre">data/raw</span></code> nach <code class="docutils literal notranslate"><span class="pre">data/processed</span></code> stehen in Code, nicht in händischen Änderungen an der Datei.</p></li>
+<li><p><strong>Jeder Schritt ist im Code nachvollziehbar</strong>, im Essay selbst oder in einem ausgelagerten Skript, das der Essay aufruft.</p></li>
+<li><p><strong>Die Commit-Historie hält fest, wann und warum sich Daten geändert haben.</strong> Eine Commit-Nachricht wie „Briefe vor 1840 ausgeschlossen, Datierung unsicher“ ist Teil der Dokumentation (siehe <a class="reference internal" href="../tools/git-history.html"><span class="doc">Git-Historie nachvollziehen und bearbeiten</span></a>).</p></li>
+<li><p><strong>Die Projektumgebung ist festgehalten</strong>, etwa in einer <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>, damit die Verarbeitung mit denselben Programmversionen wiederholt werden kann (siehe <a class="reference internal" href="../project_environments/intro.html"><span class="doc">Projektumgebungen</span></a>).</p></li>
+</ul>
+</section>
+<section id="veroffentlichen-und-archivieren">
+<h2>8. Veröffentlichen und archivieren<a class="headerlink" href="#veroffentlichen-und-archivieren" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Checkliste vor der Abgabe oder Veröffentlichung</p>
+<ul class="simple">
+<li><p>Das Projekt hat eine README mit Fragestellung, Aufbau und Anleitung zur Reproduktion.</p></li>
+<li><p>Jeder Datensatz hat eine README mit Quellen, Bearbeitungsschritten und Rechten.</p></li>
+<li><p>Jede Spalte ist im Datenwörterbuch beschrieben, einschließlich der Bedeutung leerer Felder.</p></li>
+<li><p>Unsichere Angaben sind einheitlich gekennzeichnet, und die Konvention ist dokumentiert.</p></li>
+<li><p>Die Daten liegen in offenen Formaten vor (z. B. CSV in UTF-8).</p></li>
+<li><p>Rohdaten sind unverändert; alle Bearbeitungsschritte stehen im Code.</p></li>
+<li><p>Die Daten wurden gegen ihr Datenwörterbuch geprüft.</p></li>
+<li><p>Daten, die nicht veröffentlicht werden dürfen, sind nicht im Repository und ihr Speicherort ist dokumentiert.</p></li>
+<li><p>Eigene Fotos, etwa von Archivalien, enthalten keine ungewollten Metadaten wie GPS-Koordinaten. Smartphones speichern sie oft automatisch in der Bilddatei.</p></li>
+</ul>
+</div>
+<p>Für die Veröffentlichung von Forschungsdaten empfiehlt die HU den Grundsatz <strong>„Zugänglich, wenn möglich, eingeschränkt, wenn notwendig“</strong>: Veröffentlichen Sie, was Sie veröffentlichen dürfen, und schränken Sie den Zugang nur ein, wo Rechte Dritter oder der Schutz von Personen es verlangen.</p>
+<p>Damit Ihre Daten dauerhaft auffindbar und zitierbar bleiben, sollten sie eine <strong>persistente Kennung</strong> erhalten, meist eine <strong>DOI</strong> (<em>Digital Object Identifier</em>). Anders als eine gewöhnliche Webadresse führt eine DOI auch dann noch zu Ihren Daten, wenn sich ihr Speicherort ändert. DOIs vergeben Repositorien, in denen Sie Ihre Daten ablegen:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://zenodo.org">Zenodo</a> ist ein fachübergreifendes, kostenloses Repositorium, das jeder veröffentlichten Fassung eine eigene DOI zuweist.</p></li>
+<li><p>An der HU vergibt der <a class="reference external" href="https://edoc.hu-berlin.de">edoc-Server</a> für Open-Access-Veröffentlichungen eine DOI und eine URN, eine weitere persistente Kennung; im <a class="reference external" href="https://medien.hu-berlin.de">Medien-Repositorium</a> der HU kann ebenfalls eine DOI vergeben werden. Ob und wie Sie als Studierende diese Angebote nutzen können, erfahren Sie unter <a class="reference external" href="mailto:edoc&#37;&#52;&#48;cms&#46;hu-berlin&#46;de">edoc<span>&#64;</span>cms<span>&#46;</span>hu-berlin<span>&#46;</span>de</a>.</p></li>
+<li><p>Fachrepositorien für Ihre Disziplin finden Sie im Verzeichnis <a class="reference external" href="https://www.re3data.org">re3data.org</a>.</p></li>
+</ul>
+<p>Unter welcher Lizenz Sie Daten veröffentlichen und was bei Rechten an Quellen zu beachten ist, behandelt das Kapitel <a class="reference internal" href="lizenzen.html"><span class="doc">Lizenzen für Code und Daten</span></a>. Für eine persönliche Beratung steht die <a class="reference external" href="https://www.cms.hu-berlin.de/en/dl-en/dataman-en/home/home">Initiative Forschungsdatenmanagement der HU</a> zur Verfügung (<a class="reference external" href="mailto:forschungsdaten&#37;&#52;&#48;hu-berlin&#46;de">forschungsdaten<span>&#64;</span>hu-berlin<span>&#46;</span>de</a>).</p>
+<section id="daten-in-einem-data-paper-vorstellen">
+<h3>Daten in einem Data Paper vorstellen<a class="headerlink" href="#daten-in-einem-data-paper-vorstellen" title="Link to this heading">#</a></h3>
+<p>Ein Datensatz mit DOI ist zitierbar, aber andere Forschende erfahren meist erst von ihm, wenn er in einer Zeitschrift vorgestellt wird. Dafür gibt es <strong>Data Papers</strong>: Artikel, die einen bereits veröffentlichten Datensatz beschreiben, also wie er entstanden ist, wie er aufgebaut ist und wofür er sich eignet. Die Daten selbst bleiben im Repositorium, der Artikel verweist auf sie. So wird die Arbeit, die in Erhebung und Dokumentation steckt, als eigene wissenschaftliche Leistung sichtbar und zitierbar.</p>
+<p>Im deutschsprachigen Raum bietet die <a class="reference external" href="https://zfdg.de">Zeitschrift für digitale Geisteswissenschaften (ZfdG)</a> dieses Format an. Die ZfdG ist eine Open-Access-Zeitschrift, die der Forschungsverbund Marbach Weimar Wolfenbüttel gemeinsam mit dem Verband Digital Humanities im deutschsprachigen Raum (DHd) herausgibt. Ihre Beiträge erscheinen unter der Lizenz CC BY-SA 4.0 und erhalten eine DOI. Für Data Papers nennt die ZfdG (Stand Oktober 2026) folgende Bedingungen:</p>
+<ul class="simple">
+<li><p><strong>Voraussetzungen:</strong> Die Daten stammen aus einem geisteswissenschaftlichen Kontext, sind bereits veröffentlicht, frei zugänglich und über eine persistente Kennung erreichbar. Es gibt eine Strategie für ihre Langzeitarchivierung, und sie folgen verbreiteten Datenstandards.</p></li>
+<li><p><strong>Umfang:</strong> höchstens 5.000 Wörter. An die Stelle des Abstracts tritt eine tabellarische Beschreibung des Datensatzes.</p></li>
+<li><p><strong>Einreichung:</strong> zunächst ein Exposé von höchstens 1.000 Wörtern an die Redaktion (<a class="reference external" href="mailto:redaktion&#37;&#52;&#48;zfdg&#46;de">redaktion<span>&#64;</span>zfdg<span>&#46;</span>de</a>), das auch die Metadaten der Datenpublikation nennt, etwa Titel, Autor:innen, Version, Repositorium und DOI.</p></li>
+<li><p><strong>Begutachtung:</strong> offen durch die Fachcommunity (<em>Open Peer Review</em>).</p></li>
+</ul>
+<p>Die ZfdG gibt für Data Papers eine feste Gliederung vor. Haben Sie Ihre Daten wie in diesem Kapitel beschrieben dokumentiert, liegt das Material für die ersten drei Teile bereits vor:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Teil des Data Papers</p></th>
+<th class="head"><p>Grundlage in Ihrer Dokumentation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Zielstellung, Kontext und Datenquellen</p></td>
+<td><p>Projekt-README sowie die Abschnitte „Überblick“ und „Quellen“ der Daten-README</p></td>
+</tr>
+<tr class="row-odd"><td><p>Beschreibung der Datenerhebung</p></td>
+<td><p>Abschnitt „Erhebung und Bearbeitung“ der Daten-README, Notebooks und Skripte</p></td>
+</tr>
+<tr class="row-even"><td><p>Strukturelle Beschreibung der Datenpublikation</p></td>
+<td><p>Dateien, Formate und Datenwörterbuch</p></td>
+</tr>
+<tr class="row-odd"><td><p>Interpretationsansätze, Nutzungshorizonte, Limitationen und verwandte Arbeiten</p></td>
+<td><p>Ihr Essay: Was lässt sich mit den Daten zeigen, was nicht, und wo sind sie lückenhaft oder unsicher?</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Der letzte Teil geht über die Dokumentation hinaus: Hier ordnen Sie die Daten in die Forschung ein und benennen ihre Grenzen, etwa Lücken in der Überlieferung oder unsichere Datierungen. Beispiele finden Sie unter den <a class="reference external" href="https://zfdg.de/v-wie-veroeffentlichungen">Veröffentlichungen der ZfdG</a>, etwa zur <a class="reference external" href="https://zfdg.de/2025_001">digitalen Edition der Tagebücher Fürst Christians II. von Anhalt-Bernburg</a> oder zum <a class="reference external" href="https://zfdg.de/2025_004">Marburger Urkundenrepositorium</a>. Die jeweils gültigen Bedingungen stehen auf der Seite <a class="reference external" href="https://zfdg.de/p-wie-publizieren">P wie Publizieren</a>.</p>
+<p>Haben Sie etwa in einer Abschlussarbeit einen Datensatz erstellt, der auch für andere nützlich ist, besprechen Sie mit Ihren Betreuenden, ob sich ein Data Paper lohnt. Englischsprachige Data Papers veröffentlicht unter anderem das <a class="reference external" href="https://openhumanitiesdata.metajnl.com">Journal of Open Humanities Data</a>.</p>
+</section>
+</section>
+<section id="fur-groszere-arbeiten-ein-datenmanagementplan">
+<h2>9. Für größere Arbeiten: ein Datenmanagementplan<a class="headerlink" href="#fur-groszere-arbeiten-ein-datenmanagementplan" title="Link to this heading">#</a></h2>
+<p>Für einen Computational Essay im Seminar genügen README und Datenwörterbuch. Bei Abschlussarbeiten und größeren Projekten lohnt es sich, vorab einen <strong>Datenmanagementplan</strong> (DMP) zu schreiben: ein kurzes Dokument, das festhält, wie Daten erstellt oder gesammelt, organisiert, dokumentiert, gespeichert, aufbewahrt und veröffentlicht werden. Die HU nennt dabei ausdrücklich auch Abschlussarbeiten und Dissertationen und schlägt folgende Fragen als Ausgangspunkt vor:</p>
+<ul class="simple">
+<li><p>Was ist das Ziel des Projekts, und wer ist beteiligt?</p></li>
+<li><p>Welche Daten werden erhoben oder nachgenutzt, und wie?</p></li>
+<li><p>Welche Standards werden verwendet, etwa für Formate, Metadaten und Normdaten?</p></li>
+<li><p>Wie werden die Daten gespeichert, gesichert, archiviert und gegebenenfalls zugänglich gemacht?</p></li>
+<li><p>Gibt es rechtliche, zeitliche oder andere Einschränkungen für die Veröffentlichung?</p></li>
+</ul>
+<p>Die HU bietet dazu <a class="reference external" href="https://www.cms.hu-berlin.de/de/dl/dataman/support/material">Video-Tutorials</a> und Beratung an.</p>
+</section>
+<section id="ubung">
+<h2>Übung<a class="headerlink" href="#ubung" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Laden Sie die Dateien aus dem Ordner <a class="reference external" href="https://github.com/Digital-History-Berlin/Computational-Essays/tree/main/fdm/beispieldaten"><code class="docutils literal notranslate"><span class="pre">fdm/beispieldaten</span></code></a> herunter und führen Sie die Prüfung mit <code class="docutils literal notranslate"><span class="pre">daten_pruefen</span></code> für beide CSV-Dateien selbst aus.</p></li>
+<li><p>Ergänzen Sie in <code class="docutils literal notranslate"><span class="pre">briefe_1848.csv</span></code> eine Spalte <code class="docutils literal notranslate"><span class="pre">sprache</span></code> mit der Sprache des Briefs (z. B. <code class="docutils literal notranslate"><span class="pre">de</span></code>) und führen Sie die Prüfung erneut aus. Ergänzen Sie dann das Datenwörterbuch um eine Zeile für die neue Spalte, mit Beschreibung und erlaubten Werten, bis die Prüfung keine Probleme mehr meldet.</p></li>
+<li><p>Erzeugen Sie für einen eigenen Datensatz mit <code class="docutils literal notranslate"><span class="pre">datenwoerterbuch_entwurf</span></code> einen Entwurf des Datenwörterbuchs und vervollständigen Sie die Beschreibungen.</p></li>
+<li><p>Schreiben Sie mit der <a class="reference download internal" download="" href="../_downloads/86272973899a42cdf7692a513b5beb8f/README_daten_vorlage.md"><code class="xref download docutils literal notranslate"><span class="pre">README-Vorlage</span></code></a> eine README für diesen Datensatz. Bitten Sie eine andere Person, die Daten nur mithilfe der README zu erklären: Wo bleiben Fragen offen?</p></li>
+</ol>
+</section>
+<section id="weiterfuhrende-ressourcen">
+<h2>Weiterführende Ressourcen<a class="headerlink" href="#weiterfuhrende-ressourcen" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Forschungsdatenmanagement an der HU: <a class="reference external" href="https://www.cms.hu-berlin.de/de/dl/dataman/teilen/dokumentation">Dokumentation und Metadaten</a>, <a class="reference external" href="https://www.cms.hu-berlin.de/de/dl/dataman/teilen/dokumentation/normdaten">Normdaten</a>, <a class="reference external" href="https://www.cms.hu-berlin.de/de/dl/dataman/teilen/pid">Persistente Identifikation</a> und die <a class="reference external" href="https://cms.hu-berlin.de/de/dl/dataman/readme-template/view">README-Vorlage der HU</a></p></li>
+<li><p><a class="reference external" href="https://www.ibi.hu-berlin.de/de/studium/rundumdasstudium/fdm-fuer-studierende/leitfragen_fdm_finale_version_dez_21.pdf/view">Leitfragen zum Forschungsdatenmanagement für Studierende</a> des Instituts für Bibliotheks- und Informationswissenschaft der HU</p></li>
+<li><p><a class="reference external" href="https://www.dfg.de/resource/blob/401324/handreichung-fk-112-geschichtswissenschaften.pdf">DFG-Handreichung zum Umgang mit Forschungsdaten in den Geschichtswissenschaften</a></p></li>
+<li><p><a class="reference external" href="https://zfdg.de">Zeitschrift für digitale Geisteswissenschaften (ZfdG)</a>: Artikel und Data Papers aus den digitalen Geisteswissenschaften, Bedingungen für Data Papers unter <a class="reference external" href="https://zfdg.de/p-wie-publizieren">P wie Publizieren</a></p></li>
+<li><p>AG Digitales Publizieren des DHd: <a class="reference external" href="https://doi.org/10.17175/wp_2021_001_v2">Digitales Publizieren in den Geisteswissenschaften: Begriffe, Standards, Empfehlungen</a>, ZfdG Working Papers 1 (2021)</p></li>
+<li><p><a class="reference external" href="https://forschungsdaten.info">forschungsdaten.info</a>: deutschsprachiges Informationsportal, u. a. zum Thema „Beschreiben und Dokumentieren“</p></li>
+<li><p>James Baker: <a class="reference external" href="https://programminghistorian.org/en/lessons/preserving-your-research-data">Preserving Your Research Data</a>, The Programming Historian (englisch): Dokumentation und Ordnung von Forschungsdaten für Historiker:innen</p></li>
+<li><p><a class="reference external" href="https://www.loc.gov/standards/datetime/">Extended Date/Time Format (EDTF)</a>: Spezifikation der Library of Congress (englisch)</p></li>
+<li><p>Wilkinson, Mark D. u. a.: „The FAIR Guiding Principles for scientific data management and stewardship“, in: Scientific Data 3 (2016), 160018, <a class="reference external" href="https://doi.org/10.1038/sdata.2016.18">doi:10.1038/sdata.2016.18</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "executablebooks/jupyter-book",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./fdm"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../tools/git-lfs.html"
+       title="Vorherige Seite">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">zurück</p>
+        <p class="prev-next-title">Große Dateien mit Git LFS</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="lizenzen.html"
+       title="Nächste Seite">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">weiter</p>
+        <p class="prev-next-title">Lizenzen für Code und Daten</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Inhalt
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einfuhrung">Einführung</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lernziele">Lernziele</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voraussetzungen">Voraussetzungen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#was-dokumentiert-werden-sollte">1. Was dokumentiert werden sollte</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ordnerstruktur-und-dateinamen">2. Ordnerstruktur und Dateinamen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eine-struktur-fur-ihr-projekt">Eine Struktur für Ihr Projekt</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dateinamen">Dateinamen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#offene-dateiformate">Offene Dateiformate</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#die-daten-readme">3. Die Daten-README</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#das-datenworterbuch">4. Das Datenwörterbuch</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#einen-entwurf-erzeugen">Einen Entwurf erzeugen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#den-entwurf-vervollstandigen">Den Entwurf vervollständigen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#das-fertige-datenworterbuch">Das fertige Datenwörterbuch</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#daten-gegen-das-datenworterbuch-prufen">5. Daten gegen das Datenwörterbuch prüfen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metadaten-und-standards">6. Metadaten und Standards</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#die-verarbeitung-nachvollziehbar-machen">7. Die Verarbeitung nachvollziehbar machen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#veroffentlichen-und-archivieren">8. Veröffentlichen und archivieren</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#daten-in-einem-data-paper-vorstellen">Daten in einem Data Paper vorstellen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fur-groszere-arbeiten-ein-datenmanagementplan">9. Für größere Arbeiten: ein Datenmanagementplan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ubung">Übung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weiterfuhrende-ressourcen">Weiterführende Ressourcen</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Durch <a href="https://www.geschichte.hu-berlin.de/de/bereiche-und-lehrstuehle/digital-history">Digital History, Humboldt-Universität zu Berlin</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="https://creativecommons.org/licenses/by/4.0/deed.de"><img class="license" alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> Texte und Abbildungen dieses Buchs stehen unter der Lizenz <a href="https://creativecommons.org/licenses/by/4.0/deed.de">CC BY 4.0</a>, Code unter der MIT-Lizenz (<a href="https://github.com/Digital-History-Berlin/Computational-Essays/blob/main/LICENSE.md">Details</a>).
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

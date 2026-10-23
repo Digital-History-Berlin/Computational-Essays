@@ -1,0 +1,961 @@
+
+<!DOCTYPE html>
+
+
+<html lang="de" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SSH-Schlüssel einrichten &#8212; Computational Essays</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=91fba89f"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Klicken zum Anzeigen';</script>
+    <script>let toggleHintHide = 'Klicken zum Ausblenden';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script src="../_static/translations.js?v=79cc9f76"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tools/ssh';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
+    <link rel="search" title="Suche" href="../search.html" />
+    <link rel="next" title="Branches und Merge Requests: gemeinsam an einem Projekt arbeiten" href="git-branches.html" />
+    <link rel="prev" title="Git-Grundlagen: Versionskontrolle für Computational Essays" href="git-grundlagen.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="de"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Zum Hauptinhalt springen</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Zurück zum Anfang</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Versionswarnung"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Website-Navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Suche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Suche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="Auf dieser Seite">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/Logo_DigitalHistoryBerlin.png" class="logo__image only-light" alt="Computational Essays - Home"/>
+    <img src="../_static/Logo_DigitalHistoryBerlin.png" class="logo__image only-dark pst-js-only" alt="Computational Essays - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Suche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Computational Essays: Ein Leitfaden für die Digital Humanities
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Grundlagen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Einf%C3%BChrung.html">Einführung in Computational Essays</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../project_environments/intro.html">Einführung in Projektumgebungen</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../project_environments/uv_guide.html">Projektumgebungen mit uv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../project_environments/venv_guide.html">Projektumgebungen mit venv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../project_environments/conda_guide.html">Projektumgebungen mit conda</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Leitfäden</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Leitfaden.html">Leitfaden für Computational Essays</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Versionskontrolle mit Git</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="git-grundlagen.html">Git-Grundlagen</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">SSH-Schlüssel einrichten</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git-branches.html">Branches und Merge Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git-history.html">Git-Historie nachvollziehen und bearbeiten</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git-lfs.html">Große Dateien mit Git LFS</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Forschungsdatenmanagement</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../fdm/forschungsdaten-dokumentieren.html">Forschungsdaten dokumentieren</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fdm/lizenzen.html">Lizenzen für Code und Daten</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Konvertierungen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Konvertierungen/word_md_notebook.html">Konvertierung von Word-Dokumenten</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Laden Sie diese Seite herunter">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/tools/ssh.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Quelldatei herunterladen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="In PDF drucken"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Vollbildmodus"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Farbmodus" data-bs-title="Farbmodus"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Hell"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dunkel"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Systemeinstellungen"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>SSH-Schlüssel einrichten</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Inhalt </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einfuhrung">Einführung</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lernziele">Lernziele</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voraussetzungen">Voraussetzungen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wie-ssh-schlussel-funktionieren">1. Wie SSH-Schlüssel funktionieren</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vorhandene-schlussel-prufen">2. Vorhandene Schlüssel prüfen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einen-schlussel-erzeugen">3. Einen Schlüssel erzeugen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#den-offentlichen-schlussel-in-gitlab-eintragen">4. Den öffentlichen Schlüssel in GitLab eintragen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#die-verbindung-prufen">5. Die Verbindung prüfen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#die-passphrase-nicht-jedes-mal-eingeben-ssh-agent">6. Die Passphrase nicht jedes Mal eingeben: <code class="docutils literal notranslate"><span class="pre">ssh-agent</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ssh-mit-git-verwenden">7. SSH mit Git verwenden</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ein-bestehendes-repository-auf-ssh-umstellen">Ein bestehendes Repository auf SSH umstellen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mehrere-rechner-und-plattformen">8. Mehrere Rechner und Plattformen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ssh-uber-git-hinaus">9. SSH über Git hinaus</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#haufige-probleme">Häufige Probleme</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ubung">Übung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kurzreferenz">Kurzreferenz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weiterfuhrende-ressourcen">Weiterführende Ressourcen</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="ssh-schlussel-einrichten">
+<h1>SSH-Schlüssel einrichten<a class="headerlink" href="#ssh-schlussel-einrichten" title="Link to this heading">#</a></h1>
+<section id="einfuhrung">
+<h2>Einführung<a class="headerlink" href="#einfuhrung" title="Link to this heading">#</a></h2>
+<p>Wenn Sie mit dem GitLab der HU arbeiten, muss Git sich bei jedem <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> und <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> ausweisen. Im Kapitel <a class="reference internal" href="git-grundlagen.html"><span class="doc">Git-Grundlagen</span></a> geschieht das über HTTPS mit einem Zugangstoken. Die Alternative ist <strong>SSH</strong> (<em>Secure Shell</em>), ein Verfahren für verschlüsselte Verbindungen zwischen Rechnern. Statt eines Passworts oder Tokens weisen Sie sich dabei mit einem <strong>Schlüsselpaar</strong> aus, das Sie einmal auf Ihrem Rechner erzeugen.</p>
+<p>SSH lohnt sich aus mehreren Gründen:</p>
+<ul class="simple">
+<li><p>Nach der Einrichtung entfällt die Eingabe und Verwaltung von Zugangsdaten für jedes Repository.</p></li>
+<li><p>Derselbe Weg funktioniert bei anderen Plattformen wie <a class="reference external" href="https://codeberg.org">Codeberg</a> und bei Servern, auf denen Sie z. B. rechenintensive Analysen ausführen.</p></li>
+<li><p>Ein Schlüssel lässt sich gezielt für einen einzelnen Rechner sperren, ohne dass Sie Ihr HU-Passwort ändern müssen.</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>HTTPS mit Token</p></th>
+<th class="head"><p>SSH-Schlüssel</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Einrichtung</p></td>
+<td><p>Token in GitLab anlegen</p></td>
+<td><p>Schlüsselpaar erzeugen, öffentlichen Schlüssel in GitLab eintragen</p></td>
+</tr>
+<tr class="row-odd"><td><p>Adresse eines Repositorys</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">https://scm.cms.hu-berlin.de/…</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git&#64;scm.cms.hu-berlin.de:…</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Gültigkeit</p></td>
+<td><p>bis zum Ablaufdatum des Tokens</p></td>
+<td><p>bis zum Ablaufdatum des Schlüssels in GitLab</p></td>
+</tr>
+<tr class="row-odd"><td><p>Auch für andere Server nutzbar</p></td>
+<td><p>nein</p></td>
+<td><p>ja</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Beide Wege sind sicher. Wenn HTTPS bei Ihnen zuverlässig funktioniert, müssen Sie nicht wechseln.</p>
+<section id="lernziele">
+<h3>Lernziele<a class="headerlink" href="#lernziele" title="Link to this heading">#</a></h3>
+<p>Nach diesem Kapitel können Sie:</p>
+<ul class="simple">
+<li><p>erklären, wie ein SSH-Schlüsselpaar funktioniert</p></li>
+<li><p>einen SSH-Schlüssel erzeugen und mit einer Passphrase schützen</p></li>
+<li><p>den öffentlichen Schlüssel im GitLab der HU hinterlegen und die Verbindung prüfen</p></li>
+<li><p>Repositorys über SSH klonen und bestehende Repositorys auf SSH umstellen</p></li>
+<li><p>typische Fehlermeldungen einordnen und beheben</p></li>
+</ul>
+</section>
+<section id="voraussetzungen">
+<h3>Voraussetzungen<a class="headerlink" href="#voraussetzungen" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Git ist installiert und eingerichtet (siehe <a class="reference internal" href="git-grundlagen.html"><span class="doc">Git-Grundlagen</span></a>)</p></li>
+<li><p>Unter Windows arbeiten Sie in der <em>Git Bash</em>, die alle in diesem Kapitel verwendeten Programme (<code class="docutils literal notranslate"><span class="pre">ssh</span></code>, <code class="docutils literal notranslate"><span class="pre">ssh-keygen</span></code>, <code class="docutils literal notranslate"><span class="pre">ssh-agent</span></code>) mitbringt. Unter macOS und Linux sind sie vorinstalliert.</p></li>
+</ul>
+<p>Die Ausgaben in diesem Kapitel stammen aus einem Testlauf mit dem Benutzerkonto <code class="docutils literal notranslate"><span class="pre">studentin</span></code>. Bei Ihnen stehen dort Ihr Benutzername und andere Fingerabdrücke.</p>
+</section>
+</section>
+<section id="wie-ssh-schlussel-funktionieren">
+<h2>1. Wie SSH-Schlüssel funktionieren<a class="headerlink" href="#wie-ssh-schlussel-funktionieren" title="Link to this heading">#</a></h2>
+<p>Ein SSH-Schlüsselpaar besteht aus zwei zusammengehörigen Dateien:</p>
+<ul class="simple">
+<li><p>Der <strong>private Schlüssel</strong> bleibt auf Ihrem Rechner. Wer ihn besitzt, kann sich als Sie ausgeben. Sie geben ihn nie weiter und kopieren ihn nicht auf andere Rechner.</p></li>
+<li><p>Der <strong>öffentliche Schlüssel</strong> darf bekannt sein. Sie hinterlegen ihn bei GitLab oder auf einem Server.</p></li>
+</ul>
+<p>Beim Verbindungsaufbau stellt der Server eine Aufgabe, die sich nur mit dem privaten Schlüssel lösen lässt; mit dem öffentlichen Schlüssel prüft er die Lösung. Der private Schlüssel selbst wird dabei nie übertragen. Ein Vergleich: Der öffentliche Schlüssel ist ein Schloss, das Sie an beliebig vielen Türen anbringen können; öffnen kann es nur, wer den passenden privaten Schlüssel hat.</p>
+<div class="mermaid">
+graph LR
+    A["Ihr Rechner: privater Schlüssel"] -->|beweist Besitz, ohne ihn zu übertragen| B["GitLab: öffentlicher Schlüssel"]
+    B -->|prüft und erlaubt den Zugriff| C["Ihre Repositorys"]
+</div>
+<p>Umgekehrt weist sich auch der Server aus, mit seinem eigenen Schlüssel. So können Sie sicher sein, tatsächlich mit dem GitLab der HU verbunden zu sein (siehe <a class="reference internal" href="#ssh-erste-verbindung">Abschnitt 5</a>).</p>
+</section>
+<section id="vorhandene-schlussel-prufen">
+<h2>2. Vorhandene Schlüssel prüfen<a class="headerlink" href="#vorhandene-schlussel-prufen" title="Link to this heading">#</a></h2>
+<p>SSH-Schlüssel liegen im Ordner <code class="docutils literal notranslate"><span class="pre">.ssh</span></code> in Ihrem Benutzerverzeichnis (unter Windows <code class="docutils literal notranslate"><span class="pre">C:\Users\&lt;Name&gt;\.ssh</span></code>). Sehen Sie zuerst nach, ob Sie bereits einen Schlüssel haben:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>-al<span class="w"> </span>~/.ssh
+</pre></div>
+</div>
+<p>Gibt es den Ordner noch nicht, meldet <code class="docutils literal notranslate"><span class="pre">ls</span></code> das:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ls: cannot access '/home/studentin/.ssh': No such file or directory
+</pre></div>
+</div>
+<p>Finden Sie dort bereits Dateien wie <code class="docutils literal notranslate"><span class="pre">id_ed25519</span></code> und <code class="docutils literal notranslate"><span class="pre">id_ed25519.pub</span></code> (oder <code class="docutils literal notranslate"><span class="pre">id_rsa</span></code> und <code class="docutils literal notranslate"><span class="pre">id_rsa.pub</span></code>), können Sie diesen Schlüssel weiterverwenden und direkt mit <a class="reference internal" href="#ssh-schluessel-eintragen">Abschnitt 4</a> fortfahren. Erzeugen Sie in diesem Fall keinen neuen Schlüssel unter demselben Namen, da Sie den vorhandenen sonst überschreiben.</p>
+</section>
+<section id="einen-schlussel-erzeugen">
+<h2>3. Einen Schlüssel erzeugen<a class="headerlink" href="#einen-schlussel-erzeugen" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>-C<span class="w"> </span><span class="s2">"vorname.nachname@hu-berlin.de"</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">-t</span> <span class="pre">ed25519</span></code> wählt das Verfahren <em>Ed25519</em>, das GitLab und Codeberg empfehlen. <code class="docutils literal notranslate"><span class="pre">-C</span></code> fügt einen Kommentar hinzu, an dem Sie den Schlüssel später wiedererkennen; üblich ist die E-Mail-Adresse, ergänzt um den Namen des Rechners, wenn Sie mehrere Rechner verwenden.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ssh-keygen</span></code> stellt nun drei Fragen:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Generating public/private ed25519 key pair.
+Enter file in which to save the key (/home/studentin/.ssh/id_ed25519):
+Created directory '/home/studentin/.ssh'.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/studentin/.ssh/id_ed25519
+Your public key has been saved in /home/studentin/.ssh/id_ed25519.pub
+The key fingerprint is:
+SHA256:Q03p9j99YVEdewRik7V0Xk1Dw4GtBKnp0AGBnnw3WHk vorname.nachname@hu-berlin.de
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p><strong>Speicherort:</strong> Bestätigen Sie den Vorschlag mit Enter.</p></li>
+<li><p><strong>Passphrase:</strong> Wir empfehlen, den Schlüssel mit einer Passphrase zu schützen. Gelangt Ihr privater Schlüssel in falsche Hände, etwa weil Ihr Laptop gestohlen wird, ist er ohne Passphrase nicht nutzbar. Während der Eingabe erscheinen keine Zeichen; das ist Absicht.</p></li>
+<li><p><strong>Passphrase wiederholen.</strong></p></li>
+</ol>
+<p>Danach enthält der Ordner <code class="docutils literal notranslate"><span class="pre">.ssh</span></code> die beiden Schlüsseldateien:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>-al<span class="w"> </span>~/.ssh
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>drwx------ 2 studentin studentin 4096 Oct 23 10:04 .
+drwxr-x--- 3 studentin studentin 4096 Oct 23 10:04 ..
+-rw------- 1 studentin studentin  464 Oct 23 10:04 id_ed25519
+-rw-r--r-- 1 studentin studentin  111 Oct 23 10:04 id_ed25519.pub
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">id_ed25519</span></code> ist der private Schlüssel; nur Sie dürfen ihn lesen (<code class="docutils literal notranslate"><span class="pre">-rw-------</span></code>). <code class="docutils literal notranslate"><span class="pre">id_ed25519.pub</span></code> ist der öffentliche Schlüssel.</p>
+<div class="admonition note">
+<p class="admonition-title">Bemerkung</p>
+<p>Die <a class="reference external" href="https://cms-webtech.pages.cms.hu-berlin.de/gitlab-documentation/docs/ssh-schluessel/">GitLab-Dokumentation des CMS</a> verwendet RSA-Schlüssel (<code class="docutils literal notranslate"><span class="pre">ssh-keygen</span> <span class="pre">-t</span> <span class="pre">rsa</span> <span class="pre">-b</span> <span class="pre">4096</span> <span class="pre">-C</span> <span class="pre">&quot;…&quot;</span></code>), die entsprechend <code class="docutils literal notranslate"><span class="pre">id_rsa</span></code> und <code class="docutils literal notranslate"><span class="pre">id_rsa.pub</span></code> heißen. Beide Verfahren funktionieren mit dem GitLab der HU. Ed25519-Schlüssel sind kürzer und gelten als moderner Standard; RSA ist sinnvoll, wenn ein älteres System Ed25519 nicht unterstützt.</p>
+</div>
+</section>
+<section id="den-offentlichen-schlussel-in-gitlab-eintragen">
+<span id="ssh-schluessel-eintragen"></span><h2>4. Den öffentlichen Schlüssel in GitLab eintragen<a class="headerlink" href="#den-offentlichen-schlussel-in-gitlab-eintragen" title="Link to this heading">#</a></h2>
+<p>Lassen Sie sich den öffentlichen Schlüssel anzeigen:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span>~/.ssh/id_ed25519.pub
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICLgV9s7E7yAdRVp0axEv0X8gRbVOutyrOUVS+q/mtqy vorname.nachname@hu-berlin.de
+</pre></div>
+</div>
+<p>Kopieren Sie diese eine Zeile vollständig. Sie können sie im Terminal markieren und kopieren oder direkt in die Zwischenablage übernehmen:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Windows (Git Bash)</span>
+clip<span class="w"> </span>&lt;<span class="w"> </span>~/.ssh/id_ed25519.pub
+
+<span class="c1"># macOS</span>
+pbcopy<span class="w"> </span>&lt;<span class="w"> </span>~/.ssh/id_ed25519.pub
+
+<span class="c1"># Linux (benötigt das Paket xclip)</span>
+xclip<span class="w"> </span>-sel<span class="w"> </span>clip<span class="w"> </span>&lt;<span class="w"> </span>~/.ssh/id_ed25519.pub
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warnung</p>
+<p>Achten Sie darauf, die Datei mit der Endung <code class="docutils literal notranslate"><span class="pre">.pub</span></code> zu verwenden. Der Inhalt von <code class="docutils literal notranslate"><span class="pre">id_ed25519</span></code> ohne Endung ist Ihr privater Schlüssel und gehört nie in ein Webformular, eine E-Mail oder ein Repository.</p>
+</div>
+<p>Tragen Sie den Schlüssel nun in GitLab ein:</p>
+<ol class="arabic simple">
+<li><p>Klicken Sie oben rechts auf Ihr Profilbild und wählen Sie <em>Edit profile</em>.</p></li>
+<li><p>Wählen Sie im Menü links <em>SSH Keys</em> und dann <em>Add new key</em>.</p></li>
+<li><p>Fügen Sie den kopierten Schlüssel in das Feld <em>Key</em> ein. Unter <em>Title</em> geben Sie ihm einen Namen, an dem Sie den Rechner erkennen, z. B. „Laptop“.</p></li>
+<li><p>Unter <em>Expiration date</em> schlägt GitLab ein Ablaufdatum vor. Ist es erreicht, erhalten Sie eine Benachrichtigung („Your SSH key has expired“). Ein abgelaufener Eintrag lässt sich nicht verlängern: Löschen Sie ihn und tragen Sie den Schlüssel mit einem neuen Ablaufdatum erneut ein.</p></li>
+<li><p>Klicken Sie auf <em>Add key</em>.</p></li>
+</ol>
+</section>
+<section id="die-verbindung-prufen">
+<span id="ssh-erste-verbindung"></span><h2>5. Die Verbindung prüfen<a class="headerlink" href="#die-verbindung-prufen" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>-T<span class="w"> </span>git@scm.cms.hu-berlin.de
+</pre></div>
+</div>
+<p>Bei der ersten Verbindung kennt Ihr Rechner den Server noch nicht und fragt nach:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>The authenticity of host 'scm.cms.hu-berlin.de (IP-Adresse)' can't be established.
+ED25519 key fingerprint is SHA256:/s6bqM9+DyVxbGd5aB9TTyoX5Cwd4MfQCHZAZ+9odNU.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])?
+</pre></div>
+</div>
+<p>Der angezeigte <strong>Fingerabdruck</strong> kennzeichnet den Schlüssel des Servers. Vergleichen Sie ihn, bevor Sie zustimmen, mit den Fingerabdrücken, die das GitLab der HU auf der Seite <a class="reference external" href="https://scm.cms.hu-berlin.de/help/instance_configuration"><em>Instance configuration</em></a> veröffentlicht:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Verfahren</p></th>
+<th class="head"><p>SHA256-Fingerabdruck von <code class="docutils literal notranslate"><span class="pre">scm.cms.hu-berlin.de</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ED25519</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SHA256:/s6bqM9+DyVxbGd5aB9TTyoX5Cwd4MfQCHZAZ+9odNU</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>ECDSA</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SHA256:pQTcrjnWZ3AteTB7oGKHuWUkw2BM4BcNwI5zduDh2mI</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>RSA</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SHA256:wVh19mimXwDLF+CjzC8TKH2icVAZ4JErYEfsLhRx98g</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Welches Verfahren Ihr Rechner anzeigt, hängt von Ihrer SSH-Version ab; aktuelle Versionen verwenden ED25519. Stimmt der angezeigte Fingerabdruck mit dem entsprechenden Eintrag überein, tippen Sie <code class="docutils literal notranslate"><span class="pre">yes</span></code> und bestätigen mit Enter. Weicht er ab, brechen Sie ab und wenden sich an das CMS. Ihr Rechner merkt sich den Server in der Datei <code class="docutils literal notranslate"><span class="pre">~/.ssh/known_hosts</span></code> und fragt künftig nicht mehr:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Warning: Permanently added 'scm.cms.hu-berlin.de' (ED25519) to the list of known hosts.
+Enter passphrase for key '/home/studentin/.ssh/id_ed25519':
+</pre></div>
+</div>
+<p>Nach Eingabe der Passphrase begrüßt GitLab Sie mit Ihrem Benutzernamen:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Welcome to GitLab, @benutzername!
+</pre></div>
+</div>
+<p>Damit ist die Einrichtung abgeschlossen. Wundern Sie sich nicht, dass die Verbindung gleich wieder endet: GitLab erlaubt über SSH nur Git-Befehle und keine eigene Sitzung.</p>
+</section>
+<section id="die-passphrase-nicht-jedes-mal-eingeben-ssh-agent">
+<span id="ssh-agent"></span><h2>6. Die Passphrase nicht jedes Mal eingeben: <code class="docutils literal notranslate"><span class="pre">ssh-agent</span></code><a class="headerlink" href="#die-passphrase-nicht-jedes-mal-eingeben-ssh-agent" title="Link to this heading">#</a></h2>
+<p>Mit Passphrase fragt SSH bei jeder Verbindung danach, also bei jedem <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> und <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code>. Der <strong>SSH-Agent</strong> ist ein kleines Hilfsprogramm, das den entsperrten Schlüssel für die Dauer Ihrer Sitzung bereithält. Starten Sie ihn und übergeben Sie ihm den Schlüssel:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">eval</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>ssh-agent<span class="w"> </span>-s<span class="k">)</span><span class="s2">"</span>
+ssh-add<span class="w"> </span>~/.ssh/id_ed25519
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Agent pid 1703
+Enter passphrase for /home/studentin/.ssh/id_ed25519:
+Identity added: /home/studentin/.ssh/id_ed25519 (vorname.nachname@hu-berlin.de)
+</pre></div>
+</div>
+<p>Danach fragt SSH nicht mehr nach der Passphrase, bis Sie das Terminal schließen. Welche Schlüssel der Agent gerade bereithält, zeigt <code class="docutils literal notranslate"><span class="pre">ssh-add</span> <span class="pre">-l</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>256 SHA256:Q03p9j99YVEdewRik7V0Xk1Dw4GtBKnp0AGBnnw3WHk vorname.nachname@hu-berlin.de (ED25519)
+</pre></div>
+</div>
+<p>Unter macOS können Sie die Passphrase zusätzlich im Schlüsselbund speichern lassen (<code class="docutils literal notranslate"><span class="pre">ssh-add</span> <span class="pre">--apple-use-keychain</span> <span class="pre">~/.ssh/id_ed25519</span></code>), sodass sie auch nach einem Neustart nicht erneut abgefragt wird.</p>
+</section>
+<section id="ssh-mit-git-verwenden">
+<h2>7. SSH mit Git verwenden<a class="headerlink" href="#ssh-mit-git-verwenden" title="Link to this heading">#</a></h2>
+<p>Für Git ändert sich nur die Adresse des Repositorys. GitLab zeigt sie auf der Projektseite unter <em>Code</em> (bzw. <em>Clone</em>) als <em>Clone with SSH</em> an. Sie beginnt mit <code class="docutils literal notranslate"><span class="pre">git&#64;</span></code> statt mit <code class="docutils literal notranslate"><span class="pre">https://</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>git@scm.cms.hu-berlin.de:benutzername/briefwechsel-1848.git
+</pre></div>
+</div>
+<p>Alle weiteren Befehle (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> usw.) bleiben unverändert.</p>
+<section id="ein-bestehendes-repository-auf-ssh-umstellen">
+<h3>Ein bestehendes Repository auf SSH umstellen<a class="headerlink" href="#ein-bestehendes-repository-auf-ssh-umstellen" title="Link to this heading">#</a></h3>
+<p>Haben Sie ein Repository bisher über HTTPS verwendet, tauschen Sie die Adresse der Verbindung <code class="docutils literal notranslate"><span class="pre">origin</span></code> aus:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>remote<span class="w"> </span>-v
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>origin	https://scm.cms.hu-berlin.de/benutzername/briefwechsel-1848.git (fetch)
+origin	https://scm.cms.hu-berlin.de/benutzername/briefwechsel-1848.git (push)
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>remote<span class="w"> </span>set-url<span class="w"> </span>origin<span class="w"> </span>git@scm.cms.hu-berlin.de:benutzername/briefwechsel-1848.git
+git<span class="w"> </span>remote<span class="w"> </span>-v
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>origin	git@scm.cms.hu-berlin.de:benutzername/briefwechsel-1848.git (fetch)
+origin	git@scm.cms.hu-berlin.de:benutzername/briefwechsel-1848.git (push)
+</pre></div>
+</div>
+</section>
+</section>
+<section id="mehrere-rechner-und-plattformen">
+<h2>8. Mehrere Rechner und Plattformen<a class="headerlink" href="#mehrere-rechner-und-plattformen" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Ein Schlüssel pro Rechner.</strong> Erzeugen Sie auf jedem Rechner, den Sie verwenden, einen eigenen Schlüssel und tragen Sie jeden in GitLab ein. Kopieren Sie private Schlüssel nicht zwischen Rechnern. Geht ein Gerät verloren, löschen Sie nur dessen Schlüssel in GitLab unter <em>SSH Keys</em>.</p></li>
+<li><p><strong>Andere Plattformen.</strong> Denselben öffentlichen Schlüssel können Sie auch bei anderen Plattformen hinterlegen. Auf Codeberg finden Sie die Einstellung unter <em>Settings &gt; SSH / GPG Keys</em>; die Verbindung prüfen Sie dort mit <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-T</span> <span class="pre">git&#64;codeberg.org</span></code> (siehe die <a class="reference external" href="https://docs.codeberg.org/security/ssh-key">Anleitung von Codeberg</a>).</p></li>
+</ul>
+</section>
+<section id="ssh-uber-git-hinaus">
+<h2>9. SSH über Git hinaus<a class="headerlink" href="#ssh-uber-git-hinaus" title="Link to this heading">#</a></h2>
+<p>SSH ist ursprünglich ein Werkzeug, um sich auf entfernten Rechnern anzumelden. Erhalten Sie etwa Zugang zu einem Server, auf dem Sie Analysen mit großen Datenmengen ausführen können, verwenden Sie dafür denselben Schlüssel. Ihr öffentlicher Schlüssel muss dazu auf dem Server hinterlegt sein; wie das geschieht, erfahren Sie von der jeweiligen Betreuung des Servers.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Auf einem Server anmelden (benutzername und Servername erhalten Sie vom Betreiber)</span>
+ssh<span class="w"> </span>benutzername@server.example.org
+
+<span class="c1"># Einen einzelnen Befehl auf dem Server ausführen</span>
+ssh<span class="w"> </span>benutzername@server.example.org<span class="w"> </span><span class="s2">"ls ~"</span>
+
+<span class="c1"># Dateien kopieren: vom eigenen Rechner auf den Server ...</span>
+scp<span class="w"> </span>briefe.csv<span class="w"> </span>benutzername@server.example.org:~/
+
+<span class="c1"># ... und vom Server auf den eigenen Rechner</span>
+scp<span class="w"> </span>benutzername@server.example.org:~/briefe.csv<span class="w"> </span>kopie.csv
+</pre></div>
+</div>
+<p>Bei der ersten Verbindung erscheint auch hier die Frage nach dem Fingerabdruck des Servers. Die Fingerabdrücke erfahren Sie vom Betreiber des Servers.</p>
+</section>
+<section id="haufige-probleme">
+<span id="ssh-probleme"></span><h2>Häufige Probleme<a class="headerlink" href="#haufige-probleme" title="Link to this heading">#</a></h2>
+<p><strong><code class="docutils literal notranslate"><span class="pre">Permission</span> <span class="pre">denied</span> <span class="pre">(publickey).</span></code></strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>git@scm.cms.hu-berlin.de: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+</pre></div>
+</div>
+<p>GitLab hat keinen passenden öffentlichen Schlüssel gefunden. Häufige Ursachen: Der Schlüssel wurde noch nicht (oder auf einem anderen Konto) in GitLab eingetragen, er ist abgelaufen, oder Sie arbeiten an einem anderen Rechner als dem, auf dem Sie den Schlüssel erzeugt haben. Prüfen Sie unter <em>Edit profile &gt; SSH Keys</em>, ob der Schlüssel vorhanden und gültig ist. Welche Schlüssel SSH anbietet und ob der Server einen davon annimmt, zeigt die ausführliche Ausgabe:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>-vT<span class="w"> </span>git@scm.cms.hu-berlin.de
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>debug1: Offering public key: ~/.ssh/id_ed25519 ED25519 SHA256:Q03p9j99YVEdewRik7V0Xk1Dw4GtBKnp0AGBnnw3WHk agent
+debug1: Server accepts key: ~/.ssh/id_ed25519 ED25519 SHA256:Q03p9j99YVEdewRik7V0Xk1Dw4GtBKnp0AGBnnw3WHk agent
+Authenticated to scm.cms.hu-berlin.de ([IP-Adresse]:22) using "publickey".
+</pre></div>
+</div>
+<p>(Die Ausgabe ist hier auf die entscheidenden Zeilen gekürzt.) Fehlt die Zeile <code class="docutils literal notranslate"><span class="pre">Server</span> <span class="pre">accepts</span> <span class="pre">key</span></code>, kennt GitLab den angebotenen Schlüssel nicht.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">WARNING:</span> <span class="pre">UNPROTECTED</span> <span class="pre">PRIVATE</span> <span class="pre">KEY</span> <span class="pre">FILE!</span></code></strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Permissions 0644 for '/home/studentin/.ssh/id_ed25519' are too open.
+It is required that your private key files are NOT accessible by others.
+This private key will be ignored.
+</pre></div>
+</div>
+<p>Der private Schlüssel ist für andere Benutzer:innen des Rechners lesbar, etwa nachdem er kopiert wurde. SSH verwendet ihn dann aus Sicherheitsgründen nicht. Beschränken Sie die Rechte auf Ihr eigenes Konto:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>~/.ssh/id_ed25519
+</pre></div>
+</div>
+<p><strong><code class="docutils literal notranslate"><span class="pre">WARNING:</span> <span class="pre">REMOTE</span> <span class="pre">HOST</span> <span class="pre">IDENTIFICATION</span> <span class="pre">HAS</span> <span class="pre">CHANGED!</span></code></strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that a host key has just been changed.
+...
+Host key verification failed.
+</pre></div>
+</div>
+<p>Der Server weist sich mit einem anderen Schlüssel aus als bei Ihrer letzten Verbindung. Das kann harmlos sein, etwa nach einem Umzug des Servers, kann aber auch bedeuten, dass sich jemand als der Server ausgibt. Ignorieren Sie diese Warnung nicht: Vergleichen Sie den neuen Fingerabdruck mit der Tabelle in <a class="reference internal" href="#ssh-erste-verbindung">Abschnitt 5</a> bzw. der Seite <a class="reference external" href="https://scm.cms.hu-berlin.de/help/instance_configuration"><em>Instance configuration</em></a>, oder fragen Sie beim CMS nach. Erst wenn feststeht, dass die Änderung rechtmäßig ist, entfernen Sie den alten Eintrag und verbinden sich neu:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh-keygen<span class="w"> </span>-R<span class="w"> </span>scm.cms.hu-berlin.de
+ssh<span class="w"> </span>-T<span class="w"> </span>git@scm.cms.hu-berlin.de
+</pre></div>
+</div>
+<p><strong>SSH fragt bei jeder Verbindung nach der Passphrase.</strong>
+Der SSH-Agent läuft nicht oder kennt den Schlüssel nicht. Führen Sie die beiden Befehle aus <a class="reference internal" href="#ssh-agent">Abschnitt 6</a> erneut aus; in jedem neuen Terminal ist das einmal nötig.</p>
+</section>
+<section id="ubung">
+<h2>Übung<a class="headerlink" href="#ubung" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Prüfen Sie, ob Sie bereits einen SSH-Schlüssel haben. Falls nicht, erzeugen Sie einen Ed25519-Schlüssel mit Passphrase.</p></li>
+<li><p>Tragen Sie den öffentlichen Schlüssel im GitLab der HU ein und prüfen Sie die Verbindung mit <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-T</span> <span class="pre">git&#64;scm.cms.hu-berlin.de</span></code>. Vergleichen Sie dabei den Fingerabdruck des Servers mit der Seite <em>Instance configuration</em>.</p></li>
+<li><p>Stellen Sie das Repository aus dem Kapitel <a class="reference internal" href="git-grundlagen.html"><span class="doc">Git-Grundlagen</span></a> mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">set-url</span></code> auf SSH um und führen Sie <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> und <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> aus.</p></li>
+<li><p>Starten Sie den SSH-Agenten und fügen Sie Ihren Schlüssel hinzu. Prüfen Sie mit <code class="docutils literal notranslate"><span class="pre">ssh-add</span> <span class="pre">-l</span></code>, dass der Agent ihn bereithält.</p></li>
+</ol>
+</section>
+<section id="kurzreferenz">
+<h2>Kurzreferenz<a class="headerlink" href="#kurzreferenz" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Ziel</p></th>
+<th class="head"><p>Befehl</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Vorhandene Schlüssel anzeigen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-al</span> <span class="pre">~/.ssh</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Schlüssel erzeugen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ssh-keygen</span> <span class="pre">-t</span> <span class="pre">ed25519</span> <span class="pre">-C</span> <span class="pre">&quot;&lt;e-mail&gt;&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Öffentlichen Schlüssel anzeigen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">~/.ssh/id_ed25519.pub</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Verbindung zu GitLab prüfen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-T</span> <span class="pre">git&#64;scm.cms.hu-berlin.de</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Verbindung ausführlich prüfen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-vT</span> <span class="pre">git&#64;scm.cms.hu-berlin.de</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>SSH-Agent starten</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">eval</span> <span class="pre">&quot;$(ssh-agent</span> <span class="pre">-s)&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Schlüssel dem Agenten übergeben</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ssh-add</span> <span class="pre">~/.ssh/id_ed25519</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Schlüssel im Agenten anzeigen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ssh-add</span> <span class="pre">-l</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Repository über SSH klonen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">git&#64;scm.cms.hu-berlin.de:&lt;pfad&gt;.git</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Bestehendes Repository umstellen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">set-url</span> <span class="pre">origin</span> <span class="pre">git&#64;scm.cms.hu-berlin.de:&lt;pfad&gt;.git</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Alten Server-Schlüssel entfernen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ssh-keygen</span> <span class="pre">-R</span> <span class="pre">&lt;server&gt;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Rechte des privaten Schlüssels korrigieren</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">chmod</span> <span class="pre">600</span> <span class="pre">~/.ssh/id_ed25519</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="weiterfuhrende-ressourcen">
+<h2>Weiterführende Ressourcen<a class="headerlink" href="#weiterfuhrende-ressourcen" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://cms-webtech.pages.cms.hu-berlin.de/gitlab-documentation/docs/ssh-schluessel/">GitLab-Dokumentation des CMS: SSH-Schlüssel</a>: Anleitung für das GitLab der HU</p></li>
+<li><p><a class="reference external" href="https://docs.codeberg.org/security/ssh-key">Codeberg: Adding an SSH key to your account</a>: Anleitung für Codeberg (englisch)</p></li>
+<li><p><a class="reference external" href="https://www.openssh.com/manual.html">OpenSSH-Handbuchseiten</a>: Referenz zu <code class="docutils literal notranslate"><span class="pre">ssh</span></code>, <code class="docutils literal notranslate"><span class="pre">ssh-keygen</span></code>, <code class="docutils literal notranslate"><span class="pre">ssh-agent</span></code> und <code class="docutils literal notranslate"><span class="pre">scp</span></code> (englisch)</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "executablebooks/jupyter-book",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./tools"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="git-grundlagen.html"
+       title="Vorherige Seite">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">zurück</p>
+        <p class="prev-next-title">Git-Grundlagen: Versionskontrolle für Computational Essays</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="git-branches.html"
+       title="Nächste Seite">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">weiter</p>
+        <p class="prev-next-title">Branches und Merge Requests: gemeinsam an einem Projekt arbeiten</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Inhalt
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einfuhrung">Einführung</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lernziele">Lernziele</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voraussetzungen">Voraussetzungen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wie-ssh-schlussel-funktionieren">1. Wie SSH-Schlüssel funktionieren</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vorhandene-schlussel-prufen">2. Vorhandene Schlüssel prüfen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einen-schlussel-erzeugen">3. Einen Schlüssel erzeugen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#den-offentlichen-schlussel-in-gitlab-eintragen">4. Den öffentlichen Schlüssel in GitLab eintragen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#die-verbindung-prufen">5. Die Verbindung prüfen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#die-passphrase-nicht-jedes-mal-eingeben-ssh-agent">6. Die Passphrase nicht jedes Mal eingeben: <code class="docutils literal notranslate"><span class="pre">ssh-agent</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ssh-mit-git-verwenden">7. SSH mit Git verwenden</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ein-bestehendes-repository-auf-ssh-umstellen">Ein bestehendes Repository auf SSH umstellen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mehrere-rechner-und-plattformen">8. Mehrere Rechner und Plattformen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ssh-uber-git-hinaus">9. SSH über Git hinaus</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#haufige-probleme">Häufige Probleme</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ubung">Übung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kurzreferenz">Kurzreferenz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weiterfuhrende-ressourcen">Weiterführende Ressourcen</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Durch <a href="https://www.geschichte.hu-berlin.de/de/bereiche-und-lehrstuehle/digital-history">Digital History, Humboldt-Universität zu Berlin</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="https://creativecommons.org/licenses/by/4.0/deed.de"><img class="license" alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> Texte und Abbildungen dieses Buchs stehen unter der Lizenz <a href="https://creativecommons.org/licenses/by/4.0/deed.de">CC BY 4.0</a>, Code unter der MIT-Lizenz (<a href="https://github.com/Digital-History-Berlin/Computational-Essays/blob/main/LICENSE.md">Details</a>).
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

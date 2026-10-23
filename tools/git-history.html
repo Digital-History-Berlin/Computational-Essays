@@ -1,0 +1,1209 @@
+
+<!DOCTYPE html>
+
+
+<html lang="de" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Git-Historie: nachvollziehen, korrigieren und bereinigen &#8212; Computational Essays</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=91fba89f"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Klicken zum Anzeigen';</script>
+    <script>let toggleHintHide = 'Klicken zum Ausblenden';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script src="../_static/translations.js?v=79cc9f76"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tools/git-history';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
+    <link rel="search" title="Suche" href="../search.html" />
+    <link rel="next" title="Große Dateien mit Git LFS" href="git-lfs.html" />
+    <link rel="prev" title="Branches und Merge Requests: gemeinsam an einem Projekt arbeiten" href="git-branches.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="de"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Zum Hauptinhalt springen</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Zurück zum Anfang</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Versionswarnung"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Website-Navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Suche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Suche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="Auf dieser Seite">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/Logo_DigitalHistoryBerlin.png" class="logo__image only-light" alt="Computational Essays - Home"/>
+    <img src="../_static/Logo_DigitalHistoryBerlin.png" class="logo__image only-dark pst-js-only" alt="Computational Essays - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Suche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Computational Essays: Ein Leitfaden für die Digital Humanities
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Grundlagen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Einf%C3%BChrung.html">Einführung in Computational Essays</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../project_environments/intro.html">Einführung in Projektumgebungen</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../project_environments/uv_guide.html">Projektumgebungen mit uv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../project_environments/venv_guide.html">Projektumgebungen mit venv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../project_environments/conda_guide.html">Projektumgebungen mit conda</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Leitfäden</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Leitfaden.html">Leitfaden für Computational Essays</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Versionskontrolle mit Git</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="git-grundlagen.html">Git-Grundlagen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssh.html">SSH-Schlüssel einrichten</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git-branches.html">Branches und Merge Requests</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Git-Historie nachvollziehen und bearbeiten</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git-lfs.html">Große Dateien mit Git LFS</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Forschungsdatenmanagement</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../fdm/forschungsdaten-dokumentieren.html">Forschungsdaten dokumentieren</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fdm/lizenzen.html">Lizenzen für Code und Daten</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Konvertierungen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Konvertierungen/word_md_notebook.html">Konvertierung von Word-Dokumenten</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Laden Sie diese Seite herunter">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/tools/git-history.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Quelldatei herunterladen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="In PDF drucken"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Vollbildmodus"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Farbmodus" data-bs-title="Farbmodus"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Hell"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dunkel"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Systemeinstellungen"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Git-Historie: nachvollziehen, korrigieren und bereinigen</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Inhalt </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einfuhrung">Einführung</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voraussetzungen">Voraussetzungen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grundbegriffe-was-in-der-historie-gespeichert-wird">1. Grundbegriffe: Was in der Historie gespeichert wird</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#die-historie-lesen">2. Die Historie lesen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uberblick-verschaffen">Überblick verschaffen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#einzelne-commits-und-unterschiede-betrachten">Einzelne Commits und Unterschiede betrachten</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#die-geschichte-einer-einzelnen-datei">Die Geschichte einer einzelnen Datei</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-der-historie-suchen">In der Historie suchen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ein-hinweis-zu-jupyter-notebooks">Ein Hinweis zu Jupyter Notebooks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#historie-bewusst-gestalten">3. Historie bewusst gestalten</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kleine-zusammenhangende-commits">Kleine, zusammenhängende Commits</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#commit-nachrichten-die-das-warum-festhalten">Commit-Nachrichten, die das <em>Warum</em> festhalten</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#meilensteine-mit-tags-markieren">Meilensteine mit Tags markieren</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anderungen-ruckgangig-machen-ohne-die-historie-zu-verandern">4. Änderungen rückgängig machen, ohne die Historie zu verändern</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#altere-fassungen-ansehen-und-wiederherstellen">Ältere Fassungen ansehen und wiederherstellen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#noch-nicht-committete-anderungen-verwerfen">Noch nicht committete Änderungen verwerfen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#einen-commit-ruckgangig-machen-git-revert">Einen Commit rückgängig machen: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">revert</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#die-historie-bearbeiten">5. Die Historie bearbeiten</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#die-grundregel">Die Grundregel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vorher-ein-eigenes-sicherheitsnetz">Vorher: ein eigenes Sicherheitsnetz</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#den-letzten-commit-korrigieren-git-commit-amend">5.1 Den letzten Commit korrigieren: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">--amend</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#commits-zurucksetzen-git-reset">5.2 Commits zurücksetzen: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mehrere-commits-aufraumen-interaktives-rebase">5.3 Mehrere Commits aufräumen: interaktives Rebase</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#das-sicherheitsnetz-git-reflog">5.4 Das Sicherheitsnetz: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reflog</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#umgeschriebene-historie-hochladen-force-push">5.5 Umgeschriebene Historie hochladen: Force Push</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sonderfall-daten-vollstandig-aus-der-historie-entfernen">6. Sonderfall: Daten vollständig aus der Historie entfernen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#schritt-0-schaden-begrenzen">Schritt 0: Schaden begrenzen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#werkzeug-git-filter-repo">Werkzeug: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">filter-repo</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grosze-dateien-nachtraglich-in-git-lfs-verschieben">Große Dateien nachträglich in Git LFS verschieben</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vorbeugen-ist-besser-als-umschreiben">Vorbeugen ist besser als Umschreiben</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reflexion-wann-sollte-man-geschichte-umschreiben">7. Reflexion: Wann sollte man Geschichte umschreiben?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ubung-historie-in-einem-testrepository-bearbeiten">8. Übung: Historie in einem Testrepository bearbeiten</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kurzreferenz">Kurzreferenz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weiterfuhrende-ressourcen">Weiterführende Ressourcen</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="git-historie-nachvollziehen-korrigieren-und-bereinigen">
+<h1>Git-Historie: nachvollziehen, korrigieren und bereinigen<a class="headerlink" href="#git-historie-nachvollziehen-korrigieren-und-bereinigen" title="Link to this heading">#</a></h1>
+<section id="einfuhrung">
+<h2>Einführung<a class="headerlink" href="#einfuhrung" title="Link to this heading">#</a></h2>
+<p>Wer mit Git arbeitet, erzeugt nebenbei eine Quelle: die Historie des Repositorys. Jeder Commit hält fest, wer wann was geändert hat und – im besten Fall – warum. Für die Digital History ist diese Historie in zweifacher Hinsicht von Bedeutung.</p>
+<p>Zum einen dokumentiert sie den Forschungsprozess. Sie kann beantworten, wann ein Korpus bereinigt, ein Parameter einer Analyse verändert oder eine Quelle aus dem Datensatz entfernt wurde, und welche Fassung eines Notebooks eingereicht wurde. Damit trägt sie unmittelbar zur Nachvollziehbarkeit und Reproduzierbarkeit bei, die in der <a class="reference internal" href="../Einf%C3%BChrung.html"><span class="doc">Einführung</span></a> als Grundprinzipien eines Computational Essays beschrieben werden.</p>
+<p>Zum anderen ist diese Historie nicht unveränderlich. Git erlaubt es, Commits nachträglich zu verändern, zusammenzufassen oder vollständig zu entfernen. Das ist manchmal notwendig, etwa wenn versehentlich personenbezogene Daten oder Zugangsdaten committet wurden, es kann aber auch genau die Nachvollziehbarkeit beschädigen, die die Historie eigentlich sichern soll.</p>
+<p>Dieses Kapitel behandelt beide Seiten:</p>
+<ol class="arabic simple">
+<li><p>Wie Sie die Historie lesen und für Ihre Arbeit nutzen</p></li>
+<li><p>Wie Sie Historie bewusst gestalten, sodass sie als Dokumentation taugt</p></li>
+<li><p>Wie Sie Änderungen rückgängig machen, <strong>ohne</strong> die Historie zu verändern</p></li>
+<li><p>Wie (und wann) Sie die Historie gezielt bearbeiten</p></li>
+<li><p>Wie Sie sensible Daten oder große Dateien vollständig aus einem Repository entfernen</p></li>
+</ol>
+<section id="voraussetzungen">
+<h3>Voraussetzungen<a class="headerlink" href="#voraussetzungen" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Git ist installiert und Sie kennen die Grundbefehle (<code class="docutils literal notranslate"><span class="pre">clone</span></code>, <code class="docutils literal notranslate"><span class="pre">add</span></code>, <code class="docutils literal notranslate"><span class="pre">commit</span></code>, <code class="docutils literal notranslate"><span class="pre">push</span></code>, <code class="docutils literal notranslate"><span class="pre">pull</span></code>), wie sie im Kapitel <a class="reference internal" href="git-grundlagen.html"><span class="doc">Git-Grundlagen</span></a> beschrieben sind</p></li>
+<li><p>Grundlegende Kenntnisse der Kommandozeile (unter Windows empfiehlt sich <em>Git Bash</em>)</p></li>
+<li><p>Für die Übungen: ein Testrepository, <strong>nicht</strong> Ihr eigentliches Projekt (siehe <a class="reference internal" href="#uebung">Übung</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="grundbegriffe-was-in-der-historie-gespeichert-wird">
+<h2>1. Grundbegriffe: Was in der Historie gespeichert wird<a class="headerlink" href="#grundbegriffe-was-in-der-historie-gespeichert-wird" title="Link to this heading">#</a></h2>
+<p>Ein <strong>Commit</strong> ist eine Momentaufnahme aller versionierten Dateien eines Projekts. Zu jedem Commit gehören:</p>
+<ul class="simple">
+<li><p>der Inhalt aller Dateien zu diesem Zeitpunkt</p></li>
+<li><p>Metadaten: Autor:in, Datum und Commit-Nachricht</p></li>
+<li><p>ein Verweis auf den vorhergehenden Commit (bei Merges auf mehrere)</p></li>
+</ul>
+<p>Jeder Commit wird durch einen <strong>Hash</strong> identifiziert, eine aus 40 Zeichen bestehende Prüfsumme wie <code class="docutils literal notranslate"><span class="pre">f51e495c2a…</span></code>, die meist auf die ersten sieben Zeichen abgekürzt wird. Dieser Hash wird aus dem Inhalt, den Metadaten <strong>und dem Verweis auf den Vorgänger</strong> berechnet.</p>
+<p>Daraus folgt der wichtigste Gedanke dieses Kapitels: <strong>Wird ein Commit verändert, ändert sich sein Hash – und damit auch der Hash aller nachfolgenden Commits.</strong> Git kann einen bestehenden Commit also nicht „bearbeiten“, sondern nur durch einen neuen ersetzen. Alle, die den alten Commit bereits besitzen, haben danach eine abweichende Historie.</p>
+<p>Ein <strong>Branch</strong> (z. B. <code class="docutils literal notranslate"><span class="pre">main</span></code>) ist lediglich ein beweglicher Zeiger auf einen Commit. <strong>HEAD</strong> bezeichnet den Commit, auf dem Sie gerade arbeiten.</p>
+<div class="mermaid">
+graph LR
+    C1["fded1a9: Projekt angelegt"] --> C2["1aed45c: Metadaten-Tabelle angelegt"]
+    C2 --> C3["fd4ef2d: Einleitung geschrieben"]
+    C3 --> C4["f51e495: Ersten Brief erfasst"]
+    M(["main"]) -.-> C4
+    H(["HEAD"]) -.-> M
+</div>
+<p><em>Die Pfeile zeigen die zeitliche Abfolge. Intern verweist jeder Commit auf seinen Vorgänger, weshalb eine Änderung an <code class="docutils literal notranslate"><span class="pre">1aed45c</span></code> auch <code class="docutils literal notranslate"><span class="pre">fd4ef2d</span></code> und <code class="docutils literal notranslate"><span class="pre">f51e495</span></code> neue Hashes geben würde.</em></p>
+</section>
+<section id="die-historie-lesen">
+<h2>2. Die Historie lesen<a class="headerlink" href="#die-historie-lesen" title="Link to this heading">#</a></h2>
+<section id="uberblick-verschaffen">
+<h3>Überblick verschaffen<a class="headerlink" href="#uberblick-verschaffen" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Vollständige Historie des aktuellen Branches</span>
+git<span class="w"> </span>log
+
+<span class="c1"># Kompakt: eine Zeile pro Commit</span>
+git<span class="w"> </span>log<span class="w"> </span>--oneline
+
+<span class="c1"># Alle Branches als Graph</span>
+git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span>--graph<span class="w"> </span>--all
+
+<span class="c1"># Gefiltert nach Zeitraum und Person</span>
+git<span class="w"> </span>log<span class="w"> </span>--since<span class="o">=</span><span class="s2">"2 weeks ago"</span><span class="w"> </span>--author<span class="o">=</span><span class="s2">"Name"</span>
+</pre></div>
+</div>
+</section>
+<section id="einzelne-commits-und-unterschiede-betrachten">
+<h3>Einzelne Commits und Unterschiede betrachten<a class="headerlink" href="#einzelne-commits-und-unterschiede-betrachten" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Was hat ein bestimmter Commit verändert?</span>
+git<span class="w"> </span>show<span class="w"> </span>1aed45c
+
+<span class="c1"># Nur die Liste der geänderten Dateien</span>
+git<span class="w"> </span>show<span class="w"> </span>--stat<span class="w"> </span>1aed45c
+
+<span class="c1"># Unterschiede zwischen zwei Commits, optional auf eine Datei beschränkt</span>
+git<span class="w"> </span>diff<span class="w"> </span>1aed45c<span class="w"> </span>f51e495
+git<span class="w"> </span>diff<span class="w"> </span>1aed45c<span class="w"> </span>f51e495<span class="w"> </span>--<span class="w"> </span>data/processed/briefe.csv
+</pre></div>
+</div>
+</section>
+<section id="die-geschichte-einer-einzelnen-datei">
+<h3>Die Geschichte einer einzelnen Datei<a class="headerlink" href="#die-geschichte-einer-einzelnen-datei" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Alle Commits, die eine Datei betreffen</span>
+git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span>--<span class="w"> </span>notebooks/essay.ipynb
+
+<span class="c1"># Mit Inhalt der Änderungen, auch über Umbenennungen hinweg</span>
+git<span class="w"> </span>log<span class="w"> </span>--follow<span class="w"> </span>-p<span class="w"> </span>--<span class="w"> </span>data/processed/briefe.csv
+
+<span class="c1"># Für jede Zeile: in welchem Commit wurde sie zuletzt geändert?</span>
+git<span class="w"> </span>blame<span class="w"> </span>src/bereinigung.py
+</pre></div>
+</div>
+</section>
+<section id="in-der-historie-suchen">
+<h3>In der Historie suchen<a class="headerlink" href="#in-der-historie-suchen" title="Link to this heading">#</a></h3>
+<p>Besonders nützlich für die Forschungsdokumentation ist die Suche nach Inhalten. Sie beantwortet Fragen wie: <em>Wann wurde der Schwellenwert für die Named-Entity-Erkennung geändert, und mit welcher Begründung?</em></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Commits, in denen ein Text hinzugefügt oder entfernt wurde</span>
+git<span class="w"> </span>log<span class="w"> </span>-S<span class="w"> </span><span class="s2">"Stoppwortliste"</span><span class="w"> </span>--oneline
+
+<span class="c1"># Dasselbe mit einem regulären Ausdruck</span>
+git<span class="w"> </span>log<span class="w"> </span>-G<span class="w"> </span><span class="s2">"min_df\s*="</span><span class="w"> </span>--oneline
+
+<span class="c1"># Suche in den Commit-Nachrichten</span>
+git<span class="w"> </span>log<span class="w"> </span>--grep<span class="o">=</span><span class="s2">"OCR"</span><span class="w"> </span>--oneline
+</pre></div>
+</div>
+<p>Die meisten Git-Oberflächen, etwa die Weboberfläche von GitLab oder die Git-Integration von VS Code, bieten diese Ansichten auch grafisch an. Die Befehle oben haben jedoch den Vorteil, dass sie sich in einer Dokumentation oder einem Notebook genau festhalten lassen.</p>
+</section>
+<section id="ein-hinweis-zu-jupyter-notebooks">
+<h3>Ein Hinweis zu Jupyter Notebooks<a class="headerlink" href="#ein-hinweis-zu-jupyter-notebooks" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>-Dateien sind intern JSON-Dokumente, die neben dem Code auch Ausgaben, Ausführungszähler und Metadaten enthalten. Bereits ein erneutes Ausführen eines Notebooks erzeugt daher Unterschiede, und <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> wird schnell unlesbar. Drei Werkzeuge helfen:</p>
+<ul class="simple">
+<li><p><strong><a class="reference external" href="https://nbdime.readthedocs.io/">nbdime</a></strong> zeigt Unterschiede zwischen Notebooks zellenweise an (<code class="docutils literal notranslate"><span class="pre">nbdiff</span></code>, <code class="docutils literal notranslate"><span class="pre">nbdiff-web</span></code>). Mit <code class="docutils literal notranslate"><span class="pre">nbdime</span> <span class="pre">config-git</span> <span class="pre">--enable</span> <span class="pre">--global</span></code> nutzt Git es automatisch für <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>-Dateien.</p></li>
+<li><p><strong><a class="reference external" href="https://github.com/kynan/nbstripout">nbstripout</a></strong> entfernt Ausgaben vor jedem Commit (<code class="docutils literal notranslate"><span class="pre">nbstripout</span> <span class="pre">--install</span></code> im Repository), sodass die Historie nur noch inhaltliche Änderungen enthält.</p></li>
+<li><p><strong><a class="reference external" href="https://jupytext.readthedocs.io/">Jupytext</a></strong> koppelt ein Notebook mit einer Markdown- oder Python-Datei, deren Änderungen sich wie normaler Text vergleichen lassen.</p></li>
+</ul>
+<p>Beachten Sie dabei: Wenn Sie nbstripout verwenden, enthält das Repository keine Ausgaben mehr. Eine ausgeführte Fassung des Notebooks, wie sie der <a class="reference internal" href="../Leitfaden.html"><span class="doc">Leitfaden</span></a> für die Abgabe teilweise vorsieht, müssen Sie dann gesondert erzeugen.</p>
+</section>
+</section>
+<section id="historie-bewusst-gestalten">
+<h2>3. Historie bewusst gestalten<a class="headerlink" href="#historie-bewusst-gestalten" title="Link to this heading">#</a></h2>
+<p>Eine Historie ist nur so aussagekräftig wie die Commits, aus denen sie besteht. Ein Commit mit der Nachricht „update“, der eine Datenbereinigung, eine neue Grafik und drei Tippfehler gleichzeitig enthält, hilft später niemandem.</p>
+<section id="kleine-zusammenhangende-commits">
+<h3>Kleine, zusammenhängende Commits<a class="headerlink" href="#kleine-zusammenhangende-commits" title="Link to this heading">#</a></h3>
+<p>Ein Commit sollte möglichst <strong>eine</strong> logische Änderung enthalten. Mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">-p</span></code> können Sie auch nur Teile einer Datei für den nächsten Commit vormerken.</p>
+</section>
+<section id="commit-nachrichten-die-das-warum-festhalten">
+<h3>Commit-Nachrichten, die das <em>Warum</em> festhalten<a class="headerlink" href="#commit-nachrichten-die-das-warum-festhalten" title="Link to this heading">#</a></h3>
+<p><em>Was</em> sich geändert hat, zeigt der Diff. <em>Warum</em> es sich geändert hat, steht nur in der Nachricht. Bewährt hat sich folgender Aufbau: eine kurze Zusammenfassung (etwa 50 Zeichen), eine Leerzeile, dann bei Bedarf eine Begründung.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Briefe vor 1840 aus dem Korpus ausgeschlossen
+
+Die Datierung dieser Briefe ist laut Editionsbericht unsicher.
+Sie verzerren die Zeitreihe in Abschnitt 4, daher werden sie
+gesondert in Anhang B diskutiert.
+</pre></div>
+</div>
+<p>Gegenüber „Daten geändert“ erlaubt eine solche Nachricht, eine methodische Entscheidung auch Monate später noch zu rekonstruieren. Wählen Sie dabei eine Sprache und bleiben Sie innerhalb eines Projekts bei ihr.</p>
+</section>
+<section id="meilensteine-mit-tags-markieren">
+<h3>Meilensteine mit Tags markieren<a class="headerlink" href="#meilensteine-mit-tags-markieren" title="Link to this heading">#</a></h3>
+<p>Ein <strong>Tag</strong> ist ein fester, benannter Verweis auf einen Commit. Er eignet sich, um wichtige Stände dauerhaft auffindbar zu machen, etwa die eingereichte Fassung einer Arbeit:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Annotierten Tag auf den aktuellen Commit setzen</span>
+git<span class="w"> </span>tag<span class="w"> </span>-a<span class="w"> </span>abgabe<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Eingereichte Fassung des Computational Essays"</span>
+
+<span class="c1"># Tags werden von git push nicht automatisch übertragen</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>abgabe
+</pre></div>
+</div>
+<p>Wenn Sie in Ihrer Abgabe auf das Repository verweisen, empfiehlt es sich, auf diesen Tag zu verlinken. So ist eindeutig, welcher Stand bewertet wurde, auch wenn Sie danach weiterarbeiten.</p>
+</section>
+</section>
+<section id="anderungen-ruckgangig-machen-ohne-die-historie-zu-verandern">
+<h2>4. Änderungen rückgängig machen, ohne die Historie zu verändern<a class="headerlink" href="#anderungen-ruckgangig-machen-ohne-die-historie-zu-verandern" title="Link to this heading">#</a></h2>
+<p>Viele Situationen, in denen man zunächst an „Historie umschreiben“ denkt, lassen sich lösen, ohne bestehende Commits anzutasten. Diese Wege sind immer vorzuziehen, wenn die Commits bereits geteilt wurden.</p>
+<section id="altere-fassungen-ansehen-und-wiederherstellen">
+<h3>Ältere Fassungen ansehen und wiederherstellen<a class="headerlink" href="#altere-fassungen-ansehen-und-wiederherstellen" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Das ganze Projekt im Zustand eines älteren Commits ansehen</span>
+git<span class="w"> </span>switch<span class="w"> </span>--detach<span class="w"> </span>1aed45c
+<span class="c1"># ... und zurück zum aktuellen Stand</span>
+git<span class="w"> </span>switch<span class="w"> </span>main
+
+<span class="c1"># Eine ältere Fassung einer Datei als separate Datei speichern</span>
+git<span class="w"> </span>show<span class="w"> </span>1aed45c:data/processed/briefe.csv<span class="w"> </span>&gt;<span class="w"> </span>briefe_alt.csv
+
+<span class="c1"># Eine Datei auf den Stand eines älteren Commits zurücksetzen</span>
+<span class="c1"># (die Änderung erscheint danach als normale, zu committende Änderung)</span>
+git<span class="w"> </span>restore<span class="w"> </span>--source<span class="o">=</span>1aed45c<span class="w"> </span>--<span class="w"> </span>notebooks/essay.ipynb
+</pre></div>
+</div>
+<p>Nach <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span> <span class="pre">--detach</span></code> befinden Sie sich in einem Zustand namens <em>detached HEAD</em>: Sie sehen einen alten Stand, arbeiten aber auf keinem Branch. Zum Ansehen ist das unproblematisch; Änderungen sollten Sie in diesem Zustand nicht committen, ohne vorher mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span> <span class="pre">-c</span> <span class="pre">neuer-branch</span></code> einen Branch anzulegen. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span></code> und <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span></code> gibt es seit Git 2.23; in älteren Anleitungen finden Sie stattdessen <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span></code>.</p>
+</section>
+<section id="noch-nicht-committete-anderungen-verwerfen">
+<h3>Noch nicht committete Änderungen verwerfen<a class="headerlink" href="#noch-nicht-committete-anderungen-verwerfen" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Datei aus der Staging Area nehmen (Änderungen bleiben erhalten)</span>
+git<span class="w"> </span>restore<span class="w"> </span>--staged<span class="w"> </span>notebooks/essay.ipynb
+
+<span class="c1"># Änderungen im Arbeitsverzeichnis verwerfen</span>
+git<span class="w"> </span>restore<span class="w"> </span>notebooks/essay.ipynb
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warnung</p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span></code> ohne <code class="docutils literal notranslate"><span class="pre">--staged</span></code> verwirft nicht committete Änderungen endgültig. Anders als bei Commits gibt es hierfür kein Sicherheitsnetz.</p>
+</div>
+</section>
+<section id="einen-commit-ruckgangig-machen-git-revert">
+<h3>Einen Commit rückgängig machen: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">revert</span></code><a class="headerlink" href="#einen-commit-ruckgangig-machen-git-revert" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>revert<span class="w"> </span>f51e495
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">revert</span></code> erzeugt einen <strong>neuen</strong> Commit, der die Änderungen eines früheren Commits umkehrt. Der ursprüngliche Commit bleibt in der Historie sichtbar, ebenso die Tatsache, dass er zurückgenommen wurde. Das ist der sichere Weg, einen bereits gepushten Commit rückgängig zu machen, und zugleich der transparenteste: Die Korrektur wird selbst Teil der Dokumentation.</p>
+</section>
+</section>
+<section id="die-historie-bearbeiten">
+<h2>5. Die Historie bearbeiten<a class="headerlink" href="#die-historie-bearbeiten" title="Link to this heading">#</a></h2>
+<section id="die-grundregel">
+<h3>Die Grundregel<a class="headerlink" href="#die-grundregel" title="Link to this heading">#</a></h3>
+<p><strong>Schreiben Sie nur Commits um, die noch niemand anderes besitzt.</strong> Solange Sie Ihre Commits nicht gepusht haben, können Sie sie beliebig verändern. Sobald andere sie geklont oder darauf aufgebaut haben, führt jede Änderung zu zwei unterschiedlichen Versionen der Historie, die anschließend mühsam zusammengeführt werden müssen.</p>
+<p>Wenn Sie allein an einem Repository arbeiten und sicher sind, dass niemand es geklont hat, können Sie auch bereits gepushte Commits umschreiben. Sie müssen dann aber einen <em>Force Push</em> durchführen (siehe <a class="reference internal" href="#force-push">Abschnitt 5.5</a>).</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Situation</p></th>
+<th class="head"><p>Befehl</p></th>
+<th class="head"><p>Verändert die Historie?</p></th>
+<th class="head"><p>Für bereits geteilte Commits geeignet?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Einen Commit zurücknehmen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">revert</span></code></p></td>
+<td><p>nein</p></td>
+<td><p>ja</p></td>
+</tr>
+<tr class="row-odd"><td><p>Letzten Commit korrigieren</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">--amend</span></code></p></td>
+<td><p>ja</p></td>
+<td><p>nein</p></td>
+</tr>
+<tr class="row-even"><td><p>Letzte Commits verwerfen oder neu zusammenstellen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span></code></p></td>
+<td><p>ja</p></td>
+<td><p>nein</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mehrere Commits aufräumen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">-i</span></code></p></td>
+<td><p>ja</p></td>
+<td><p>nein</p></td>
+</tr>
+<tr class="row-even"><td><p>Datei aus der gesamten Historie entfernen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">filter-repo</span></code></p></td>
+<td><p>ja, alle betroffenen Commits</p></td>
+<td><p>nur nach Absprache</p></td>
+</tr>
+<tr class="row-odd"><td><p>Verlorene Commits wiederfinden</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reflog</span></code></p></td>
+<td><p>nein</p></td>
+<td><p>–</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="vorher-ein-eigenes-sicherheitsnetz">
+<h3>Vorher: ein eigenes Sicherheitsnetz<a class="headerlink" href="#vorher-ein-eigenes-sicherheitsnetz" title="Link to this heading">#</a></h3>
+<p>Bevor Sie die Historie bearbeiten, sollte <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> keine offenen Änderungen anzeigen. Legen Sie außerdem einen Sicherungs-Branch an. Er kostet nichts und erspart im Zweifel viel Zeit:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>branch<span class="w"> </span>backup/vor-aufraeumen
+</pre></div>
+</div>
+</section>
+<section id="den-letzten-commit-korrigieren-git-commit-amend">
+<h3>5.1 Den letzten Commit korrigieren: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">--amend</span></code><a class="headerlink" href="#den-letzten-commit-korrigieren-git-commit-amend" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Nachricht des letzten Commits ändern</span>
+git<span class="w"> </span>commit<span class="w"> </span>--amend<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Ersten Brief (Hans an Grete, 18.03.1848) erfasst"</span>
+
+<span class="c1"># Eine vergessene Datei nachträglich in den letzten Commit aufnehmen</span>
+git<span class="w"> </span>add<span class="w"> </span>data/processed/metadaten.csv
+git<span class="w"> </span>commit<span class="w"> </span>--amend<span class="w"> </span>--no-edit
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">--amend</span></code> ersetzt den letzten Commit durch einen neuen mit neuem Hash. Für den jeweils letzten, noch nicht gepushten Commit ist das der einfachste Weg, kleine Versäumnisse zu korrigieren.</p>
+</section>
+<section id="commits-zurucksetzen-git-reset">
+<h3>5.2 Commits zurücksetzen: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span></code><a class="headerlink" href="#commits-zurucksetzen-git-reset" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span></code> verschiebt den aktuellen Branch auf einen früheren Commit. <code class="docutils literal notranslate"><span class="pre">HEAD~1</span></code> bezeichnet dabei den Vorgänger des aktuellen Commits, <code class="docutils literal notranslate"><span class="pre">HEAD~3</span></code> den Commit drei Schritte zurück. Was mit den Änderungen der „übersprungenen“ Commits geschieht, hängt vom Modus ab:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modus</p></th>
+<th class="head"><p>Branch-Zeiger</p></th>
+<th class="head"><p>Staging Area</p></th>
+<th class="head"><p>Dateien im Arbeitsverzeichnis</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--soft</span></code></p></td>
+<td><p>zurückgesetzt</p></td>
+<td><p>Änderungen bleiben vorgemerkt</p></td>
+<td><p>unverändert</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">--mixed</span></code> (Standard)</p></td>
+<td><p>zurückgesetzt</p></td>
+<td><p>geleert</p></td>
+<td><p>unverändert</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">--hard</span></code></p></td>
+<td><p>zurückgesetzt</p></td>
+<td><p>geleert</p></td>
+<td><p><strong>auf den alten Stand zurückgesetzt</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Ein typischer Anwendungsfall ist das Zusammenfassen mehrerer kleiner Commits zu einem:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Die letzten drei Commits auflösen, ihre Änderungen bleiben vorgemerkt</span>
+git<span class="w"> </span>reset<span class="w"> </span>--soft<span class="w"> </span>HEAD~3
+
+<span class="c1"># ... und als einen einzigen Commit neu anlegen</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Ortsnamen im Korpus vereinheitlicht"</span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warnung</p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span> <span class="pre">--hard</span></code> verwirft alle nicht committeten Änderungen endgültig. Bereits committete Änderungen lassen sich dagegen in der Regel über <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reflog</span></code> wiederherstellen (siehe 5.4).</p>
+</div>
+</section>
+<section id="mehrere-commits-aufraumen-interaktives-rebase">
+<h3>5.3 Mehrere Commits aufräumen: interaktives Rebase<a class="headerlink" href="#mehrere-commits-aufraumen-interaktives-rebase" title="Link to this heading">#</a></h3>
+<p>Das interaktive Rebase ist das vielseitigste Werkzeug zum Aufräumen. Es eignet sich besonders, um eine unübersichtliche Arbeitshistorie vor dem Teilen in eine nachvollziehbare Abfolge zu bringen.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Die letzten vier Commits bearbeiten</span>
+git<span class="w"> </span>rebase<span class="w"> </span>-i<span class="w"> </span>HEAD~4
+</pre></div>
+</div>
+<p>Git öffnet daraufhin einen Texteditor mit einer Liste der Commits, <strong>den ältesten zuerst</strong> (also umgekehrt zu <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>pick fc5ba48 Einleitung geschrieben
+pick fc424dc Tippfehler
+pick 9c8d7e6 Ortsnamen vereinheitlicht
+pick 3f2e1d0 noch ein Tippfehler in der Einleitung
+</pre></div>
+</div>
+<p>Sie bearbeiten diese Liste, speichern und schließen den Editor; Git führt die Anweisungen dann von oben nach unten aus. Die wichtigsten Befehle:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Befehl</p></th>
+<th class="head"><p>Wirkung</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pick</span></code></p></td>
+<td><p>Commit unverändert übernehmen</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">reword</span></code></p></td>
+<td><p>Commit übernehmen, aber die Nachricht neu schreiben</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">edit</span></code></p></td>
+<td><p>Anhalten, um den Commit inhaltlich zu verändern</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">squash</span></code></p></td>
+<td><p>Mit dem vorherigen Commit zusammenführen, Nachrichten kombinieren</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fixup</span></code></p></td>
+<td><p>Mit dem vorherigen Commit zusammenführen, eigene Nachricht verwerfen</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">drop</span></code></p></td>
+<td><p>Commit entfernen</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Zeilen dürfen außerdem umsortiert werden. Um beide Tippfehler-Korrekturen in den Commit „Einleitung geschrieben“ einzufügen, würden Sie die Liste so ändern:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>pick fc5ba48 Einleitung geschrieben
+fixup fc424dc Tippfehler
+fixup 3f2e1d0 noch ein Tippfehler in der Einleitung
+pick 9c8d7e6 Ortsnamen vereinheitlicht
+</pre></div>
+</div>
+<p>Das Ergebnis sind zwei saubere Commits statt vier. Kommt es dabei zu Konflikten, hält Git an. Sie lösen den Konflikt wie bei einem Merge, merken die Dateien mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> vor und setzen mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">--continue</span></code> fort. Mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">--abort</span></code> kehren Sie jederzeit zum Zustand vor dem Rebase zurück.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tipp</p>
+<p>Git öffnet standardmäßig häufig den Editor Vim, der für Einsteiger:innen ungewohnt ist. Sie können einen anderen Editor festlegen, z. B. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">core.editor</span> <span class="pre">&quot;nano&quot;</span></code> oder für VS Code <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">core.editor</span> <span class="pre">&quot;code</span> <span class="pre">--wait&quot;</span></code>.</p>
+</div>
+</section>
+<section id="das-sicherheitsnetz-git-reflog">
+<h3>5.4 Das Sicherheitsnetz: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reflog</span></code><a class="headerlink" href="#das-sicherheitsnetz-git-reflog" title="Link to this heading">#</a></h3>
+<p>Git protokolliert lokal jede Bewegung von HEAD, also jeden Commit, jedes Reset und jedes Rebase. Dieses Protokoll ist das <strong>Reflog</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>reflog
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>1aed45c HEAD@{0}: reset: moving to HEAD~2
+f51e495 HEAD@{1}: rebase (finish): returning to refs/heads/main
+f51e495 HEAD@{2}: rebase (pick): Ersten Brief (Hans an Grete, 18.03.1848) erfasst
+fd4ef2d HEAD@{3}: rebase (fixup): Einleitung geschrieben
+fc5ba48 HEAD@{4}: rebase (start): checkout HEAD~3
+</pre></div>
+</div>
+<p>Hier wurde versehentlich <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span> <span class="pre">--hard</span> <span class="pre">HEAD~2</span></code> ausgeführt. Der Eintrag <code class="docutils literal notranslate"><span class="pre">HEAD&#64;{1}</span></code> zeigt den Stand unmittelbar davor, der sich so wiederherstellen lässt:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Branch auf den Stand vor dem Reset zurücksetzen</span>
+git<span class="w"> </span>reset<span class="w"> </span>--hard<span class="w"> </span>HEAD@<span class="o">{</span><span class="m">1</span><span class="o">}</span>
+
+<span class="c1"># oder vorsichtiger: den alten Stand zunächst als eigenen Branch sichern</span>
+git<span class="w"> </span>branch<span class="w"> </span>rettung<span class="w"> </span>f51e495
+</pre></div>
+</div>
+<p>Das Reflog hat jedoch Grenzen:</p>
+<ul class="simple">
+<li><p>Es existiert <strong>nur lokal</strong> auf Ihrem Rechner und wird weder gepusht noch geklont.</p></li>
+<li><p>Einträge verfallen: standardmäßig nach 90 Tagen, für Commits, die von keinem Branch mehr erreichbar sind, nach 30 Tagen. Danach kann Git diese Commits beim Aufräumen endgültig löschen.</p></li>
+<li><p>Nicht committete Änderungen erscheinen nie im Reflog.</p></li>
+</ul>
+</section>
+<section id="umgeschriebene-historie-hochladen-force-push">
+<span id="force-push"></span><h3>5.5 Umgeschriebene Historie hochladen: Force Push<a class="headerlink" href="#umgeschriebene-historie-hochladen-force-push" title="Link to this heading">#</a></h3>
+<p>Haben Sie bereits gepushte Commits umgeschrieben, lehnt der Server ein normales <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> ab, weil Ihre Historie nicht mehr auf der entfernten aufbaut. Sie müssen das Überschreiben dann ausdrücklich verlangen:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>--force-with-lease
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">--force-with-lease</span></code> ist dem einfachen <code class="docutils literal notranslate"><span class="pre">--force</span></code> vorzuziehen: Es bricht ab, wenn auf dem Server inzwischen Commits liegen, die Sie lokal noch nicht gesehen haben, etwa weil eine Kollegin parallel gepusht hat. Dieser Schutz greift allerdings nur, solange Sie seit dem Umschreiben kein <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code> ausgeführt haben, ohne die neuen Commits zu prüfen.</p>
+<p>Zwei weitere Punkte sind zu beachten:</p>
+<ul class="simple">
+<li><p>In GitLab ist der Standard-Branch in der Regel als <em>protected branch</em> eingerichtet, für den Force Pushes gesperrt sind. Unter <em>Settings &gt; Repository &gt; Protected branches</em> (in neueren Versionen <em>Branch rules</em>) lässt sich dies vorübergehend ändern („Allowed to force push“). Mehr zu geschützten Branches steht im Kapitel <a class="reference internal" href="git-branches.html"><span class="doc">Branches und Merge Requests</span></a>.</p></li>
+<li><p>Alle anderen, die das Repository bereits geklont haben, müssen ihre lokale Kopie anschließend anpassen. Am einfachsten ist ein erneutes Klonen, nachdem eigene, noch nicht gepushte Änderungen gesichert wurden. Sprechen Sie einen Force Push deshalb immer vorher ab.</p></li>
+</ul>
+</section>
+</section>
+<section id="sonderfall-daten-vollstandig-aus-der-historie-entfernen">
+<h2>6. Sonderfall: Daten vollständig aus der Historie entfernen<a class="headerlink" href="#sonderfall-daten-vollstandig-aus-der-historie-entfernen" title="Link to this heading">#</a></h2>
+<p>Für das Forschungsdatenmanagement ist dies der wichtigste Anwendungsfall des Umschreibens. Typische Anlässe sind:</p>
+<ul class="simple">
+<li><p><strong>Personenbezogene Daten</strong>, die nicht veröffentlicht werden dürfen, etwa aus Interviews oder Archivalien mit Schutzfristen</p></li>
+<li><p><strong>Urheberrechtlich geschütztes Material</strong>, z. B. Digitalisate ohne Nutzungsrechte für eine Veröffentlichung</p></li>
+<li><p><strong>Zugangsdaten</strong> wie API-Schlüssel oder Passwörter</p></li>
+<li><p><strong>Große Dateien</strong>, die das Repository unbenutzbar machen oder die Speichergrenzen überschreiten</p></li>
+</ul>
+<p>Entscheidend ist dabei: <strong>Ein <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rm</span></code> mit anschließendem Commit entfernt eine Datei nur aus künftigen Ständen.</strong> In allen älteren Commits ist sie weiterhin vollständig enthalten und für alle mit Zugriff auf das Repository abrufbar, zum Beispiel mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">show</span> <span class="pre">&lt;alter-commit&gt;:pfad/zur/datei</span></code>.</p>
+<section id="schritt-0-schaden-begrenzen">
+<h3>Schritt 0: Schaden begrenzen<a class="headerlink" href="#schritt-0-schaden-begrenzen" title="Link to this heading">#</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warnung</p>
+<p>Das Bereinigen der Historie entfernt Daten nur aus <strong>Ihrem</strong> Repository. Jede bereits existierende Kopie, ob ein Klon auf einem anderen Rechner, ein Fork oder ein Cache, enthält die Daten weiterhin. Bei Zugangsdaten gilt daher: <strong>Zuerst den Schlüssel widerrufen bzw. das Passwort ändern</strong>, erst danach die Historie bereinigen. Bei personenbezogenen oder rechtlich geschützten Daten sprechen Sie das weitere Vorgehen mit Ihren Betreuenden ab.</p>
+</div>
+<p>Ist das Repository öffentlich, kann es sinnvoll sein, es für die Dauer der Bereinigung auf <em>privat</em> zu stellen.</p>
+</section>
+<section id="werkzeug-git-filter-repo">
+<h3>Werkzeug: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">filter-repo</span></code><a class="headerlink" href="#werkzeug-git-filter-repo" title="Link to this heading">#</a></h3>
+<p>Das Git-Projekt selbst empfiehlt für diese Aufgabe <a class="reference external" href="https://github.com/newren/git-filter-repo">git filter-repo</a> anstelle des älteren <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">filter-branch</span></code>. Es ist ein Python-Programm und kann z. B. mit <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">tool</span> <span class="pre">install</span> <span class="pre">git-filter-repo</span></code>, mit <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">git-filter-repo</span></code> (in einer Projektumgebung) oder unter macOS mit <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">git-filter-repo</span></code> installiert werden.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. In einem frischen Klon arbeiten</span>
+<span class="c1">#    (filter-repo verlangt das standardmäßig als Schutzmaßnahme)</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://scm.cms.hu-berlin.de/benutzername/projekt.git<span class="w"> </span>projekt-bereinigung
+<span class="nb">cd</span><span class="w"> </span>projekt-bereinigung
+
+<span class="c1"># 2a. Eine Datei aus allen Commits entfernen</span>
+git<span class="w"> </span>filter-repo<span class="w"> </span>--invert-paths<span class="w"> </span>--path<span class="w"> </span>data/raw/personendaten.csv
+
+<span class="c1"># 2b. Oder: Textstellen in allen Commits ersetzen, z. B. ein Token</span>
+<span class="c1">#     ersetzungen.txt enthält Zeilen wie:  mein-geheimes-token==&gt;***ENTFERNT***</span>
+git<span class="w"> </span>filter-repo<span class="w"> </span>--replace-text<span class="w"> </span>../ersetzungen.txt
+
+<span class="c1"># 2c. Oder: alle Dateien über 50 MB aus der Historie entfernen</span>
+git<span class="w"> </span>filter-repo<span class="w"> </span>--strip-blobs-bigger-than<span class="w"> </span>50M
+</pre></div>
+</div>
+<p>Die Datei mit den Ersetzungen sollte <strong>außerhalb</strong> des Repositorys liegen, da sie die zu entfernenden Inhalte enthält. Commits, die durch die Bereinigung leer werden, entfernt filter-repo automatisch.</p>
+<p>Anschließend prüfen Sie das Ergebnis und laden die neue Historie hoch:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 3. Prüfen: Diese Abfrage sollte keine Commits mehr liefern</span>
+git<span class="w"> </span>log<span class="w"> </span>--all<span class="w"> </span>--oneline<span class="w"> </span>--<span class="w"> </span>data/raw/personendaten.csv
+
+<span class="c1"># 4. filter-repo entfernt die Verbindung zu "origin", damit nicht</span>
+<span class="c1">#    versehentlich gepusht wird. Sie muss bewusst neu angelegt werden.</span>
+git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>https://scm.cms.hu-berlin.de/benutzername/projekt.git
+
+<span class="c1"># 5. Alle Branches und Tags überschreiben</span>
+git<span class="w"> </span>push<span class="w"> </span>--force<span class="w"> </span>--all
+git<span class="w"> </span>push<span class="w"> </span>--force<span class="w"> </span>--tags
+</pre></div>
+</div>
+<p>Hier ist <code class="docutils literal notranslate"><span class="pre">--force</span></code> statt <code class="docutils literal notranslate"><span class="pre">--force-with-lease</span></code> notwendig, da die neu angelegte Verbindung noch keinen Vergleichsstand kennt. Tragen Sie die entfernte Datei außerdem in die <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> ein, damit sie nicht erneut committet wird.</p>
+<p>Auch auf dem Server können alte Commits noch eine Weile erreichbar bleiben, etwa über Merge Requests. GitLab bietet in den Repository-Einstellungen eine Funktion <em>Repository cleanup</em>, der Sie die von filter-repo erzeugte Datei <code class="docutils literal notranslate"><span class="pre">.git/filter-repo/commit-map</span></code> übergeben, um solche Verweise zu entfernen. Für GitHub beschreibt die Anleitung <a class="reference external" href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository">Removing sensitive data from a repository</a> die notwendigen Schritte. Eine ältere, ebenfalls verbreitete Alternative zu filter-repo ist der <a class="reference external" href="https://rtyley.github.io/bfg-repo-cleaner/">BFG Repo-Cleaner</a>.</p>
+</section>
+<section id="grosze-dateien-nachtraglich-in-git-lfs-verschieben">
+<h3>Große Dateien nachträglich in Git LFS verschieben<a class="headerlink" href="#grosze-dateien-nachtraglich-in-git-lfs-verschieben" title="Link to this heading">#</a></h3>
+<p>Wurden große Dateien versehentlich direkt mit Git versioniert, müssen sie nicht unbedingt entfernt werden. Git LFS kann sie nachträglich in allen Commits durch Pointer-Dateien ersetzen (siehe das <a class="reference internal" href="git-lfs.html"><span class="std std-doc">Kapitel zu Git LFS</span></a>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Welche Dateitypen belegen in der Historie wie viel Speicher?</span>
+git<span class="w"> </span>lfs<span class="w"> </span>migrate<span class="w"> </span>info<span class="w"> </span>--everything
+
+<span class="c1"># Ausgewählte Dateitypen in der gesamten Historie nach LFS verschieben</span>
+git<span class="w"> </span>lfs<span class="w"> </span>migrate<span class="w"> </span>import<span class="w"> </span>--include<span class="o">=</span><span class="s2">"*.npz,*.pkl"</span><span class="w"> </span>--everything
+
+<span class="c1"># Auch dies schreibt die Historie um</span>
+git<span class="w"> </span>push<span class="w"> </span>--force<span class="w"> </span>--all
+</pre></div>
+</div>
+</section>
+<section id="vorbeugen-ist-besser-als-umschreiben">
+<h3>Vorbeugen ist besser als Umschreiben<a class="headerlink" href="#vorbeugen-ist-besser-als-umschreiben" title="Link to this heading">#</a></h3>
+<p>Die meisten dieser Situationen lassen sich vermeiden:</p>
+<ul class="simple">
+<li><p>Legen Sie zu Beginn eine <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> an, die Rohdaten mit Personenbezug, lokale Konfigurationsdateien (z. B. <code class="docutils literal notranslate"><span class="pre">.env</span></code>) und große Zwischenergebnisse ausschließt.</p></li>
+<li><p>Speichern Sie Zugangsdaten nie im Code, sondern in Umgebungsvariablen oder einer ignorierten Konfigurationsdatei.</p></li>
+<li><p>Prüfen Sie vor jedem Commit mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> und <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">--staged</span></code>, was Sie tatsächlich committen. Vermeiden Sie <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">.</span></code>, solange Sie nicht sicher sind, was im Verzeichnis liegt.</p></li>
+</ul>
+</section>
+</section>
+<section id="reflexion-wann-sollte-man-geschichte-umschreiben">
+<h2>7. Reflexion: Wann sollte man Geschichte umschreiben?<a class="headerlink" href="#reflexion-wann-sollte-man-geschichte-umschreiben" title="Link to this heading">#</a></h2>
+<p>Für Historiker:innen liegt eine Parallele nahe: Die Commit-Historie ist eine Quelle zum Forschungsprozess, und ihr Umschreiben gleicht einem Eingriff in ein Archiv. Das ist nicht grundsätzlich illegitim, sollte aber eine bewusste Entscheidung sein. Hilfreich ist es, drei Fälle zu unterscheiden:</p>
+<ol class="arabic simple">
+<li><p><strong>Aufräumen vor dem Teilen.</strong> Eine unübersichtliche Abfolge lokaler Zwischenstände zu nachvollziehbaren Commits zusammenzufassen, ähnelt dem Überarbeiten eines Entwurfs vor der Veröffentlichung. Die entstehende Historie ist für andere meist aussagekräftiger als die ungefilterte.</p></li>
+<li><p><strong>Entfernen aus rechtlichen oder ethischen Gründen.</strong> Personenbezogene Daten, geschützte Materialien oder Zugangsdaten zu entfernen, ist notwendig. Dokumentieren Sie dabei <em>dass</em> und <em>warum</em> etwas entfernt wurde, etwa in der README, ohne die entfernten Inhalte zu wiederholen.</p></li>
+<li><p><strong>Nachträgliches Glätten.</strong> Wer nach einer Abgabe oder Veröffentlichung Fehler aus der Historie tilgt, beschädigt deren Funktion als Nachweis. Hier ist ein <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">revert</span></code> mit einer erklärenden Nachricht der angemessene Weg: Der Fehler und seine Korrektur bleiben sichtbar. Ein Tag wie <code class="docutils literal notranslate"><span class="pre">abgabe</span></code> sollte nach der Einreichung nicht mehr verändert werden.</p></li>
+</ol>
+<p>Vor jedem Umschreiben lohnt es sich daher, kurz zu fragen: Wer besitzt diese Commits bereits? Welche Funktion erfüllt die Historie in meinem Projekt? Und was ginge verloren, wenn ich sie verändere?</p>
+</section>
+<section id="ubung-historie-in-einem-testrepository-bearbeiten">
+<span id="uebung"></span><h2>8. Übung: Historie in einem Testrepository bearbeiten<a class="headerlink" href="#ubung-historie-in-einem-testrepository-bearbeiten" title="Link to this heading">#</a></h2>
+<p>Die folgenden Befehle legen ein kleines Testrepository mit einer typischen, etwas unordentlichen Historie an. Führen Sie sie in einem leeren Ordner aus (unter Windows in <em>Git Bash</em>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>git-uebung
+<span class="nb">cd</span><span class="w"> </span>git-uebung
+git<span class="w"> </span>init
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"# Briefwechsel 1848"</span><span class="w"> </span>&gt;<span class="w"> </span>README.md
+git<span class="w"> </span>add<span class="w"> </span>README.md
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Projekt angelegt"</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"absender;empfaenger;datum"</span><span class="w"> </span>&gt;<span class="w"> </span>briefe.csv
+git<span class="w"> </span>add<span class="w"> </span>briefe.csv
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Tabelle für Briefmetadaten angelegt"</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Die Korespondenz zwischen den beiden Familien beginnt im März 1848."</span><span class="w"> </span>&gt;<span class="w"> </span>essay.md
+git<span class="w"> </span>add<span class="w"> </span>essay.md
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Einleitung geschrieben"</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Die Korrespondenz zwischen den beiden Familien beginnt im März 1848."</span><span class="w"> </span>&gt;<span class="w"> </span>essay.md
+git<span class="w"> </span>commit<span class="w"> </span>-am<span class="w"> </span><span class="s2">"tippfehler"</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Hans;Grete;1848-03-18"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>briefe.csv
+git<span class="w"> </span>commit<span class="w"> </span>-am<span class="w"> </span><span class="s2">"brief"</span>
+git<span class="w"> </span>log<span class="w"> </span>--oneline
+</pre></div>
+</div>
+<p><strong>Aufgaben:</strong></p>
+<ol class="arabic simple">
+<li><p>Die Nachricht des letzten Commits („brief“) ist wenig aussagekräftig. Ersetzen Sie sie durch eine präzisere Nachricht.</p></li>
+<li><p>Führen Sie den Commit „tippfehler“ mit dem Commit „Einleitung geschrieben“ zusammen, sodass in der Historie nur noch die korrigierte Einleitung erscheint.</p></li>
+<li><p>Simulieren Sie ein Missgeschick mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span> <span class="pre">--hard</span> <span class="pre">HEAD~2</span></code>. Stellen Sie den vorherigen Stand mithilfe des Reflogs wieder her.</p></li>
+<li><p>Nehmen Sie den Commit mit dem ersten Brief mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">revert</span></code> zurück. Vergleichen Sie die Historie mit der aus Aufgabe 3: Was ist anders, und wann würden Sie welches Vorgehen wählen?</p></li>
+<li><p>Suchen Sie mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">-S</span></code> den Commit, in dem das Wort „Korrespondenz“ eingeführt wurde. Was hätte diese Suche vor Aufgabe 2 ergeben?</p></li>
+</ol>
+<p><strong>Hinweise:</strong> Für Aufgabe 1 genügt <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">--amend</span></code>. Für Aufgabe 2 verwenden Sie <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">-i</span> <span class="pre">HEAD~3</span></code> und ändern <code class="docutils literal notranslate"><span class="pre">pick</span></code> vor dem Commit „tippfehler“ zu <code class="docutils literal notranslate"><span class="pre">fixup</span></code>. Für Aufgabe 3 hilft der Eintrag <code class="docutils literal notranslate"><span class="pre">HEAD&#64;{1}</span></code> aus <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reflog</span></code>.</p>
+</section>
+<section id="kurzreferenz">
+<h2>Kurzreferenz<a class="headerlink" href="#kurzreferenz" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Ziel</p></th>
+<th class="head"><p>Befehl</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Historie kompakt anzeigen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--oneline</span> <span class="pre">--graph</span> <span class="pre">--all</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Änderungen eines Commits ansehen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">show</span> <span class="pre">&lt;commit&gt;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Geschichte einer Datei</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--follow</span> <span class="pre">-p</span> <span class="pre">--</span> <span class="pre">&lt;datei&gt;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Nach Inhalten suchen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">-S</span> <span class="pre">&quot;&lt;text&gt;&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Alte Fassung einer Datei wiederherstellen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span> <span class="pre">--source=&lt;commit&gt;</span> <span class="pre">--</span> <span class="pre">&lt;datei&gt;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Commit sicher zurücknehmen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">revert</span> <span class="pre">&lt;commit&gt;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Meilenstein markieren</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">tag</span> <span class="pre">-a</span> <span class="pre">&lt;name&gt;</span> <span class="pre">-m</span> <span class="pre">&quot;&lt;beschreibung&gt;&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Letzten Commit korrigieren</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">--amend</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Letzte Commits zusammenfassen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span> <span class="pre">--soft</span> <span class="pre">HEAD~&lt;n&gt;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Commits aufräumen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">-i</span> <span class="pre">HEAD~&lt;n&gt;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Verlorene Commits wiederfinden</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reflog</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Umgeschriebene Historie hochladen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">--force-with-lease</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Datei aus der gesamten Historie entfernen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">filter-repo</span> <span class="pre">--invert-paths</span> <span class="pre">--path</span> <span class="pre">&lt;datei&gt;</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="weiterfuhrende-ressourcen">
+<h2>Weiterführende Ressourcen<a class="headerlink" href="#weiterfuhrende-ressourcen" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://git-scm.com/book/de/v2">Pro Git (deutsche Übersetzung)</a>, insbesondere das Kapitel <em>Git Tools</em> zum Umschreiben der Historie</p></li>
+<li><p><a class="reference external" href="https://learngitbranching.js.org/?locale=de_DE">Learn Git Branching</a>: interaktive Übungen zu Branches, Rebase und Reset, auch auf Deutsch</p></li>
+<li><p><a class="reference external" href="https://swcarpentry.github.io/git-novice/">Software Carpentry: Version Control with Git</a>: Einführung in die Grundlagen für Forschende (englisch)</p></li>
+<li><p><a class="reference external" href="https://github.com/newren/git-filter-repo">git filter-repo</a>: Dokumentation und weitere Anwendungsbeispiele</p></li>
+<li><p><a class="reference external" href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository">GitHub Docs: Removing sensitive data from a repository</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "executablebooks/jupyter-book",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./tools"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="git-branches.html"
+       title="Vorherige Seite">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">zurück</p>
+        <p class="prev-next-title">Branches und Merge Requests: gemeinsam an einem Projekt arbeiten</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="git-lfs.html"
+       title="Nächste Seite">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">weiter</p>
+        <p class="prev-next-title">Große Dateien mit Git LFS</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Inhalt
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einfuhrung">Einführung</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voraussetzungen">Voraussetzungen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grundbegriffe-was-in-der-historie-gespeichert-wird">1. Grundbegriffe: Was in der Historie gespeichert wird</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#die-historie-lesen">2. Die Historie lesen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uberblick-verschaffen">Überblick verschaffen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#einzelne-commits-und-unterschiede-betrachten">Einzelne Commits und Unterschiede betrachten</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#die-geschichte-einer-einzelnen-datei">Die Geschichte einer einzelnen Datei</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-der-historie-suchen">In der Historie suchen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ein-hinweis-zu-jupyter-notebooks">Ein Hinweis zu Jupyter Notebooks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#historie-bewusst-gestalten">3. Historie bewusst gestalten</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kleine-zusammenhangende-commits">Kleine, zusammenhängende Commits</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#commit-nachrichten-die-das-warum-festhalten">Commit-Nachrichten, die das <em>Warum</em> festhalten</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#meilensteine-mit-tags-markieren">Meilensteine mit Tags markieren</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anderungen-ruckgangig-machen-ohne-die-historie-zu-verandern">4. Änderungen rückgängig machen, ohne die Historie zu verändern</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#altere-fassungen-ansehen-und-wiederherstellen">Ältere Fassungen ansehen und wiederherstellen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#noch-nicht-committete-anderungen-verwerfen">Noch nicht committete Änderungen verwerfen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#einen-commit-ruckgangig-machen-git-revert">Einen Commit rückgängig machen: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">revert</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#die-historie-bearbeiten">5. Die Historie bearbeiten</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#die-grundregel">Die Grundregel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vorher-ein-eigenes-sicherheitsnetz">Vorher: ein eigenes Sicherheitsnetz</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#den-letzten-commit-korrigieren-git-commit-amend">5.1 Den letzten Commit korrigieren: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">--amend</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#commits-zurucksetzen-git-reset">5.2 Commits zurücksetzen: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mehrere-commits-aufraumen-interaktives-rebase">5.3 Mehrere Commits aufräumen: interaktives Rebase</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#das-sicherheitsnetz-git-reflog">5.4 Das Sicherheitsnetz: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reflog</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#umgeschriebene-historie-hochladen-force-push">5.5 Umgeschriebene Historie hochladen: Force Push</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sonderfall-daten-vollstandig-aus-der-historie-entfernen">6. Sonderfall: Daten vollständig aus der Historie entfernen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#schritt-0-schaden-begrenzen">Schritt 0: Schaden begrenzen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#werkzeug-git-filter-repo">Werkzeug: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">filter-repo</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grosze-dateien-nachtraglich-in-git-lfs-verschieben">Große Dateien nachträglich in Git LFS verschieben</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vorbeugen-ist-besser-als-umschreiben">Vorbeugen ist besser als Umschreiben</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reflexion-wann-sollte-man-geschichte-umschreiben">7. Reflexion: Wann sollte man Geschichte umschreiben?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ubung-historie-in-einem-testrepository-bearbeiten">8. Übung: Historie in einem Testrepository bearbeiten</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kurzreferenz">Kurzreferenz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weiterfuhrende-ressourcen">Weiterführende Ressourcen</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Durch <a href="https://www.geschichte.hu-berlin.de/de/bereiche-und-lehrstuehle/digital-history">Digital History, Humboldt-Universität zu Berlin</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="https://creativecommons.org/licenses/by/4.0/deed.de"><img class="license" alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> Texte und Abbildungen dieses Buchs stehen unter der Lizenz <a href="https://creativecommons.org/licenses/by/4.0/deed.de">CC BY 4.0</a>, Code unter der MIT-Lizenz (<a href="https://github.com/Digital-History-Berlin/Computational-Essays/blob/main/LICENSE.md">Details</a>).
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

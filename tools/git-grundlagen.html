@@ -1,0 +1,1328 @@
+
+<!DOCTYPE html>
+
+
+<html lang="de" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Git-Grundlagen: Versionskontrolle für Computational Essays &#8212; Computational Essays</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=91fba89f"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Klicken zum Anzeigen';</script>
+    <script>let toggleHintHide = 'Klicken zum Ausblenden';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script src="../_static/translations.js?v=79cc9f76"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tools/git-grundlagen';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.1.3/mermaid.min.js"></script>
+    <link rel="index" title="Stichwortverzeichnis" href="../genindex.html" />
+    <link rel="search" title="Suche" href="../search.html" />
+    <link rel="next" title="SSH-Schlüssel einrichten" href="ssh.html" />
+    <link rel="prev" title="Leitfaden für Computational Essays: Formatierung und Anforderungen" href="../Leitfaden.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="de"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Zum Hauptinhalt springen</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Zurück zum Anfang</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Versionswarnung"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Website-Navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Suche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Suche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="Auf dieser Seite">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/Logo_DigitalHistoryBerlin.png" class="logo__image only-light" alt="Computational Essays - Home"/>
+    <img src="../_static/Logo_DigitalHistoryBerlin.png" class="logo__image only-dark pst-js-only" alt="Computational Essays - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Suche</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Computational Essays: Ein Leitfaden für die Digital Humanities
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Grundlagen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Einf%C3%BChrung.html">Einführung in Computational Essays</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../project_environments/intro.html">Einführung in Projektumgebungen</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../project_environments/uv_guide.html">Projektumgebungen mit uv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../project_environments/venv_guide.html">Projektumgebungen mit venv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../project_environments/conda_guide.html">Projektumgebungen mit conda</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Leitfäden</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Leitfaden.html">Leitfaden für Computational Essays</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Versionskontrolle mit Git</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Git-Grundlagen</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ssh.html">SSH-Schlüssel einrichten</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git-branches.html">Branches und Merge Requests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git-history.html">Git-Historie nachvollziehen und bearbeiten</a></li>
+<li class="toctree-l1"><a class="reference internal" href="git-lfs.html">Große Dateien mit Git LFS</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Forschungsdatenmanagement</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../fdm/forschungsdaten-dokumentieren.html">Forschungsdaten dokumentieren</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fdm/lizenzen.html">Lizenzen für Code und Daten</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Konvertierungen</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Konvertierungen/word_md_notebook.html">Konvertierung von Word-Dokumenten</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Laden Sie diese Seite herunter">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/tools/git-grundlagen.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Quelldatei herunterladen"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="In PDF drucken"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Vollbildmodus"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Farbmodus" data-bs-title="Farbmodus"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Hell"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dunkel"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="Systemeinstellungen"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Suche" aria-label="Suche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Git-Grundlagen: Versionskontrolle für Computational Essays</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Inhalt </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einfuhrung">Einführung</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lernziele">Lernziele</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voraussetzungen">Voraussetzungen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-installieren">1. Git installieren</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#macos">macOS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-prufen">Installation prüfen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-einrichten">2. Git einrichten</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ein-erstes-repository">3. Ein erstes Repository</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repository-anlegen">Repository anlegen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#die-drei-bereiche-von-git">Die drei Bereiche von Git</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#den-ersten-commit-anlegen">Den ersten Commit anlegen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anderungen-ansehen-und-speichern">Änderungen ansehen und speichern</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#die-historie-anzeigen">Die Historie anzeigen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#was-ist-ein-guter-commit">Was ist ein guter Commit?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#was-nicht-ins-repository-gehort-gitignore">4. Was nicht ins Repository gehört: <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebooks-und-git">5. Jupyter Notebooks und Git</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mit-dem-gitlab-der-hu-arbeiten">6. Mit dem GitLab der HU arbeiten</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ein-projekt-in-gitlab-anlegen">Ein Projekt in GitLab anlegen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anmeldung-mit-einem-zugangstoken">Anmeldung mit einem Zugangstoken</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#das-lokale-repository-mit-gitlab-verbinden">Das lokale Repository mit GitLab verbinden</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ein-repository-herunterladen-git-clone">Ein Repository herunterladen: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anderungen-hoch-und-herunterladen">Änderungen hoch- und herunterladen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#betreuende-zum-projekt-hinzufugen">Betreuende zum Projekt hinzufügen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#speicherplatz">Speicherplatz</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nach-dem-studium-projekte-sichern">Nach dem Studium: Projekte sichern</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#branches-und-merges">7. Branches und Merges</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#einen-branch-anlegen-und-zusammenfuhren">Einen Branch anlegen und zusammenführen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#einen-konflikt-auflosen">Einen Konflikt auflösen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafische-oberflachen">8. Grafische Oberflächen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ein-arbeitsablauf-fur-ihren-computational-essay">9. Ein Arbeitsablauf für Ihren Computational Essay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#haufige-probleme">Häufige Probleme</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ubung">Übung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kurzreferenz">Kurzreferenz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weiterfuhrende-ressourcen">Weiterführende Ressourcen</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="git-grundlagen-versionskontrolle-fur-computational-essays">
+<h1>Git-Grundlagen: Versionskontrolle für Computational Essays<a class="headerlink" href="#git-grundlagen-versionskontrolle-fur-computational-essays" title="Link to this heading">#</a></h1>
+<section id="einfuhrung">
+<h2>Einführung<a class="headerlink" href="#einfuhrung" title="Link to this heading">#</a></h2>
+<p>Viele Projekte enden in einem Ordner wie diesem:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>essay.ipynb
+essay_v2.ipynb
+essay_v2_korrigiert.ipynb
+essay_final.ipynb
+essay_final_wirklich_final.ipynb
+</pre></div>
+</div>
+<p>Welche Fassung wurde eingereicht? Was hat sich zwischen <code class="docutils literal notranslate"><span class="pre">v2</span></code> und <code class="docutils literal notranslate"><span class="pre">final</span></code> geändert, und warum? Welche Version der Daten lag der Abbildung in Kapitel 3 zugrunde? Ein solcher Ordner beantwortet diese Fragen nicht, und für eine Arbeit, deren Ergebnisse nachvollziehbar und reproduzierbar sein sollen, ist das ein Problem.</p>
+<p><strong>Git</strong> ist ein Versionskontrollsystem, das genau diese Aufgabe übernimmt. Statt Kopien anzulegen, speichern Sie in regelmäßigen Abständen eine Momentaufnahme Ihres Projekts, einen <strong>Commit</strong>, zusammen mit einer kurzen Beschreibung. Git verwaltet diese Momentaufnahmen, zeigt Unterschiede zwischen ihnen an und kann jeden früheren Stand wiederherstellen. Über eine Plattform wie das <strong>GitLab der HU</strong> lässt sich das Projekt zudem sichern, mit anderen teilen und Ihren Betreuenden zugänglich machen. Der <a class="reference internal" href="../Leitfaden.html"><span class="doc">Leitfaden</span></a> sieht deshalb vor, dass Sie zusammen mit Ihrem Computational Essay einen Link zum Repository Ihres Projekts einreichen.</p>
+<p>Für das Forschungsdatenmanagement ist Git mehr als ein Sicherungswerkzeug: Die Folge der Commits dokumentiert, wie Ihre Daten und Analysen entstanden sind. Wie Sie diese Historie gezielt lesen und bearbeiten, behandelt das Kapitel <a class="reference internal" href="git-history.html"><span class="doc">Git-Historie nachvollziehen und bearbeiten</span></a>; der Umgang mit großen Dateien folgt im Kapitel zu <a class="reference internal" href="git-lfs.html"><span class="doc">Git LFS</span></a>.</p>
+<section id="lernziele">
+<h3>Lernziele<a class="headerlink" href="#lernziele" title="Link to this heading">#</a></h3>
+<p>Nach diesem Kapitel können Sie:</p>
+<ul class="simple">
+<li><p>Git installieren und einrichten</p></li>
+<li><p>ein Projekt unter Versionskontrolle stellen und Änderungen als Commits speichern</p></li>
+<li><p>festlegen, welche Dateien nicht ins Repository gehören</p></li>
+<li><p>Ihr Projekt mit dem GitLab der HU verbinden und Änderungen hoch- und herunterladen</p></li>
+<li><p>mit Branches arbeiten und einen Konflikt auflösen</p></li>
+</ul>
+</section>
+<section id="voraussetzungen">
+<h3>Voraussetzungen<a class="headerlink" href="#voraussetzungen" title="Link to this heading">#</a></h3>
+<p>Sie arbeiten in diesem Kapitel auf der Kommandozeile. Unter Windows verwenden Sie dafür die <em>Git Bash</em>, die mit Git installiert wird; unter macOS und Linux das <em>Terminal</em>. Diese vier Befehle genügen für den Anfang:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Befehl</p></th>
+<th class="head"><p>Bedeutung</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pwd</span></code></p></td>
+<td><p>Zeigt an, in welchem Ordner Sie sich befinden</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ls</span></code></p></td>
+<td><p>Listet die Dateien im aktuellen Ordner auf</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">ordnername</span></code></p></td>
+<td><p>Wechselt in einen Ordner (<code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">..</span></code> wechselt eine Ebene nach oben)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">ordnername</span></code></p></td>
+<td><p>Legt einen neuen Ordner an</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Je nach Systemeinstellung gibt Git seine Meldungen auf Englisch oder auf Deutsch aus. In diesem Kapitel sind die englischen Meldungen abgebildet; die Bedeutung ist dieselbe.</p>
+</section>
+</section>
+<section id="git-installieren">
+<h2>1. Git installieren<a class="headerlink" href="#git-installieren" title="Link to this heading">#</a></h2>
+<section id="windows">
+<h3>Windows<a class="headerlink" href="#windows" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Laden Sie den Installer von <a class="reference external" href="https://gitforwindows.org/">gitforwindows.org</a> herunter und führen Sie ihn aus.</p></li>
+<li><p>Die vorgeschlagenen Einstellungen können Sie übernehmen. Der Installer enthält neben Git auch die <em>Git Bash</em> und den <em>Git Credential Manager</em>, der später Ihre Zugangsdaten für GitLab sicher speichert.</p></li>
+<li><p>Öffnen Sie anschließend die <em>Git Bash</em> über das Startmenü.</p></li>
+</ol>
+</section>
+<section id="macos">
+<h3>macOS<a class="headerlink" href="#macos" title="Link to this heading">#</a></h3>
+<p>Öffnen Sie das Terminal und geben Sie <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">--version</span></code> ein. Ist Git noch nicht installiert, bietet macOS an, die <em>Command Line Developer Tools</em> zu installieren, die Git enthalten. Alternativ installieren Sie Git mit Homebrew:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew<span class="w"> </span>install<span class="w"> </span>git
+</pre></div>
+</div>
+</section>
+<section id="linux">
+<h3>Linux<a class="headerlink" href="#linux" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ubuntu/Debian</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>git
+
+<span class="c1"># Fedora</span>
+sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>git
+</pre></div>
+</div>
+</section>
+<section id="installation-prufen">
+<h3>Installation prüfen<a class="headerlink" href="#installation-prufen" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>--version
+</pre></div>
+</div>
+<p>Die Ausgabe sollte eine Versionsnummer zeigen, etwa <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">version</span> <span class="pre">2.43.0</span></code>. Für dieses Buch sollte die Version mindestens 2.28 sein.</p>
+</section>
+</section>
+<section id="git-einrichten">
+<span id="id1"></span><h2>2. Git einrichten<a class="headerlink" href="#git-einrichten" title="Link to this heading">#</a></h2>
+<p>Bevor Sie den ersten Commit anlegen, braucht Git einige Angaben. Sie werden einmalig pro Rechner gesetzt (<code class="docutils literal notranslate"><span class="pre">--global</span></code>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Name und E-Mail-Adresse, die in jedem Commit gespeichert werden</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.name<span class="w"> </span><span class="s2">"Vorname Nachname"</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="s2">"vorname.nachname@hu-berlin.de"</span>
+
+<span class="c1"># Neue Repositorys beginnen mit dem Branch "main"</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>init.defaultBranch<span class="w"> </span>main
+
+<span class="c1"># Beim Herunterladen abweichende Änderungen zusammenführen (siehe Abschnitt 6)</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>pull.rebase<span class="w"> </span><span class="nb">false</span>
+
+<span class="c1"># Ein einfacher Texteditor für Commit-Nachrichten</span>
+git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>core.editor<span class="w"> </span><span class="s2">"nano"</span>
+</pre></div>
+</div>
+<p>Zur Kontrolle können Sie sich alle Einstellungen anzeigen lassen:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>--list
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>user.name=Vorname Nachname
+user.email=vorname.nachname@hu-berlin.de
+init.defaultbranch=main
+pull.rebase=false
+core.editor=nano
+</pre></div>
+</div>
+<p>Einige Hinweise zu diesen Einstellungen:</p>
+<ul class="simple">
+<li><p><strong>Name und E-Mail-Adresse</strong> stehen in jedem Commit und sind für alle sichtbar, die Zugriff auf das Repository haben. Bei einem öffentlichen Repository sind sie also öffentlich.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">pull.rebase</span> <span class="pre">false</span></code></strong> legt fest, wie Git reagiert, wenn auf dem Server und auf Ihrem Rechner unterschiedliche neue Commits liegen. Ohne diese Einstellung bricht <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> in dieser Situation mit einer Fehlermeldung ab (siehe <a class="reference internal" href="#git-probleme">Häufige Probleme</a>).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">core.editor</span></code></strong> bestimmt, welcher Editor sich öffnet, wenn Git eine Nachricht von Ihnen braucht. Ohne diese Einstellung ist das oft <em>Vim</em>, dessen Bedienung ungewohnt ist. Wenn Sie VS Code verwenden, können Sie stattdessen <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">core.editor</span> <span class="pre">&quot;code</span> <span class="pre">--wait&quot;</span></code> eintragen.</p></li>
+</ul>
+</section>
+<section id="ein-erstes-repository">
+<h2>3. Ein erstes Repository<a class="headerlink" href="#ein-erstes-repository" title="Link to this heading">#</a></h2>
+<p>Als Beispiel dient in diesem Kapitel ein kleines Projekt zu einem fiktiven Briefwechsel aus dem Jahr 1848. Die Beispiele im Kapitel zur <a class="reference internal" href="git-history.html"><span class="doc">Git-Historie</span></a> knüpfen daran an.</p>
+<section id="repository-anlegen">
+<h3>Repository anlegen<a class="headerlink" href="#repository-anlegen" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>briefwechsel-1848
+<span class="nb">cd</span><span class="w"> </span>briefwechsel-1848
+git<span class="w"> </span>init
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Initialized empty Git repository in /home/ihr-name/briefwechsel-1848/.git/
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> legt im Projektordner einen versteckten Unterordner <code class="docutils literal notranslate"><span class="pre">.git</span></code> an. Darin speichert Git alle Commits und Einstellungen des Repositorys. Sie bearbeiten diesen Ordner nie direkt; wenn Sie ihn löschen, ist die gesamte Versionsgeschichte verloren.</p>
+</section>
+<section id="die-drei-bereiche-von-git">
+<h3>Die drei Bereiche von Git<a class="headerlink" href="#die-drei-bereiche-von-git" title="Link to this heading">#</a></h3>
+<p>Um zu verstehen, was die folgenden Befehle tun, hilft eine Unterscheidung zwischen drei Bereichen:</p>
+<div class="mermaid">
+graph LR
+    A["Arbeitsverzeichnis: Ihre Dateien"] -->|git add| B["Staging Area: für den nächsten Commit vorgemerkt"]
+    B -->|git commit| C["Repository: gespeicherte Commits"]
+</div>
+<ul class="simple">
+<li><p>Das <strong>Arbeitsverzeichnis</strong> ist Ihr Projektordner, in dem Sie wie gewohnt Dateien bearbeiten.</p></li>
+<li><p>In der <strong>Staging Area</strong> stellen Sie zusammen, was in den nächsten Commit aufgenommen werden soll. So können Sie auch dann gezielt committen, wenn Sie an mehreren Dingen gleichzeitig gearbeitet haben.</p></li>
+<li><p>Im <strong>Repository</strong> liegen die gespeicherten Commits.</p></li>
+</ul>
+</section>
+<section id="den-ersten-commit-anlegen">
+<h3>Den ersten Commit anlegen<a class="headerlink" href="#den-ersten-commit-anlegen" title="Link to this heading">#</a></h3>
+<p>Legen Sie eine Datei <code class="docutils literal notranslate"><span class="pre">README.md</span></code> an, die das Projekt kurz beschreibt, entweder in einem Editor oder mit diesem Befehl:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">"# Briefwechsel 1848"</span><span class="w"> </span>&gt;<span class="w"> </span>README.md
+</pre></div>
+</div>
+<p>Mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> sehen Sie, in welchem Zustand sich Ihre Dateien befinden. Diesen Befehl werden Sie am häufigsten verwenden:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>status
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add &lt;file&gt;..." to include in what will be committed)
+	README.md
+
+nothing added to commit but untracked files present (use "git add" to track)
+</pre></div>
+</div>
+<p>Git hat die Datei bemerkt, verfolgt sie aber noch nicht (<em>untracked</em>). Mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> merken Sie sie für den nächsten Commit vor:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>README.md
+git<span class="w"> </span>status
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>On branch main
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached &lt;file&gt;..." to unstage)
+	new file:   README.md
+</pre></div>
+</div>
+<p>Mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> speichern Sie den vorgemerkten Stand. Die Nachricht hinter <code class="docutils literal notranslate"><span class="pre">-m</span></code> beschreibt, was der Commit enthält:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Projekt angelegt"</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[main (root-commit) 20756f7] Projekt angelegt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+</pre></div>
+</div>
+<p>Die Zeichenfolge <code class="docutils literal notranslate"><span class="pre">20756f7</span></code> ist die Kennung (der <em>Hash</em>) dieses Commits. Bei Ihnen wird sie anders aussehen.</p>
+</section>
+<section id="anderungen-ansehen-und-speichern">
+<h3>Änderungen ansehen und speichern<a class="headerlink" href="#anderungen-ansehen-und-speichern" title="Link to this heading">#</a></h3>
+<p>Legen Sie nun eine Tabelle <code class="docutils literal notranslate"><span class="pre">briefe.csv</span></code> für die Metadaten der Briefe an und committen Sie sie:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>absender;empfaenger;datum;ort
+Hans;Grete;1848-03-18;Berlin
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>briefe.csv
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Metadaten des ersten Briefs erfasst"</span>
+</pre></div>
+</div>
+<p>Ergänzen Sie anschließend in <code class="docutils literal notranslate"><span class="pre">briefe.csv</span></code> eine weitere Zeile für den Antwortbrief und speichern Sie die Datei. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> zeigt jetzt eine Änderung an einer bereits verfolgten Datei:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>On branch main
+Changes not staged for commit:
+  (use "git add &lt;file&gt;..." to update what will be committed)
+  (use "git restore &lt;file&gt;..." to discard changes in working directory)
+	modified:   briefe.csv
+
+no changes added to commit (use "git add" and/or "git commit -a")
+</pre></div>
+</div>
+<p>Was genau sich geändert hat, zeigt <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>diff
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>diff --git a/briefe.csv b/briefe.csv
+index d38d986..95ec96d 100644
+--- a/briefe.csv
++++ b/briefe.csv
+@@ -1,2 +1,3 @@
+ absender;empfaenger;datum;ort
+ Hans;Grete;1848-03-18;Berlin
++Grete;Hans;1848-04-02;Potsdam
+</pre></div>
+</div>
+<p>Zeilen mit <code class="docutils literal notranslate"><span class="pre">+</span></code> wurden hinzugefügt, Zeilen mit <code class="docutils literal notranslate"><span class="pre">-</span></code> entfernt. Nach <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> zeigt <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> nichts mehr an, weil es nur nicht vorgemerkte Änderungen vergleicht. Die vorgemerkten Änderungen sehen Sie mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">--staged</span></code>. Es lohnt sich, diesen Befehl vor jedem Commit auszuführen, um zu prüfen, was Sie tatsächlich speichern.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>briefe.csv
+git<span class="w"> </span>diff<span class="w"> </span>--staged
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Antwortbrief von Grete ergänzt"</span>
+</pre></div>
+</div>
+</section>
+<section id="die-historie-anzeigen">
+<h3>Die Historie anzeigen<a class="headerlink" href="#die-historie-anzeigen" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>log<span class="w"> </span>--oneline
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>1d06da3 Antwortbrief von Grete ergänzt
+2357f9d Metadaten des ersten Briefs erfasst
+20756f7 Projekt angelegt
+</pre></div>
+</div>
+<p>Ohne <code class="docutils literal notranslate"><span class="pre">--oneline</span></code> zeigt <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> zusätzlich Autor:in und Datum jedes Commits. Weitere Möglichkeiten, die Historie zu durchsuchen, beschreibt das Kapitel <a class="reference internal" href="git-history.html"><span class="doc">Git-Historie nachvollziehen und bearbeiten</span></a>.</p>
+</section>
+<section id="was-ist-ein-guter-commit">
+<h3>Was ist ein guter Commit?<a class="headerlink" href="#was-ist-ein-guter-commit" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Committen Sie oft</strong>, etwa nach jedem abgeschlossenen Arbeitsschritt. Kleine Commits sind leichter zu verstehen und bei Bedarf rückgängig zu machen.</p></li>
+<li><p><strong>Ein Commit, eine Sache:</strong> Eine Datenbereinigung und eine neue Grafik gehören in zwei Commits.</p></li>
+<li><p><strong>Die Nachricht beschreibt das <em>Warum</em>.</strong> Was sich geändert hat, zeigt der Diff; warum, steht nur in der Nachricht. „Briefe vor 1840 ausgeschlossen, Datierung unsicher“ ist hilfreicher als „Daten geändert“.</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tipp</p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">.</span></code> merkt alle geänderten und neuen Dateien im aktuellen Ordner auf einmal vor. Das ist bequem, aber nur sicher, wenn Ihre <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> vollständig ist (siehe nächster Abschnitt). Prüfen Sie im Zweifel vorher mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>, was dabei aufgenommen würde.</p>
+</div>
+</section>
+</section>
+<section id="was-nicht-ins-repository-gehort-gitignore">
+<span id="gitignore"></span><h2>4. Was nicht ins Repository gehört: <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code><a class="headerlink" href="#was-nicht-ins-repository-gehort-gitignore" title="Link to this heading">#</a></h2>
+<p>Nicht jede Datei im Projektordner gehört ins Repository:</p>
+<ul class="simple">
+<li><p><strong>Virtuelle Umgebungen</strong> (<code class="docutils literal notranslate"><span class="pre">venv/</span></code>, <code class="docutils literal notranslate"><span class="pre">.venv/</span></code>): Sie lassen sich aus der <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> bzw. der <code class="docutils literal notranslate"><span class="pre">uv.lock</span></code> jederzeit neu erzeugen (siehe <a class="reference internal" href="../project_environments/intro.html"><span class="doc">Projektumgebungen</span></a>).</p></li>
+<li><p><strong>Automatisch erzeugte Dateien</strong> wie <code class="docutils literal notranslate"><span class="pre">.ipynb_checkpoints/</span></code> oder <code class="docutils literal notranslate"><span class="pre">__pycache__/</span></code></p></li>
+<li><p><strong>Rohdaten mit Personenbezug oder unklaren Rechten</strong>: Dokumentieren Sie stattdessen in der README, woher die Daten stammen und wo sie liegen (siehe <a class="reference internal" href="../fdm/forschungsdaten-dokumentieren.html"><span class="doc">Forschungsdaten dokumentieren</span></a>).</p></li>
+<li><p><strong>Zugangsdaten</strong> wie API-Schlüssel oder Passwörter, etwa in einer Datei <code class="docutils literal notranslate"><span class="pre">.env</span></code></p></li>
+<li><p><strong>Sehr große Dateien</strong>: Dafür gibt es <a class="reference internal" href="git-lfs.html"><span class="doc">Git LFS</span></a>.</p></li>
+</ul>
+<p>Angenommen, Ihr Projektordner enthält inzwischen eine virtuelle Umgebung, Jupyter-Sicherungsdateien, Rohdaten und eine Datei mit Zugangsdaten. Dann zeigt <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> all das als neue Dateien an:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>On branch main
+Untracked files:
+  (use "git add &lt;file&gt;..." to include in what will be committed)
+	.env
+	.ipynb_checkpoints/
+	data/
+	venv/
+</pre></div>
+</div>
+<p>Legen Sie im Projektordner eine Datei mit dem Namen <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> an. Jede Zeile beschreibt Dateien oder Ordner, die Git ignorieren soll; Zeilen mit <code class="docutils literal notranslate"><span class="pre">#</span></code> sind Kommentare:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># Virtuelle Umgebung
+venv/
+.venv/
+
+# Von Jupyter erzeugte Dateien
+.ipynb_checkpoints/
+__pycache__/
+
+# Rohdaten mit Personenbezug (Speicherort in der README dokumentieren)
+data/raw/
+
+# Zugangsdaten und lokale Einstellungen
+.env
+
+# Dateien des Betriebssystems
+.DS_Store
+Thumbs.db
+</pre></div>
+</div>
+<p>Danach erscheint nur noch die <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> selbst, die Sie wie jede andere Datei committen:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>status
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>On branch main
+Untracked files:
+  (use "git add &lt;file&gt;..." to include in what will be committed)
+	.gitignore
+
+nothing added to commit but untracked files present (use "git add" to track)
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>.gitignore
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">".gitignore für Umgebung, Rohdaten und Zugangsdaten angelegt"</span>
+</pre></div>
+</div>
+<p>Wenn Sie nicht wissen, warum eine Datei ignoriert wird, zeigt <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">check-ignore</span></code> die verantwortliche Zeile:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>check-ignore<span class="w"> </span>-v<span class="w"> </span>data/raw/personendaten.csv
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.gitignore:10:data/raw/	data/raw/personendaten.csv
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warnung</p>
+<p>Die <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> wirkt nur auf Dateien, die Git noch nicht verfolgt. Eine Datei, die bereits committet wurde, bleibt im Repository, auch wenn Sie sie nachträglich in die <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> eintragen. Mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rm</span> <span class="pre">--cached</span> <span class="pre">datei</span></code> entfernen Sie sie aus künftigen Commits; in älteren Commits ist sie aber weiterhin enthalten. Wie Sie etwa versehentlich committete Zugangsdaten vollständig entfernen, beschreibt das Kapitel zur <a class="reference internal" href="git-history.html"><span class="doc">Git-Historie</span></a>.</p>
+</div>
+</section>
+<section id="jupyter-notebooks-und-git">
+<h2>5. Jupyter Notebooks und Git<a class="headerlink" href="#jupyter-notebooks-und-git" title="Link to this heading">#</a></h2>
+<p>Notebooks lassen sich wie jede andere Datei versionieren. Weil eine <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>-Datei intern aber auch Ausgaben, Ausführungszähler und Metadaten speichert, entstehen bereits durch erneutes Ausführen Änderungen, und <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> wird schnell unübersichtlich. Für den Anfang helfen zwei Gewohnheiten:</p>
+<ul class="simple">
+<li><p>Committen Sie Notebooks in einem bewussten Zustand, etwa nachdem Sie <em>Kernel neu starten und alle Zellen ausführen</em> gewählt haben. So passen die gespeicherten Ausgaben zum Code.</p></li>
+<li><p>Lagern Sie größere Datenverarbeitungsschritte in eigene Skripte aus, deren Änderungen sich als normaler Text vergleichen lassen.</p></li>
+</ul>
+<p>Werkzeuge, die Notebook-Unterschiede zellenweise anzeigen oder Ausgaben vor dem Commit entfernen, stellt das Kapitel zur <a class="reference internal" href="git-history.html"><span class="doc">Git-Historie</span></a> vor.</p>
+</section>
+<section id="mit-dem-gitlab-der-hu-arbeiten">
+<h2>6. Mit dem GitLab der HU arbeiten<a class="headerlink" href="#mit-dem-gitlab-der-hu-arbeiten" title="Link to this heading">#</a></h2>
+<p>Bisher liegt Ihr Repository nur auf Ihrem Rechner. Eine Kopie auf einem Server sichert Ihre Arbeit, ermöglicht das Arbeiten auf mehreren Rechnern und erlaubt es, das Projekt mit anderen zu teilen. Die HU betreibt dafür ein eigenes GitLab unter <a class="reference external" href="https://scm.cms.hu-berlin.de">scm.cms.hu-berlin.de</a>, das allen Studierenden und Beschäftigten zur Verfügung steht. Sie melden sich dort mit Ihrem HU-Account an, also mit Ihrem HU-Benutzernamen aus acht Buchstaben und Ihrem HU-Passwort. Eine ausführliche Anleitung zur Weboberfläche bietet die <a class="reference external" href="https://cms-webtech.pages.cms.hu-berlin.de/gitlab-documentation/docs/home/">GitLab-Dokumentation des CMS</a>.</p>
+<p>Die Befehle in diesem Abschnitt funktionieren genauso mit anderen Plattformen, etwa mit <a class="reference external" href="https://codeberg.org">Codeberg</a>, einer gemeinnützigen Plattform, die nicht an eine Hochschule gebunden ist (siehe <a class="reference internal" href="#gitlab-nach-dem-studium">Nach dem Studium</a>).</p>
+<div class="admonition note">
+<p class="admonition-title">Bemerkung</p>
+<p>Die Bezeichnungen in der GitLab-Oberfläche können je nach Version leicht von den hier genannten abweichen.</p>
+</div>
+<section id="ein-projekt-in-gitlab-anlegen">
+<h3>Ein Projekt in GitLab anlegen<a class="headerlink" href="#ein-projekt-in-gitlab-anlegen" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>Wählen Sie in der Projektübersicht (<em>Projects</em>) <em>New project</em> oder klicken Sie auf das Plus-Symbol in der oberen Leiste. Wählen Sie dann <em>Create blank project</em>.</p></li>
+<li><p>Geben Sie unter <em>Project name</em> einen Namen ein, z. B. <code class="docutils literal notranslate"><span class="pre">briefwechsel-1848</span></code>.</p></li>
+<li><p>Wählen Sie unter <em>Project URL</em> den Namensraum (<em>namespace</em>), in dem das Projekt liegen soll: für ein eigenes Projekt Ihren Benutzernamen, für ein Seminarprojekt gegebenenfalls die Gruppe, die Ihre Dozierenden angelegt haben.</p></li>
+<li><p>Wählen Sie die <strong>Sichtbarkeit</strong> (<em>Visibility Level</em>):</p>
+<ul class="simple">
+<li><p><em>Private</em>: Der Zugriff muss jeder Person ausdrücklich gewährt werden. Gehört das Projekt zu einer Gruppe, haben alle Mitglieder der Gruppe Zugriff.</p></li>
+<li><p><em>Internal</em>: Alle, die am GitLab der HU angemeldet sind, haben Zugriff, außer externen Nutzer:innen.</p></li>
+<li><p><em>Public</em>: Alle haben Zugriff, auch ohne Anmeldung.</p></li>
+</ul>
+<p>Für einen Computational Essay ist <em>Private</em> die richtige Wahl. Ein öffentliches Repository setzt voraus, dass Sie alle enthaltenen Daten und Materialien veröffentlichen dürfen.</p>
+</li>
+<li><p>Unter <em>Project Configuration</em> ist <em>Initialize repository with a README</em> bereits angehakt. Entfernen Sie den Haken, da Sie ein bestehendes Repository hochladen.</p></li>
+<li><p>Klicken Sie auf <em>Create project</em>. GitLab zeigt anschließend die Adresse des Repositorys an, z. B. <code class="docutils literal notranslate"><span class="pre">https://scm.cms.hu-berlin.de/benutzername/briefwechsel-1848.git</span></code>.</p></li>
+</ol>
+<p>Die Sichtbarkeit lässt sich später unter <em>Settings &gt; General</em> im Abschnitt <em>Visibility, project features, permissions</em> ändern.</p>
+</section>
+<section id="anmeldung-mit-einem-zugangstoken">
+<h3>Anmeldung mit einem Zugangstoken<a class="headerlink" href="#anmeldung-mit-einem-zugangstoken" title="Link to this heading">#</a></h3>
+<p>Für die Verbindung über HTTPS verwenden Sie statt Ihres Passworts einen <strong>Personal Access Token</strong>:</p>
+<ol class="arabic simple">
+<li><p>Klicken Sie oben rechts auf Ihr Profilbild und wählen Sie <em>Edit profile</em>. Im Menü links finden Sie <em>Access tokens</em> (je nach Version <em>Personal access tokens</em>).</p></li>
+<li><p>Legen Sie mit <em>Add new token</em> einen Token an, geben Sie ihm einen Namen (z. B. den Ihres Rechners) und ein Ablaufdatum, und wählen Sie die Bereiche (<em>scopes</em>) <code class="docutils literal notranslate"><span class="pre">read_repository</span></code> und <code class="docutils literal notranslate"><span class="pre">write_repository</span></code>.</p></li>
+<li><p>Kopieren Sie den Token sofort; GitLab zeigt ihn nur einmal an.</p></li>
+</ol>
+<p>Wenn Git beim ersten <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> nach Zugangsdaten fragt, geben Sie als Benutzernamen Ihren HU-Benutzernamen und als Passwort den Token ein. Unter Windows (Git Credential Manager) und macOS (Schlüsselbund) wird der Token danach gespeichert, sodass Sie ihn nicht erneut eingeben müssen. Unter Linux merkt sich Git den Token mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">credential.helper</span> <span class="pre">&quot;cache</span> <span class="pre">--timeout=3600&quot;</span></code> jeweils für eine Stunde.</p>
+<p>Alternativ können Sie sich mit einem <strong>SSH-Schlüssel</strong> anmelden. Die Einrichtung ist etwas aufwendiger; danach entfällt aber die Verwaltung von Tokens, und derselbe Weg funktioniert auch bei anderen Plattformen und Servern. Das Kapitel <a class="reference internal" href="ssh.html"><span class="doc">SSH-Schlüssel einrichten</span></a> beschreibt die Schritte. Die Adresse des Repositorys lautet dann <code class="docutils literal notranslate"><span class="pre">git&#64;scm.cms.hu-berlin.de:benutzername/briefwechsel-1848.git</span></code>.</p>
+</section>
+<section id="das-lokale-repository-mit-gitlab-verbinden">
+<h3>Das lokale Repository mit GitLab verbinden<a class="headerlink" href="#das-lokale-repository-mit-gitlab-verbinden" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>https://scm.cms.hu-berlin.de/benutzername/briefwechsel-1848.git
+git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>main
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>To https://scm.cms.hu-berlin.de/benutzername/briefwechsel-1848.git
+ * [new branch]      main -&gt; main
+branch 'main' set up to track 'origin/main'.
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">origin</span></code> ist der übliche Name für die Verbindung zum Server. Die Option <code class="docutils literal notranslate"><span class="pre">-u</span></code> verknüpft Ihren lokalen Branch <code class="docutils literal notranslate"><span class="pre">main</span></code> dauerhaft mit dem auf dem Server; danach genügt <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code>.</p>
+</section>
+<section id="ein-repository-herunterladen-git-clone">
+<h3>Ein Repository herunterladen: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code><a class="headerlink" href="#ein-repository-herunterladen-git-clone" title="Link to this heading">#</a></h3>
+<p>Um ein bestehendes Projekt auf einen anderen Rechner zu holen, verwenden Sie <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code>. Es lädt das Repository mit seiner vollständigen Historie herunter und richtet die Verbindung <code class="docutils literal notranslate"><span class="pre">origin</span></code> automatisch ein:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://scm.cms.hu-berlin.de/benutzername/briefwechsel-1848.git
+</pre></div>
+</div>
+</section>
+<section id="anderungen-hoch-und-herunterladen">
+<h3>Änderungen hoch- und herunterladen<a class="headerlink" href="#anderungen-hoch-und-herunterladen" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> lädt Ihre neuen Commits auf den Server.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> holt neue Commits vom Server und übernimmt sie in Ihr Arbeitsverzeichnis.</p></li>
+</ul>
+<p>Arbeiten Sie auf mehreren Rechnern oder mit anderen zusammen, beginnen Sie jede Arbeitssitzung mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code>. Haben Sie das vergessen und inzwischen eigene Commits angelegt, lehnt der Server Ihr <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> ab:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>To https://scm.cms.hu-berlin.de/benutzername/briefwechsel-1848.git
+ ! [rejected]        main -&gt; main (fetch first)
+error: failed to push some refs to 'https://scm.cms.hu-berlin.de/benutzername/briefwechsel-1848.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+</pre></div>
+</div>
+<p>Das ist kein Fehler im eigentlichen Sinn: Git schützt die Commits auf dem Server davor, überschrieben zu werden. Holen Sie die neuen Commits mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code>. Git führt sie mit Ihren zusammen (dank der Einstellung <code class="docutils literal notranslate"><span class="pre">pull.rebase</span> <span class="pre">false</span></code> aus Abschnitt 2) und öffnet dafür einen Editor mit einer vorbereiteten Nachricht, die Sie nur speichern und schließen müssen. Danach gelingt <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>pull
+git<span class="w"> </span>push
+</pre></div>
+</div>
+<p>Die Historie zeigt nun beide Entwicklungsstränge und den Commit, der sie zusammenführt:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span>--graph
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>*   3d70fe3 Merge branch 'main' of https://scm.cms.hu-berlin.de/benutzername/briefwechsel-1848
+|\
+| * 7ac5360 Projektbeschreibung ergänzt
+* | eab1c14 Vierten Brief erfasst
+|/
+* 9746cad Dritten Brief erfasst
+</pre></div>
+</div>
+<p>Betreffen beide Änderungen dieselbe Stelle derselben Datei, kann Git sie nicht automatisch zusammenführen. Wie Sie einen solchen Konflikt auflösen, zeigt der nächste Abschnitt.</p>
+</section>
+<section id="betreuende-zum-projekt-hinzufugen">
+<h3>Betreuende zum Projekt hinzufügen<a class="headerlink" href="#betreuende-zum-projekt-hinzufugen" title="Link to this heading">#</a></h3>
+<p>Damit Ihre Betreuenden ein privates Projekt sehen können, fügen Sie sie in GitLab als Mitglieder hinzu. Sie finden die Einstellung in der Projektnavigation unter <em>Members</em> (in neueren Versionen unter <em>Manage &gt; Members</em>). Für reinen Lesezugriff genügt die Rolle <em>Reporter</em>.</p>
+<p>Personen ohne HU-Account können sich im GitLab der HU mit einer externen E-Mail-Adresse registrieren. Ihr Konto wird allerdings wieder gelöscht, wenn sie nicht innerhalb von 14 Tagen einem Projekt oder einer Gruppe hinzugefügt werden.</p>
+</section>
+<section id="speicherplatz">
+<h3>Speicherplatz<a class="headerlink" href="#speicherplatz" title="Link to this heading">#</a></h3>
+<p>Der Speicherplatz im GitLab der HU ist begrenzt: Für jeden Namensraum, also für Ihr Benutzerkonto oder eine Gruppe, stehen insgesamt 10 GiB zur Verfügung, einschließlich der Dateien in Git LFS. Ein einzelner Push darf höchstens 10 GiB groß sein, eine an ein Issue oder einen Kommentar angehängte Datei höchstens 20 MiB. Wie viel Sie bereits belegen, zeigt die Seite <a class="reference external" href="https://scm.cms.hu-berlin.de/-/profile/usage_quotas"><em>Usage Quotas</em></a> in Ihren Einstellungen; die aktuell gültigen Grenzen der Instanz finden Sie unter <a class="reference external" href="https://scm.cms.hu-berlin.de/help/instance_configuration"><em>Instance configuration</em></a>. Für einen Computational Essay reicht dieser Platz in aller Regel aus. Große Datensätze gehören nicht direkt ins Repository (siehe <a class="reference internal" href="git-lfs.html"><span class="doc">Git LFS</span></a>).</p>
+</section>
+<section id="nach-dem-studium-projekte-sichern">
+<span id="gitlab-nach-dem-studium"></span><h3>Nach dem Studium: Projekte sichern<a class="headerlink" href="#nach-dem-studium-projekte-sichern" title="Link to this heading">#</a></h3>
+<p>Wenn Sie die Universität verlassen, wird Ihr HU-Account deaktiviert und damit auch Ihr GitLab-Konto gesperrt. Ihre Projekte bleiben zunächst erhalten, werden aber <strong>ein Jahr später</strong> zusammen mit dem Konto gelöscht. Das betrifft auch Repositorys, auf die Sie in einer Abgabe verlinkt haben. Sichern Sie Projekte, die Sie behalten möchten, deshalb rechtzeitig.</p>
+<p>Eine vollständige Sicherung mit allen Branches und Tags erhalten Sie mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">--mirror</span></code>. Das Ergebnis ist ein Repository ohne Arbeitsverzeichnis, aus dem Sie später jederzeit wieder eine normale Kopie klonen können:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>--mirror<span class="w"> </span>https://scm.cms.hu-berlin.de/benutzername/briefwechsel-1848.git
+</pre></div>
+</div>
+<p>Möchten Sie ein Projekt öffentlich weiterführen, können Sie es auf eine Plattform außerhalb der Universität übertragen. Eine Möglichkeit ist <a class="reference external" href="https://codeberg.org">Codeberg</a>, eine gemeinnützige Plattform für freie Software und offene Inhalte. Codeberg ist allerdings für öffentliche Projekte unter einer offenen Lizenz gedacht (siehe <a class="reference internal" href="../fdm/lizenzen.html"><span class="doc">Lizenzen für Code und Daten</span></a>); private Repositorys erlaubt es nur in engen Grenzen (siehe die <a class="reference external" href="https://docs.codeberg.org/getting-started/faq/">Codeberg-FAQ</a>). Nach dem Anlegen eines leeren Projekts auf Codeberg übertragen Sie Ihre Branches und Tags so:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>codeberg<span class="w"> </span>https://codeberg.org/benutzername/briefwechsel-1848.git
+git<span class="w"> </span>push<span class="w"> </span>codeberg<span class="w"> </span>--all
+git<span class="w"> </span>push<span class="w"> </span>codeberg<span class="w"> </span>--tags
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">--all</span></code> überträgt alle Branches, die auf Ihrem Rechner vorhanden sind; ob Ihnen Branches fehlen, die nur auf dem Server liegen, zeigt <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">-a</span></code>. Für eine dauerhafte, zitierbare Archivierung Ihrer Arbeit eignet sich zusätzlich ein Repositorium wie <a class="reference external" href="https://zenodo.org">Zenodo</a>, das jeder veröffentlichten Fassung eine DOI zuweist.</p>
+</section>
+</section>
+<section id="branches-und-merges">
+<h2>7. Branches und Merges<a class="headerlink" href="#branches-und-merges" title="Link to this heading">#</a></h2>
+<p>Ein <strong>Branch</strong> ist ein eigener Entwicklungsstrang innerhalb des Repositorys. Branches eignen sich, um etwas auszuprobieren, ohne den funktionierenden Stand auf <code class="docutils literal notranslate"><span class="pre">main</span></code> zu gefährden, etwa eine alternative Auswertung oder ein neues Register.</p>
+<section id="einen-branch-anlegen-und-zusammenfuhren">
+<h3>Einen Branch anlegen und zusammenführen<a class="headerlink" href="#einen-branch-anlegen-und-zusammenfuhren" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Neuen Branch anlegen und zu ihm wechseln</span>
+git<span class="w"> </span>switch<span class="w"> </span>-c<span class="w"> </span>ortsregister
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Switched to a new branch 'ortsregister'
+</pre></div>
+</div>
+<p>Alle Commits landen jetzt auf dem Branch <code class="docutils literal notranslate"><span class="pre">ortsregister</span></code>. Legen Sie etwa eine Datei <code class="docutils literal notranslate"><span class="pre">orte.csv</span></code> an und committen Sie sie:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ort;gnd
+Berlin;4005728-8
+Potsdam;4046948-7
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>orte.csv
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Ortsregister mit GND-Nummern angelegt"</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span></code> zeigt alle Branches an; der aktuelle ist mit <code class="docutils literal notranslate"><span class="pre">*</span></code> markiert. Um die Arbeit zu übernehmen, wechseln Sie zurück auf <code class="docutils literal notranslate"><span class="pre">main</span></code> und führen den Branch mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> zusammen:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>switch<span class="w"> </span>main
+git<span class="w"> </span>merge<span class="w"> </span>ortsregister
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Updating 0477e9a..393bfa1
+Fast-forward
+ orte.csv | 3 +++
+ 1 file changed, 3 insertions(+)
+ create mode 100644 orte.csv
+</pre></div>
+</div>
+<p>Weil auf <code class="docutils literal notranslate"><span class="pre">main</span></code> in der Zwischenzeit nichts geschehen ist, kann Git den Branch einfach „vorspulen“ (<em>fast-forward</em>). Der Branch wird danach nicht mehr gebraucht:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>branch<span class="w"> </span>-d<span class="w"> </span>ortsregister
+</pre></div>
+</div>
+</section>
+<section id="einen-konflikt-auflosen">
+<h3>Einen Konflikt auflösen<a class="headerlink" href="#einen-konflikt-auflosen" title="Link to this heading">#</a></h3>
+<p>Ein Konflikt entsteht, wenn auf zwei Branches dieselbe Stelle einer Datei unterschiedlich geändert wurde. Angenommen, die Datei <code class="docutils literal notranslate"><span class="pre">einleitung.md</span></code> enthält den Satz „Die Korrespondenz beginnt im März 1848.“, und</p>
+<ul class="simple">
+<li><p>auf einem Branch <code class="docutils literal notranslate"><span class="pre">genaue-datierung</span></code> wurde daraus „Die Korrespondenz beginnt am 18. März 1848.“,</p></li>
+<li><p>auf <code class="docutils literal notranslate"><span class="pre">main</span></code> dagegen „Die Korrespondenz beginnt im Frühjahr 1848.“</p></li>
+</ul>
+<div class="mermaid">
+graph LR
+    A["Einleitung begonnen"] --> B["main: Datierung vorsichtiger formuliert"]
+    A --> C["genaue-datierung: Beginn genau datiert"]
+    B --> M["Merge-Commit"]
+    C --> M
+</div>
+<p>Beim Zusammenführen meldet Git den Konflikt:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>merge<span class="w"> </span>genaue-datierung
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Auto-merging einleitung.md
+CONFLICT (content): Merge conflict in einleitung.md
+Automatic merge failed; fix conflicts and then commit the result.
+</pre></div>
+</div>
+<p>In der betroffenen Datei markiert Git beide Fassungen:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Die Korrespondenz beginnt im Frühjahr 1848.
+=======
+Die Korrespondenz beginnt am 18. März 1848.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; genaue-datierung
+</pre></div>
+</div>
+<p>Oberhalb von <code class="docutils literal notranslate"><span class="pre">=======</span></code> steht die Fassung des aktuellen Branches (<code class="docutils literal notranslate"><span class="pre">HEAD</span></code>, hier <code class="docutils literal notranslate"><span class="pre">main</span></code>), darunter die des Branches, den Sie zusammenführen. Öffnen Sie die Datei, entscheiden Sie sich für eine Fassung oder formulieren Sie eine neue, und entfernen Sie die Markierungszeilen, etwa so:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Die Korrespondenz beginnt am 18. März 1848, kurz vor den Barrikadenkämpfen in Berlin.
+</pre></div>
+</div>
+<p>Dann merken Sie die aufgelöste Datei vor und schließen den Merge mit einem Commit ab. <code class="docutils literal notranslate"><span class="pre">--no-edit</span></code> übernimmt die von Git vorbereitete Nachricht:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>einleitung.md
+git<span class="w"> </span>commit<span class="w"> </span>--no-edit
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[main b415d70] Merge branch 'genaue-datierung'
+</pre></div>
+</div>
+<p>Wenn Sie den Merge lieber abbrechen und zum Stand davor zurückkehren möchten, verwenden Sie vor dem Commit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span> <span class="pre">--abort</span></code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tipp</p>
+<p>Konflikte sind kein Fehler, sondern eine Rückfrage: Git weiß nicht, welche Fassung richtig ist, und überlässt die inhaltliche Entscheidung Ihnen. Je öfter Sie <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> ausführen und je kleiner Ihre Commits sind, desto seltener und übersichtlicher werden Konflikte.</p>
+</div>
+<p>Wie Sie Branches über das GitLab der HU mit anderen teilen und über Merge Requests gemeinsam zusammenführen, zeigt das Kapitel <a class="reference internal" href="git-branches.html"><span class="doc">Branches und Merge Requests</span></a>.</p>
+</section>
+</section>
+<section id="grafische-oberflachen">
+<h2>8. Grafische Oberflächen<a class="headerlink" href="#grafische-oberflachen" title="Link to this heading">#</a></h2>
+<p>Alle Befehle dieses Kapitels gibt es auch in grafischen Oberflächen, zum Beispiel:</p>
+<ul class="simple">
+<li><p><strong>VS Code</strong>: Die Ansicht <em>Quellcodeverwaltung</em> zeigt Änderungen an, erlaubt Commits und das Auflösen von Konflikten.</p></li>
+<li><p><strong>GitHub Desktop</strong>: ein eigenständiges Programm, das auch mit GitLab-Repositorys funktioniert</p></li>
+<li><p><strong>JupyterLab</strong>: Die Erweiterung <code class="docutils literal notranslate"><span class="pre">jupyterlab-git</span></code> ergänzt eine Git-Seitenleiste.</p></li>
+<li><p><strong>GitLab</strong>: Kleinere Änderungen lassen sich direkt im Browser vornehmen.</p></li>
+</ul>
+<p>Diese Werkzeuge verwenden dieselben Begriffe wie die Kommandozeile: Sie <em>stagen</em> Dateien, <em>committen</em>, <em>pushen</em> und <em>pullen</em>. Wenn Sie die Grundbegriffe einmal auf der Kommandozeile kennengelernt haben, finden Sie sich in jeder Oberfläche zurecht.</p>
+</section>
+<section id="ein-arbeitsablauf-fur-ihren-computational-essay">
+<h2>9. Ein Arbeitsablauf für Ihren Computational Essay<a class="headerlink" href="#ein-arbeitsablauf-fur-ihren-computational-essay" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Wann</p></th>
+<th class="head"><p>Was</p></th>
+<th class="head"><p>Befehl</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Zu Beginn jeder Sitzung</p></td>
+<td><p>Neue Commits vom Server holen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Während der Arbeit</p></td>
+<td><p>Änderungen prüfen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Nach jedem Arbeitsschritt</p></td>
+<td><p>Änderungen vormerken und committen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">&lt;datei&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;&lt;nachricht&gt;&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Am Ende jeder Sitzung</p></td>
+<td><p>Commits auf den Server laden</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Vor der Abgabe</p></td>
+<td><p>Kernel neu starten, alle Zellen ausführen, committen und die Fassung markieren</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">tag</span> <span class="pre">-a</span> <span class="pre">abgabe</span> <span class="pre">-m</span> <span class="pre">&quot;Eingereichte</span> <span class="pre">Fassung&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">abgabe</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Den Tag für die eingereichte Fassung und den Umgang mit Tags erläutert das Kapitel zur <a class="reference internal" href="git-history.html"><span class="doc">Git-Historie</span></a>.</p>
+</section>
+<section id="haufige-probleme">
+<span id="git-probleme"></span><h2>Häufige Probleme<a class="headerlink" href="#haufige-probleme" title="Link to this heading">#</a></h2>
+<p><strong><code class="docutils literal notranslate"><span class="pre">fatal:</span> <span class="pre">not</span> <span class="pre">a</span> <span class="pre">git</span> <span class="pre">repository</span> <span class="pre">(or</span> <span class="pre">any</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">parent</span> <span class="pre">directories):</span> <span class="pre">.git</span></code></strong>
+Sie befinden sich nicht im Projektordner. Prüfen Sie mit <code class="docutils literal notranslate"><span class="pre">pwd</span></code>, wo Sie sind, und wechseln Sie mit <code class="docutils literal notranslate"><span class="pre">cd</span></code> in den Ordner, in dem Sie <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> ausgeführt oder das Repository geklont haben.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">Author</span> <span class="pre">identity</span> <span class="pre">unknown</span></code> / <code class="docutils literal notranslate"><span class="pre">***</span> <span class="pre">Please</span> <span class="pre">tell</span> <span class="pre">me</span> <span class="pre">who</span> <span class="pre">you</span> <span class="pre">are.</span></code></strong>
+Git kennt Ihren Namen und Ihre E-Mail-Adresse noch nicht. Führen Sie die beiden <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span></code>-Befehle aus <a class="reference internal" href="#git-einrichten">Abschnitt 2</a> aus.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">!</span> <span class="pre">[rejected]</span> <span class="pre">main</span> <span class="pre">-&gt;</span> <span class="pre">main</span> <span class="pre">(fetch</span> <span class="pre">first)</span></code></strong>
+Auf dem Server liegen Commits, die Sie noch nicht haben. Führen Sie <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> und danach erneut <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> aus.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">fatal:</span> <span class="pre">Need</span> <span class="pre">to</span> <span class="pre">specify</span> <span class="pre">how</span> <span class="pre">to</span> <span class="pre">reconcile</span> <span class="pre">divergent</span> <span class="pre">branches.</span></code></strong>
+Git weiß nicht, wie es Ihre und die neuen Commits vom Server zusammenführen soll. Setzen Sie einmalig <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">pull.rebase</span> <span class="pre">false</span></code> und führen Sie <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> erneut aus.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">fatal:</span> <span class="pre">The</span> <span class="pre">current</span> <span class="pre">branch</span> <span class="pre">...</span> <span class="pre">has</span> <span class="pre">no</span> <span class="pre">upstream</span> <span class="pre">branch.</span></code></strong>
+Ein neu angelegter Branch ist noch nicht mit dem Server verknüpft. Laden Sie ihn beim ersten Mal mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">-u</span> <span class="pre">origin</span> <span class="pre">&lt;branchname&gt;</span></code> hoch.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">warning:</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">working</span> <span class="pre">copy</span> <span class="pre">of</span> <span class="pre">'briefe.csv',</span> <span class="pre">LF</span> <span class="pre">will</span> <span class="pre">be</span> <span class="pre">replaced</span> <span class="pre">by</span> <span class="pre">CRLF</span> <span class="pre">the</span> <span class="pre">next</span> <span class="pre">time</span> <span class="pre">Git</span> <span class="pre">touches</span> <span class="pre">it</span></code></strong>
+Diese Meldung erscheint unter Windows und ist unbedenklich. Windows und macOS/Linux kennzeichnen Zeilenenden unterschiedlich; Git gleicht das automatisch an.</p>
+<p><strong>Ein Editor öffnet sich, und Sie kommen nicht mehr heraus.</strong>
+Wahrscheinlich ist das <em>Vim</em>. Drücken Sie <code class="docutils literal notranslate"><span class="pre">Esc</span></code>, tippen Sie <code class="docutils literal notranslate"><span class="pre">:wq</span></code> und drücken Sie Enter, um zu speichern und zu schließen. Damit das nicht wieder passiert, legen Sie mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">core.editor</span> <span class="pre">&quot;nano&quot;</span></code> einen einfacheren Editor fest.</p>
+<p><strong>Die Anmeldung bei GitLab schlägt fehl.</strong>
+Prüfen Sie, ob Ihr Token abgelaufen ist und die Bereiche <code class="docutils literal notranslate"><span class="pre">read_repository</span></code> und <code class="docutils literal notranslate"><span class="pre">write_repository</span></code> hat. Hat sich Ihr Rechner alte Zugangsdaten gemerkt, löschen Sie den Eintrag für <code class="docutils literal notranslate"><span class="pre">scm.cms.hu-berlin.de</span></code> unter Windows in der <em>Anmeldeinformationsverwaltung</em>, unter macOS in der <em>Schlüsselbundverwaltung</em>.</p>
+</section>
+<section id="ubung">
+<h2>Übung<a class="headerlink" href="#ubung" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Richten Sie Git wie in Abschnitt 2 beschrieben ein und prüfen Sie die Einstellungen mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">--list</span></code>.</p></li>
+<li><p>Legen Sie ein Repository <code class="docutils literal notranslate"><span class="pre">briefwechsel-1848</span></code> mit einer <code class="docutils literal notranslate"><span class="pre">README.md</span></code> und einer Tabelle <code class="docutils literal notranslate"><span class="pre">briefe.csv</span></code> an, und speichern Sie beides in mindestens zwei Commits.</p></li>
+<li><p>Ändern Sie eine Zeile in <code class="docutils literal notranslate"><span class="pre">briefe.csv</span></code>. Sehen Sie sich die Änderung mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> an, merken Sie sie vor, prüfen Sie sie mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">--staged</span></code> und committen Sie sie.</p></li>
+<li><p>Legen Sie einen Ordner <code class="docutils literal notranslate"><span class="pre">data/raw/</span></code> mit einer beliebigen Datei an und sorgen Sie mit einer <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> dafür, dass Git ihn ignoriert. Prüfen Sie das Ergebnis mit <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> und <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">check-ignore</span> <span class="pre">-v</span></code>.</p></li>
+<li><p>Legen Sie im GitLab der HU ein privates Projekt an und laden Sie Ihr Repository hoch.</p></li>
+<li><p>Erzeugen Sie absichtlich einen Konflikt: Ändern Sie dieselbe Zeile einer Datei auf <code class="docutils literal notranslate"><span class="pre">main</span></code> und auf einem neuen Branch unterschiedlich, und führen Sie beide zusammen. Lösen Sie den Konflikt auf.</p></li>
+</ol>
+<p>Wenn Sie mit diesem Repository weiterarbeiten möchten, schließt die Übung im Kapitel <a class="reference internal" href="git-history.html"><span class="doc">Git-Historie nachvollziehen und bearbeiten</span></a> daran an.</p>
+</section>
+<section id="kurzreferenz">
+<h2>Kurzreferenz<a class="headerlink" href="#kurzreferenz" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Ziel</p></th>
+<th class="head"><p>Befehl</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Name und E-Mail festlegen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">user.name</span> <span class="pre">&quot;…&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">user.email</span> <span class="pre">&quot;…&quot;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Repository anlegen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Repository herunterladen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">&lt;adresse&gt;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Zustand der Dateien anzeigen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Nicht vorgemerkte Änderungen anzeigen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Vorgemerkte Änderungen anzeigen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">--staged</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Datei vormerken</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">&lt;datei&gt;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Commit anlegen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;&lt;nachricht&gt;&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Historie anzeigen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--oneline</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Verbindung zum Server anlegen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">add</span> <span class="pre">origin</span> <span class="pre">&lt;adresse&gt;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Commits hochladen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> (beim ersten Mal <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">-u</span> <span class="pre">origin</span> <span class="pre">main</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Commits herunterladen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Branch anlegen und wechseln</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span> <span class="pre">-c</span> <span class="pre">&lt;name&gt;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Branch wechseln</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span> <span class="pre">&lt;name&gt;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Branch zusammenführen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span> <span class="pre">&lt;name&gt;</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Merge abbrechen</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span> <span class="pre">--abort</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="weiterfuhrende-ressourcen">
+<h2>Weiterführende Ressourcen<a class="headerlink" href="#weiterfuhrende-ressourcen" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://swcarpentry.github.io/git-novice/">Software Carpentry: Version Control with Git</a>: ausführliche Einführung für Forschende (englisch, CC BY 4.0). Die Reihenfolge der Themen in diesem Kapitel orientiert sich an dieser Lektion.</p></li>
+<li><p><a class="reference external" href="https://coderefinery.github.io/git-intro/">CodeRefinery: Introduction to version control with Git</a>: Einführung mit Übungen ohne Programmierkenntnisse (englisch, CC BY 4.0)</p></li>
+<li><p><a class="reference external" href="https://git-scm.com/book/de/v2">Pro Git (deutsche Übersetzung)</a>: umfassendes Nachschlagewerk, Kapitel 1 bis 3 behandeln die Grundlagen</p></li>
+<li><p><a class="reference external" href="https://learngitbranching.js.org/?locale=de_DE">Learn Git Branching</a>: interaktive Übungen zu Branches und Merges, auch auf Deutsch</p></li>
+<li><p><a class="reference external" href="https://gitforwindows.org/">Git for Windows</a>: Installer und Dokumentation für Windows</p></li>
+<li><p><a class="reference external" href="https://cms-webtech.pages.cms.hu-berlin.de/gitlab-documentation/docs/home/">GitLab-Dokumentation des CMS</a>: Anleitung zum GitLab der HU, insbesondere zur Weboberfläche</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "executablebooks/jupyter-book",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./tools"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Leitfaden.html"
+       title="Vorherige Seite">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">zurück</p>
+        <p class="prev-next-title">Leitfaden für Computational Essays: Formatierung und Anforderungen</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ssh.html"
+       title="Nächste Seite">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">weiter</p>
+        <p class="prev-next-title">SSH-Schlüssel einrichten</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Inhalt
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einfuhrung">Einführung</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lernziele">Lernziele</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voraussetzungen">Voraussetzungen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-installieren">1. Git installieren</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#macos">macOS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-prufen">Installation prüfen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-einrichten">2. Git einrichten</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ein-erstes-repository">3. Ein erstes Repository</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repository-anlegen">Repository anlegen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#die-drei-bereiche-von-git">Die drei Bereiche von Git</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#den-ersten-commit-anlegen">Den ersten Commit anlegen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anderungen-ansehen-und-speichern">Änderungen ansehen und speichern</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#die-historie-anzeigen">Die Historie anzeigen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#was-ist-ein-guter-commit">Was ist ein guter Commit?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#was-nicht-ins-repository-gehort-gitignore">4. Was nicht ins Repository gehört: <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebooks-und-git">5. Jupyter Notebooks und Git</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mit-dem-gitlab-der-hu-arbeiten">6. Mit dem GitLab der HU arbeiten</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ein-projekt-in-gitlab-anlegen">Ein Projekt in GitLab anlegen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anmeldung-mit-einem-zugangstoken">Anmeldung mit einem Zugangstoken</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#das-lokale-repository-mit-gitlab-verbinden">Das lokale Repository mit GitLab verbinden</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ein-repository-herunterladen-git-clone">Ein Repository herunterladen: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anderungen-hoch-und-herunterladen">Änderungen hoch- und herunterladen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#betreuende-zum-projekt-hinzufugen">Betreuende zum Projekt hinzufügen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#speicherplatz">Speicherplatz</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nach-dem-studium-projekte-sichern">Nach dem Studium: Projekte sichern</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#branches-und-merges">7. Branches und Merges</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#einen-branch-anlegen-und-zusammenfuhren">Einen Branch anlegen und zusammenführen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#einen-konflikt-auflosen">Einen Konflikt auflösen</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafische-oberflachen">8. Grafische Oberflächen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ein-arbeitsablauf-fur-ihren-computational-essay">9. Ein Arbeitsablauf für Ihren Computational Essay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#haufige-probleme">Häufige Probleme</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ubung">Übung</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kurzreferenz">Kurzreferenz</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weiterfuhrende-ressourcen">Weiterführende Ressourcen</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Durch <a href="https://www.geschichte.hu-berlin.de/de/bereiche-und-lehrstuehle/digital-history">Digital History, Humboldt-Universität zu Berlin</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="https://creativecommons.org/licenses/by/4.0/deed.de"><img class="license" alt="Creative Commons License" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> Texte und Abbildungen dieses Buchs stehen unter der Lizenz <a href="https://creativecommons.org/licenses/by/4.0/deed.de">CC BY 4.0</a>, Code unter der MIT-Lizenz (<a href="https://github.com/Digital-History-Berlin/Computational-Essays/blob/main/LICENSE.md">Details</a>).
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

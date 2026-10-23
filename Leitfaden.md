@@ -12,7 +12,7 @@ Für Vorschläge zur Verbesserung dieser Richtlinien kontaktieren Sie bitte: <no
 
 - Gesamtumfang wird in Zeichen gemessen, nicht Wortanzahl
 - Verhältnis: ca. 60% Text und 40% Code
-- Hinweis: Das Verhältniss ist ein Richtwert; qualitative Aspekte wie Argumentationsstruktur und Codequalität sind wichtiger
+- Hinweis: Das Verhältnis ist ein Richtwert; qualitative Aspekte wie Argumentationsstruktur und Codequalität sind wichtiger
 
 Für das Zählen der Zeichen im Notebook hilft Ihnen ein Snippet aus dem folgenden Notebook von Robert Jäschke (IBI):
 <https://scm.cms.hu-berlin.de/ibi/notebooks/-/blob/master/notebooks/Jupyter-Demo.ipynb>
@@ -54,7 +54,7 @@ Nach den Titelseiteninformationen sollte in der nächsten Zelle ein Link zum Rep
 
 ```python
 # Link zum Projektrepository
-# https://scm.cms.hu-berlin.de//username/project
+# https://scm.cms.hu-berlin.de/username/project
 ```
 
 ### 2.2 Struktur und Aufbau
@@ -150,11 +150,11 @@ Im Essay muss klar dokumentiert sein:
 
 Jupyter Notebooks verwenden Markdown zur Textformatierung. Hier sind die wichtigsten Grundlagen:
 
-- Überschriften mit # (# Überschrift 1, ## Überschrift 2, etc.)
-- Hervorhebungen mit *kursiv* oder **fett**
-- Aufzählungen mit - oder 1., 2., 3.
-- Links mit [Text](URL)
-- Bilder mit ![Alt-Text](Bildpfad)
+- Überschriften mit `#` (`# Überschrift 1`, `## Überschrift 2` usw.)
+- Hervorhebungen mit `*kursiv*` oder `**fett**`
+- Aufzählungen mit `-` oder `1.`, `2.`, `3.`
+- Links mit `[Text](URL)`
+- Bilder mit `![Alt-Text](Bildpfad)`
 
 Für eine umfassende Einführung in Markdown empfehlen wir:
 
@@ -278,7 +278,7 @@ projekt_name/
 
 ### 5.4 Umgang mit großen Datensätzen
 
-- ZIP-Dateien können nicht zu Groß für die Einreichung sein
+- Die ZIP-Datei darf für die Einreichung nicht zu groß sein
 - Bei zu großen Datensätzen:
   - Notebook mit ausgeführten Zellen einreichen
   - Link zum vollständigen Repository bereitstellen

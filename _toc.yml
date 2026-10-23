@@ -22,7 +22,7 @@ parts:
   - caption: Konvertierungen
     chapters:
     - file: Konvertierungen/word_md_notebook
-      title: "Konvertierung von Word Documenten"
+      title: "Konvertierung von Word-Dokumenten"
 
   - caption: Praktische Werkzeuge
     chapters:

@@ -279,7 +279,7 @@ conda update conda
 conda update --all
 ```
 
-### 4. Der conda Cache verstehen und verwalten
+### 4. Den conda-Cache verstehen und verwalten
 
 conda speichert heruntergeladene Pakete und deren Abhängigkeiten in einem Cache-Verzeichnis auf Ihrem Computer. Dies umfasst:
 
@@ -289,7 +289,7 @@ conda speichert heruntergeladene Pakete und deren Abhängigkeiten in einem Cache
 
 Der Cache hilft conda:
 
-- Pakete schneller zu installieren (keine erneute Downloads nötig)
+- Pakete schneller zu installieren (keine erneuten Downloads nötig)
 - Offline zu arbeiten mit bereits gecachten Paketen
 - Frühere Versionen von Paketen wiederherzustellen
 

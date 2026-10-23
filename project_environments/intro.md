@@ -61,7 +61,7 @@ Digitale Forschung muss auch in Zukunft nachvollziehbar sein:
 
 Dependencies sind Bibliotheken oder Tools, die Ihr Projekt benötigt:
 
-```txt
+```text
 Projekt: Historische Netzwerkanalyse
 ├── Python 3.9
 ├── NetworkX 3.1 (für Netzwerkanalyse)

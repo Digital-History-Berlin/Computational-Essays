@@ -70,7 +70,7 @@ Bevor Sie venv nutzen können, muss Python korrekt installiert sein.
 
 Ein gut organisiertes Projekt ist der erste Schritt:
 
-```txt
+```text
 digital_history_project/
 ├── data/                  # Rohdaten und verarbeitete Daten
 │   ├── raw/
@@ -85,7 +85,7 @@ digital_history_project/
 
 Windows:
 
-```cmd
+```bat
 mkdir digital_history_project
 cd digital_history_project
 ```
@@ -103,7 +103,7 @@ cd digital_history_project
 
 Windows (Command Prompt):
 
-```cmd
+```bat
 python -m venv venv
 ```
 
@@ -117,7 +117,7 @@ python3 -m venv venv
 
 Windows (Command Prompt):
 
-```cmd
+```bat
 venv\Scripts\activate
 ```
 
@@ -157,7 +157,7 @@ pip freeze > requirements.txt
 
 Beispiel `requirements.txt`:
 
-```txt
+```text
 numpy==1.21.2
 pandas==1.3.3
 matplotlib==3.4.3
@@ -240,7 +240,7 @@ Erstellen Sie eine ausführliche README.md:
 
 Schließen Sie die Umgebung und automatisch erzeugte Dateien in Ihrer `.gitignore` aus:
 
-```txt
+```text
 venv/
 __pycache__/
 .ipynb_checkpoints/

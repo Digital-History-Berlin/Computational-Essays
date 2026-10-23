@@ -13,7 +13,7 @@ Dieses Buch unterstützt kollaborative Annotationen durch [Hypothesis](https://h
 - Direkte Kommentare und Anmerkungen im Text
 - Diskussionen über spezifische Passagen
 - Ergänzende Ressourcen und Links
-- Fragen und Clarifications zu bestimmten Abschnitten
+- Fragen und Klärungsbedarf zu bestimmten Abschnitten
 
 Um Annotationen zu nutzen:
 

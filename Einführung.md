@@ -60,9 +60,9 @@ Bei der Erstellung eines Computational Essays sollten folgende Aspekte beachtet 
 
 ## Beispiele
 
-- UiO Computational Essay Showroom: [https://uio-ccse.github.io/computational-essay-showroom/intro.html]
+- [UiO Computational Essay Showroom](https://uio-ccse.github.io/computational-essay-showroom/intro.html)
   *Sammlung verschiedener Computational Essays mit unterschiedlichen Ansätzen*
-- Notebooks am IBI: [https://pages.cms.hu-berlin.de/ibi/notebooks/]
+- [Notebooks am IBI](https://pages.cms.hu-berlin.de/ibi/notebooks/)
   *Sammlung von Jupyter Notebooks des Instituts für Bibliotheks- und Informationswissenschaft der HU Berlin*
 - [Liste von Jupyter Notebooks in DH](https://github.com/quinnanya/dh-jupyter)
 
@@ -78,4 +78,4 @@ Wolfram, Stephen: "What Is a Computational Essay?", in: Stephen Wolfram Writings
 
 Knuth, Donald: "Literate Programming", in: The Computer Journal 27, Nr. 2 (1984), S. 97-111.
 
-Millman, K. Jarrod / Perez, Fernando, Developing open source scientific practice, in: Stodden, Victoria / Leisch, Friedrich / Peng, Roger, Implementing Reproducible Research, Chapman and Hall/CRC Press 2014, S. 149-183, S. 174.
+Millman, K. Jarrod / Perez, Fernando: "Developing open source scientific practice", in: Stodden, Victoria / Leisch, Friedrich / Peng, Roger (Hg.): Implementing Reproducible Research, Chapman and Hall/CRC Press 2014, S. 149-183, hier S. 174.

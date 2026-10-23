@@ -3,7 +3,7 @@
 ```{admonition} Keine Rechtsberatung
 :class: warning
 
-Dieses Kapitel gibt einen Überblick über Rechtsfragen, die Ihnen bei der Arbeit mit historischen Quellen und beim Veröffentlichen eigener Ergebnisse begegnen (Stand der Angaben: Oktober 2026). Es ersetzt keine Rechtsberatung. Bei konkreten Fragen wenden Sie sich an Ihre Betreuenden, an die [Initiative Forschungsdatenmanagement der HU](https://www.cms.hu-berlin.de/en/dl-en/dataman-en/home/home) oder an den [Legal Helpdesk von NFDI4Culture](https://nfdi4culture.de/about-us/success-stories/expert-guidance-the-legal-helpdesk-as-a-central-point-of-contact-for-legal-questions-in-research-data-management.html).
+Dieses Kapitel gibt einen Überblick über Rechtsfragen, die Ihnen bei der Arbeit mit historischen Quellen und beim Veröffentlichen eigener Ergebnisse begegnen (Stand der Angaben: Oktober 2026). Es ersetzt keine Rechtsberatung. Bei konkreten Fragen wenden Sie sich an Ihre Betreuenden, an die {ref}`Beratungsstellen der HU <hu-rechtsberatung>` oder an den [Legal Helpdesk von NFDI4Culture](https://nfdi4culture.de/about-us/success-stories/expert-guidance-the-legal-helpdesk-as-a-central-point-of-contact-for-legal-questions-in-research-data-management.html).
 ```
 
 ## Einführung
@@ -134,7 +134,7 @@ Einzelne Fakten sind nicht urheberrechtlich geschützt, Datensätze als Ganzes a
 - **CC BY 4.0**, wenn Sie eine Namensnennung verlangen möchten
 - **CC0 1.0**, mit der Sie auf alle Rechte verzichten, soweit das rechtlich möglich ist. Nach deutschem Recht kann man auf das Urheberrecht nicht verzichten (§ 29 UrhG); CC0 wirkt hier deshalb als umfassende, bedingungslose Lizenz. Für die wissenschaftliche Zitation ändert das nichts: Wer Ihre Daten verwendet, zitiert sie nach den Regeln guter wissenschaftlicher Praxis ohnehin.
 
-Die [Lizenzübersicht der HU](https://cms.hu-berlin.de/de/dl/dataman/lizenzuebersicht) empfiehlt für Forschungsdaten offene Lizenzen wie CC0, CC BY oder CC BY-SA und rät davon ab, Creative-Commons-Lizenzen für Software zu verwenden.
+Die HU empfiehlt im Einklang mit ihrer [Open-Access-Erklärung](https://edoc-info.hu-berlin.de/de/nutzung/oa_hu/oa) möglichst offene Lizenzen für Forschungsdaten, etwa CC0, CC BY oder CC BY-SA, und rät davon ab, Creative-Commons-Lizenzen für Software zu verwenden (siehe [Lizenz wählen](https://www.cms.hu-berlin.de/de/dl/dataman/teilen/rechtliche-aspekte/lizenzen) und die [Lizenzübersicht der HU](https://cms.hu-berlin.de/de/dl/dataman/lizenzuebersicht)). Ob und welche Lizenz Sie wählen, entscheiden Sie selbst, solange Rechte Dritter nicht entgegenstehen.
 
 ### Code: MIT, Apache oder GPL
 
@@ -308,6 +308,21 @@ Nachname V. (2026). Familienkorrespondenz im Revolutionsjahr 1848: ein Computati
 
 Für eine dauerhafte Zitierbarkeit unabhängig vom GitLab der HU, das Projekte ein Jahr nach dem Ende Ihres Studiums löscht (siehe {ref}`Nach dem Studium <gitlab-nach-dem-studium>`), können Sie eine Fassung Ihres Projekts bei [Zenodo](https://zenodo.org) veröffentlichen. Zenodo vergibt eine DOI, unter der die Fassung dauerhaft erreichbar bleibt.
 
+(hu-rechtsberatung)=
+## 6. Beratung an der HU
+
+Ob Sie eine Quelle veröffentlichen dürfen oder welche Lizenz zu Ihrem Projekt passt, hängt oft vom Einzelfall ab. Mit Fragen zu einer Seminar- oder Abschlussarbeit wenden Sie sich am besten zuerst an Ihre Betreuenden. Darüber hinaus nennt die HU für rechtliche Fragen im Forschungsdatenmanagement unter anderem diese Ansprechpartner:
+
+| Thema | Ansprechpartner |
+|---|---|
+| Urheberrecht und Lizenzen | [Fachreferentinnen und Fachreferenten der Universitätsbibliothek](https://www.ub.hu-berlin.de/de/ueber-uns/kontakt/ansprechpartner/ansprechpartner-fachreferentinnen-und-fachreferenten) |
+| Datenschutz und Persönlichkeitsrechte, etwa bei Quellen mit Angaben zu lebenden Personen | [Datenschutzbeauftragte der HU](https://www.hu-berlin.de/de/datenschutz) |
+| Lizenzen, Richtlinien der HU und weitere rechtliche Fragen zu Forschungsdaten | [Initiative Forschungsdatenmanagement](https://www.cms.hu-berlin.de/en/dl-en/dataman-en/home/home) (forschungsdaten@hu-berlin.de) |
+| Rechte an Arbeitsergebnissen, wenn Sie als studentische Hilfskraft beschäftigt sind | [Personalabteilung](https://www.personalabteilung.hu-berlin.de/) |
+| Verträge mit Kooperationspartnern, etwa Archiven oder Unternehmen | [Servicezentrum Forschung](https://www.hu-berlin.de/de/forschung/szf/koop_IP) |
+
+Die Seite [Rechtliche Aspekte](https://www.cms.hu-berlin.de/de/dl/dataman/teilen/rechtliche-aspekte) der HU gibt außerdem einen Überblick über alle Rechtsgebiete, die im Forschungsdatenmanagement eine Rolle spielen können, mit Verweisen auf die einschlägigen Vorschriften.
+
 ## Checkliste
 
 ```{admonition} Vor der Veröffentlichung
@@ -329,7 +344,9 @@ Für eine dauerhafte Zitierbarkeit unabhängig vom GitLab der HU, das Projekte e
 
 ## Weiterführende Ressourcen
 
-- [Lizenzübersicht der HU](https://cms.hu-berlin.de/de/dl/dataman/lizenzuebersicht): Empfehlungen für Forschungsdaten an der HU
+- Forschungsdatenmanagement an der HU: [Rechtliche Aspekte](https://www.cms.hu-berlin.de/de/dl/dataman/teilen/rechtliche-aspekte) mit weiterführender Literatur, [Lizenz wählen](https://www.cms.hu-berlin.de/de/dl/dataman/teilen/rechtliche-aspekte/lizenzen) und die [Lizenzübersicht der HU](https://cms.hu-berlin.de/de/dl/dataman/lizenzuebersicht)
+- Paul Klimpel, John Weitzmann: [Forschen in der digitalen Welt. Juristische Handreichung für die Geisteswissenschaften](http://nbn-resolving.de/urn:nbn:de:gbv:7-dariah-2015-5-0) (DARIAH-DE Working Papers 12), Göttingen 2015. Stand 2015, also vor den Änderungen des Urheberrechts von 2018 und 2021, die etwa Text und Data Mining und Reproduktionen gemeinfreier Werke betreffen
+- Till Kreutzer, Henning Lahmann: [Rechtsfragen bei Open Science. Ein Leitfaden](https://doi.org/10.15460/HUP.195), Hamburg University Press 2019
 - Till Kreutzer: [Open Content – Ein Praxisleitfaden zur Nutzung von Creative-Commons-Lizenzen](https://www.bpb.de/lernen/digitale-bildung/oer-material-fuer-alle/220538/open-content-ein-praxisleitfaden-zur-nutzung-von-creative-commons-lizenzen/), Deutsche UNESCO-Kommission, hbz und Wikimedia Deutschland (CC BY 4.0)
 - [Urheberrechtsgesetz (UrhG)](https://www.gesetze-im-internet.de/urhg/) und [Bundesarchivgesetz (BArchG)](https://www.gesetze-im-internet.de/barchg_2017/) im Wortlaut
 - [choosealicense.com](https://choosealicense.com/): Hilfe bei der Wahl einer Lizenz für Software (englisch)

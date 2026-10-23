@@ -26,5 +26,7 @@ parts:
 
   - caption: Praktische Werkzeuge
     chapters:
+    - file: tools/git-history
+      title: "Git-Historie nachvollziehen und bearbeiten"
     - file: tools/git-lfs
       title: "Fortgeschrittene Git-Funktionen"

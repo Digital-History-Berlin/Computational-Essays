@@ -29,6 +29,7 @@ Das Buch enthält derzeit:
 - **Einführung in Computational Essays**: Grundlegende Konzepte, Bedeutung in den Digital Humanities und wesentliche Komponenten
 - **Formatierungs- und Anforderungsleitfaden**: Detaillierte Anleitungen zur Strukturierung und Einreichung
 - **Einführung in Projektumgebungen**: Grundlegende Idee, Detaillierte Guides zu venv und Conda
+- **Praktische Werkzeuge**: Git-Historie nachvollziehen und bearbeiten, Git LFS für große Dateien
 
 ### Voraussetzungen
 

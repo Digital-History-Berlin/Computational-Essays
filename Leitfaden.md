@@ -262,6 +262,8 @@ projekt_name/
 └── README.md
 ```
 
+Wie Sie Dateien benennen und Ihre Daten dokumentieren, beschreibt das Kapitel {doc}`Forschungsdaten dokumentieren <fdm/forschungsdaten-dokumentieren>`.
+
 ### 5.2 Einreichungsformat
 
 - ZIP-Datei mit Namen: `SE_[Semester]_Name-Vorname_[Kurztitel].zip`

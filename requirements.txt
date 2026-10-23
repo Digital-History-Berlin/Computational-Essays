@@ -6,4 +6,3 @@ jupyter-book>=1.0.4,<2
 # Used by the code cells of the chapter "Forschungsdaten dokumentieren",
 # which are run every time the book is built (pandas 3 needs Python 3.11+)
 pandas>=3,<4
-frictionless>=5,<6

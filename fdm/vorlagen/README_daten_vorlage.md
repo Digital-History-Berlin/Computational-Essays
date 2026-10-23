@@ -6,9 +6,13 @@
 
 - **Inhalt:** <Was enthält der Datensatz? Wie viele Einträge, welcher Zeitraum, welcher Raum?>
 - **Kontext:** <Projekt, Seminar oder Arbeit, in dem der Datensatz entstanden ist; Forschungsfrage>
-- **Erstellt von:** <Namen, Einrichtung, Kontakt>
+- **Erstellt von:** <Namen, Einrichtung, Kontakt, ggf. ORCID>
+- **Mitwirkende:** <Personen, die nicht hauptsächlich an der Erstellung beteiligt waren, mit ihrer Rolle>
 - **Erstellt:** <Zeitraum der Erstellung>
 - **Version:** <Versionsnummer, ggf. Git-Tag>
+- **Kennung:** <DOI oder andere Kennung, sobald vorhanden>
+- **Schlagwörter:** <Begriffe, die den Inhalt beschreiben, möglichst aus einem kontrollierten Vokabular wie der GND>
+- **Sprache:** <Sprache(n) der Quellen und der Daten>
 
 ## Quellen
 
@@ -33,7 +37,7 @@ Normdaten: <verwendete Normdateien, z. B. GND, GeoNames, Wikidata>
 
 ## Spalten
 
-<Kurzbeschreibung jeder Spalte oder Verweis auf das Datenwörterbuch bzw. Schema. Was bedeuten leere Felder?>
+<Kurzbeschreibung jeder Spalte oder Verweis auf das Datenwörterbuch. Was bedeuten leere Felder?>
 
 ## Software
 
@@ -43,6 +47,10 @@ Normdaten: <verwendete Normdateien, z. B. GND, GeoNames, Wikidata>
 
 - <Lizenz der Daten>
 - <Rechte an den Quellen, Nutzungsbedingungen von Archiven, Einschränkungen z. B. wegen Personenbezug>
+
+## Verwandte Ressourcen
+
+- <Veröffentlichungen, andere Datensätze oder Code, die mit diesem Datensatz zusammenhängen, möglichst mit DOI>
 
 ## Zitierempfehlung
 

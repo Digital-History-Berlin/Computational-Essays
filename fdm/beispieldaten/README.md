@@ -9,6 +9,9 @@
 - **Erstellt von:** Vorname Nachname, Humboldt-Universität zu Berlin (vorname.nachname@hu-berlin.de)
 - **Erstellt:** 12.–16. Januar 2026
 - **Version:** 1.0 (im Repository als Git-Tag `daten-v1.0` markiert)
+- **Kennung:** noch keine; bei einer Veröffentlichung erhält der Datensatz eine DOI
+- **Schlagwörter:** Briefe; Familienkorrespondenz; Revolution 1848/49; Berlin; Potsdam
+- **Sprache:** Deutsch
 
 ## Quellen
 
@@ -22,7 +25,7 @@
 2. Datierung: Ist im Brief kein Datum genannt, wurde es aus dem Inhalt erschlossen und im Extended Date/Time Format (EDTF) gekennzeichnet: `?` für unsicher, `~` für ungefähr, `XX` für unbekannte Stellen (13.01.2026)
 3. Orte in heutiger Schreibweise normiert und, soweit vorhanden, mit der Gemeinsamen Normdatei (GND) verknüpft (14.01.2026)
 4. Stand der Transkription nachgetragen (15.01.2026)
-5. Prüfung der Tabelle gegen das Schema `briefe_1848.schema.yaml` (16.01.2026)
+5. Prüfung der Tabelle gegen das Datenwörterbuch `briefe_1848_datenwoerterbuch.csv` (16.01.2026)
 
 Transkriptionsrichtlinien: buchstabengetreu, Abkürzungen werden nicht aufgelöst, unsichere Lesungen stehen in eckigen Klammern.
 
@@ -31,7 +34,7 @@ Transkriptionsrichtlinien: buchstabengetreu, Abkürzungen werden nicht aufgelös
 | Datei | Inhalt |
 |---|---|
 | `briefe_1848.csv` | Metadaten der Briefe (UTF-8, Trennzeichen: Semikolon, eine Zeile pro Brief) |
-| `briefe_1848.schema.yaml` | Beschreibung und Prüfregeln aller Spalten (Frictionless Table Schema) |
+| `briefe_1848_datenwoerterbuch.csv` | Datenwörterbuch: Beschreibung und Prüfregeln aller Spalten (UTF-8, Trennzeichen: Semikolon) |
 | `briefe_1848_fehlerhaft.csv` | Kopie mit absichtlichen Fehlern für die Übung im Kapitel |
 
 ## Spalten
@@ -46,12 +49,12 @@ Transkriptionsrichtlinien: buchstabengetreu, Abkürzungen werden nicht aufgelös
 | `transkription` | Stand der Transkription: `vollständig`, `teilweise` oder `keine` |
 | `signatur` | Signatur des Originals |
 
-Die vollständige Beschreibung mit allen Regeln steht in `briefe_1848.schema.yaml`. Leere Felder bedeuten „nicht vorhanden“, nicht „unbekannt“.
+Die vollständige Beschreibung mit allen Regeln steht in `briefe_1848_datenwoerterbuch.csv`. Leere Felder bedeuten „nicht vorhanden“, nicht „unbekannt“.
 
 ## Software
 
 - Erfassung: Tabellenkalkulation (LibreOffice Calc)
-- Prüfung: Python 3.12, frictionless 5.21
+- Prüfung: Python 3.12, pandas 3.1 (Funktion `daten_pruefen` aus dem Kapitel „Forschungsdaten dokumentieren“)
 
 ## Rechte und Lizenz
 

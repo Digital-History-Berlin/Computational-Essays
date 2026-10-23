@@ -29,14 +29,16 @@ Nach diesem Kapitel können Sie:
 - eine README für einen Datensatz schreiben
 - ein Datenwörterbuch anlegen, das jede Spalte einer Tabelle beschreibt
 - Unsicherheiten, etwa bei Datierungen, und Normdaten einheitlich erfassen
-- Ihre Daten mit einem maschinenlesbaren Schema beschreiben und automatisch prüfen
+- Ihre Daten automatisch gegen ihr Datenwörterbuch prüfen
+- Metadatenstandards und persistente Identifikatoren einordnen und wissen, wo Sie Daten veröffentlichen können
 
 ### Voraussetzungen
 
-Für die Codebeispiele benötigen Sie Grundkenntnisse in Python und eine {doc}`Projektumgebung <../project_environments/intro>` mit den Paketen `pandas` und `frictionless`:
+Für die Codebeispiele benötigen Sie Grundkenntnisse in Python und eine {doc}`Projektumgebung <../project_environments/intro>` mit dem Paket `pandas`:
 
 ```bash
-pip install pandas frictionless
+uv add pandas        # in einem Projekt, das mit uv verwaltet wird
+pip install pandas   # in einer mit venv angelegten Umgebung
 ```
 
 Als Beispiel dient ein kleiner, frei erfundener Datensatz: die Metadaten zu acht Briefen, die sich Mitglieder einer Familie Albrecht im Jahr 1848 geschrieben haben. Er liegt im Repository dieses Buchs im Ordner [`fdm/beispieldaten`](https://github.com/Digital-History-Berlin/Computational-Essays/tree/main/fdm/beispieldaten).
@@ -61,11 +63,13 @@ Dokumentation entsteht auf mehreren Ebenen, die unterschiedliche Fragen beantwor
 |---|---|---|
 | Projekt-README | Worum geht es, wie ist das Projekt aufgebaut, wie lässt sich die Analyse wiederholen? | `README.md` im Projektordner |
 | Daten-README | Woher stammen die Daten, wie wurden sie bearbeitet, wer darf sie wie nutzen? | `README.md` im Datenordner |
-| Datenwörterbuch | Was bedeutet jede Spalte, welche Werte sind erlaubt? | Tabelle oder Schema-Datei |
+| Datenwörterbuch | Was bedeutet jede Spalte, welche Werte sind erlaubt? | Tabelle, z. B. als CSV-Datei |
 | Code-Dokumentation | Was tut eine Funktion, warum wurde ein Schritt so umgesetzt? | Docstrings und Kommentare |
 | Der Essay selbst | Welche methodischen Entscheidungen wurden getroffen, und was folgt daraus? | Abschnitt zu Quellenlage und Datenkritik |
 
 Die Ebenen ergänzen sich. Der Essay diskutiert, *warum* Sie etwa unsichere Datierungen in die Analyse aufgenommen haben; die Daten-README und das Datenwörterbuch halten fest, *wie* sie gekennzeichnet sind.
+
+Häufig ist außerdem von **Metadaten** die Rede. Gemeint ist ein Ausschnitt der Dokumentation, der vor allem dazu dient, Daten zu *finden*: Titel, Urheber:innen, Zeitraum, Ort, Schlagwörter, Rechte. Die Dokumentation geht weit darüber hinaus und beschreibt etwa, wie die Daten entstanden sind und was jede Spalte bedeutet. Wie Metadaten nach Standards erfasst werden, behandelt {ref}`Abschnitt 6 <fdm-metadaten>`.
 
 ## 2. Ordnerstruktur und Dateinamen
 
@@ -84,7 +88,7 @@ briefwechsel-1848/
 │   └── processed/               # aus den Rohdaten erzeugte Daten
 │       ├── README.md            # Daten-README
 │       ├── briefe_1848.csv
-│       └── briefe_1848.schema.yaml
+│       └── briefe_1848_datenwoerterbuch.csv
 ├── src/                         # ausgelagerte Skripte
 └── images/                      # Abbildungen
 ```
@@ -196,130 +200,141 @@ briefe["datum_unsicher"] = briefe["datum"].str.contains("[?~%X]")
 briefe[["brief_id", "datum", "datum_unsicher"]]
 ```
 
-**Normdaten.** Namen sind mehrdeutig: „Berlin“ kann die Stadt an der Spree oder einen gleichnamigen Ort anderswo bezeichnen, und historische Schreibweisen wechseln. Eine Kennung aus einer **Normdatei** legt eindeutig fest, was gemeint ist. Für Personen, Orte und Körperschaften ist im deutschsprachigen Raum die [Gemeinsame Normdatei (GND)](https://www.dnb.de/gnd) der Deutschen Nationalbibliothek verbreitet; für Orte auch [GeoNames](https://www.geonames.org), übergreifend [Wikidata](https://www.wikidata.org). Im Beispiel verweist `4005728-8` auf Berlin und `4046948-7` auf Potsdam. Dokumentieren Sie, welche Normdatei Sie verwenden.
+**Normdaten.** Namen sind mehrdeutig: „Berlin“ kann die Stadt an der Spree oder einen gleichnamigen Ort anderswo bezeichnen, und historische Schreibweisen wechseln. Eine Kennung aus einer **Normdatei** legt eindeutig fest, was gemeint ist:
+
+| Wofür | Normdatei | Hinweis |
+|---|---|---|
+| Personen, Orte, Körperschaften und Sachbegriffe | [Gemeinsame Normdatei (GND)](https://www.dnb.de/DE/Professionell/Standardisierung/GND/gnd_node.html) | von der Deutschen Nationalbibliothek und Bibliotheken gemeinsam geführt; im deutschsprachigen Raum am weitesten verbreitet |
+| Personen, international | [VIAF](https://viaf.org) | führt die GND mit den Normdateien anderer Länder zusammen |
+| Orte mit Koordinaten | [GeoNames](https://www.geonames.org) | geografische Datenbank mit weltweiten Ortsangaben |
+| Personen, Orte, Ereignisse, übergreifend | [Wikidata](https://www.wikidata.org) | offene, gemeinschaftlich gepflegte Wissensdatenbank |
+| Sie selbst als Autor:in | [ORCID](https://orcid.org) | kostenlose Kennung für Forschende, die Sie bei Veröffentlichungen angeben |
+| Forschungseinrichtungen | [ROR](https://ror.org) | Kennungen für Universitäten und Institute |
+
+Im Beispiel verweist die GND-Nummer `4005728-8` auf Berlin und `4046948-7` auf Potsdam. Ähnlich wie Normdateien legen **kontrollierte Vokabulare** fest, mit welchen Begriffen Sie etwas beschreiben, etwa bei Schlagwörtern; auch hierfür bietet die GND Sachbegriffe. Dokumentieren Sie, welche Normdateien und Vokabulare Sie verwenden.
 
 **Leere Felder.** Ein leeres Feld kann „nicht vorhanden“, „unbekannt“ oder „nicht erhoben“ bedeuten. Legen Sie fest, was es in Ihrem Datensatz bedeutet. Im Beispiel ist `ort_gnd` beim Gut Albrechtshof leer, weil der Ort keinen Eintrag in der GND hat, nicht weil er nicht nachgeschlagen wurde.
 
 **Normierte und originale Schreibweisen.** Wenn Sie Namen oder Orte vereinheitlichen, geht die Schreibweise der Quelle verloren. Ist sie für Ihre Fragestellung relevant, erfassen Sie sie in einer eigenen Spalte.
 
-## 5. Maschinenlesbare Dokumentation mit Frictionless
+### Das fertige Datenwörterbuch
 
-Ein Datenwörterbuch in einer Tabelle oder README ist für Menschen geschrieben. Es lässt sich aber auch so festhalten, dass ein Programm es lesen und die Daten damit **prüfen** kann. Dafür gibt es den offenen Standard *Table Schema* des Projekts [Frictionless Data](https://frictionlessdata.io). Ein Schema beschreibt jede Spalte mit Typ und Beschreibung und legt Regeln fest, etwa welche Werte erlaubt sind.
-
-### Was die Software selbst errät
-
-Das Paket `frictionless` kann den Aufbau einer Tabelle zunächst selbst untersuchen:
+Für den Beispieldatensatz ist das Datenwörterbuch selbst eine CSV-Datei, die neben den Daten liegt. Sie lässt sich in jeder Tabellenkalkulation bearbeiten und mit pandas einlesen:
 
 ```{code-cell} ipython3
-from frictionless import describe
-
-ressource = describe("beispieldaten/briefe_1848.csv")
-erkannt = [
-    {"spalte": feld.name, "erkannter_typ": feld.type}
-    for feld in ressource.schema.fields
-]
-pd.DataFrame(erkannt)
+woerterbuch = pd.read_csv(
+    "beispieldaten/briefe_1848_datenwoerterbuch.csv", sep=";", dtype=str
+).fillna("")
+woerterbuch
 ```
 
-Das Trennzeichen (Semikolon) hat `frictionless` richtig erkannt, ebenso die Seitenzahlen als ganze Zahlen (`integer`). Aufschlussreich ist die Spalte `ort_gnd`: Die GND-Nummer `4005728-8` hält das Programm für eine Angabe aus Jahr und Monat (`yearmonth`), nämlich den August des Jahres 4005728. Automatische Typerkennung ist also ein Ausgangspunkt, aber keine Dokumentation. Was eine Spalte bedeutet, müssen Sie selbst festlegen.
+Neben der Beschreibung enthält es für jede Spalte einige **Regeln**:
 
-### Ein Schema schreiben
-
-Das folgende Schema beschreibt den Beispieldatensatz. Es liegt als YAML-Datei neben den Daten und enthält für jede Spalte einen Namen, einen Typ, eine Beschreibung und Regeln (*constraints*):
-
-```{literalinclude} beispieldaten/briefe_1848.schema.yaml
-:language: yaml
-```
-
-Die wichtigsten Regeln:
-
-| Regel | Bedeutung |
+| Spalte im Datenwörterbuch | Bedeutung |
 |---|---|
-| `required: true` | Das Feld darf nicht leer sein. |
-| `unique: true` | Jeder Wert darf nur einmal vorkommen. |
-| `pattern` | Der Wert muss einem regulären Ausdruck entsprechen, etwa dem Aufbau eines EDTF-Datums. |
-| `enum` | Nur die aufgeführten Werte sind erlaubt. |
-| `minimum` | Der Wert darf nicht kleiner sein als angegeben. |
-| `primaryKey` | Diese Spalte identifiziert jede Zeile eindeutig. |
+| `datentyp` | `Text` oder `ganze Zahl` |
+| `pflichtfeld` | `ja`, wenn das Feld nie leer sein darf |
+| `eindeutig` | `ja`, wenn jeder Wert nur einmal vorkommen darf, wie bei einer Kennung |
+| `erlaubte_werte` | die einzigen zulässigen Werte, durch Kommas getrennt |
+| `muster` | ein regulärer Ausdruck, dem jeder Wert entsprechen muss |
 
-### Daten prüfen
+Ein **regulärer Ausdruck** beschreibt den Aufbau eines Textes. `B[0-9]{3}` bedeutet etwa „ein B, gefolgt von genau drei Ziffern“, `[0-9]{7}-[0-9X]` „sieben Ziffern, ein Bindestrich und eine Ziffer oder ein X“. Das Muster für die Spalte `datum` beschreibt die oben genannten EDTF-Angaben.
 
-Mit dem Schema lässt sich prüfen, ob eine Tabelle der Dokumentation entspricht:
+## 5. Daten gegen das Datenwörterbuch prüfen
 
-```{code-cell} ipython3
-from frictionless import validate
-
-bericht = validate(
-    "beispieldaten/briefe_1848.csv",
-    schema="beispieldaten/briefe_1848.schema.yaml",
-)
-bericht.valid
-```
-
-Der Beispieldatensatz erfüllt alle Regeln. Interessanter ist eine Kopie, in die sich typische Fehler eingeschlichen haben, wie sie bei der Erfassung von Hand entstehen:
+Weil die Regeln im Datenwörterbuch so festgehalten sind, dass ein Programm sie lesen kann, lässt sich automatisch prüfen, ob die Daten ihrer Dokumentation entsprechen. Die folgende Funktion geht das Datenwörterbuch Zeile für Zeile durch und sammelt alle Verstöße. Jede Prüfung ist dabei eine einzelne pandas-Anweisung:
 
 ```{code-cell} ipython3
-bericht = validate(
-    "beispieldaten/briefe_1848_fehlerhaft.csv",
-    schema="beispieldaten/briefe_1848.schema.yaml",
-)
-print("Gültig:", bericht.valid)
+def daten_pruefen(tabelle, woerterbuch):
+    """Prüft eine Tabelle gegen ihr Datenwörterbuch und listet Verstöße."""
+    probleme = []
 
-fehler = pd.DataFrame(
-    bericht.flatten(["rowNumber", "fieldName", "type", "note"]),
-    columns=["zeile", "spalte", "fehlerart", "hinweis"],
-)
-# Ein Fehler beim Primärschlüssel betrifft die ganze Zeile, nicht eine Spalte
-fehler.fillna("–")
+    def melden(zeilen, spalte, problem):
+        for index in zeilen:
+            wert = tabelle.at[index, spalte]
+            probleme.append({
+                "zeile": index + 2,  # Zeile in der Datei; Kopfzeile = 1
+                "spalte": spalte,
+                "wert": "(leer)" if pd.isna(wert) else wert,
+                "problem": problem,
+            })
+
+    for spalte in tabelle.columns.difference(woerterbuch["spalte"]):
+        probleme.append({"zeile": "–", "spalte": spalte, "wert": "–",
+                         "problem": "Spalte fehlt im Datenwörterbuch"})
+
+    for regel in woerterbuch.itertuples():
+        if regel.spalte not in tabelle.columns:
+            probleme.append({"zeile": "–", "spalte": regel.spalte, "wert": "–",
+                             "problem": "Spalte fehlt in der Tabelle"})
+            continue
+        werte = tabelle[regel.spalte]
+        vorhanden = werte.notna()
+        if regel.pflichtfeld == "ja":
+            melden(werte.index[~vorhanden], regel.spalte,
+                   "Pflichtfeld ist leer")
+        if regel.eindeutig == "ja":
+            doppelt = werte.duplicated() & vorhanden
+            melden(werte.index[doppelt], regel.spalte,
+                   "Wert kommt mehrfach vor")
+        if regel.datentyp == "ganze Zahl":
+            zahlen = pd.to_numeric(werte, errors="coerce")
+            keine_zahl = vorhanden & ~(zahlen % 1 == 0)
+            melden(werte.index[keine_zahl], regel.spalte, "keine ganze Zahl")
+        if regel.erlaubte_werte:
+            erlaubt = regel.erlaubte_werte.split(", ")
+            melden(werte.index[vorhanden & ~werte.isin(erlaubt)],
+                   regel.spalte, "Wert ist nicht erlaubt")
+        if regel.muster:
+            passt = werte.astype(str).str.fullmatch(regel.muster)
+            melden(werte.index[vorhanden & ~passt], regel.spalte,
+                   "Wert entspricht nicht dem Muster")
+
+    spalten = ["zeile", "spalte", "wert", "problem"]
+    return pd.DataFrame(probleme, columns=spalten).set_index("zeile")
 ```
 
-`frictionless` findet alle Fehler in einem Durchgang. Die Zeilennummern beziehen sich auf die Datei, in der die Kopfzeile die erste Zeile ist:
+Für die Datei `briefe_1848.csv` findet die Prüfung nichts:
 
-- **Zeile 4:** Das Datum `20.04.1848` folgt nicht dem vereinbarten Format.
+```{code-cell} ipython3
+original = pd.read_csv("beispieldaten/briefe_1848.csv", sep=";")
+daten_pruefen(original, woerterbuch)
+```
+
+Die Datei wird hier neu eingelesen, weil die Tabelle `briefe` inzwischen die Spalte `datum_unsicher` enthält, die in Abschnitt 4 ergänzt wurde. Prüfen Sie stattdessen `briefe`, meldet die Funktion diese Spalte, weil sie im Datenwörterbuch fehlt. Abgeleitete Spalten, die Sie im Code berechnen, müssen Sie nicht dokumentieren, solange Sie sie nicht mit den Daten abspeichern.
+
+Interessanter ist eine Kopie, in die sich typische Fehler eingeschlichen haben, wie sie bei der Erfassung von Hand entstehen:
+
+```{code-cell} ipython3
+fehlerhaft = pd.read_csv("beispieldaten/briefe_1848_fehlerhaft.csv", sep=";")
+daten_pruefen(fehlerhaft, woerterbuch)
+```
+
+Die Prüfung findet alle sechs Fehler in einem Durchgang. Sie geht dabei die Spalten in der Reihenfolge des Datenwörterbuchs durch; die Zeilennummern beziehen sich auf die Datei, in der die Kopfzeile die erste Zeile ist:
+
+- **Zeile 7:** Die Kennung `B005` kommt doppelt vor.
+- **Zeile 8:** Der Empfänger fehlt.
+- **Zeile 4:** Das Datum `20.04.1848` folgt nicht dem vereinbarten EDTF-Format.
 - **Zeile 5:** Der GND-Nummer fehlt die Prüfziffer.
 - **Zeile 6:** Die Seitenzahl steht als Wort (`eine`) statt als Zahl in der Tabelle.
-- **Zeile 7:** Die Kennung `B005` kommt doppelt vor. Der Fehler erscheint zweimal, weil die Spalte sowohl eindeutig (`unique`) als auch Primärschlüssel ist; der Primärschlüssel betrifft die ganze Zeile, deshalb steht dort keine Spalte.
-- **Zeile 8:** Der Empfänger fehlt.
 - **Zeile 9:** `fertig` ist kein erlaubter Wert für den Stand der Transkription.
 
-Eine solche Prüfung lohnt sich nach jeder Bearbeitung der Daten, und bei größeren Datensätzen findet sie Fehler, die beim Durchsehen leicht übersehen werden.
+Eine solche Prüfung lohnt sich nach jeder Bearbeitung der Daten, und bei größeren Datensätzen findet sie Fehler, die beim Durchsehen leicht übersehen werden. Weil die Funktion auch Spalten meldet, die im Datenwörterbuch fehlen, erinnert sie Sie zugleich daran, die Dokumentation aktuell zu halten. Das Datenwörterbuch ist damit eine einzige Quelle für beides: die Beschreibung für Menschen und die Regeln für die Prüfung.
 
-### Das Datenwörterbuch aus dem Schema erzeugen
+(fdm-metadaten)=
+## 6. Metadaten und Standards
 
-Pflegen Sie ein Schema, müssen Sie das Datenwörterbuch nicht zusätzlich von Hand schreiben: Es lässt sich aus dem Schema erzeugen. So gibt es nur eine Stelle, an der die Spalten beschrieben werden, und die Fassung für Menschen kann nicht von der für Programme abweichen.
+Metadaten machen Daten auffindbar. Wenn Sie Daten in einem Repositorium veröffentlichen, fragt dieses sie meist in einem Formular ab und speichert sie nach einem **Metadatenstandard**, damit Suchmaschinen und Kataloge sie einheitlich auswerten können. Für Ihre Arbeit sind vor allem diese Standards von Bedeutung:
 
-```{code-cell} ipython3
-from frictionless import Schema
+| Standard | Wofür |
+|---|---|
+| [DataCite](https://schema.datacite.org) | fachübergreifender Standard für Forschungsdaten, auf dem die Vergabe von DOIs beruht |
+| [Dublin Core](https://www.dublincore.org) | einfacher, fachübergreifender Standard mit 15 Grundelementen wie Titel, Urheber:in, Datum, Thema und Rechte |
+| [Text Encoding Initiative (TEI)](https://tei-c.org) | Standard der Geisteswissenschaften für die Auszeichnung von Texten, etwa für digitale Editionen; der TEI-Header enthält die Metadaten zu Quelle und Bearbeitung |
 
+Die Angaben, die diese Standards verlangen, decken sich weitgehend mit denen einer guten Daten-README: Titel, Urheber:innen und Mitwirkende, Zeitraum, Ort, Schlagwörter, Sprache, Rechte, Dateien und Formate, Methode, Quellen und verwandte Ressourcen. Haben Sie die README sorgfältig geschrieben, übernehmen Sie diese Angaben beim Veröffentlichen einfach in das Formular des Repositoriums. Zu fachspezifischen Standards beraten an der HU die [Fachreferentinnen und Fachreferenten der Universitätsbibliothek](https://www.ub.hu-berlin.de/de/ueber-uns/kontakt/ansprechpartner/ansprechpartner-fachreferentinnen-und-fachreferenten).
 
-def datenwoerterbuch_aus_schema(pfad):
-    """Erstellt aus einem Table Schema ein lesbares Datenwörterbuch."""
-    schema = Schema(pfad)
-    zeilen = []
-    for feld in schema.fields:
-        regeln = []
-        for name, wert in feld.constraints.items():
-            if name == "required":
-                continue
-            if isinstance(wert, bool):
-                wert = "ja" if wert else "nein"
-            if isinstance(wert, list):
-                wert = ", ".join(str(eintrag) for eintrag in wert)
-            regeln.append(f"{name}: {wert}")
-        zeilen.append({
-            "Spalte": feld.name,
-            "Typ": feld.type,
-            "Pflichtfeld": "ja" if feld.required else "nein",
-            "Beschreibung": feld.description,
-            "Regeln": "; ".join(regeln),
-        })
-    return pd.DataFrame(zeilen)
-
-
-datenwoerterbuch_aus_schema("beispieldaten/briefe_1848.schema.yaml")
-```
-
-## 6. Die Verarbeitung nachvollziehbar machen
+## 7. Die Verarbeitung nachvollziehbar machen
 
 Dokumentation beschreibt nicht nur das Ergebnis, sondern auch den Weg dorthin:
 
@@ -328,38 +343,56 @@ Dokumentation beschreibt nicht nur das Ergebnis, sondern auch den Weg dorthin:
 - **Die Commit-Historie hält fest, wann und warum sich Daten geändert haben.** Eine Commit-Nachricht wie „Briefe vor 1840 ausgeschlossen, Datierung unsicher“ ist Teil der Dokumentation (siehe {doc}`Git-Historie nachvollziehen und bearbeiten <../tools/git-history>`).
 - **Die Projektumgebung ist festgehalten**, etwa in einer `requirements.txt`, damit die Verarbeitung mit denselben Programmversionen wiederholt werden kann (siehe {doc}`Projektumgebungen <../project_environments/intro>`).
 
-## 7. Vor der Abgabe oder Veröffentlichung
+## 8. Veröffentlichen und archivieren
 
-```{admonition} Checkliste
+```{admonition} Checkliste vor der Abgabe oder Veröffentlichung
 :class: tip
 
 - Das Projekt hat eine README mit Fragestellung, Aufbau und Anleitung zur Reproduktion.
 - Jeder Datensatz hat eine README mit Quellen, Bearbeitungsschritten und Rechten.
-- Jede Spalte ist in einem Datenwörterbuch oder Schema beschrieben, einschließlich der Bedeutung leerer Felder.
+- Jede Spalte ist im Datenwörterbuch beschrieben, einschließlich der Bedeutung leerer Felder.
 - Unsichere Angaben sind einheitlich gekennzeichnet, und die Konvention ist dokumentiert.
 - Die Daten liegen in offenen Formaten vor (z. B. CSV in UTF-8).
 - Rohdaten sind unverändert; alle Bearbeitungsschritte stehen im Code.
-- Die Daten wurden gegen ihr Schema geprüft.
+- Die Daten wurden gegen ihr Datenwörterbuch geprüft.
 - Daten, die nicht veröffentlicht werden dürfen, sind nicht im Repository und ihr Speicherort ist dokumentiert.
 ```
 
-Möchten Sie Ihre Daten über die Abgabe hinaus zugänglich machen, eignet sich ein Repositorium wie [Zenodo](https://zenodo.org), das jeder veröffentlichten Fassung eine dauerhafte DOI zuweist. Welche Angebote die HU selbst hat und wie Sie Ihre Daten dort ablegen können, klärt die Beratung der [Initiative Forschungsdatenmanagement der HU](https://www.cms.hu-berlin.de/en/dl-en/dataman-en/home/home). Unter welcher Lizenz Sie Daten veröffentlichen und was bei Rechten an Quellen zu beachten ist, behandelt das Kapitel {doc}`Lizenzen für Code und Daten <lizenzen>`.
+Für die Veröffentlichung von Forschungsdaten empfiehlt die HU den Grundsatz **„Zugänglich, wenn möglich, eingeschränkt, wenn notwendig“**: Veröffentlichen Sie, was Sie veröffentlichen dürfen, und schränken Sie den Zugang nur ein, wo Rechte Dritter oder der Schutz von Personen es verlangen.
+
+Damit Ihre Daten dauerhaft auffindbar und zitierbar bleiben, sollten sie eine **persistente Kennung** erhalten, meist eine **DOI** (*Digital Object Identifier*). Anders als eine gewöhnliche Webadresse führt eine DOI auch dann noch zu Ihren Daten, wenn sich ihr Speicherort ändert. DOIs vergeben Repositorien, in denen Sie Ihre Daten ablegen:
+
+- [Zenodo](https://zenodo.org) ist ein fachübergreifendes, kostenloses Repositorium, das jeder veröffentlichten Fassung eine eigene DOI zuweist.
+- An der HU vergibt der [edoc-Server](https://edoc.hu-berlin.de) für Open-Access-Veröffentlichungen eine DOI und eine URN, eine weitere persistente Kennung; im [Medien-Repositorium](https://medien.hu-berlin.de) der HU kann ebenfalls eine DOI vergeben werden. Ob und wie Sie als Studierende diese Angebote nutzen können, erfahren Sie unter edoc@cms.hu-berlin.de.
+- Fachrepositorien für Ihre Disziplin finden Sie im Verzeichnis [re3data.org](https://www.re3data.org).
+
+Unter welcher Lizenz Sie Daten veröffentlichen und was bei Rechten an Quellen zu beachten ist, behandelt das Kapitel {doc}`Lizenzen für Code und Daten <lizenzen>`. Für eine persönliche Beratung steht die [Initiative Forschungsdatenmanagement der HU](https://www.cms.hu-berlin.de/en/dl-en/dataman-en/home/home) zur Verfügung (forschungsdaten@hu-berlin.de).
+
+## 9. Für größere Arbeiten: ein Datenmanagementplan
+
+Für einen Computational Essay im Seminar genügen README und Datenwörterbuch. Bei Abschlussarbeiten und größeren Projekten lohnt es sich, vorab einen **Datenmanagementplan** (DMP) zu schreiben: ein kurzes Dokument, das festhält, wie Daten erstellt oder gesammelt, organisiert, dokumentiert, gespeichert, aufbewahrt und veröffentlicht werden. Die HU nennt dabei ausdrücklich auch Abschlussarbeiten und Dissertationen und schlägt folgende Fragen als Ausgangspunkt vor:
+
+- Was ist das Ziel des Projekts, und wer ist beteiligt?
+- Welche Daten werden erhoben oder nachgenutzt, und wie?
+- Welche Standards werden verwendet, etwa für Formate, Metadaten und Normdaten?
+- Wie werden die Daten gespeichert, gesichert, archiviert und gegebenenfalls zugänglich gemacht?
+- Gibt es rechtliche, zeitliche oder andere Einschränkungen für die Veröffentlichung?
+
+Die HU bietet dazu [Video-Tutorials](https://www.cms.hu-berlin.de/de/dl/dataman/support/material) und Beratung an.
 
 ## Übung
 
-1. Laden Sie die Dateien aus dem Ordner [`fdm/beispieldaten`](https://github.com/Digital-History-Berlin/Computational-Essays/tree/main/fdm/beispieldaten) herunter und führen Sie die Prüfung mit `validate` für beide CSV-Dateien selbst aus.
-2. Ergänzen Sie in `briefe_1848.csv` eine Spalte `sprache` mit der Sprache des Briefs (z. B. `de`). Erweitern Sie das Schema um eine passende Beschreibung und eine `enum`-Regel, und prüfen Sie die Tabelle erneut.
+1. Laden Sie die Dateien aus dem Ordner [`fdm/beispieldaten`](https://github.com/Digital-History-Berlin/Computational-Essays/tree/main/fdm/beispieldaten) herunter und führen Sie die Prüfung mit `daten_pruefen` für beide CSV-Dateien selbst aus.
+2. Ergänzen Sie in `briefe_1848.csv` eine Spalte `sprache` mit der Sprache des Briefs (z. B. `de`) und führen Sie die Prüfung erneut aus. Ergänzen Sie dann das Datenwörterbuch um eine Zeile für die neue Spalte, mit Beschreibung und erlaubten Werten, bis die Prüfung keine Probleme mehr meldet.
 3. Erzeugen Sie für einen eigenen Datensatz mit `datenwoerterbuch_entwurf` einen Entwurf des Datenwörterbuchs und vervollständigen Sie die Beschreibungen.
 4. Schreiben Sie mit der {download}`README-Vorlage <vorlagen/README_daten_vorlage.md>` eine README für diesen Datensatz. Bitten Sie eine andere Person, die Daten nur mithilfe der README zu erklären: Wo bleiben Fragen offen?
 
 ## Weiterführende Ressourcen
 
-- [README-Vorlage der HU Berlin](https://cms.hu-berlin.de/de/dl/dataman/readme-template/view)
-- [Initiative Forschungsdatenmanagement der HU](https://www.cms.hu-berlin.de/en/dl-en/dataman-en/home/home): Beratung und Angebote der HU (englisch)
+- Forschungsdatenmanagement an der HU: [Dokumentation und Metadaten](https://www.cms.hu-berlin.de/de/dl/dataman/teilen/dokumentation), [Normdaten](https://www.cms.hu-berlin.de/de/dl/dataman/teilen/dokumentation/normdaten), [Persistente Identifikation](https://www.cms.hu-berlin.de/de/dl/dataman/teilen/pid) und die [README-Vorlage der HU](https://cms.hu-berlin.de/de/dl/dataman/readme-template/view)
 - [Leitfragen zum Forschungsdatenmanagement für Studierende](https://www.ibi.hu-berlin.de/de/studium/rundumdasstudium/fdm-fuer-studierende/leitfragen_fdm_finale_version_dez_21.pdf/view) des Instituts für Bibliotheks- und Informationswissenschaft der HU
 - [DFG-Handreichung zum Umgang mit Forschungsdaten in den Geschichtswissenschaften](https://www.dfg.de/resource/blob/401324/handreichung-fk-112-geschichtswissenschaften.pdf)
 - [forschungsdaten.info](https://forschungsdaten.info): deutschsprachiges Informationsportal, u. a. zum Thema „Beschreiben und Dokumentieren“
 - James Baker: [Preserving Your Research Data](https://programminghistorian.org/en/lessons/preserving-your-research-data), The Programming Historian (englisch): Dokumentation und Ordnung von Forschungsdaten für Historiker:innen
 - [Extended Date/Time Format (EDTF)](https://www.loc.gov/standards/datetime/): Spezifikation der Library of Congress (englisch)
-- [Frictionless Data](https://frictionlessdata.io): Table Schema und Werkzeuge zur Datenprüfung (englisch)
 - Wilkinson, Mark D. u. a.: „The FAIR Guiding Principles for scientific data management and stewardship“, in: Scientific Data 3 (2016), 160018, [doi:10.1038/sdata.2016.18](https://doi.org/10.1038/sdata.2016.18)

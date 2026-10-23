@@ -1,0 +1,10 @@
+spalte;beschreibung;datentyp;pflichtfeld;eindeutig;erlaubte_werte;muster
+brief_id;Kennung des Briefs in diesem Datensatz: B und dreistellige Nummer;Text;ja;ja;;B[0-9]{3}
+absender;Person, die den Brief geschrieben hat, in normierter Schreibweise (Vorname Nachname);Text;ja;nein;;
+empfaenger;Person, an die der Brief gerichtet ist, in normierter Schreibweise (Vorname Nachname);Text;ja;nein;;
+datum;"Datum im Extended Date/Time Format (EDTF): JJJJ-MM-TT, ""?"" = unsicher, ""~"" = ungefähr, ""XX"" = unbekannte Stelle";Text;ja;nein;;[0-9]{4}(-([0-9]{2}|XX)){0,2}[?~%]?
+ort;Abfassungsort in heutiger Schreibweise;Text;ja;nein;;
+ort_gnd;GND-Nummer des Abfassungsorts, leer, wenn der Ort keinen Eintrag in der GND hat;Text;nein;nein;;[0-9]{7}-[0-9X]
+seiten;Umfang des Briefs in beschriebenen Seiten;ganze Zahl;ja;nein;;
+transkription;Stand der Transkription des Briefs;Text;ja;nein;vollständig, teilweise, keine;
+signatur;Signatur des Originals im Archiv;Text;ja;nein;;

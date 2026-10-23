@@ -163,12 +163,20 @@ Bei der ersten Verbindung kennt Ihr Rechner den Server noch nicht und fragt nach
 
 ```text
 The authenticity of host 'scm.cms.hu-berlin.de (IP-Adresse)' can't be established.
-ED25519 key fingerprint is SHA256:6bXtwZKPwkaL0KbQJtINrBx7tHX307hDnH3jJrUFFHs.
+ED25519 key fingerprint is SHA256:/s6bqM9+DyVxbGd5aB9TTyoX5Cwd4MfQCHZAZ+9odNU.
 This key is not known by any other names.
 Are you sure you want to continue connecting (yes/no/[fingerprint])?
 ```
 
-Der angezeigte **Fingerabdruck** kennzeichnet den Schlüssel des Servers. (Der hier abgebildete stammt aus einem Testlauf; maßgeblich ist der, den Ihr Terminal anzeigt.) Vergleichen Sie ihn mit den Fingerabdrücken, die GitLab auf der Seite [*Instance configuration*](https://scm.cms.hu-berlin.de/help/instance_configuration) unter *SSH host keys fingerprints* veröffentlicht. Stimmen sie überein, tippen Sie `yes` und bestätigen mit Enter. Ihr Rechner merkt sich den Server in der Datei `~/.ssh/known_hosts` und fragt künftig nicht mehr:
+Der angezeigte **Fingerabdruck** kennzeichnet den Schlüssel des Servers. Vergleichen Sie ihn, bevor Sie zustimmen, mit den Fingerabdrücken, die das GitLab der HU auf der Seite [*Instance configuration*](https://scm.cms.hu-berlin.de/help/instance_configuration) veröffentlicht:
+
+| Verfahren | SHA256-Fingerabdruck von `scm.cms.hu-berlin.de` |
+|---|---|
+| ED25519 | `SHA256:/s6bqM9+DyVxbGd5aB9TTyoX5Cwd4MfQCHZAZ+9odNU` |
+| ECDSA | `SHA256:pQTcrjnWZ3AteTB7oGKHuWUkw2BM4BcNwI5zduDh2mI` |
+| RSA | `SHA256:wVh19mimXwDLF+CjzC8TKH2icVAZ4JErYEfsLhRx98g` |
+
+Welches Verfahren Ihr Rechner anzeigt, hängt von Ihrer SSH-Version ab; aktuelle Versionen verwenden ED25519. Stimmt der angezeigte Fingerabdruck mit dem entsprechenden Eintrag überein, tippen Sie `yes` und bestätigen mit Enter. Weicht er ab, brechen Sie ab und wenden sich an das CMS. Ihr Rechner merkt sich den Server in der Datei `~/.ssh/known_hosts` und fragt künftig nicht mehr:
 
 ```text
 Warning: Permanently added 'scm.cms.hu-berlin.de' (ED25519) to the list of known hosts.
@@ -316,7 +324,7 @@ It is also possible that a host key has just been changed.
 Host key verification failed.
 ```
 
-Der Server weist sich mit einem anderen Schlüssel aus als bei Ihrer letzten Verbindung. Das kann harmlos sein, etwa nach einem Umzug des Servers, kann aber auch bedeuten, dass sich jemand als der Server ausgibt. Ignorieren Sie diese Warnung nicht: Vergleichen Sie den neuen Fingerabdruck mit der Seite [*Instance configuration*](https://scm.cms.hu-berlin.de/help/instance_configuration) oder fragen Sie beim CMS nach. Erst wenn feststeht, dass die Änderung rechtmäßig ist, entfernen Sie den alten Eintrag und verbinden sich neu:
+Der Server weist sich mit einem anderen Schlüssel aus als bei Ihrer letzten Verbindung. Das kann harmlos sein, etwa nach einem Umzug des Servers, kann aber auch bedeuten, dass sich jemand als der Server ausgibt. Ignorieren Sie diese Warnung nicht: Vergleichen Sie den neuen Fingerabdruck mit der Tabelle in [Abschnitt 5](#ssh-erste-verbindung) bzw. der Seite [*Instance configuration*](https://scm.cms.hu-berlin.de/help/instance_configuration), oder fragen Sie beim CMS nach. Erst wenn feststeht, dass die Änderung rechtmäßig ist, entfernen Sie den alten Eintrag und verbinden sich neu:
 
 ```bash
 ssh-keygen -R scm.cms.hu-berlin.de

@@ -477,7 +477,7 @@ Personen ohne HU-Account können sich im GitLab der HU mit einer externen E-Mail
 
 ### Speicherplatz
 
-Der Speicherplatz im GitLab der HU ist begrenzt: Für jeden Namensraum, also für Ihr Benutzerkonto oder eine Gruppe, stehen insgesamt 10 GiB zur Verfügung, einschließlich der Dateien in Git LFS. Ein einzelner Push darf höchstens 5 GiB groß sein. Wie viel Sie bereits belegen, zeigt die Seite [*Usage Quotas*](https://scm.cms.hu-berlin.de/-/profile/usage_quotas) in Ihren Einstellungen; die aktuell gültigen Grenzen der Instanz finden Sie unter [*Instance configuration*](https://scm.cms.hu-berlin.de/help/instance_configuration). Für einen Computational Essay reicht dieser Platz in aller Regel aus. Große Datensätze gehören nicht direkt ins Repository (siehe {doc}`Git LFS <git-lfs>`).
+Der Speicherplatz im GitLab der HU ist begrenzt: Für jeden Namensraum, also für Ihr Benutzerkonto oder eine Gruppe, stehen insgesamt 10 GiB zur Verfügung, einschließlich der Dateien in Git LFS. Ein einzelner Push darf höchstens 10 GiB groß sein, eine an ein Issue oder einen Kommentar angehängte Datei höchstens 20 MiB. Wie viel Sie bereits belegen, zeigt die Seite [*Usage Quotas*](https://scm.cms.hu-berlin.de/-/profile/usage_quotas) in Ihren Einstellungen; die aktuell gültigen Grenzen der Instanz finden Sie unter [*Instance configuration*](https://scm.cms.hu-berlin.de/help/instance_configuration). Für einen Computational Essay reicht dieser Platz in aller Regel aus. Große Datensätze gehören nicht direkt ins Repository (siehe {doc}`Git LFS <git-lfs>`).
 
 (gitlab-nach-dem-studium)=
 ### Nach dem Studium: Projekte sichern

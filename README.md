@@ -39,10 +39,23 @@ Das Buch enthält derzeit:
 
 ### Lokale Installation
 
+Um das Buch lokal zu bauen, etwa um Änderungen vor dem Hochladen zu prüfen:
+
 ```bash
 # Repository klonen
 git clone https://github.com/Digital-History-Berlin/Computational-Essays.git
+cd Computational-Essays
+
+# Virtuelle Umgebung anlegen und aktivieren (siehe Kapitel zu Projektumgebungen)
+python -m venv venv
+source venv/bin/activate  # unter Windows: venv\Scripts\activate
+
+# Abhängigkeiten installieren und das Buch bauen
+pip install -r requirements.txt
+jupyter-book build .
 ```
+
+Das Ergebnis öffnen Sie anschließend mit der Datei `_build/html/index.html` im Browser.
 
 ## Mitarbeit und Feedback
 

@@ -609,6 +609,8 @@ Wenn Sie den Merge lieber abbrechen und zum Stand davor zurückkehren möchten, 
 Konflikte sind kein Fehler, sondern eine Rückfrage: Git weiß nicht, welche Fassung richtig ist, und überlässt die inhaltliche Entscheidung Ihnen. Je öfter Sie `git pull` ausführen und je kleiner Ihre Commits sind, desto seltener und übersichtlicher werden Konflikte.
 ```
 
+Wie Sie Branches über das GitLab der HU mit anderen teilen und über Merge Requests gemeinsam zusammenführen, zeigt das Kapitel {doc}`Branches und Merge Requests <git-branches>`.
+
 ## 8. Grafische Oberflächen
 
 Alle Befehle dieses Kapitels gibt es auch in grafischen Oberflächen, zum Beispiel:

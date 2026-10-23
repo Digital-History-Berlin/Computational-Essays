@@ -350,7 +350,7 @@ git push --force-with-lease
 
 Zwei weitere Punkte sind zu beachten:
 
-- In GitLab ist der Standard-Branch in der Regel als *protected branch* eingerichtet, für den Force Pushes gesperrt sind. Unter *Settings > Repository > Protected branches* lässt sich dies vorübergehend ändern („Allowed to force push“).
+- In GitLab ist der Standard-Branch in der Regel als *protected branch* eingerichtet, für den Force Pushes gesperrt sind. Unter *Settings > Repository > Protected branches* (in neueren Versionen *Branch rules*) lässt sich dies vorübergehend ändern („Allowed to force push“). Mehr zu geschützten Branches steht im Kapitel {doc}`Branches und Merge Requests <git-branches>`.
 - Alle anderen, die das Repository bereits geklont haben, müssen ihre lokale Kopie anschließend anpassen. Am einfachsten ist ein erneutes Klonen, nachdem eigene, noch nicht gepushte Änderungen gesichert wurden. Sprechen Sie einen Force Push deshalb immer vorher ab.
 
 ## 6. Sonderfall: Daten vollständig aus der Historie entfernen

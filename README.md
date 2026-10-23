@@ -29,7 +29,7 @@ Das Buch enthält derzeit:
 - **Einführung in Computational Essays**: Grundlegende Konzepte, Bedeutung in den Digital Humanities und wesentliche Komponenten
 - **Formatierungs- und Anforderungsleitfaden**: Detaillierte Anleitungen zur Strukturierung und Einreichung
 - **Einführung in Projektumgebungen**: Grundlegende Idee, Detaillierte Guides zu uv, venv und Conda
-- **Versionskontrolle mit Git**: Git-Grundlagen, SSH-Schlüssel, Git-Historie nachvollziehen und bearbeiten, Git LFS für große Dateien
+- **Versionskontrolle mit Git**: Git-Grundlagen, SSH-Schlüssel, Branches und Merge Requests, Git-Historie nachvollziehen und bearbeiten, Git LFS für große Dateien
 - **Forschungsdatenmanagement**: Forschungsdaten dokumentieren, Lizenzen für Code und Daten
 
 ### Voraussetzungen

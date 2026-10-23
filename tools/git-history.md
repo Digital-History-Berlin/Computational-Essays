@@ -18,7 +18,7 @@ Dieses Kapitel behandelt beide Seiten:
 
 ### Voraussetzungen
 
-- Git ist installiert und Sie kennen die Grundbefehle (`clone`, `add`, `commit`, `push`, `pull`)
+- Git ist installiert und Sie kennen die Grundbefehle (`clone`, `add`, `commit`, `push`, `pull`), wie sie im Kapitel {doc}`Git-Grundlagen <git-grundlagen>` beschrieben sind
 - Grundlegende Kenntnisse der Kommandozeile (unter Windows empfiehlt sich *Git Bash*)
 - Für die Übungen: ein Testrepository, **nicht** Ihr eigentliches Projekt (siehe [Übung](#uebung))
 

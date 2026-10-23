@@ -19,14 +19,16 @@ parts:
     - file: Leitfaden
       title: "Leitfaden für Computational Essays"
         
+  - caption: Versionskontrolle mit Git
+    chapters:
+    - file: tools/git-grundlagen
+      title: "Git-Grundlagen"
+    - file: tools/git-history
+      title: "Git-Historie nachvollziehen und bearbeiten"
+    - file: tools/git-lfs
+      title: "Große Dateien mit Git LFS"
+
   - caption: Konvertierungen
     chapters:
     - file: Konvertierungen/word_md_notebook
       title: "Konvertierung von Word-Dokumenten"
-
-  - caption: Praktische Werkzeuge
-    chapters:
-    - file: tools/git-history
-      title: "Git-Historie nachvollziehen und bearbeiten"
-    - file: tools/git-lfs
-      title: "Fortgeschrittene Git-Funktionen"

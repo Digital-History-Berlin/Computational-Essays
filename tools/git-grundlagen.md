@@ -369,7 +369,9 @@ Werkzeuge, die Notebook-Unterschiede zellenweise anzeigen oder Ausgaben vor dem 
 
 ## 6. Mit dem GitLab der HU arbeiten
 
-Bisher liegt Ihr Repository nur auf Ihrem Rechner. Eine Kopie auf einem Server sichert Ihre Arbeit, ermöglicht das Arbeiten auf mehreren Rechnern und erlaubt es, das Projekt mit anderen zu teilen. An der HU steht dafür ein eigenes GitLab unter [scm.cms.hu-berlin.de](https://scm.cms.hu-berlin.de) zur Verfügung, bei dem Sie sich mit Ihrem HU-Account anmelden. Die Befehle funktionieren genauso mit GitHub oder anderen GitLab-Instanzen.
+Bisher liegt Ihr Repository nur auf Ihrem Rechner. Eine Kopie auf einem Server sichert Ihre Arbeit, ermöglicht das Arbeiten auf mehreren Rechnern und erlaubt es, das Projekt mit anderen zu teilen. Die HU betreibt dafür ein eigenes GitLab unter [scm.cms.hu-berlin.de](https://scm.cms.hu-berlin.de), das allen Studierenden und Beschäftigten zur Verfügung steht. Sie melden sich dort mit Ihrem HU-Account an, also mit Ihrem HU-Benutzernamen aus acht Buchstaben und Ihrem HU-Passwort. Eine ausführliche Anleitung zur Weboberfläche bietet die [GitLab-Dokumentation des CMS](https://cms-webtech.pages.cms.hu-berlin.de/gitlab-documentation/docs/home/).
+
+Die Befehle in diesem Abschnitt funktionieren genauso mit anderen Plattformen, etwa mit [Codeberg](https://codeberg.org), einer gemeinnützigen Plattform, die nicht an eine Hochschule gebunden ist (siehe [Nach dem Studium](#gitlab-nach-dem-studium)).
 
 ```{note}
 Die Bezeichnungen in der GitLab-Oberfläche können je nach Version leicht von den hier genannten abweichen.
@@ -377,38 +379,31 @@ Die Bezeichnungen in der GitLab-Oberfläche können je nach Version leicht von d
 
 ### Ein Projekt in GitLab anlegen
 
-1. Wählen Sie in GitLab *New project* und dann *Create blank project*.
-2. Geben Sie einen Projektnamen ein, z. B. `briefwechsel-1848`.
-3. Wählen Sie die **Sichtbarkeit** (*Visibility Level*):
-   - *Private*: nur Personen, die Sie ausdrücklich hinzufügen
-   - *Internal*: alle, die am GitLab der HU angemeldet sind
-   - *Public*: alle, auch ohne Anmeldung
+1. Wählen Sie in der Projektübersicht (*Projects*) *New project* oder klicken Sie auf das Plus-Symbol in der oberen Leiste. Wählen Sie dann *Create blank project*.
+2. Geben Sie unter *Project name* einen Namen ein, z. B. `briefwechsel-1848`.
+3. Wählen Sie unter *Project URL* den Namensraum (*namespace*), in dem das Projekt liegen soll: für ein eigenes Projekt Ihren Benutzernamen, für ein Seminarprojekt gegebenenfalls die Gruppe, die Ihre Dozierenden angelegt haben.
+4. Wählen Sie die **Sichtbarkeit** (*Visibility Level*):
+   - *Private*: Der Zugriff muss jeder Person ausdrücklich gewährt werden. Gehört das Projekt zu einer Gruppe, haben alle Mitglieder der Gruppe Zugriff.
+   - *Internal*: Alle, die am GitLab der HU angemeldet sind, haben Zugriff, außer externen Nutzer:innen.
+   - *Public*: Alle haben Zugriff, auch ohne Anmeldung.
 
-   Für einen Computational Essay ist *Private* meist die richtige Wahl. Ein öffentliches Repository setzt voraus, dass Sie alle enthaltenen Daten und Materialien veröffentlichen dürfen.
-4. Entfernen Sie den Haken bei *Initialize repository with a README*, da Ihr lokales Repository bereits eine README enthält.
-5. Legen Sie das Projekt an. GitLab zeigt anschließend die Adresse des Repositorys an, z. B. `https://scm.cms.hu-berlin.de/benutzername/briefwechsel-1848.git`.
+   Für einen Computational Essay ist *Private* die richtige Wahl. Ein öffentliches Repository setzt voraus, dass Sie alle enthaltenen Daten und Materialien veröffentlichen dürfen.
+5. Unter *Project Configuration* ist *Initialize repository with a README* bereits angehakt. Entfernen Sie den Haken, da Sie ein bestehendes Repository hochladen.
+6. Klicken Sie auf *Create project*. GitLab zeigt anschließend die Adresse des Repositorys an, z. B. `https://scm.cms.hu-berlin.de/benutzername/briefwechsel-1848.git`.
+
+Die Sichtbarkeit lässt sich später unter *Settings > General* im Abschnitt *Visibility, project features, permissions* ändern.
 
 ### Anmeldung mit einem Zugangstoken
 
 Für die Verbindung über HTTPS verwenden Sie statt Ihres Passworts einen **Personal Access Token**:
 
-1. Öffnen Sie in GitLab Ihre Benutzereinstellungen (*Preferences* bzw. *User settings*) und dort *Access tokens*.
-2. Legen Sie einen neuen Token an, geben Sie ihm einen Namen (z. B. den Ihres Rechners) und ein Ablaufdatum, und wählen Sie die Bereiche (*scopes*) `read_repository` und `write_repository`.
+1. Klicken Sie oben rechts auf Ihr Profilbild und wählen Sie *Edit profile*. Im Menü links finden Sie *Access tokens* (je nach Version *Personal access tokens*).
+2. Legen Sie mit *Add new token* einen Token an, geben Sie ihm einen Namen (z. B. den Ihres Rechners) und ein Ablaufdatum, und wählen Sie die Bereiche (*scopes*) `read_repository` und `write_repository`.
 3. Kopieren Sie den Token sofort; GitLab zeigt ihn nur einmal an.
 
 Wenn Git beim ersten `git push` nach Zugangsdaten fragt, geben Sie als Benutzernamen Ihren HU-Benutzernamen und als Passwort den Token ein. Unter Windows (Git Credential Manager) und macOS (Schlüsselbund) wird der Token danach gespeichert, sodass Sie ihn nicht erneut eingeben müssen. Unter Linux merkt sich Git den Token mit `git config --global credential.helper "cache --timeout=3600"` jeweils für eine Stunde.
 
-````{dropdown} Alternative: Anmeldung mit einem SSH-Schlüssel
-Statt eines Tokens können Sie einen SSH-Schlüssel verwenden. Er wird einmal pro Rechner erzeugt:
-
-```bash
-ssh-keygen -t ed25519 -C "HU GitLab"
-```
-
-Bestätigen Sie den vorgeschlagenen Speicherort mit Enter und vergeben Sie bei Bedarf ein Passwort für den Schlüssel. Kopieren Sie anschließend den Inhalt der Datei `~/.ssh/id_ed25519.pub` (der *öffentliche* Schlüssel) und fügen Sie ihn in GitLab unter *User settings > SSH Keys* ein. Die Datei `~/.ssh/id_ed25519` ohne Endung ist Ihr privater Schlüssel; geben Sie sie nie weiter.
-
-Für die Verbindung verwenden Sie dann die SSH-Adresse des Projekts, die GitLab unter *Clone* anzeigt (sie beginnt mit `git@`), statt der HTTPS-Adresse.
-````
+Alternativ können Sie sich mit einem **SSH-Schlüssel** anmelden. Die Einrichtung ist etwas aufwendiger; danach entfällt aber die Verwaltung von Tokens, und derselbe Weg funktioniert auch bei anderen Plattformen und Servern. Das Kapitel {doc}`SSH-Schlüssel einrichten <ssh>` beschreibt die Schritte. Die Adresse des Repositorys lautet dann `git@scm.cms.hu-berlin.de:benutzername/briefwechsel-1848.git`.
 
 ### Das lokale Repository mit GitLab verbinden
 
@@ -477,6 +472,33 @@ Betreffen beide Änderungen dieselbe Stelle derselben Datei, kann Git sie nicht 
 ### Betreuende zum Projekt hinzufügen
 
 Damit Ihre Betreuenden ein privates Projekt sehen können, fügen Sie sie in GitLab als Mitglieder hinzu. Sie finden die Einstellung in der Projektnavigation unter *Members* (in neueren Versionen unter *Manage > Members*). Für reinen Lesezugriff genügt die Rolle *Reporter*.
+
+Personen ohne HU-Account können sich im GitLab der HU mit einer externen E-Mail-Adresse registrieren. Ihr Konto wird allerdings wieder gelöscht, wenn sie nicht innerhalb von 14 Tagen einem Projekt oder einer Gruppe hinzugefügt werden.
+
+### Speicherplatz
+
+Der Speicherplatz im GitLab der HU ist begrenzt: Für jeden Namensraum, also für Ihr Benutzerkonto oder eine Gruppe, stehen insgesamt 10 GiB zur Verfügung, einschließlich der Dateien in Git LFS. Ein einzelner Push darf höchstens 5 GiB groß sein. Wie viel Sie bereits belegen, zeigt die Seite [*Usage Quotas*](https://scm.cms.hu-berlin.de/-/profile/usage_quotas) in Ihren Einstellungen; die aktuell gültigen Grenzen der Instanz finden Sie unter [*Instance configuration*](https://scm.cms.hu-berlin.de/help/instance_configuration). Für einen Computational Essay reicht dieser Platz in aller Regel aus. Große Datensätze gehören nicht direkt ins Repository (siehe {doc}`Git LFS <git-lfs>`).
+
+(gitlab-nach-dem-studium)=
+### Nach dem Studium: Projekte sichern
+
+Wenn Sie die Universität verlassen, wird Ihr HU-Account deaktiviert und damit auch Ihr GitLab-Konto gesperrt. Ihre Projekte bleiben zunächst erhalten, werden aber **ein Jahr später** zusammen mit dem Konto gelöscht. Das betrifft auch Repositorys, auf die Sie in einer Abgabe verlinkt haben. Sichern Sie Projekte, die Sie behalten möchten, deshalb rechtzeitig.
+
+Eine vollständige Sicherung mit allen Branches und Tags erhalten Sie mit `git clone --mirror`. Das Ergebnis ist ein Repository ohne Arbeitsverzeichnis, aus dem Sie später jederzeit wieder eine normale Kopie klonen können:
+
+```bash
+git clone --mirror https://scm.cms.hu-berlin.de/benutzername/briefwechsel-1848.git
+```
+
+Möchten Sie ein Projekt öffentlich weiterführen, können Sie es auf eine Plattform außerhalb der Universität übertragen. Eine Möglichkeit ist [Codeberg](https://codeberg.org), eine gemeinnützige Plattform für freie Software und offene Inhalte. Codeberg ist allerdings für öffentliche Projekte unter einer offenen Lizenz gedacht; private Repositorys erlaubt es nur in engen Grenzen (siehe die [Codeberg-FAQ](https://docs.codeberg.org/getting-started/faq/)). Nach dem Anlegen eines leeren Projekts auf Codeberg übertragen Sie Ihre Branches und Tags so:
+
+```bash
+git remote add codeberg https://codeberg.org/benutzername/briefwechsel-1848.git
+git push codeberg --all
+git push codeberg --tags
+```
+
+`--all` überträgt alle Branches, die auf Ihrem Rechner vorhanden sind; ob Ihnen Branches fehlen, die nur auf dem Server liegen, zeigt `git branch -a`. Für eine dauerhafte, zitierbare Archivierung Ihrer Arbeit eignet sich zusätzlich ein Repositorium wie [Zenodo](https://zenodo.org), das jeder veröffentlichten Fassung eine DOI zuweist.
 
 ## 7. Branches und Merges
 
@@ -676,3 +698,4 @@ Wenn Sie mit diesem Repository weiterarbeiten möchten, schließt die Übung im 
 - [Pro Git (deutsche Übersetzung)](https://git-scm.com/book/de/v2): umfassendes Nachschlagewerk, Kapitel 1 bis 3 behandeln die Grundlagen
 - [Learn Git Branching](https://learngitbranching.js.org/?locale=de_DE): interaktive Übungen zu Branches und Merges, auch auf Deutsch
 - [Git for Windows](https://gitforwindows.org/): Installer und Dokumentation für Windows
+- [GitLab-Dokumentation des CMS](https://cms-webtech.pages.cms.hu-berlin.de/gitlab-documentation/docs/home/): Anleitung zum GitLab der HU, insbesondere zur Weboberfläche
